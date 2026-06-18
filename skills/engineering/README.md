@@ -1,36 +1,25 @@
----
-name: engineering
-description: 软件工程技能套件。当用户想要创建 PRD（产品需求文档）、编写测试（TDD）、改进代码库架构、对 issue 进行分类或围绕设计文档进行深入讨论时使用。
----
+# 工程技能（Engineering）
 
-# 工程技能
+日常编码工作中使用的技能。
 
-一套基于提示词驱动的工程技能，由确定性的脚本和按需触发的子技能组合而成。
+## 用户调用（User-invoked）
 
-## 技能目录
+只有通过输入技能名称才能调用（`disable-model-invocation: true`）。
 
-| 技能 | 用途 |
-| ----- | ----- |
-| [to-prd](./to-prd/) | 将自然语言描述转换为结构化 PRD |
-| [to-issues](./to-issues/) | 将 PRD 拆解为可执行的 issue |
-| [triage](./triage/) | 对 issue 进行分类并编写 agent brief |
-| [diagnose](./diagnose/) | 调查 bug 并对代码库进行排查 |
-| [tdd](./tdd/) | 以测试驱动的方式实现功能 |
-| [improve-codebase-architecture](./improve-codebase-architecture/) | 系统性优化代码基架构 |
-| [prototype](./prototype/) | 用 StackBlitz 搭建 UI 原型 |
-| [grill-with-docs](./grill-with-docs/) | 结合设计文档对 issue 进行深入审查 |
-| [zoom-out](./zoom-out/) | 拉高视角，获取高层面的上下文 |
+- **[ask-matt](./ask-matt/SKILL.md)** — 询问哪种技能或流程适合你的情况。本仓库中用户调用技能的路由器。
+- **[grill-with-docs](./grill-with-docs/SKILL.md)** — 盘问式会话，同时构建项目的领域模型，锤炼术语并内联更新 `CONTEXT.md` 和 ADR。
+- **[triage](./triage/SKILL.md)** — 通过 triage 角色的状态机推动 issue 流转。
+- **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)** — 扫描代码库寻找可深化改进的机会，以可视化 HTML 报告呈现，然后深入讨论你选择的任何一个。
+- **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)** — 为本仓库配置工程技能（issue 跟踪器、triage 标签、领域文档布局）。每个仓库运行一次。
+- **[to-issues](./to-issues/SKILL.md)** — 将任何计划、规范或 PRD 通过垂直切片拆解为可独立抓取的 issue。
+- **[to-prd](./to-prd/SKILL.md)** — 将当前对话转换为 PRD 并发布到 issue 跟踪器。
+- **[prototype](./prototype/SKILL.md)** — 构建一次性原型——用于状态/逻辑问题的可运行终端应用，或若干可切换的 UI 变体。
 
-## 工作流
+## 模型调用（Model-invoked）
 
-这些技能彼此配合，构成一条开发流水线：
+模型或用户均可调用（使用丰富的触发短语，使模型能够主动调用）。
 
-```
-to-prd → to-issues → triage → (diagnose/grill-with-docs) → tdd → improve-codebase-architecture
-```
-
-**to-prd** 与 **to-issues** 负责将模糊的想法转化为可供开发的细化 issue。**triage** 对 issue 进行分类并提供详细规范。**diagnose** 和 **grill-with-docs** 负责对 issue 进行深入推敲和质量把关。**tdd** 以测试驱动的方式实现功能，**improve-codebase-architecture** 在代码落地后检查架构重复和执行质量问题。
-
-## 设置
-
-首次使用之前，请运行 [setup-matt-pocock-skills](./setup-matt-pocock-skills/) 来配置仓库的 issue 跟踪方式、分类标签和领域文档。
+- **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)** — 针对棘手的 bug 和性能回归问题的规范化诊断循环：复现 → 最小化 → 假设 → 检测 → 修复 → 回归测试。
+- **[tdd](./tdd/SKILL.md)** — 测试驱动开发，采用红-绿-重构循环。每次一个垂直切片地构建功能或修复 bug。
+- **[domain-modeling](./domain-modeling/SKILL.md)** — 主动构建和锤炼项目的领域模型——挑战术语、通过场景进行压力测试、内联更新 `CONTEXT.md` 和 ADR。
+- **[codebase-design](./codebase-design/SKILL.md)** — 用于设计深层模块的共享规范和词汇表：小接口、清晰接缝、可通过接口进行测试。

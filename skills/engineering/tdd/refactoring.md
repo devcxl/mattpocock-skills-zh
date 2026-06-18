@@ -1,10 +1,10 @@
-# 重构候选点
+# Refactor Candidates
 
-TDD 循环结束后，检查以下方面：
+After TDD cycle, look for:
 
-- **重复代码** → 抽取为函数/类
-- **长方法** → 拆分为私有辅助方法（测试保持在公共接口层面）
-- **浅层模块** → 合并或深化
-- **依恋情结** → 将逻辑移到数据所在位置
-- **基本类型偏执** → 引入值对象
-- **被新代码暴露出来的已有代码问题** → 一并记录
+- **Duplication** → Extract function/class
+- **Long methods** → Break into private helpers (keep tests on public interface)
+- **Shallow modules** → Combine or deepen
+- **Feature envy** → Move logic to where data lives
+- **Primitive obsession** → Introduce value objects
+- **Existing code** the new code reveals as problematic

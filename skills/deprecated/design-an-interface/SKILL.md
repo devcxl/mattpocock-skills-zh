@@ -1,94 +1,94 @@
 ---
 name: design-an-interface
-description: 使用并行子 agent 为模块生成多个截然不同的接口设计。当用户想设计 API、探索接口选项、比较模块形态或提到"设计两个版本"时使用。
+description: Generate multiple radically different interface designs for a module using parallel sub-agents. Use when user wants to design an API, explore interface options, compare module shapes, or mentions "design it twice".
 ---
 
-# 设计接口
+# Design an Interface
 
-基于《软件设计的哲学》中的"设计两个版本"理念：你的第一个想法不太可能是最好的。生成多个截然不同的设计，然后比较。
+Based on "Design It Twice" from "A Philosophy of Software Design": your first idea is unlikely to be the best. Generate multiple radically different designs, then compare.
 
-## 工作流
+## Workflow
 
-### 1. 收集需求
+### 1. Gather Requirements
 
-在设计之前，先理解：
+Before designing, understand:
 
-- [ ] 这个模块解决什么问题？
-- [ ] 调用者是谁？（其他模块、外部用户、测试）
-- [ ] 关键操作有哪些？
-- [ ] 有什么约束？（性能、兼容性、现有模式）
-- [ ] 什么应该隐藏在内部 vs. 暴露出来？
+- [ ] What problem does this module solve?
+- [ ] Who are the callers? (other modules, external users, tests)
+- [ ] What are the key operations?
+- [ ] Any constraints? (performance, compatibility, existing patterns)
+- [ ] What should be hidden inside vs exposed?
 
-问："这个模块需要做什么？谁会使用它？"
+Ask: "What does this module need to do? Who will use it?"
 
-### 2. 生成设计（并行子 Agent）
+### 2. Generate Designs (Parallel Sub-Agents)
 
-使用 Task 工具同时启动 3 个以上子 agent。每个必须产生一个**截然不同**的方案。
+Spawn 3+ sub-agents simultaneously using Task tool. Each must produce a **radically different** approach.
 
 ```
-每个子 agent 的 prompt 模板：
+Prompt template for each sub-agent:
 
-为以下模块设计接口：[模块描述]
+Design an interface for: [module description]
 
-需求：[收集到的需求]
+Requirements: [gathered requirements]
 
-此设计的约束：[为每个 agent 分配不同的约束]
-- Agent 1："最小化方法数量——最多 1-3 个方法"
-- Agent 2："最大化灵活性——支持多种使用场景"
-- Agent 3："针对最常见场景优化"
-- Agent 4："从 [特定范式/库] 中汲取灵感"
+Constraints for this design: [assign a different constraint to each agent]
+- Agent 1: "Minimize method count - aim for 1-3 methods max"
+- Agent 2: "Maximize flexibility - support many use cases"
+- Agent 3: "Optimize for the most common case"
+- Agent 4: "Take inspiration from [specific paradigm/library]"
 
-输出格式：
-1. 接口签名（类型/方法）
-2. 使用示例（调用者如何使用）
-3. 此设计隐藏的内部实现
-4. 此方案的权衡取舍
+Output format:
+1. Interface signature (types/methods)
+2. Usage example (how caller uses it)
+3. What this design hides internally
+4. Trade-offs of this approach
 ```
 
-### 3. 展示设计
+### 3. Present Designs
 
-对每个设计展示：
+Show each design with:
 
-1. **接口签名**——类型、方法、参数
-2. **使用示例**——调用者在实践中如何使用
-3. **隐藏了什么**——留在内部的复杂性
+1. **Interface signature** - types, methods, params
+2. **Usage examples** - how callers actually use it in practice
+3. **What it hides** - complexity kept internal
 
-依次展示设计，让用户能在比较之前先消化每个方案。
+Present designs sequentially so user can absorb each approach before comparison.
 
-### 4. 比较设计
+### 4. Compare Designs
 
-展示完所有设计后，从以下维度比较它们：
+After showing all designs, compare them on:
 
-- **接口简洁性**：更少的方法、更简单的参数
-- **通用 vs. 专用**：灵活性 vs. 专注度
-- **实现效率**：接口形态是否允许高效的内部实现？
-- **深度**：小接口隐藏大量复杂性（好）vs. 大接口却只有薄薄一层实现（避免）
-- **正确使用的容易程度** vs. **误用的容易程度**
+- **Interface simplicity**: fewer methods, simpler params
+- **General-purpose vs specialized**: flexibility vs focus
+- **Implementation efficiency**: does shape allow efficient internals?
+- **Depth**: small interface hiding significant complexity (good) vs large interface with thin implementation (bad)
+- **Ease of correct use** vs **ease of misuse**
 
-用散文而非表格来讨论权衡取舍。突出设计之间分歧最大的地方。
+Discuss trade-offs in prose, not tables. Highlight where designs diverge most.
 
-### 5. 综合
+### 5. Synthesize
 
-通常最好的设计会融合多个选项的洞见。问：
+Often the best design combines insights from multiple options. Ask:
 
-- "哪个设计最适合你的主要使用场景？"
-- "有其他设计中值得融入的元素吗？"
+- "Which design best fits your primary use case?"
+- "Any elements from other designs worth incorporating?"
 
-## 评估标准
+## Evaluation Criteria
 
-来自《软件设计的哲学》：
+From "A Philosophy of Software Design":
 
-**接口简洁性**：更少的方法、更简单的参数 = 更容易学习和正确使用。
+**Interface simplicity**: Fewer methods, simpler params = easier to learn and use correctly.
 
-**通用性**：能够无需改动地处理未来的使用场景。但要注意避免过度泛化。
+**General-purpose**: Can handle future use cases without changes. But beware over-generalization.
 
-**实现效率**：接口形态是否允许高效的实现？还是会迫使内部实现别别扭扭？
+**Implementation efficiency**: Does interface shape allow efficient implementation? Or force awkward internals?
 
-**深度**：小接口隐藏大量复杂性 = 深层模块（好）。大接口却只有薄薄一层实现 = 浅层模块（避免）。
+**Depth**: Small interface hiding significant complexity = deep module (good). Large interface with thin implementation = shallow module (avoid).
 
-## 反模式
+## Anti-Patterns
 
-- 不要让子 agent 产生相似的设计——强制要求截然不同
-- 不要跳过比较——价值在于对比
-- 不要实现——这纯粹是关于接口形态
-- 不要基于实现工作量来评估
+- Don't let sub-agents produce similar designs - enforce radical difference
+- Don't skip comparison - the value is in contrast
+- Don't implement - this is purely about interface shape
+- Don't evaluate based on implementation effort

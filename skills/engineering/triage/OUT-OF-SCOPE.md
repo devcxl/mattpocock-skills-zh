@@ -82,7 +82,9 @@ interface ThemeConfig {
 
 ## 何时写入 `.out-of-scope/`
 
-仅当某个 **enhancement**（而非 bug）被拒绝为 `wontfix` 时。流程为：
+仅当某个 **enhancement**（而非 bug）被**拒绝**为 `wontfix` 时。这对 enhancement PR 同样适用，与 issue 一致——被拒绝的 PR 也记录在此，防止相同的请求以新代码的形式再次出现。
+
+当某事项因为**已经实现**而被关闭为 `wontfix` 时，**不要**写入此目录。那是已内置的功能，而非被拒绝的功能；记录它会污染去重检查，产生错误的拒绝匹配。此时关闭评论应指向该功能已存在的位置。
 
 1. 维护者决定某个功能请求不在范围内
 2. 检查是否已有匹配的 `.out-of-scope/` 文件

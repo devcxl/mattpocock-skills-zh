@@ -1,0 +1,20 @@
+{
+  "name": "mattpocock-skills",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Matt Pocock's agent skills for real engineering",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattpocock/skills"
+  },
+  "license": "MIT",
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.30.0"
+  },
+  "packageManager": "npm@10.9.4"
+}

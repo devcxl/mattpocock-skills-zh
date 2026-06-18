@@ -1,11 +1,14 @@
 ---
 name: triage
-description: 按分类角色驱动的状态机对 issue 进行分流处理。当用户想要创建 issue、对 issue 进行分类、审查收到的 bug 或功能请求、为 AFK agent 准备 issue、或管理 issue 工作流时使用。
+description: 通过分类角色驱动的状态机对 issue 和外部 PR 进行分流处理——分类、验证、盘问（如需）、撰写 agent-ready brief。
+disable-model-invocation: true
 ---
 
 # Triage（分类分流）
 
 将项目 issue 跟踪器中的 issue 沿着一个精简的分类状态机进行流转。
+
+如果本仓库将外部 pull request 也视为请求面（参见 issue-tracker 配置），则 triage 同样覆盖它们：**PR 是附带了代码的 issue** —— 同样的角色、同样的状态、同样的状态机，只有少数差异在下方标记为"针对 PR"。将裸的 `#42` 解析为 issue 或 PR，具体取决于 tracker 配置。
 
 在分类过程中发布到 issue 跟踪器的每一条评论或 issue **必须**以下述声明开头：
 

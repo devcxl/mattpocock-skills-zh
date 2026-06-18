@@ -1,48 +1,51 @@
 # 领域文档
 
-`setup-matt-pocock-skills` 会确认本仓库的领域文档布局，并将消费规则写入 `docs/agents/domain.md`。本文件是那个种子模板，在配置过程中会被复制或参考。
+工程技能在探索代码库时应当如何消费本仓库的领域文档。
 
-## 消费规则
+## 在探索之前，阅读这些文件
 
-当你被指示"使用项目领域术语表"或"查阅领域文档"时：
+- **仓库根目录下的 `CONTEXT.md`**，或者
+- **仓库根目录下的 `CONTEXT-MAP.md`**（如果存在）——它指向每个上下文的 `CONTEXT.md`。阅读与当前主题相关的每一个。
+- **`docs/adr/`**——阅读与你即将工作的区域相关的 ADR。在多上下文仓库中，同时检查 `src/<context>/docs/adr/` 中上下文范围内的决策。
 
-1. 找出与当前工作相关的 `CONTEXT.md` 文件
-   - 如果是单上下文：仓库根目录下的 `CONTEXT.md`
-   - 如果是多上下文：通过 `CONTEXT-MAP.md` 定位到相关上下文
+如果这些文件不存在，**静默继续**。不要标记它们的缺失，也不要建议提前创建它们。`/domain-modeling` 技能（通过 `/grill-with-docs` 和 `/improve-codebase-architecture` 访问）会在术语或决策实际需要解决时延迟创建它们。
 
-2. 在与用户对话及编写 agent brief 时，使用上下文中定义的术语
+## 文件结构
 
-3. 对照 `docs/adr/` 检查你的工作，避免违反现有的架构决策
-
-## 上下文布局
-
-### 单上下文
+单上下文仓库（大多数仓库）：
 
 ```
-CONTEXT.md           ← 整个仓库的领域术语表
-docs/adr/            ← 架构决策记录（ADR）
+/
+├── CONTEXT.md
+├── docs/adr/
+│   ├── 0001-event-sourced-orders.md
+│   └── 0002-postgres-for-write-model.md
+└── src/
 ```
 
-大多数仓库都是单上下文。一个 `CONTEXT.md` 文件描述整个项目。
-
-### 多上下文
+多上下文仓库（根目录下存在 `CONTEXT-MAP.md`）：
 
 ```
-CONTEXT-MAP.md       ← 将区域映射到其上下文文件
-src/backend/CONTEXT.md
-src/frontend/CONTEXT.md
-src/backend/docs/adr/
-src/frontend/docs/adr/
+/
+├── CONTEXT-MAP.md
+├── docs/adr/                          ← 全局决策
+└── src/
+    ├── ordering/
+    │   ├── CONTEXT.md
+    │   └── docs/adr/                  ← 上下文特定决策
+    └── billing/
+        ├── CONTEXT.md
+        └── docs/adr/
 ```
 
-多上下文适用于各子系统使用不同领域语言的 monorepo 或大型项目。
+## 使用术语表的词汇
 
-`CONTEXT-MAP.md` 应包含：
+当你的输出命名了一个领域概念时（在 issue 标题、重构提案、假设或测试名称中），请使用 `CONTEXT.md` 中定义的术语。不要偏离术语表明确排除的同义词。
 
-- 每个上下文的名称和路径
-- 对每个上下文负责范围的 1–2 句描述
-- 如何判断一段代码或议题属于哪个上下文的指南
+如果你需要的概念尚未出现在术语表中，那是一个信号——要么你正在发明项目不使用的语言（重新考虑），要么存在真正的空白（将其记录给 `/domain-modeling`）。
 
----
+## 标记 ADR 冲突
 
-> 此文件在运行 `setup-matt-pocock-skills` 时生成。关于上下文文件内容的详细说明，参见 [CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md)。
+如果你的输出与现有 ADR 相矛盾，请明确提出来，而不是静默覆盖：
+
+> _与 ADR-0007（event-sourced orders）矛盾——但值得重新讨论，因为……_

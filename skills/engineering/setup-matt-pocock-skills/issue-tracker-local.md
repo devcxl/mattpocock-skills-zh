@@ -1,19 +1,19 @@
-# Issue 跟踪器：本地 Markdown
+# Issue tracker: Local Markdown（本地 Markdown）
 
-本仓库的 issue 和 PRD 以 markdown 文件的形式存放在 `.scratch/` 中。
+本仓库的 issue 和 PRD 以 markdown 文件形式存放在 `.scratch/` 中。
 
 ## 约定
 
-- 一个功能对应一个目录：`.scratch/<feature-slug>/`
-- PRD 文件：`.scratch/<feature-slug>/PRD.md`
-- 实现 issue：`.scratch/<feature-slug>/issues/<NN>-<slug>.md`，从 `01` 开始编号
-- 分类状态以 `Status:` 行的形式记录在每个 issue 文件顶部附近（角色字符串见 `triage-labels.md`）
-- 评论和对话历史追加到文件末尾的 `## Comments` 标题下
+- 每个功能一个目录：`.scratch/<feature-slug>/`
+- PRD 位于 `.scratch/<feature-slug>/PRD.md`
+- 实现 issue 位于 `.scratch/<feature-slug>/issues/<NN>-<slug>.md`，从 `01` 开始编号
+- 分类状态在每个 issue 文件顶部附近通过 `Status:` 行记录（角色字符串参见 `triage-labels.md`）
+- 评论和对话历史追加到文件末尾，位于 `## Comments` 标题下
 
-## 当技能说"发布到 issue 跟踪器"
+## 当技能要求"发布到 issue tracker"
 
-在 `.scratch/<feature-slug>/` 下创建新文件（如目录不存在则先创建）。
+在 `.scratch/<feature-slug>/` 下创建新文件（按需创建目录）。
 
-## 当技能说"获取相关票"
+## 当技能要求"获取相关 ticket"
 
-读取所引用路径下的文件。用户通常会直接传递路径或 issue 编号。
+读取引用路径下的文件。用户通常会直接传入路径或 issue 编号。

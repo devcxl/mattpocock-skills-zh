@@ -2,6 +2,7 @@
 name: handoff
 description: 将当前对话压缩为一份交接文档，供另一个智能体继续工作。
 argument-hint: "下一个会话会用来做什么？"
+disable-model-invocation: true
 ---
 
 将当前对话总结为一份交接文档，方便一个全新的智能体继续工作。保存到用户操作系统的临时目录——而不是当前工作区。

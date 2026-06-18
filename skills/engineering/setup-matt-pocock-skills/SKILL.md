@@ -1,6 +1,6 @@
 ---
 name: setup-matt-pocock-skills
-description: 在 AGENTS.md/CLAUDE.md 中设置 `## Agent skills` 块以及 `docs/agents/`，使工程技能了解本仓库的 issue 跟踪方式（GitHub 或本地 markdown）、分类标签词汇和领域文档布局。在首次使用 `to-issues`、`to-prd`、`triage`、`diagnose`、`tdd`、`improve-codebase-architecture` 或 `zoom-out` 之前运行——或者当这些技能似乎缺少 issue 跟踪器、分类标签或领域文档的上下文时运行。
+description: 为本仓库配置工程技能——设置 issue 跟踪器、分类标签词汇和领域文档布局。在首次使用其他工程技能之前运行一次。
 disable-model-invocation: true
 ---
 
@@ -44,6 +44,12 @@ disable-model-invocation: true
 - **本地 markdown** — issue 以文件形式存放在本仓库 `.scratch/<feature>/` 下（适合个人项目或没有远程仓库的项目）
 - **其他**（Jira、Linear 等）——请用户用一段话描述工作流，技能会将其记录为自由文本
 
+如果——且仅当——用户选择了 **GitHub** 或 **GitLab**，再追问一个问题：
+
+> 解释：开源仓库经常通过 pull request（而不仅仅是 issue）接收功能请求——PR 是附带了代码的 issue。如果你开启此选项，`/triage` 会将*外部* PR 也拉入同一个队列，并按照与 issue 相同的标签和状态进行流转（协作者正在进行中的 PR 不受影响）。如果 PR 不是你的请求入口，则保持关闭。
+
+- **PR 作为请求入口** —— 是 / 否（默认：否）。将答案记录在 `docs/agents/issue-tracker.md` 中。对于本地 markdown 和其他跟踪器，跳过此问题——因为它们没有 PR。
+
 **B 部分 —— 分类标签词汇。**
 
 > 解释：当 `triage` 技能处理一个进来的 issue 时，它会将 issue 沿一条状态机流转——需要评估、等待报告人回复、可被 AFK agent 接手、需要人工实现、或者不予处理。为此，它需要打上与*你实际配置的标签*一致的标签字符串。如果你的仓库已经在使用不同的标签名称（例如 `bug:triage` 而非 `needs-triage`），请在此处做好映射，让技能使用正确的标签，而不是创建重复标签。
@@ -60,7 +66,7 @@ disable-model-invocation: true
 
 **C 部分 —— 领域文档。**
 
-> 解释：某些技能（`improve-codebase-architecture`、`diagnose`、`tdd`）会读取 `CONTEXT.md` 文件以了解项目的领域语言，以及 `docs/adr/` 以了解过往的架构决策。它们需要知道仓库采用的是单一全局上下文还是多个上下文（例如一个同时有前端和后端上下文的 monorepo），以便在正确的位置进行查找。
+> 解释：某些技能（`improve-codebase-architecture`、`diagnosing-bugs`、`tdd`）会读取 `CONTEXT.md` 文件以了解项目的领域语言，以及 `docs/adr/` 以了解过往的架构决策。它们需要知道仓库采用的是单一全局上下文还是多个上下文（例如一个同时有前端和后端上下文的 monorepo），以便在正确的位置进行查找。
 
 确认布局：
 
@@ -95,7 +101,7 @@ disable-model-invocation: true
 
 ### Issue tracker
 
-[对 issue 跟踪位置的一句话总结]。详见 `docs/agents/issue-tracker.md`。
+[对 issue 跟踪位置的一句话总结，以及外部 PR 是否作为分类入口]。详见 `docs/agents/issue-tracker.md`。
 
 ### Triage labels
 

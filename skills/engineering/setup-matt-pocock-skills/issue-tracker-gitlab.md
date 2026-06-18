@@ -14,6 +14,18 @@
 
 通过 `git remote -v` 推断仓库地址——在 clone 的仓库内运行 `glab` 会自动识别。
 
+## 将合并请求作为分类入口
+
+**MR 作为请求入口：否。** _（如果本仓库将外部合并请求视为功能请求，则设为 `yes`；`/triage` 会读取此标志。）_
+
+当设为 `yes` 时，MR 与 issue 使用相同的标签和状态进行流转，使用 `glab mr` 的等价命令：
+
+- **读取 MR**：`glab mr view <number> --comments` 以及 `glab mr diff <number>` 获取 diff。
+- **列出需要分类的外部 MR**：`glab mr list -F json`，然后只保留作者不是项目成员/所有者的 MR（贡献者的 MR，而非维护者正在进行中的工作）。
+- **评论 / 标签 / 关闭**：`glab mr note`、`glab mr update --label`/`--unlabel`、`glab mr close`。
+
+与 GitHub 不同，GitLab 为 issue 和 MR 分别编号，因此 `#42` 在你知道维护者指的是哪个入口时是明确的。
+
 ## 当技能说"发布到 issue 跟踪器"
 
 创建一个 GitLab issue。

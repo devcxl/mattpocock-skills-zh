@@ -1,6 +1,7 @@
 ---
 name: edit-article
 description: 通过重构章节、提升清晰度、精简文笔来编辑和改进文章。当用户想编辑、修订或改进文章草稿时使用。
+disable-model-invocation: true
 ---
 
 1. 首先，根据文章的标题将其划分为若干章节。思考你在每个章节中想要表达的核心要点。

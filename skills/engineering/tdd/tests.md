@@ -1,11 +1,11 @@
-# 好的测试与坏的测试
+# Good and Bad Tests
 
-## 好的测试
+## Good Tests
 
-**集成风格**：通过真实接口测试，而不是 mock 内部组件。
+**Integration-style**: Test through real interfaces, not mocks of internal parts.
 
 ```typescript
-// 好：测试的是可观察行为
+// GOOD: Tests observable behavior
 test("user can checkout with valid cart", async () => {
   const cart = createCart();
   cart.add(product);
@@ -14,20 +14,20 @@ test("user can checkout with valid cart", async () => {
 });
 ```
 
-特征：
+Characteristics:
 
-- 测试用户/调用方关心的行为
-- 仅使用公共 API
-- 经得起内部重构
-- 描述"是什么"，而非"怎么做"
-- 每个测试只验证一个逻辑断言
+- Tests behavior users/callers care about
+- Uses public API only
+- Survives internal refactors
+- Describes WHAT, not HOW
+- One logical assertion per test
 
-## 坏的测试
+## Bad Tests
 
-**实现细节测试**：与内部结构紧耦合。
+**Implementation-detail tests**: Coupled to internal structure.
 
 ```typescript
-// 坏：测试的是实现细节
+// BAD: Tests implementation details
 test("checkout calls paymentService.process", async () => {
   const mockPayment = jest.mock(paymentService);
   await checkout(cart, payment);
@@ -35,24 +35,24 @@ test("checkout calls paymentService.process", async () => {
 });
 ```
 
-危险信号：
+Red flags:
 
-- Mock 了内部协作者
-- 测试了私有方法
-- 断言调用次数/调用顺序
-- 不改行为只做重构时测试就挂了
-- 测试名称描述的是"怎么做"而非"是什么"
-- 绕过接口，用外部手段来验证
+- Mocking internal collaborators
+- Testing private methods
+- Asserting on call counts/order
+- Test breaks when refactoring without behavior change
+- Test name describes HOW not WHAT
+- Verifying through external means instead of interface
 
 ```typescript
-// 坏：绕过接口来验证
+// BAD: Bypasses interface to verify
 test("createUser saves to database", async () => {
   await createUser({ name: "Alice" });
   const row = await db.query("SELECT * FROM users WHERE name = ?", ["Alice"]);
   expect(row).toBeDefined();
 });
 
-// 好：通过接口来验证
+// GOOD: Verifies through interface
 test("createUser makes user retrievable", async () => {
   const user = await createUser({ name: "Alice" });
   const retrieved = await getUser(user.id);

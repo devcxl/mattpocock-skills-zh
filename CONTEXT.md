@@ -1,26 +1,26 @@
-# Matt Pocock 技能集
+# Matt Pocock Skills
 
-一组由 Claude Code 加载的智能体技能（斜杠命令和行为）。技能按分类组织，由 `/setup-matt-pocock-skills` 生成的各仓库配置来消费。
+本仓库是 Claude Code 加载的一组 agent 技能（斜杠命令和行为）集合。技能按类别组织，由 `/setup-matt-pocock-skills` 生成的逐仓库配置来消费。
 
-## 语言规范
+## 术语
 
-**Issue 跟踪器**：
-托管仓库 issues 的工具——GitHub Issues、Linear、本地 `.scratch/` markdown 约定或类似方式。`to-issues`、`to-prd`、`triage`、`qa` 等技能会对其进行读写。
-_避免使用_：backlog 管理器、backlog 后端、issue 宿主
+**Issue tracker（问题跟踪器）：**
+承载仓库 issue 的工具——GitHub Issues、Linear、本地 `.scratch/` markdown 约定等。`to-issues`、`to-prd`、`triage`、`qa` 等技能从中读写数据。
+_避免使用_：backlog manager、backlog backend、issue host
 
-**Issue**：
-**Issue 跟踪器**中单个被跟踪的工作单元——一个 bug、任务、PRD 或 `to-issues` 生成的切片。
-_避免使用_：ticket（仅在引用外部系统中称之为 ticket 时使用）
+**Issue：**
+**Issue tracker** 中的单个跟踪工作单元——一个 bug、任务、PRD 或 `to-issues` 产出的切片。
+_避免使用_：ticket（仅在引用将其称为 ticket 的外部系统时使用）
 
-**分类角色（Triage role）**：
-在分类过程中应用于某个 **Issue** 的规范状态机标签（如 `needs-triage`、`ready-for-afk`）。每个角色通过 `docs/agents/triage-labels.md` 映射到 **Issue 跟踪器** 中的实际标签字符串。
+**Triage role（分类角色）：**
+分类过程中应用于 **Issue** 的一个规范状态机标签（如 `needs-triage`、`ready-for-afk`）。每个角色通过 `docs/agents/triage-labels.md` 映射到 **Issue tracker** 中的实际标签字符串。
 
 ## 关系
 
-- 一个 **Issue 跟踪器** 包含多个 **Issue**
-- 一个 **Issue** 每次携带一个 **分类角色**
+- 一个 **Issue tracker** 包含多个 **Issues**
+- 一个 **Issue** 同时携带一个 **Triage role**
 
-## 已解决的歧义
+## 已标记的歧义
 
-- "backlog" 之前既用于指代*托管 issues 的工具*又指代*其中的工作内容*——已解决：工具是 **Issue 跟踪器**；"backlog" 不再作为领域术语使用。
-- "backlog backend" / "backlog manager"——已解决：统一为 **Issue 跟踪器**。
+- "backlog" 之前同时指代承载 issue 的*工具*和其中的*工作集合*——已解决：工具是 **Issue tracker**；"backlog" 不再作为领域术语使用。
+- "backlog backend" / "backlog manager"——已解决：统一归入 **Issue tracker**。

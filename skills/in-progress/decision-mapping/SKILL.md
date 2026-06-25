@@ -39,7 +39,7 @@ Type: Research | Prototype | Grilling
 
 - **Research（调研）**：阅读文档、第三方 API 或本地资源（如知识库）。创建一个 Markdown 摘要作为资产。当需要当前工作目录之外的知识时使用此类型。
 - **Prototype（原型）**：编写 UI 或逻辑代码来验证假设，或探索设计方案。使用 /prototype 技能。创建一个原型作为资产。当核心问题是"应该长什么样"或"应该怎么表现"时使用此类型。
-- **Grilling（盘问）**：与 Agent 进行对话。使用 /grilling 和 /domain-modelling 技能。一次只问一个问题。这是默认类型。
+- **Grilling（盘问）**：与 Agent 进行对话。使用 /grilling 和 /domain-modeling 技能。一次只问一个问题。这是默认类型。
 
 ## 战争迷雾（Fog of War）
 
@@ -55,7 +55,7 @@ Type: Research | Prototype | Grilling
 
 用户用一个松散的想法发起调用。
 
-1. 运行一个 /grilling + /domain-modelling 会话，以揭示未解决的决策。一次只问一个问题。
+1. 运行一个 /grilling + /domain-modeling 会话，以揭示未解决的决策。一次只问一个问题。
 2. 编写一个新的决策映射——大部分是迷雾，前沿已被识别，可简单决定的条目已内联解决。
 3. 停止。构建映射是一个会话的工作量；不要同时解决 Ticket。
 
@@ -64,7 +64,7 @@ Type: Research | Prototype | Grilling
 用户传入现有映射的路径和一个 Ticket 编号来发起调用。
 
 1. 将**整个映射**加载为上下文。
-2. 运行一个会话来解决该 Ticket，根据需要调用其他技能。如有疑问，使用 `/grilling` 和 `/domain-modelling`。
+2. 运行一个会话来解决该 Ticket，根据需要调用其他技能。如有疑问，使用 `/grilling` 和 `/domain-modeling`。
 3. 在 Ticket 正文中记录会话解决的内容。
 4. 添加新发现的 Ticket（附带正确的 `blocked_by` 边）。
 5. 停止。

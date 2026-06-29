@@ -1,7 +1,6 @@
 ---
 name: prototype
-description: 构建一个可丢弃的原型来完善设计——针对状态/业务逻辑问题构建可运行的终端应用，或在一个路由下生成多个截然不同的 UI 变体供切换查看。
-disable-model-invocation: true
+description: 构建一个可丢弃的原型来回答设计问题。当用户想要验证状态模型或逻辑是否合理，或探索 UI 应该长什么样时使用。
 ---
 
 # 原型

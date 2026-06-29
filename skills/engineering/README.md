@@ -13,11 +13,12 @@
 - **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)** — 为本仓库配置工程技能（issue 跟踪器、triage 标签、领域文档布局）。每个仓库运行一次。
 - **[to-issues](./to-issues/SKILL.md)** — 将任何计划、规范或 PRD 通过垂直切片拆解为可独立抓取的 issue。
 - **[to-prd](./to-prd/SKILL.md)** — 将当前对话转换为 PRD 并发布到 issue 跟踪器。
-- **[prototype](./prototype/SKILL.md)** — 构建一次性原型——用于状态/逻辑问题的可运行终端应用，或若干可切换的 UI 变体。
 
 ## 模型调用（Model-invoked）
 
 模型或用户均可调用（使用丰富的触发短语，使模型能够主动调用）。
+
+- **[prototype](./prototype/SKILL.md)** — 构建一个可丢弃的原型来回答设计问题：针对状态/逻辑问题的可运行终端应用，或若干可切换的 UI 变体。
 
 - **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)** — 针对棘手的 bug 和性能回归问题的规范化诊断循环：复现 → 最小化 → 假设 → 检测 → 修复 → 回归测试。
 - **[tdd](./tdd/SKILL.md)** — 测试驱动开发，采用红-绿-重构循环。每次一个垂直切片地构建功能或修复 bug。

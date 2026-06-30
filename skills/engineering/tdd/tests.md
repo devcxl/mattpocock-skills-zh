@@ -59,3 +59,19 @@ test("createUser makes user retrievable", async () => {
   expect(retrieved.name).toBe("Alice");
 });
 ```
+
+**循环论证测试（Tautological tests）**：期望值重述了实现，因此测试构造性通过。
+
+```typescript
+// BAD：期望值以与代码相同的方式计算
+test("calculateTotal sums line items", () => {
+  const items = [{ price: 10 }, { price: 5 }];
+  const expected = items.reduce((sum, i) => sum + i.price, 0);
+  expect(calculateTotal(items)).toBe(expected);
+});
+
+// GOOD：期望值是独立的、已知正确的字面量
+test("calculateTotal sums line items", () => {
+  expect(calculateTotal([{ price: 10 }, { price: 5 }])).toBe(15);
+});
+```

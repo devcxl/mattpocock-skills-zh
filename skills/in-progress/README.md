@@ -8,3 +8,4 @@
 - **[writing-fragments](./writing-fragments/SKILL.md)** — 通过盘问来挖掘碎片——异质化的写作片段——并将它们追加到一份文档中，作为未来文章的原始素材。
 - **[writing-shape](./writing-shape/SKILL.md)** — 拿一份 markdown 格式的原始素材，通过对话逐段将其塑造为一篇文章，每一步都要论证格式选择的合理性。
 - **[wizard](./wizard/SKILL.md)** — 引导用户完成多步骤设置或编排流程。
+- **[claude-handoff](./claude-handoff/SKILL.md)** — 将当前对话移交给一个立即接手工作的新后台 agent，通过 `claude --bg` 注入交接摘要。用户调用。

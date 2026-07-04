@@ -149,6 +149,7 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 - **[ask-matt](./skills/engineering/ask-matt/SKILL.md)** — 询问仓库中的某个技能应该用于某个特定的使用场景或目标。
 - **[code-review](./skills/engineering/code-review/SKILL.md)** — 审查自某个固定点以来的变更——规范（标准）和规格（需求）双轴并行审查。
 - **[diagnose](./skills/engineering/diagnose/SKILL.md)** — 针对棘手 bug 和性能回归的纪律性诊断循环：复现 → 最小化 → 假设 → 插桩 → 修复 → 回归测试。
+- **[research](./skills/engineering/research/SKILL.md)** — 在后台 agent 中调查一个问题，依据高可信度一手来源，将发现作为带引用的 Markdown 文件写入仓库。
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — 盘问环节，用现有领域模型挑战你的计划、打磨术语，并实时更新 `CONTEXT.md` 和 ADR。
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — 在代码库中发现深化机会，结合 `CONTEXT.md` 中的领域语言和 ADR 中的决策。
 - **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** — 搭建各仓库配置（Issue 跟踪器、分类标签词汇表、领域文档布局），供其他工程类技能使用。每个仓库使用 `to-issues`、`to-prd`、`triage`、`diagnose`、`tdd`、`improve-codebase-architecture` 或 `zoom-out` 之前运行一次。

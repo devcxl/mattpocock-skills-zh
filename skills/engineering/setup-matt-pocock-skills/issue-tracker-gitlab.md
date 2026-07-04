@@ -33,3 +33,14 @@
 ## 当技能说"获取相关票"
 
 运行 `glab issue view <number> --comments`。
+
+## Wayfinding 操作
+
+由 `/wayfinder` 使用。**地图**是一个带有**子** issue 的单一 issue，作为 ticket。
+
+- **地图**：一个带有 `wayfinder:map` 标签的单一 issue，包含 Notes / Decisions-so-far / Fog 正文。`glab issue create --label wayfinder:map`。（在支持原生 epics 的 GitLab 层级上，可以使用 epic 作为地图；带标签的 issue 在任何地方都能工作。）
+- **子 ticket**：一个在其描述顶部带有 `Part of #<map>` 以及 `wayfinder:<type>`（`research`/`prototype`/`grilling`/`task`）标签的 issue。一旦认领，ticket 分配给推动的开发人员。
+- **阻塞关系**：GitLab 的**原生阻塞链接**——规范的、UI 可见的表示。使用 `/blocked_by #<n>` 快速操作添加，作为 note 发布（`glab issue note <child> --message "/blocked_by #<blocker>"`）。原生阻塞链接是 Premium/Ultimate 功能；在免费版（或不可用时），回退到描述顶部的 `Blocked by: #<n>, #<n>` 行。当所有阻塞者都关闭时 ticket 解除阻塞。
+- **前沿查询**：`glab issue list -F json` 限制在地图的子项范围内，排除任何带有打开阻塞者——一个指向打开 issue 的原生 `blocked_by` 链接（`glab api projects/:id/issues/:iid/links`），或 `Blocked by` 行中的打开 issue——或分配人的条目；按地图顺序第一个胜出。
+- **认领**：`glab issue update <n> --assignee @me`——会话的第一次写入。
+- **解决**：`glab issue note <n> --message "<answer>"`，然后 `glab issue close <n>`，然后在地图的 Decisions-so-far 后面追加上下文指针（摘要 + 链接）。

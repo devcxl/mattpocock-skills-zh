@@ -9,6 +9,7 @@
 - **[ask-matt](./ask-matt/SKILL.md)** — 询问哪种技能或流程适合你的情况。本仓库中用户调用技能的路由器。
 - **[code-review](./code-review/SKILL.md)** — 审查自某个固定点以来的变更——规范（代码标准）和规格（需求）双轴并行审查。
 - **[diagnose](./diagnose/SKILL.md)** — 针对棘手的 bug 和性能回归问题的规范化诊断循环：复现 → 最小化 → 假设 → 检测 → 修复 → 回归测试。
+- **[research](./research/SKILL.md)** — 在后台 agent 中针对高可信度一手来源调查一个问题，将发现作为带引用的 Markdown 文件写入仓库。
 - **[grill-with-docs](./grill-with-docs/SKILL.md)** — 盘问式会话，同时构建项目的领域模型，锤炼术语并内联更新 `CONTEXT.md` 和 ADR。
 - **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)** — 扫描代码库寻找可深化改进的机会，以可视化 HTML 报告呈现，然后深入讨论你选择的任何一个。
 - **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)** — 为本仓库配置工程技能（issue 跟踪器、triage 标签、领域文档布局）。每个仓库运行一次。

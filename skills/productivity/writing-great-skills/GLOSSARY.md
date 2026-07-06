@@ -175,3 +175,9 @@ _避免_：bloat、length、size、verbosity
 Leading word 是一种*技巧*；No-Op 是一行内容的*裁决*——它们交叉。一个太弱而无法击败默认行为的 leading word 就是一个 no-op（当 agent 已经相当*彻底*时要求 _要彻底_），修复方法是使用一个更强的、能通过裁决的词语（_穷追不舍_），而不是不同的技巧。所以 No-Op 测试——它是否改变了相对于默认行为的行为？——也是你评估一个 leading word 是否值得重复的方式。这是模型相对的，而非读者相对的：两个人争论一行内容是否是无用指令时，实际上是在争论默认行为，通过运行技能来判定，而非通过辩论。
 
 _避免_：redundant instruction、restating the obvious、belaboring
+
+### 否定（Negation）
+
+一行内容告诉 agent *不要*做什么。否定似乎是安全的——它声明一条边界——但边界只有在 agent 打算迈过去的那一步时才值得绘制；在它原本就不会去的地方画边界，你只是徒增字符。很多否定内容实际上是不精确的**禁止性 branch**——一条包含在技能中的分支，明确说明在某种情况下几乎不做什么——而不是它表面上的样子。一个真实的 branch 说"*当* X 发生时做 Y"；一个否定性假 branch 说"当 X 发生时*不要*做 Y"——如果 X 从未发生，你支付了负载却什么都没得到。
+
+_避免_：negative instruction、prohibition、don't-say

@@ -20,7 +20,7 @@ npx skills update grill-with-docs
 
 通过输入 `/grill-with-docs` 来调用——Agent 不会自行调用。
 
-在变更开始时使用，当计划仍然模糊、领域语言尚未确定，并且你希望在编写任何代码之前对两者都进行压力测试时。如果你只想要盘问而不需要制品，使用 [grilling](https://aihero.dev/skills-grilling)；如果计划已经清晰，你只需要确定或记录术语，使用 [domain-modeling](https://aihero.dev/skills-domain-modeling)。而如果变更大到一次会话容纳不下、路线仍然模糊——一个绿野项目、一个大型功能构建——先用 [wayfinder](https://aihero.dev/skills-wayfinder) 上游开始：它将工作绘制为决策地图，然后当路线清晰时交回给此主流程。
+在变更开始时使用，当计划仍然模糊、领域语言尚未确定，并且你希望在编写任何代码之前对两者都进行压力测试时。如果你只想要盘问而不需要制品，使用 [grilling](https://aihero.dev/skills-grilling)；如果计划已经清晰，你只需要确定或记录术语，使用 [domain-modeling](https://aihero.dev/skills-domain-modeling)。而如果变更大到一次会话容纳不下、路线仍然模糊——一个绿野项目、一个大型功能构建——先用 [wayfinder](https://aihero.dev/skills-wayfinder) 上游开始：它将工作绘制为决策地图，然后当路线清晰时交回给此主流程。如果变更太大，一个会话装不下，且路线仍然笼罩在迷雾中——全新项目、大型功能构建——请先启动 [wayfinder](https://aihero.dev/skills-wayfinder)：它将工作绘制为决策地图，然后在此主流程恢复运转之前回传。
 
 ## 前置条件
 

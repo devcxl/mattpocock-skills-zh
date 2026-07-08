@@ -1,33 +1,44 @@
----
-title: wayfinder（文档）
-description: Wayfinding（探路法）的概念、行为及跟踪器操作参考。
----
+快速开始：
 
-# Wayfinding（探路法）
+```bash
+npx skills add mattpocock/skills --skill=wayfinder
+```
 
-Wayfinding 是一种规划大型工作的方法——当一个工作块太大以至于一个 agent 会话无法完成时——通过在 Issue 跟踪器上将其绘制为一组调研 ticket 的**地图（map）**。在阅读本文档之前，请先阅读 `/engineering/wayfinder` 技能规范。
+```bash
+npx skills update wayfinder
+```
 
-## 跟踪器操作
+[源代码](https://github.com/mattpocock/skills/tree/main/skills/engineering/wayfinder)
 
-在 GitHub Issue 跟踪器中，地图、ticket 及其关系表达如下：
+## 功能
 
-- **地图（Map）** 是一个带有 `wayfinder:map` 标签的 Issue。其标题即为地图的名称。
-- **Ticket** 是一个带有 `wayfinder:<type>` 标签的 Issue——类型为 `research`、`prototype`、`grilling` 或 `task`。它通过 GitHub Issue 跟踪器的 **sub-issues（子 Issue）** 功能作为其地图的子项（嵌套在父级下方）。
-- **阻塞依赖（Blocking）** 通过 GitHub Issue 跟踪器原生的阻塞关系来表达。
-- 已被认领的 ticket 会分配给驱动该地图的开发者。
-- **前沿（Frontier）** 是指地图中所有处于开放状态、未被分配、且未被阻塞的子 Issue。
-- 地图正文、ticket 类型、迷雾（fog of war）以及范围外规则与技能规范中的定义完全相同。
+`wayfinder` 将一个大到单个 agent 会话装不下的工作——被迷雾笼罩，从当前到目标的路还看不清楚——绘制为 Issue 跟踪器上的一张**共享地图**，地图上是调查 ticket，然后逐个解决，直到路线清晰。它**规划，不动手**：每个 ticket 解决一个决策，当没有任何需要决定的事情时地图就完成了——因此它产出的是决策，而非可交付物。
 
-`/setup-matt-pocock-skills` 技能为项目配置标签词汇表。
+## 何时使用
 
-### 在跟踪器中操作
+通过输入 `/wayfinder` 来调用——agent 不会主动使用它。
 
-在 GitHub Issue 跟踪器上操作地图时，通过 `gh` 工具与 Issue 交互：
+当一个工作**超过一个 agent 会话能容纳的量**，且到达其**目的地**的路线仍然笼罩在迷雾中——你能感觉到工作的形状，但还不能将其写为规范或计划时使用。要将*已经清晰*的内容转化为 spec，请使用 [to-spec](https://aihero.dev/skills-to-spec)；要将已理解的计划切成可构建的 ticket，请使用 [to-tickets](https://aihero.dev/skills-to-tickets)。Wayfinder 位于两者上游：当迷雾大到无法直接编写 spec 时，你运行它。
 
-- 使用 `gh issue create` 创建 Issue
-- 使用 `gh issue edit <id> --add-label` 为 Issue 添加标签
-- 使用 `gh sub-issue add <parent-id> <child-id>` 添加子 Issue
-- 使用 `gh issue edit <id> --add-blocked-by <blocker-id>` 和 `gh issue edit <id> --add-blocks <dependent-id>`（或跟踪器支持的其他关系字段名）添加阻塞关系
-- 使用 `gh issue edit <id> --add-assignee @me` 分配 Issue
-- 使用 `gh issue comment <id> --body` 发表评论
-- 使用 `gh issue close <id>` 关闭 Issue
+## 前置条件
+
+地图及其 ticket 位于仓库的 Issue 跟踪器上，因此 wayfinder 需要由 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 配置好的跟踪器连接——它会生成一个"Wayfinding 操作"章节，描述在 GitHub、GitLab 或本地 Markdown 下如何表示地图、子 ticket、阻塞关系和前沿查询。如果没有该文档，wayfinder 默认使用本地 Markdown 地图。
+
+## 地图是索引，迷雾是前沿
+
+**地图**是一个带有 `wayfinder:map` 标签的 Issue，其 ticket 是它的子 issue——整个团队可共同查看的一个共享 URL。它是**索引，而非仓库**：每个决策只存在于一个地方（它的 ticket 中），地图只摘要和链接，从不重述。每个会话以低分辨率加载地图，按需放大进入单个 ticket。
+
+在活跃 ticket 之外是**战争迷雾**——你能感觉到即将到来但还不能确定的决策。判断某物是一个 ticket 还是仍然处于迷雾中的检验标准是：你能否现在*精确陈述问题*，而非你能否回答它。解决一个 ticket 会清除它前方的迷雾，将现在可明确的内容**毕业**为新的 ticket。**前沿**是打开的、未阻塞的、未分配的 ticket——已知领域的边界——跟踪器的原生阻塞功能在视觉上呈现它，让你无需打开地图就能看到哪些是可领取的。迷雾只朝**目的地**方向聚集；超出目的地的工作被判定为**范围外**，关闭，永不毕业。
+
+每个 ticket 要么是 **HITL**（人在回路——盘问、原型制作），要么是 **AFK**（agent 独立完成——研究）；HITL ticket 只能通过实时交流解决，因此 agent 永远不会自己回答自己的问题。
+
+## 验证标准
+
+- **命名目的地**是第一个行为——在任何 ticket 存在之前——因为它固定了每个 ticket 的评估范围
+- 一个地图就是一个 `wayfinder:map` Issue；ticket 是它的子 issue，通过**名称**引用，绝不用裸 `#42`
+- 一个会话最多解决**一个 ticket**，将答案记录为解决评论，关闭 ticket，并在"已有决策"中追加一行摘要
+- 如果开始的盘问没有浮现**任何迷雾**，它会停止并告诉你这个工作小到可以跳过地图
+
+## 定位
+
+`wayfinder` 是一个大型想法的**入口匝道**：大到无法在一次坐下写完 spec 的工作会生成一张清除了决策迷雾的地图，然后合并到主构建流程中。当迷雾被推回、路线清晰时，交由 [to-spec](https://aihero.dev/skills-to-spec) 来安排多会话的构建（如果工作量较小，也可以直接实现）。它依靠 [grilling](https://aihero.dev/skills-grilling) 和 [domain-modeling](https://aihero.dev/skills-domain-modeling) 来解析单个 ticket，依靠 [prototype](https://aihero.dev/skills-prototype) 和 [research](https://aihero.dev/skills-research) 来处理需要它们的 ticket 类型。当你不确定哪种技能或流程适合时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指路。

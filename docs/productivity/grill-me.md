@@ -30,4 +30,4 @@ npx skills update grill-me
 
 ## 它的定位
 
-`grill-me` 是一项可以随时使用的独立工具——你在计划需要敲定之前运行的构建前压力测试。它是 [grilling](https://aihero.dev/skills-grilling) 原语的无状态、用户调用的前端入口；它的近邻是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，其有状态的兄弟执行相同的盘问，但额外将决策记录为 ADR 和术语表。如果最终结果是想要写下来的规范，交给 [to-prd](https://aihero.dev/skills-to-prd)，它会将已确定的综合理解转变为 PRD，而无需重新盘问你。当你不确定适合哪种流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。
+`grill-me` 是一项可以随时使用的独立工具——你在计划需要敲定之前运行的构建前压力测试。它是 [grilling](https://aihero.dev/skills-grilling) 原语的无状态、用户调用的前端入口；它的近邻是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，其有状态的兄弟执行相同的盘问，但额外将决策记录为 ADR 和术语表。如果最终结果是想要写下来的规范，交给 [to-spec](https://aihero.dev/skills-to-spec)，它会将已确定的综合理解转变为 spec，而无需重新盘问你。当你不确定适合哪种流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

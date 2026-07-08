@@ -35,7 +35,7 @@ disable-model-invocation: true
 
 **A 部分 —— Issue 跟踪器。**
 
-> 解释：Issue 跟踪器是本仓库 issue 的存放位置。`to-issues`、`triage`、`to-prd` 和 `qa` 等技能会从中读取和写入——它们需要知道是调用 `gh issue create`、将 markdown 文件写入 `.scratch/` 目录，还是遵循你描述的其他工作流。请选择你实际跟踪本仓库工作的地方。
+> 解释：Issue 跟踪器是本仓库 issue 的存放位置。`to-tickets`、`triage`、`to-spec` 等技能会从中读取和写入——它们需要知道是调用 `gh issue create`、将 markdown 文件写入 `.scratch/` 目录，还是遵循你描述的其他工作流。请选择你实际跟踪本仓库工作的地方。
 
 默认倾向：这些技能是为 GitHub 设计的。如果 `git remote` 指向 GitHub，则推荐 GitHub。如果 `git remote` 指向 GitLab（`gitlab.com` 或自托管地址），则推荐 GitLab。否则（或用户有偏好），提供以下选项：
 

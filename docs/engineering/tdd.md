@@ -20,7 +20,7 @@ npx skills update tdd
 
 键入 `/tdd`，或者当任务适合时代理会自动使用它——以测试先行的方式构建一个特性或修复一个缺陷，或者当你说"red-green-refactor"时。
 
-当有一个具体的行为需要构建，并且你希望测试能够经受住重构时使用它。如果行为尚未确定，先敲定规范——可以使用 [to-prd](https://aihero.dev/skills-to-prd)。当工作的重点实际上是接口的形状而不是测试时，使用 [codebase-design](https://aihero.dev/skills-codebase-design)；`tdd` 在规划期间会调用它来寻找深度模块的词汇。
+当有一个具体的行为需要构建，并且你希望测试能够经受住重构时使用它。如果行为尚未确定，先敲定规范——可以使用 [to-spec](https://aihero.dev/skills-to-spec)。当工作的重点实际上是接口的形状而不是测试时，使用 [codebase-design](https://aihero.dev/skills-codebase-design)；`tdd` 在规划期间会调用它来寻找深度模块的词汇。
 
 ## 红绿交替，一次一个切片
 
@@ -41,7 +41,7 @@ npx skills update tdd
 `tdd` 是主构建链中用来编写代码的 red-green 循环：
 
 ```txt
-grill-with-docs → to-prd → to-issues → implement → code-review
+grill-with-docs → to-spec → to-tickets → implement → code-review
 ```
 
 [implement](https://aihero.dev/skills-implement) 是链中的构建步骤，它在内部驱动 `tdd` 以测试先行的方式构建每个工单，然后再交给 [code-review](https://aihero.dev/skills-code-review)——因此 `tdd` 是该步骤内部的引擎，而不是一个独立的步骤。你也可以直接使用它，只要有一个具体的行为需要构建而不需要完整的规范。它的另一个近邻是 [codebase-design](https://aihero.dev/skills-codebase-design)，它依赖后者来寻找值得测试的深层模块接缝。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

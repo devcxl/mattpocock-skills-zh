@@ -20,7 +20,7 @@ npx skills update triage
 
 你通过键入 `/triage` 并用自然语言描述你想要什么来调用它——代理不会主动使用它。"显示任何需要我关注的内容"、"我们来看看 #42"、"将 #42 移至 ready-for-agent"。
 
-当你的工单跟踪器中有原始、未经评估的报告，并且你希望它们被分类、验证并转化为代理或人类可以接手的工作时使用。要将一个已确定的对话转化为一份新的规范，使用 [to-prd](https://aihero.dev/skills-to-prd)；要将现有的 PRD 拆分为工单，使用 [to-issues](https://aihero.dev/skills-to-issues)。`triage` 是反向的方向——它处理*已经*存在于跟踪器中的内容。
+当你的工单跟踪器中有原始、未经评估的报告，并且你希望它们被分类、验证并转化为代理或人类可以接手的工作时使用。要将一个已确定的对话转化为一份新的规范，使用 [to-spec](https://aihero.dev/skills-to-spec)；要将现有的 spec 拆分为工单，使用 [to-tickets](https://aihero.dev/skills-to-tickets)。`triage` 是反向的方向——它处理*已经*存在于跟踪器中的内容。
 
 ## 前置条件
 
@@ -43,4 +43,4 @@ npx skills update triage
 
 ## 它的定位
 
-`triage` 是对你工单跟踪器的**定期维护**——在报告堆积时运行它，以保持队列有序和 `ready-for-agent` 列的可信度。它位于跟踪器的最前端，处于构建链的上游：它编写的简要说明正是 [tdd](https://aihero.dev/skills-tdd) 后续进行实现时需要读取的内容。当请求需要打磨时，它依赖 [grilling](https://aihero.dev/skills-grilling) 和 [domain-modeling](https://aihero.dev/skills-domain-modeling) 一次一个问题地将其盘问成形。它的近邻是 [to-prd](https://aihero.dev/skills-to-prd)，后者从新的对话中填充跟踪器，而 `triage` 处理已经存在的内容。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。
+`triage` 是对你工单跟踪器的**定期维护**——在报告堆积时运行它，以保持队列有序和 `ready-for-agent` 列的可信度。它位于跟踪器的最前端，处于构建链的上游：它编写的简要说明正是 [tdd](https://aihero.dev/skills-tdd) 后续进行实现时需要读取的内容。当请求需要打磨时，它依赖 [grilling](https://aihero.dev/skills-grilling) 和 [domain-modeling](https://aihero.dev/skills-domain-modeling) 一次一个问题地将其盘问成形。它的近邻是 [to-spec](https://aihero.dev/skills-to-spec)，后者从新的对话中填充跟踪器，而 `triage` 处理已经存在的内容。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

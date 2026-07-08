@@ -20,16 +20,16 @@ disable-model-invocation: true
    - **`/prototype`** 用可丢弃的代码回答问题，
    - **`/handoff`** 把你学到的东西带回来，并从原始想法线程中引用它。
 3. **分支——这是多会话构建吗？**
-   - **是** → **`/to-prd`**（把对话转化为 PRD）→ **`/to-issues`**（把 PRD 拆分为可独立领取的 Issue）。因为 Issue 是独立的，**每个之间清空上下文**：每个 Issue 启动一个新会话，通过传入 PRD 和要处理的单个 Issue 来启动 **`/implement`**。
+   - **是** → **`/to-spec`**（把对话转化为 spec），然后 **`/to-tickets`** 拆分为 tracer-bullet ticket，每个 ticket 声明其**阻塞边**。在本地跟踪器上，这是一个按顺序的 `tickets.md`，需要手动按顺序推进；在真实跟踪器上，阻塞边变成原生依赖链接，因此任何阻塞项已完成的 ticket 都可以被领取——每个 ticket 启动 **`/implement`**，**每个之间清空上下文**。
    - **否** → 就在同一个上下文窗口中 **`/implement`**。
 
-   无论哪种方式，**`/implement`** 都在内部驱动 **`/tdd`** 构建每个 Issue——一次一个红-绿切片——然后在提交前通过运行 **`/code-review`** 收尾，对 diff 进行双轴审查（规范 + 规格）。当你只想在没有完整规格说明的情况下用测试优先的方式构建具体行为时，单独使用 **`/tdd`**；当你需要审查某个分支或 PR 时，随时单独使用 **`/code-review`**。
+   无论哪种方式，**`/implement`** 都在内部驱动 **`/tdd`** 构建每个 ticket——一次一个红-绿切片——然后在提交前通过运行 **`/code-review`** 收尾，对 diff 进行双轴审查（规范 + 规格）。当你只想在没有完整 spec 的情况下用测试优先的方式构建具体行为时，单独使用 **`/tdd`**；当你需要审查某个分支或 PR 时，随时单独使用 **`/code-review`**。
 
 ### 上下文卫生
 
-将步骤 1-3 保持在**一个不间断的上下文窗口**中——不要压缩或清空，直到 `/to-issues` 之后——这样盘问、PRD 和 Issue 都建立在同一个思考基础上。然后每个 **`/implement`** 重新开始，基于 Issue 工作。
+将步骤 1-3 保持在**一个不间断的上下文窗口**中——不要压缩或清空，直到 `/to-tickets` 之后——这样盘问、spec 和 ticket 都建立在同一个思考基础上。然后每个 **`/implement`** 重新开始，基于 ticket 工作。
 
-这里的限制是 **[智能区](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**：模型仍能清晰推理的窗口（最先进模型约 120k token）。如果在 `/to-issues` 之前会话就接近了这个极限，不要用降级状态硬撑——用 `/handoff` 在新线程中继续。
+这里的限制是 **[智能区](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**：模型仍能清晰推理的窗口（最先进模型约 120k token）。如果在 `/to-tickets` 之前会话就接近了这个极限，不要用降级状态硬撑——用 `/handoff` 在新线程中继续。
 
 ## 入口匝道
 
@@ -37,9 +37,11 @@ disable-model-invocation: true
 
 - **Bug 和请求堆积中** → **`/triage`**。它通过分类角色推动 Issue 流转，产生 Agent 就绪的 Issue，后续由 **`/implement`** 接手。
 
-  分类仅适用于**非你创建**的 Issue——bug 报告、外来的功能请求，任何原始内容。`/to-issues` 产生的 Issue 已经是 Agent 就绪的，所以**不要对它们进行分类**。
+  分类仅适用于**非你创建**的 Issue——bug 报告、外来的功能请求，任何原始内容。`/to-tickets` 产生的 ticket 已经是 Agent 就绪的，所以**不要对它们进行分类**。
 
 - **有东西坏了** → **`/diagnosing-bugs`**。针对疑难杂症：一眼看不出的 bug、间歇性闪退、在两个已知正常状态之间溜进来的回归。它拒绝在没有**紧反馈循环**之前做理论化——一个已经能复现*这个* bug 的命令——然后带着回归测试修复。当真正的发现是没有好的接缝来锁定 bug 时，它的事后分析会交给 **`/improve-codebase-architecture`**。
+
+- **一个巨大、模糊的工作——绿野项目或大型功能构建，一个大到一次会话装不下** → **`/wayfinder`**。当从这里到目的地的路线还不清晰时，它在 Issue 跟踪器上绘制一张**共享地图**，上面是调查 ticket，然后逐个解决——产出**决策，而非可交付物**——直到迷雾退散，路线清晰。然后合并到主干流程，进入 **`/to-spec`**（或者，如果工作最终很小，直接进入 **`/implement`**）。**`/grill-with-docs`** 打磨的是你能在一个会话中 hold 住的想法，wayfinder 是为你 hold 不住的想法准备的。
 
 ## 代码库健康
 

@@ -37,4 +37,4 @@ npx skills update prototype
 
 ## 在生态中的位置
 
-`prototype` 是一个随时可用的独立技能：你切入它来解析一个设计问题，然后退出。它的答案通常输入下一步——一个已验证的状态模型或 UI 方向成为 [to-prd](https://aihero.dev/skills-to-prd) 的确定输入以供编写，或一个值得通过 [domain-modeling](https://aihero.dev/skills-domain-modeling) 记录的架构决策。当你不确定哪个技能或流程适合时，[ask-matt](https://aihero.dev/skills-ask-matt) 会引导你。
+`prototype` 是一个随时可用的独立技能：你切入它来解析一个设计问题，然后退出。它的答案通常输入下一步——一个已验证的状态模型或 UI 方向成为 [to-spec](https://aihero.dev/skills-to-spec) 的确定输入以供编写，或一个值得通过 [domain-modeling](https://aihero.dev/skills-domain-modeling) 记录的架构决策。当你不确定哪个技能或流程适合时，[ask-matt](https://aihero.dev/skills-ask-matt) 会引导你。

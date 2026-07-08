@@ -34,4 +34,4 @@ npx skills update grilling
 
 ## 它的定位
 
-`grilling` 是主构建链下的访谈**原语**：[grill-with-docs](https://aihero.dev/skills-grill-with-docs) 在 [to-prd](https://aihero.dev/skills-to-prd) 编写规范之前运行它以锐化上下文。当你不确定适合哪种入口点时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。
+`grilling` 是主构建链下的访谈**原语**：[grill-with-docs](https://aihero.dev/skills-grill-with-docs) 在 [to-spec](https://aihero.dev/skills-to-spec) 编写规范之前运行它以锐化上下文。当你不确定适合哪种入口点时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

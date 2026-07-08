@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 文档中需要包含"建议技能"部分，列出智能体应该调用的技能。
 
-不要重复复制已经记录在其他产物中的内容（PRD、计划、ADR、Issue、commit、diff）。用路径或 URL 引用它们。
+不要重复复制已经记录在其他产物中的内容（spec、计划、ADR、Issue、commit、diff）。用路径或 URL 引用它们。
 
 隐去所有敏感信息，如 API 密钥、密码或个人身份信息。
 

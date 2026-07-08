@@ -46,7 +46,7 @@ npx skills update code-review
 `code-review` 是构建链中的最后一个步骤：
 
 ```txt
-grill-with-docs → to-prd → to-issues → implement → code-review
+grill-with-docs → to-spec → to-tickets → implement → code-review
 ```
 
 它接收 [implement](https://aihero.dev/skills-implement) 构建的代码，并在合并之前对其进行审查。它的近邻是 [tdd](https://aihero.dev/skills-tdd)，后者在构建步骤内部编写代码以确保代码是可测试的——因此到 code-review 运行时，代码已经通过了它自己的测试。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

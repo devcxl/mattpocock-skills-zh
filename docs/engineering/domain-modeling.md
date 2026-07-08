@@ -43,4 +43,4 @@ npx skills update domain-modeling
 
 ## 在生态中的位置
 
-`domain-modeling` 是一个**随时可用的独立技能**，它运行在*其他技能之下*的频率与作为固定步骤一样高。其最近的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)，因为共享语言正是让你精确命名深度模块及其接缝所需的东西；下游，确定好的术语表正是 [to-prd](https://aihero.dev/skills-to-prd) 综合为项目自身语言编写的规格说明的内容。当你不确定哪个技能或流程适合时，[ask-matt](https://aihero.dev/skills-ask-matt) 会引导你。
+`domain-modeling` 是一个**随时可用的独立技能**，它运行在*其他技能之下*的频率与作为固定步骤一样高。其最近的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)，因为共享语言正是让你精确命名深度模块及其接缝所需的东西；下游，确定好的术语表正是 [to-spec](https://aihero.dev/skills-to-spec) 综合为项目自身语言编写的规格说明的内容。当你不确定哪个技能或流程适合时，[ask-matt](https://aihero.dev/skills-ask-matt) 会引导你。

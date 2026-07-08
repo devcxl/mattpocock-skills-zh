@@ -34,7 +34,7 @@ npx skills update codebase-design
 
 ## 有意提取出来
 
-`codebase-design` 是深度模块词汇表的**唯一真实来源**，被拆分为独立的模型调用技能，以便任何东西都可以调用它。其他技能指向它而不是复述该词汇：[tdd](https://aihero.dev/skills-tdd) 借用它在编写测试之前放置接缝，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在重构现有代码时依赖它，[to-prd](https://aihero.dev/skills-to-prd) 在编写规格说明之前勾勒接缝和深化机会时使用它。
+`codebase-design` 是深度模块词汇表的**唯一真实来源**，被拆分为独立的模型调用技能，以便任何东西都可以调用它。其他技能指向它而不是复述该词汇：[tdd](https://aihero.dev/skills-tdd) 借用它在编写测试之前放置接缝，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在重构现有代码时依赖它，[to-spec](https://aihero.dev/skills-to-spec) 在编写规格说明之前勾勒接缝和深化机会时使用它。
 
 保持独立的意义在于你还可以单独使用它——作为*如何思考模块设计*的**参考**——而无需触发任何这些技能所要求的更大流程。在一个地方、一次性地修复词语，每个设计对话都继承它们。
 

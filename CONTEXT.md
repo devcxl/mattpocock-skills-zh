@@ -5,11 +5,11 @@
 ## 术语
 
 **Issue tracker（问题跟踪器）：**
-承载仓库 issue 的工具——GitHub Issues、Linear、本地 `.scratch/` markdown 约定等。`to-issues`、`to-prd`、`triage`、`qa` 等技能从中读写数据。
+承载仓库 issue 的工具——GitHub Issues、Linear、本地 `.scratch/` markdown 约定等。`to-tickets`、`to-spec`、`triage`、`qa` 等技能从中读写数据。
 _避免使用_：backlog manager、backlog backend、issue host
 
 **Issue：**
-**Issue tracker** 中的单个跟踪工作单元——一个 bug、任务、PRD 或 `to-issues` 产出的切片。
+**Issue tracker** 中的单个跟踪工作单元——一个 bug、任务、spec 或 `to-tickets` 产出的切片。
 _避免使用_：ticket（仅在引用将其称为 ticket 的外部系统时使用）
 
 **Triage role（分类角色）：**

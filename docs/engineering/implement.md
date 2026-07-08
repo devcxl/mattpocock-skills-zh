@@ -20,7 +20,7 @@ npx skills update implement
 
 代理在构建链中自动调用 `implement`——你不需要手动调用它。
 
-当 `to-issues` 发布了工单并且你希望它们被独立地构建时使用。它会在你的跟踪器中寻找标记为 `ready-for-agent` 的工单并按依赖顺序处理它们。如果你还没有工单，使用 [to-issues](https://aihero.dev/skills-to-issues) 来产生它们。
+当 `to-tickets` 发布了工单并且你希望它们被独立地构建时使用。它会在你的跟踪器中寻找标记为 `ready-for-agent` 的工单并按依赖顺序处理它们。如果你还没有工单，使用 [to-tickets](https://aihero.dev/skills-to-tickets) 来产生它们。
 
 ## 先设计，再编码
 
@@ -37,7 +37,7 @@ npx skills update implement
 `implement` 是构建链中构建工单的步骤：
 
 ```txt
-grill-with-docs → to-prd → to-issues → implement → code-review
+grill-with-docs → to-spec → to-tickets → implement → code-review
 ```
 
-它接收 [to-issues](https://aihero.dev/skills-to-issues) 产生的工单，在内部驱动 [tdd](https://aihero.dev/skills-tdd) 来构建每个工单，然后将其结果传递给 [code-review](https://aihero.dev/skills-code-review)。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。
+它接收 [to-tickets](https://aihero.dev/skills-to-tickets) 产生的工单，在内部驱动 [tdd](https://aihero.dev/skills-tdd) 来构建每个工单，然后将其结果传递给 [code-review](https://aihero.dev/skills-code-review)。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

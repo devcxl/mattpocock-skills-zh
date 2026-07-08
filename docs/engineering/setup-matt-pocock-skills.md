@@ -18,7 +18,7 @@ npx skills update setup-matt-pocock-skills
 
 ## 何时使用
 
-在首次使用任何与工单跟踪器交互的技能（[triage](https://aihero.dev/skills-triage)、[to-prd](https://aihero.dev/skills-to-prd)、[to-issues](https://aihero.dev/skills-to-issues)、[implement](https://aihero.dev/skills-implement)）之前，每个仓库运行一次。如果你切换跟踪器或更改标签，也要重新运行。
+在首次使用任何与工单跟踪器交互的技能（[triage](https://aihero.dev/skills-triage)、[to-spec](https://aihero.dev/skills-to-spec)、[to-tickets](https://aihero.dev/skills-to-tickets)、[implement](https://aihero.dev/skills-implement)）之前，每个仓库运行一次。如果你切换跟踪器或更改标签，也要重新运行。
 
 ## 它配置什么
 
@@ -29,4 +29,4 @@ npx skills update setup-matt-pocock-skills
 
 ## 它的定位
 
-`setup-matt-pocock-skills` 是一次性设置步骤——每个仓库运行一次，位于构建链之前。它在 [triage](https://aihero.dev/skills-triage)、[to-prd](https://aihero.dev/skills-to-prd)、[to-issues](https://aihero.dev/skills-to-issues) 和 [implement](https://aihero.dev/skills-implement) 需要跟踪器连接之前运行。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。
+`setup-matt-pocock-skills` 是一次性设置步骤——每个仓库运行一次，位于构建链之前。它在 [triage](https://aihero.dev/skills-triage)、[to-spec](https://aihero.dev/skills-to-spec)、[to-tickets](https://aihero.dev/skills-to-tickets) 和 [implement](https://aihero.dev/skills-implement) 需要跟踪器连接之前运行。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

@@ -131,7 +131,7 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 
 这内建在这些技能的每一层：
 
-- [`/to-prd`](./skills/engineering/to-prd/SKILL.md) 在创建 PRD 之前询问你将触及哪些模块
+- [`/to-spec`](./skills/engineering/to-spec/SKILL.md) 在创建 spec 之前询问你将触及哪些模块
 - [`/zoom-out`](./skills/engineering/zoom-out/SKILL.md) 告诉智能体在整个系统的上下文中解释代码
 
 而最关键的是，[`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) 帮助你拯救已经成为一团浆糊的代码库。我建议每隔几天就在你的代码库上运行一次。
@@ -152,16 +152,17 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 - **[research](./skills/engineering/research/SKILL.md)** — 在后台 agent 中调查一个问题，依据高可信度一手来源，将发现作为带引用的 Markdown 文件写入仓库。
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — 盘问环节，用现有领域模型挑战你的计划、打磨术语，并实时更新 `CONTEXT.md` 和 ADR。
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — 在代码库中发现深化机会，结合 `CONTEXT.md` 中的领域语言和 ADR 中的决策。
-- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** — 搭建各仓库配置（Issue 跟踪器、分类标签词汇表、领域文档布局），供其他工程类技能使用。每个仓库使用 `to-issues`、`to-prd`、`triage`、`diagnose`、`tdd`、`improve-codebase-architecture` 或 `zoom-out` 之前运行一次。
+- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** — 搭建各仓库配置（Issue 跟踪器、分类标签词汇表、领域文档布局），供其他工程类技能使用。每个仓库使用 `to-tickets`、`to-spec`、`triage`、`diagnose`、`tdd`、`improve-codebase-architecture` 或 `zoom-out` 之前运行一次。
 - **[tdd](./skills/engineering/tdd/SKILL.md)** — 使用红-绿-重构循环进行测试驱动开发。
-- **[to-issues](./skills/engineering/to-issues/SKILL.md)** — 将任何计划、规格说明或 PRD 拆分为可独立领取的 GitHub Issue，使用垂直切片方式。
-- **[to-prd](./skills/engineering/to-prd/SKILL.md)** — 将当前对话上下文转为 PRD 并作为 GitHub Issue 提交。
+- **[to-spec](./skills/engineering/to-spec/SKILL.md)** — 将当前对话上下文转为 spec 并提交到 Issue 跟踪器。无需面试——只需综合已讨论过的内容。
+- **[to-tickets](./skills/engineering/to-tickets/SKILL.md)** — 将任何计划、spec 或对话拆分为一组 tracer-bullet ticket，每个 ticket 声明其阻塞边——写入本地文件文本，或在真实跟踪器上使用原生阻塞链接。
+- **[wayfinder](./skills/engineering/wayfinder/SKILL.md)** — 规划一大块工作——超过一次 agent 会话能容纳的体量——在 Issue 跟踪器上以共享的调查 ticket 地图形式呈现，逐个解决，直到路线清晰。
 - **[triage](./skills/engineering/triage/SKILL.md)** — 通过分类角色的状态机对 Issue 进行分类。
 - **[zoom-out](./skills/engineering/zoom-out/SKILL.md)** — 告诉智能体放大视角，对不熟悉的代码片段提供更广泛的上下文或更高层次的视角。
 
 **模型调用**
 
-- **[implement](./skills/engineering/implement/SKILL.md)** — 实现 `to-prd` 或 `to-issues` 创建的一个或多个 Issue。
+- **[implement](./skills/engineering/implement/SKILL.md)** — 根据 spec 或一组 tickets 描述的内容实现工作，在预先约定的 seam 处驱动 `/tdd`，提交前以 `/code-review` 收尾。
 - **[prototype](./skills/engineering/prototype/SKILL.md)** — 构建一个可丢弃的原型来回答设计问题——针对状态/逻辑问题的可运行终端应用，或若干可切换的 UI 变体。
 
 ### 效率类（Productivity）

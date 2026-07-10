@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: 将计划、规范或当前对话拆分为一组 tracer-bullet ticket，每个 ticket 声明其阻塞边（blocking edges），发布到已配置的跟踪器——本地文件中以文本表示边，真实跟踪器上以原生阻塞链接表示。
+description: 将计划、规范或当前对话拆分为一组 tracer-bullet ticket，每个 ticket 声明其阻塞边（blocking edges），发布到已配置的跟踪器——本地文件中每个 ticket 一个文件以文本表示边，真实跟踪器上以原生阻塞链接表示。
 disable-model-invocation: true
 ---
 
@@ -59,33 +59,31 @@ Issue 跟踪器和分类标签词汇表应已提供给你——如果没有，�
 
 发布已批准的 ticket。**发布方式**取决于 `/setup-matt-pocock-skills` 配置的跟踪器——ticket 本身相同，只有阻塞边的形式不同：
 
-- **本地文件** → 在仓库根目录写入一个 `tickets.md`，所有 ticket 按依赖顺序排列（阻塞项在前），每个 ticket 的 "Blocked by" 列出其依赖的标题。使用下面的文件模板。
+- **本地文件** → 在 `.scratch/<feature>/issues/` 下为每个 ticket 写入一个文件，按编号顺序命名（`01-<slug>.md`、`02-<slug>.md` 等），阻塞项在前。每个 ticket 的顶部通过 `Blocked by:` 行列出其依赖的标题。使用下面的文件模板。
 - **真实 Issue 跟踪器（GitHub、Linear 等）** → 按依赖顺序每 ticket 发布一个 Issue（阻塞项在前），这样每个 ticket 的阻塞边可以引用真实标识符。在平台支持的地方使用原生阻塞/子 Issue 关系；否则在每个 ticket 的 "Blocked by" 中设置阻塞的 Issue。除非另有指示，应用 `ready-for-agent` 分类标签——这些 ticket 本身就是 Agent 可抓取的。
 
 不要关闭或修改任何父 Issue。
 
-<tickets-file-template>
+<local-ticket-template>
 
-# Tickets：<工作的简短名称>
-
-这些 ticket 构建内容的单行摘要。如果有源规范，请引用它。
-
-处理**前沿**：任何阻塞项已完成的所有 ticket。对于纯线性链，意味着从上到下。
-
-## <Ticket 标题>
+```markdown
+# <NN> — <Ticket 标题>
 
 **构建内容：** 此 ticket 使哪个端到端行为生效，从用户视角出发——而不是逐层的实现列表。
 
-**被以下阻塞：** 制约此 ticket 的其他 ticket 的标题，或"无——可立即开始"。
+**被以下阻塞：** 制约此 ticket 的其他 ticket 的编号，或"无——可立即开始"。
 
-- [ ] 验收标准 1
-- [ ] 验收标准 2
+## 验收标准
 
-## <Ticket 标题>
+- [ ] 标准 1
+- [ ] 标准 2
 
-...
+## 被以下阻塞
 
-</tickets-file-template>
+- 每个阻塞 ticket 的编号或标题，或"无——可立即开始"。
+```
+
+</local-ticket-template>
 
 <issue-template>
 

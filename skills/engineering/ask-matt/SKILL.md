@@ -20,7 +20,7 @@ disable-model-invocation: true
    - **`/prototype`** 用可丢弃的代码回答问题，
    - **`/handoff`** 把你学到的东西带回来，并从原始想法线程中引用它。
 3. **分支——这是多会话构建吗？**
-   - **是** → **`/to-spec`**（把对话转化为 spec），然后 **`/to-tickets`** 拆分为 tracer-bullet ticket，每个 ticket 声明其**阻塞边**。在本地跟踪器上，这是一个按顺序的 `tickets.md`，需要手动按顺序推进；在真实跟踪器上，阻塞边变成原生依赖链接，因此任何阻塞项已完成的 ticket 都可以被领取——每个 ticket 启动 **`/implement`**，**每个之间清空上下文**。
+   - **是** → **`/to-spec`**（把对话转化为 spec），然后 **`/to-tickets`** 拆分为 tracer-bullet ticket，每个 ticket 声明其**阻塞边**。在本地跟踪器上，每个 ticket 对应 `.scratch/<feature>/issues/` 下的一个文件，按阻塞项优先手动推进；在真实跟踪器上，阻塞边变成原生依赖链接，因此任何阻塞项已完成的 ticket 都可以被领取——每个 ticket 启动 **`/implement`**，**每个之间清空上下文**。
    - **否** → 就在同一个上下文窗口中 **`/implement`**。
 
    无论哪种方式，**`/implement`** 都在内部驱动 **`/tdd`** 构建每个 ticket——一次一个红-绿切片——然后在提交前通过运行 **`/code-review`** 收尾，对 diff 进行双轴审查（规范 + 规格）。当你只想在没有完整 spec 的情况下用测试优先的方式构建具体行为时，单独使用 **`/tdd`**；当你需要审查某个分支或 PR 时，随时单独使用 **`/code-review`**。

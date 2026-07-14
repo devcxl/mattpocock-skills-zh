@@ -39,6 +39,33 @@ npx skills@latest add mattpocock/skills
 
 4. 搞定——可以开工了。
 
+## 作为 Claude Code 插件安装
+
+喜欢即插即用、无需手动维护的安装方式？这些技能也可作为原生 [Claude Code 插件](https://code.claude.com/docs/en/plugins) 提供。与将可编辑文件复制到你的仓库不同，插件将整套技能集作为托管包安装，当我发布新版本时会自动更新——你订阅而非 fork。
+
+在 Claude Code 中：
+
+```
+/plugin marketplace add mattpocock/skills
+/plugin install mattpocock-skills@mattpocock
+```
+
+或者在 shell 中：
+
+```bash
+claude plugin marketplace add mattpocock/skills
+claude plugin install mattpocock-skills@mattpocock
+```
+
+然后每个仓库运行一次 `/setup-matt-pocock-skills`，与上方快速启动完全一致。
+
+两种安装方式，两种理念：
+
+- **[skills.sh](https://skills.sh/mattpocock/skills)** 将技能复制到你的项目中，以便你可以修改它们并变成自己的东西。
+- **插件** 将技能保持为只读、始终最新的 bundle，你无需编辑——最适合你只想让我的技能集正常工作并跟随其演进。
+
+> 使用 Codex 或其他智能体？[skills.sh 安装器](https://skills.sh/mattpocock/skills) 目前已支持将技能安装到 Codex 和其他遵循 Agent-Skills 标准的 harness 中。原生 Codex 插件已在规划中——详见 [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
+
 ## 为什么要有这些技能
 
 我构建这些技能是为了修复我在 Claude Code、Codex 和其他编程智能体中看到的常见失败模式。
@@ -148,6 +175,8 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 
 - **[ask-matt](./skills/engineering/ask-matt/SKILL.md)** — 询问仓库中的某个技能应该用于某个特定的使用场景或目标。
 - **[code-review](./skills/engineering/code-review/SKILL.md)** — 审查自某个固定点以来的变更——规范（标准）和规格（需求）双轴并行审查。
+- **[codebase-design](./skills/engineering/codebase-design/SKILL.md)** — 共享的设计深度模块的纪律和词汇：通过小型接口暴露大量行为，放置在干净的 seam 处，可通过该接口进行测试。
+- **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)** — 逐个 hunk 处理正在进行的 git merge 或 rebase 冲突，按意图追溯到各方的原始来源逐一解决，然后完成操作——绝不 `--abort`。
 - **[diagnose](./skills/engineering/diagnose/SKILL.md)** — 针对棘手 bug 和性能回归的纪律性诊断循环：复现 → 最小化 → 假设 → 插桩 → 修复 → 回归测试。
 - **[research](./skills/engineering/research/SKILL.md)** — 在后台 agent 中调查一个问题，依据高可信度一手来源，将发现作为带引用的 Markdown 文件写入仓库。
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — 盘问环节，用现有领域模型挑战你的计划、打磨术语，并实时更新 `CONTEXT.md` 和 ADR。
@@ -169,9 +198,13 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 
 通用工作流工具，不限于编码。
 
-- **[grill-me](./skills/productivity/grill-me/SKILL.md)** — 被无休止地盘问你的计划或设计，直到决策树的每个分支都被解决。
+- **[grill-me](./skills/productivity/grill-me/SKILL.md)** — 被无休止地盘问你的计划、决策或想法，直到决策树的每个分支都被解决。
 - **[handoff](./skills/productivity/handoff/SKILL.md)** — 将当前对话压缩为一份交接文档，让另一个智能体可以继续工作。
 - **[teach](./skills/productivity/teach/SKILL.md)** — 通过多个会话教会用户一项新技能或概念，使用当前目录作为有状态的教学工作区。
+
+**模型调用**
+
+- **[grilling](./skills/productivity/grilling/SKILL.md)** — 对用户的计划、决策或想法进行无休止地盘问，直到决策树的每个分支都被解决。`grill-me` 和 `grill-with-docs` 背后的可复用循环。
 
 ### 杂项（Misc）
 

@@ -16,6 +16,8 @@ npx skills update improve-codebase-architecture
 
 它**不会**给你一份扁平的重构清单。每个候选点都必须通过**删除测试**——移除这个模块是会将复杂度*集中*到更小的接口后面，还是仅仅将其搬了个地方？只有"集中"的情况才会生成一个卡片。这个过滤器正是防止报告变成泛泛的清理建议的关键。
 
+除非你指定了具体的区域，它还会自动将范围限定在开发正在落地的地方——读取最近的提交记录，将权重偏向你仍在修改的代码。加深一个模块的回报在于使未来对该模块的修改更容易，因此它会对你最近变动的部分给予额外关注。
+
 ## 何时使用
 
 你通过键入 `/improve-codebase-architecture` 来调用它——代理不会主动使用它。
@@ -36,4 +38,4 @@ npx skills update improve-codebase-architecture
 
 ## 它的定位
 
-`improve-codebase-architecture` 是**定期维护**——每隔几天运行一次，而不是作为链条中的一个环节。它的近邻是 [codebase-design](https://aihero.dev/skills-codebase-design)，后者拥有每个候选点所使用到的深度与接缝词汇；[grilling](https://aihero.dev/skills-grilling)，在你选择候选点后遍历设计树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)，在重新设计定型时保持 `CONTEXT.md` 和 ADR 的更新。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。
+`improve-codebase-architecture` 是**定期维护**——每隔几天运行一次，而不是作为链条中的一个环节。它的近邻是 [codebase-design](https://aihero.dev/skills-codebase-design)，后者拥有每个候选点所使用到的深度与接缝词汇；[grilling](https://aihero.dev/skills-grilling)，在你选择候选点后遍历决策树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)，在重新设计定型时保持 `CONTEXT.md` 和 ADR 的更新。当你不确定适合哪种技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你指引方向。

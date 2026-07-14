@@ -12,6 +12,10 @@ _避免使用_：backlog manager、backlog backend、issue host
 **Issue tracker** 中的单个跟踪工作单元——一个 bug、任务、spec 或 `to-tickets` 产出的切片。
 _避免使用_：ticket（仅在引用将其称为 ticket 的外部系统时使用）
 
+**Decision ticket（决策 ticket）：**
+**Issue** 的一种，其产出为一个**决策**而非可交付物。它被解决（得出答案）而非完成（交付工件）。由 `/wayfinder` 创建和消费。
+_避免使用_：story（与决策 ticket 不同，story 承诺交付某些东西）
+
 **Triage role（分类角色）：**
 分类过程中应用于 **Issue** 的一个规范状态机标签（如 `needs-triage`、`ready-for-afk`）。每个角色通过 `docs/agents/triage-labels.md` 映射到 **Issue tracker** 中的实际标签字符串。
 

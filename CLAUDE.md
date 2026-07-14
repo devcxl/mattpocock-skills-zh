@@ -22,3 +22,9 @@
 `docs/productivity/` 包含编码以外的工作流，以跨技能保持一致。
 
 要（重新）将所有技能链接到本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每个条目都是指向此仓库的符号链接，因此 `git pull` 能使已安装的技能保持最新；添加、删除或重命名技能后重新运行脚本。
+
+## 作为 Claude Code 插件安装
+
+此仓库也可作为 [Claude Code 插件](https://docs.anthropic.com/en/docs/claude-code/overview) 使用。**通过 `npx skills` 安装是推荐方式**，但如果你希望获得持续更新，可以通过 `git clone` 安装——将 `.claude-plugin` 目录复制到 repo 的根目录，使插件对工作区可用。
+
+详见 [ADR-0002](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。

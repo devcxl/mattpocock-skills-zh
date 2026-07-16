@@ -10,3 +10,4 @@
 - **[claude-handoff](./claude-handoff/SKILL.md)** — 使用 `claude --bg` 创建一个专门的后台 agent，用于处理独立的子问题。
 - **[setup-ts-deep-modules](./setup-ts-deep-modules/SKILL.md)** — 为 TypeScript 项目配置模块深度工具链：安装并配置 dependency-cruiser 规则（规则集、入口点、已知的"流氓"模块别名），然后建立跨接口的模块边界，并修正任何检测到的违规。
 - **[to-questionnaire](./to-questionnaire/SKILL.md)** — 将一个你无法完全回答的决策转化为 Markdown 问卷，让别人异步填写，或在会议上一起完成。它盘问的是关于**发送**的问题（发给谁、需要什么回来），而不是主题本身。用户调用。
+- **[batch-grill-me](./batch-grill-me/SKILL.md)** — 一轮一轮地同时询问所有前沿决策的无情盘问——每轮提出所有先决条件已确定的决策，然后根据你的回答重新计算。用户调用。

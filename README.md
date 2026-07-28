@@ -22,49 +22,64 @@
 
 [订阅 Newsletter](https://www.aihero.dev/s/skills-newsletter)
 
-## 快速开始（30 秒配置）
+## 安装（30 秒配置）
 
-1. 运行 skills.sh 安装器：
+两种方式，两种理念。**[Claude Code 插件](https://code.claude.com/docs/en/plugins)** 将整套技能集作为受管理的只读 bundle 安装，在我发布新版本时自动更新——你订阅而非 fork。**[skills.sh](https://skills.sh/mattpocock/skills)** 将可编辑的技能文件复制到你的项目中，这样你可以随意修改，变成自己的东西。**二选一——两者都装会导致每个技能出现两次。**
+
+### 1. 获取技能
+
+<details>
+<summary><strong>Claude Code</strong></summary>
+
+```bash
+claude plugins install mattpocock-skills
+```
+
+或者在会话中：
+
+```
+/plugin install mattpocock-skills
+```
+
+它在 Claude Code 的官方市场中，无需额外添加，更新自动送达。
+
+</details>
+
+<details>
+<summary><strong>Codex 及其他智能体</strong></summary>
 
 ```bash
 npx skills@latest add mattpocock/skills
 ```
 
-2. 选择你想要的技能，以及要安装到哪些编程智能体上。**确保选中 `/setup-matt-pocock-skills`**。
+选择你想要的技能，以及要安装到哪些编程智能体上。**安装器会列出可选技能——确保选中 `setup-matt-pocock-skills`。**
 
-3. 在你的智能体中运行 `/setup-matt-pocock-skills`。它会：
-   - 询问你要使用哪个 Issue 跟踪器（GitHub、Linear 或本地文件）
-   - 询问你对工单进行分类时使用哪些标签（`/triage` 会用到）
-   - 询问你希望把创建的文档保存在哪里
+原生 Codex 插件已在规划中——详见 [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
 
-4. 搞定——可以开工了。
+</details>
 
-## 作为 Claude Code 插件安装
+<details>
+<summary><strong>喜欢折腾的</strong></summary>
 
-喜欢即插即用、无需手动维护的安装方式？这些技能也可作为原生 [Claude Code 插件](https://code.claude.com/docs/en/plugins) 提供。与将可编辑文件复制到你的仓库不同，插件将整套技能集作为托管包安装，当我发布新版本时会自动更新——你订阅而非 fork。
-
-在 Claude Code 中：
-
-```
-/plugin marketplace add mattpocock/skills
-/plugin install mattpocock-skills@mattpocock
-```
-
-或者在 shell 中：
+使用同样的安装器，在任何智能体上安装——包括 Claude Code：
 
 ```bash
-claude plugin marketplace add mattpocock/skills
-claude plugin install mattpocock-skills@mattpocock
+npx skills@latest add mattpocock/skills
 ```
 
-然后每个仓库运行一次 `/setup-matt-pocock-skills`，与上方快速启动完全一致。
+这会将技能作为普通文件写入你的仓库，归你所有，你可以自由编辑。不会有任何东西在后台偷偷更新；想获取最新变更时，运行 `npx skills update` 即可。
 
-两种安装方式，两种理念：
+</details>
 
-- **[skills.sh](https://skills.sh/mattpocock/skills)** 将技能复制到你的项目中，以便你可以修改它们并变成自己的东西。
-- **插件** 将技能保持为只读、始终最新的 bundle，你无需编辑——最适合你只想让我的技能集正常工作并跟随其演进。
+### 2. 运行 `/setup-matt-pocock-skills`
 
-> 使用 Codex 或其他智能体？[skills.sh 安装器](https://skills.sh/mattpocock/skills) 目前已支持将技能安装到 Codex 和其他遵循 Agent-Skills 标准的 harness 中。原生 Codex 插件已在规划中——详见 [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
+在你的智能体中运行它，每个仓库执行一次。它会：
+
+- 询问你要使用哪个 Issue 跟踪器（GitHub、Linear 或本地文件）
+- 询问你对工单进行分类时使用哪些标签（`/triage` 会用到）
+- 询问你希望把创建的文档保存在哪里
+
+### 3. 搞定——可以开工了。
 
 ## 为什么要有这些技能
 

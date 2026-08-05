@@ -1,5 +1,0 @@
-interface:
-  display_name: "Batch Grill Me"
-  short_description: "一轮一轮地提出问题，逐步打磨方案"
-policy:
-  allow_implicit_invocation: false

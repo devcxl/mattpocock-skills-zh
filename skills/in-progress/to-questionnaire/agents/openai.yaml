@@ -1,5 +1,0 @@
-interface:
-  display_name: "To Questionnaire"
-  short_description: "把问题前置到文档中，让别人来回答"
-policy:
-  allow_implicit_invocation: false

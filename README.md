@@ -155,7 +155,7 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 
 我构建了一个 **[`/tdd`](./skills/engineering/tdd/SKILL.md) 技能**，你可以插入任何项目。它鼓励红-绿-重构，并给智能体提供了大量关于什么是好测试、什么是坏测试的指导。
 
-对于调试，我还构建了一个 **[`/diagnose`](./skills/engineering/diagnose/SKILL.md)** 技能，将最佳调试实践封装成一个简单的循环。
+对于调试，我还构建了一个 **[`/diagnosing-bugs`](./skills/engineering/diagnosing-bugs/SKILL.md)** 技能，将最佳调试实践封装成一个纪律性循环，逐阶段把关。
 
 ### #4：代码变成了一团浆糊
 
@@ -192,11 +192,11 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 - **[code-review](./skills/engineering/code-review/SKILL.md)** — 审查自某个固定点以来的变更——规范（标准）和规格（需求）双轴并行审查。
 - **[codebase-design](./skills/engineering/codebase-design/SKILL.md)** — 共享的设计深度模块的纪律和词汇：通过小型接口暴露大量行为，放置在干净的 seam 处，可通过该接口进行测试。
 - **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)** — 逐个 hunk 处理正在进行的 git merge 或 rebase 冲突，按意图追溯到各方的原始来源逐一解决，然后完成操作——绝不 `--abort`。
-- **[diagnose](./skills/engineering/diagnose/SKILL.md)** — 针对棘手 bug 和性能回归的纪律性诊断循环：复现 → 最小化 → 假设 → 插桩 → 修复 → 回归测试。
+- **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)** — 针对棘手 bug 和性能回归的纪律性诊断循环：复现 → 最小化 → 假设 → 插桩 → 修复 → 回归测试。
 - **[research](./skills/engineering/research/SKILL.md)** — 在后台 agent 中调查一个问题，依据高可信度一手来源，将发现作为带引用的 Markdown 文件写入仓库。
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — 盘问环节，用现有领域模型挑战你的计划、打磨术语，并实时更新 `CONTEXT.md` 和 ADR。
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — 在代码库中发现深化机会，结合 `CONTEXT.md` 中的领域语言和 ADR 中的决策。
-- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** — 搭建各仓库配置（Issue 跟踪器、分类标签词汇表、领域文档布局），供其他工程类技能使用。每个仓库使用 `to-tickets`、`to-spec`、`triage`、`diagnose`、`tdd`、`improve-codebase-architecture` 或 `zoom-out` 之前运行一次。
+- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** — 搭建各仓库配置（Issue 跟踪器、分类标签词汇表、领域文档布局），供其他工程类技能使用。每个仓库使用 `to-tickets`、`to-spec`、`triage`、`diagnosing-bugs`、`tdd`、`improve-codebase-architecture` 或 `zoom-out` 之前运行一次。
 - **[tdd](./skills/engineering/tdd/SKILL.md)** — 使用红-绿-重构循环进行测试驱动开发。
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)** — 将当前对话上下文转为 spec 并提交到 Issue 跟踪器。无需面试——只需综合已讨论过的内容。
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)** — 将任何计划、spec 或对话拆分为一组 tracer-bullet ticket，每个 ticket 声明其阻塞边——写入本地文件文本，或在真实跟踪器上使用原生阻塞链接。

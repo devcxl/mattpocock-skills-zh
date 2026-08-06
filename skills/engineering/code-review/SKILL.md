@@ -59,8 +59,6 @@ Issue 跟踪器应该已经提供给你了——如果 `docs/agents/issue-tracke
 
 ### 4. 并行启动两个子 agent
 
-发送一条消息，包含两个 `Agent` 工具调用。两个都使用 `general-purpose` 子 agent。
-
 **规范子 agent prompt**——包含：
 
 - 完整的 diff 命令和 commit 列表。

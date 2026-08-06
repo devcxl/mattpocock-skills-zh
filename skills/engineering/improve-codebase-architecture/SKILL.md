@@ -24,7 +24,7 @@ disable-model-invocation: true
 
 首先阅读项目的领域术语表（`CONTEXT.md`）以及你将要接触的区域内任何 ADR。
 
-然后使用 `subagent_type=Explore` 的 Agent 工具遍历代码库。不要遵循僵化的启发式规则——有机地探索，并记录你在哪里遇到了摩擦：
+然后生成一个子代理来遍历代码库。不要遵循僵化的启发式规则——有机地探索，并记录你在哪里遇到了摩擦：
 
 - 在哪些地方，理解一个概念需要在多个小模块之间来回跳转？
 - 哪些 module 是**shallow**的——interface 几乎和 implementation 一样复杂？

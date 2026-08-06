@@ -176,7 +176,7 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 - [`/to-spec`](./skills/engineering/to-spec/SKILL.md) 在创建 spec 之前询问你将触及哪些模块
 - [`/zoom-out`](./skills/engineering/zoom-out/SKILL.md) 告诉智能体在整个系统的上下文中解释代码
 
-而最关键的是，[`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) 帮助你拯救已经成为一团浆糊的代码库。我建议每隔几天就在你的代码库上运行一次。
+而最关键的是，[`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) 扫描代码库寻找**深化机会**，把候选方案交到你手上。我建议每隔几天就在你的代码库上运行一次。它是调查，不是拯救——对真正老旧的项目它会找到真实候选，但不会帮你理清那团乱麻。
 
 ### 总结
 
@@ -186,40 +186,47 @@ AI 时代同样如此。你和智能体之间存在沟通鸿沟。解决方法�
 
 ### 工程类（Engineering）
 
-用户调用：
+**用户调用**
 
 - **[ask-matt](./skills/engineering/ask-matt/SKILL.md)** — 询问仓库中的某个技能应该用于某个特定的使用场景或目标。
-- **[code-review](./skills/engineering/code-review/SKILL.md)** — 审查自某个固定点以来的变更——规范（标准）和规格（需求）双轴并行审查。
-- **[codebase-design](./skills/engineering/codebase-design/SKILL.md)** — 共享的设计深度模块的纪律和词汇：通过小型接口暴露大量行为，放置在干净的 seam 处，可通过该接口进行测试。
-- **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)** — 逐个 hunk 处理正在进行的 git merge 或 rebase 冲突，按意图追溯到各方的原始来源逐一解决，然后完成操作——绝不 `--abort`。
-- **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)** — 针对棘手 bug 和性能回归的纪律性诊断循环：复现 → 最小化 → 假设 → 插桩 → 修复 → 回归测试。
-- **[research](./skills/engineering/research/SKILL.md)** — 在后台 agent 中调查一个问题，依据高可信度一手来源，将发现作为带引用的 Markdown 文件写入仓库。
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — 盘问环节，用现有领域模型挑战你的计划、打磨术语，并实时更新 `CONTEXT.md` 和 ADR。
-- **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — 在代码库中发现深化机会，结合 `CONTEXT.md` 中的领域语言和 ADR 中的决策。
+- **[triage](./skills/engineering/triage/SKILL.md)** — 通过分类角色的状态机对 Issue 进行分类。
+- **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — 在代码库中发现深化机会，以可视化 HTML 报告呈现，然后在你选择的候选方案上进行盘问。
 - **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** — 搭建各仓库配置（Issue 跟踪器、分类标签词汇表、领域文档布局），供其他工程类技能使用。每个仓库使用 `to-tickets`、`to-spec`、`triage`、`diagnosing-bugs`、`tdd`、`improve-codebase-architecture` 或 `zoom-out` 之前运行一次。
-- **[tdd](./skills/engineering/tdd/SKILL.md)** — 使用红-绿-重构循环进行测试驱动开发。
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)** — 将当前对话上下文转为 spec 并提交到 Issue 跟踪器。无需面试——只需综合已讨论过的内容。
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)** — 将任何计划、spec 或对话拆分为一组 tracer-bullet ticket，每个 ticket 声明其阻塞边——写入本地文件文本，或在真实跟踪器上使用原生阻塞链接。
+- **[implement](./skills/engineering/implement/SKILL.md)** — 根据 spec 或一组 tickets 描述的内容实现工作，在预先约定的 seam 处驱动 `/tdd`，提交前以 `/code-review` 收尾。
 - **[wayfinder](./skills/engineering/wayfinder/SKILL.md)** — 规划一大块工作——超过一次 agent 会话能容纳的体量——在 Issue 跟踪器上以共享的调查 ticket 地图形式呈现，逐个解决，直到路线清晰。
-- **[triage](./skills/engineering/triage/SKILL.md)** — 通过分类角色的状态机对 Issue 进行分类。
 - **[zoom-out](./skills/engineering/zoom-out/SKILL.md)** — 告诉智能体放大视角，对不熟悉的代码片段提供更广泛的上下文或更高层次的视角。
 
 **模型调用**
 
-- **[implement](./skills/engineering/implement/SKILL.md)** — 根据 spec 或一组 tickets 描述的内容实现工作，在预先约定的 seam 处驱动 `/tdd`，提交前以 `/code-review` 收尾。
-- **[prototype](./skills/engineering/prototype/SKILL.md)** — 构建一个可丢弃的原型来回答设计问题——针对状态/逻辑问题的可运行终端应用，或若干可切换的 UI 变体。
+- **[prototype](./skills/engineering/prototype/SKILL.md)** — 构建一个可丢弃的原型来回答设计问题——一个可分享的 HTML 文件用于状态/逻辑问题，或从同一路由切换的多个截然不同的 UI 变体。
+- **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)** — 针对棘手 bug 和性能回归的纪律性诊断循环：构建反馈循环，对 bug 亮红灯 → 最小化 → 假设 → 插桩 → 修复 → 回归测试。
+- **[research](./skills/engineering/research/SKILL.md)** — 在后台 agent 中调查一个问题，依据高可信度一手来源，将发现作为带引用的 Markdown 文件写入仓库。
+- **[tdd](./skills/engineering/tdd/SKILL.md)** — 使用红-绿-重构循环进行测试驱动开发。一次一个垂直切片地构建功能或修复 bug。
+- **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)** — 主动构建和打磨项目的领域模型——用词汇表挑战术语，用边缘场景进行压力测试，并实时更新 `CONTEXT.md` 和 ADR。
+- **[codebase-design](./skills/engineering/codebase-design/SKILL.md)** — 共享的设计深度模块的纪律和词汇：通过小型接口暴露大量行为，放置在干净的 seam 处，可通过该接口进行测试。
+- **[code-review](./skills/engineering/code-review/SKILL.md)** — 审查自某个固定点以来的变更——**规范**（是否符合仓库编码规范及 Fowler 坏味道基线？）和**规格**（是否忠实实现了来源 issue/spec？）双轴并行审查，作为并行子代理运行，互不污染。
+- **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)** — 逐个 hunk 处理正在进行的 git merge 或 rebase 冲突，按意图追溯到各方的原始来源逐一解决，然后完成操作——绝不 `--abort`。
+- **[wizard](./skills/engineering/wizard/SKILL.md)** — 生成一个交互式 bash 向导，引导人类完成只有他们能执行的步骤：配置基础设施、设置凭证或 CI 密钥、操作不熟悉的第三方面板，或执行一次性迁移或切换。
 
 ### 效率类（Productivity）
 
 通用工作流工具，不限于编码。
 
+**用户调用**
+
 - **[grill-me](./skills/productivity/grill-me/SKILL.md)** — 被无休止地盘问你的计划、决策或想法，直到决策树的每个分支都被解决。
 - **[handoff](./skills/productivity/handoff/SKILL.md)** — 将当前对话压缩为一份交接文档，让另一个智能体可以继续工作。
 - **[teach](./skills/productivity/teach/SKILL.md)** — 通过多个会话教会用户一项新技能或概念，使用当前目录作为有状态的教学工作区。
+- **[to-questionnaire](./skills/productivity/to-questionnaire/SKILL.md)** — 将你无法独自回答的决策转化为一份 Markdown 问卷，交给能回答的人——异步填写，或在会议中共同完成。它审问的是"发送"（发给谁、需要什么回来），而非主题本身。
+- **[wait-what](./skills/productivity/wait-what/SKILL.md)** — 当一条消息没理解时立刻触发。智能体用你缺失的上下文重新解释，用通俗语言，使用 `CONTEXT.md` 中的词汇。
 
 **模型调用**
 
-- **[grilling](./skills/productivity/grilling/SKILL.md)** — 对用户的计划、决策或想法进行无休止地盘问，直到决策树的每个分支都被解决。`grill-me` 和 `grill-with-docs` 背后的可复用循环。
+- **[grilling](./skills/productivity/grilling/SKILL.md)** — 对用户的计划、决策或想法进行无休止地盘问，直到决策树的每个分支都被解决。`grill-me`、`grill-with-docs`、`triage`、`wayfinder` 和 `improve-codebase-architecture` 背后的可复用循环。
+- **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)** — 编写供智能体使用的文档：技能、AGENTS.md/CLAUDE.md，以及任何智能体通过指针引用的文档。
 
 ### 杂项（Misc）
 

@@ -1,0 +1,41 @@
+name: sync-check
+
+# 文件级覆盖校验：防止上游变更文件在同步时被漏掉/多出。
+# 每次 push 到 main 后自动对比上游 mattpocock/skills 与中文仓库的文件树。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  tree-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout upstream
+        uses: actions/checkout@v4
+        with:
+          repository: mattpocock/skills
+          path: upstream
+
+      - name: Checkout zh mirror
+        uses: actions/checkout@v4
+        with:
+          path: zh
+
+      - name: Compare file trees
+        run: |
+          cd zh
+          # 非翻译文件（不要求对齐）：changeset/CI/脚本/agent 配置/废弃与进行中目录
+          EXCL='^(\.changeset/|\.github/|scripts/|\.agents/|\.out-of-scope/|skills/(deprecated|in-progress|personal)/)'
+          SUFFIX='\.(yaml|yml|json|cjs|mjs|sh|png|svg)$'
+          missing=$(comm -23 <(cd ../upstream && git ls-files | sort) <(git ls-files | sort) \
+            | grep -v -E "$EXCL" | grep -v -E "$SUFFIX" || true)
+          extra=$(comm -13 <(cd ../upstream && git ls-files | sort) <(git ls-files | sort) \
+            | grep -v -E "$EXCL" | grep -v -E "$SUFFIX" || true)
+          if [ -n "$missing" ] || [ -n "$extra" ]; then
+            echo "::error::文件树未对齐上游，请补齐/清理后重新同步"
+            if [ -n "$missing" ]; then echo "--- 缺失（上游有，中文版没有）:"; echo "$missing"; fi
+            if [ -n "$extra" ]; then echo "--- 多余（中文版有，上游没有）:"; echo "$extra"; fi
+            exit 1
+          fi
+          echo "✅ 文件树与上游对齐（无缺失、无多余）"

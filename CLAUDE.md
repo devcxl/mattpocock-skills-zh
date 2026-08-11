@@ -2,29 +2,22 @@
 
 - `engineering/` — 日常编码工作
 - `productivity/` — 日常非编码工作流工具
-- `misc/` — 保留但很少使用
-- `personal/` — 与我个人配置相关，不对外推广
-- `in-progress/` — 尚未就绪的草稿
+- `misc/` — 保留但很少使用，不对外推广
+- `in-progress/` — 测试版：刻意公开、欢迎反馈、不随插件发布
 - `deprecated/` — 已不再使用
 
-`engineering/`、`productivity/` 或 `misc/` 中的每个技能必须在顶级 `README.md` 中有引用，并在 `.claude-plugin/plugin.json` 中有条目。`personal/`、`in-progress/` 和 `deprecated/` 中的技能不应出现在这两者中。
+`engineering/` 或 `productivity/` 中的每个技能（**对外推广**的分类）必须在顶级 `README.md` 中有引用，并在 `.claude-plugin/plugin.json` 的 `skills` 数组中有条目（Claude Code 插件只随附对外推广的那组）。`misc/`、`in-progress/` 和 `deprecated/` 中的技能不得出现在两者之中。
 
-顶级 `README.md` 中的每个技能条目必须将技能名称链接到其 `SKILL.md`。
+安装命令从 [.agents/install-block.md](./.agents/install-block.md) 逐字复制。`.claude-plugin/marketplace.json` 让本仓库成为自己的单插件市场——这是安装块解释的备用方案，不是文档化的正式途径。触碰任一清单文件后运行 `claude plugin validate . --strict`。为什么做 Claude 插件而（暂时）不做 Codex 插件，见 [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
 
-每个分类目录都有一个 `README.md`，列出该分类中的每个技能及其一行描述，技能名称链接到其 `SKILL.md`。Bucket `README.md` 和顶级 `README.md` 将条目分为**用户调用（User-invoked）**和**模型调用（Model-invoked）**两类。
+顶级 `README.md` 中的每个技能条目必须把技能名称链接到它的 `SKILL.md`。
 
-每个 `SKILL.md` 要么是用户调用（`disable-model-invocation: true`，只能由人类调用），要么是模型调用（模型或用户均可调用）。有关完整定义、描述约定，以及为什么用户调用技能可以调用模型调用技能但不能调用其他用户调用技能，请参阅 [.agents/invocation.md](./.agents/invocation.md)。
+每个分类目录都有一个 `README.md`，列出该分类中的每个技能及一行描述，技能名称链接到其 `SKILL.md`。对外推广分类的 `README.md` 和顶级 `README.md` 把条目分成**用户调用（User-invoked）**和**模型调用（Model-invoked）**两组；非推广分类的 `README.md`（`misc/`、`in-progress/`）用平铺列表。
 
-`.agents/` 目录包含技能本身不直接依赖的元配置和引用——调用文档、ADRs 和 `writing-docs.md`（供应用于 `/write-docs` 的子代理使用）。所有技能文档都存放在 `docs/` 下，技能可以通过类型引用它们当它们不直接位于 `skills/` 下时。
+`engineering/` 和 `productivity/` 中的技能还有面向人类的文档页，位于 `docs/<bucket>/<skill-name>.md`（docs 树镜像 `skills/` 下的那两个分类目录）。发布 URL 是 `https://aihero.dev/skills-<skill-name>`，与分类无关——docs 路径只是仓库内部组织。当你在 `engineering/` 或 `productivity/` 中添加、重命名或改变某个技能的行为时，按照 [.agents/writing-docs.md](./.agents/writing-docs.md) 创建或重新同步它的文档页。完成的页面包含四个章节——**它做什么（What it does）**、**何时使用（When to reach for it）**、**常见问题（Common questions）**、**生效的标志（It's working if）**——`writing-docs.md` 里存有模板、章节顺序，以及去哪里找这些问题。非推广分类（`misc/`、`in-progress/`、`deprecated/`）中的技能**没有**文档页。
 
-`docs/engineering/` 包含技能在其提示中可能会引用的工程文档（如 `docs/engineering/tdd.md`），以跨技能保持一致——它们已在 `.claude-plugin/plugin.json` 中以 `docs:consult` 注册。
+每个 `SKILL.md` 要么是用户调用（`disable-model-invocation: true` 加上 `agents/openai.yaml` 中的 `policy.allow_implicit_invocation: false`，只有人能调用），要么是模型调用（模型或用户均可调用）。见 [.agents/invocation.md](./.agents/invocation.md)。
 
-`docs/productivity/` 包含编码以外的工作流，以跨技能保持一致。
+[`ask-matt`](./skills/engineering/ask-matt/SKILL.md) 是路由器，映射每个用户可调用的技能及其相互关系。触发文档页重新同步的同一个规则也适用于它：每当你添加、重命名、移除或改变某个用户可调用技能在流程中的位置时，重新读 `ask-matt` 的 `SKILL.md` 并更新它，让地图保持准确——一个它从不提及的新技能，或一个它仍在路由的过时技能，都是一个说谎的路由器。
 
-要（重新）将所有技能链接到本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每个条目都是指向此仓库的符号链接，因此 `git pull` 能使已安装的技能保持最新；添加、删除或重命名技能后重新运行脚本。
-
-## 作为 Claude Code 插件安装
-
-此仓库也可作为 [Claude Code 插件](https://docs.anthropic.com/en/docs/claude-code/overview) 使用。**通过 `npx skills` 安装是推荐方式**，但如果你希望获得持续更新，可以通过 `git clone` 安装——将 `.claude-plugin` 目录复制到 repo 的根目录，使插件对工作区可用。
-
-详见 [ADR-0002](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
+要（重新）把每个技能链接进本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每个条目都是指向本仓库的符号链接，所以 `git pull` 能让已安装的技能保持最新；添加、删除或重命名技能后重新运行脚本。

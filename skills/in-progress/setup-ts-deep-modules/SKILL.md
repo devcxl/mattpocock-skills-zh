@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 让此仓库中的每个 package 都成为一个**深度模块**：小接口背后隐藏大量行为。一个 package 的公开表面是其**入口点**——package 根目录下的文件——而其子文件夹中的所有内容都是隐藏的。本技能安装 [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) 和使入口点成为唯一通路的规则，然后验证规则确实起作用。
 
-关于相关词汇（深度模块、接口、接缝、depth），请运行 `/codebase-design` 技能——在后续内容中使用它的术语。
+关于相关词汇（深度模块、接口、接缝、depth），请调用 Skill 工具并传入 "codebase-design"——在后续内容中使用它的术语。
 
 ## 它强制形成的结构
 

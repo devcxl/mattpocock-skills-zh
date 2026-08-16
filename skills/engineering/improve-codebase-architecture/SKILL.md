@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 本命令**参考**项目的领域模型，并基于共享的设计词汇：
 
-- 运行 `/codebase-design` 技能获取架构词汇（**module**、**interface**、**depth**、**seam**、**adapter**、**leverage**、**locality**）及其原则（deletion test、"interface 就是 test surface"、"一个 adapter = 假设性 seam，两个 = 真实的"）。在每个建议中严格使用这些术语——不要偏离到 "component"、"service"、"API" 或 "boundary"。
+- 调用 Skill 工具并传入 "codebase-design" 获取架构词汇（**module**、**interface**、**depth**、**seam**、**adapter**、**leverage**、**locality**）及其原则（deletion test、"interface 就是 test surface"、"一个 adapter = 假设性 seam，两个 = 真实的"）。在每个建议中严格使用这些术语——不要偏离到 "component"、"service"、"API" 或 "boundary"。
 - `CONTEXT.md` 中的领域语言为好的 seam 提供了命名；`docs/adr/` 中的 ADR 记录了本命令不应重新讨论的决策。
 
 ## 流程
@@ -61,11 +61,11 @@ disable-model-invocation: true
 
 ### 3. 盘问循环
 
-一旦用户选中一个候选方案，运行 `/grilling` 技能与他们一起遍历决策树——约束条件、依赖关系、deepened module 的形状、seam 背后是什么、哪些测试能够存活。
+一旦用户选中一个候选方案，调用 Skill 工具并传入 "grilling" 与他们一起遍历决策树——约束条件、依赖关系、deepened module 的形状、seam 背后是什么、哪些测试能够存活。
 
-副作用在决策明确时即时产生——运行 `/domain-modeling` 技能以保持领域模型的最新状态：
+副作用在决策明确时即时产生——调用 Skill 工具并传入 "domain-modeling" 以保持领域模型的最新状态：
 
 - **将一个 deepened module 命名为 `CONTEXT.md` 中不存在的概念？** 将该术语添加到 `CONTEXT.md`。如果文件不存在，延迟创建。
 - **在对话过程中澄清了一个模糊的术语？** 立即更新 `CONTEXT.md`。
 - **用户因一个重要原因拒绝了候选方案？** 提议创建一个 ADR，措辞为：_"需要我将此记录为 ADR，以便未来的架构审查不再重新提出此建议吗？"_ 只有当原因确实对未来探索者避免重复提出相同建议有实际帮助时才提出——跳过临时性原因（"现在不值得做"）和自明的原因。
-- **想探索 deepened module 的替代 interface？** 运行 `/codebase-design` 技能并使用其 design-it-twice 并行子代理模式。
+- **想探索 deepened module 的替代 interface？** 调用 Skill 工具并传入 "codebase-design" 并使用其 design-it-twice 并行子代理模式。

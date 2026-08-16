@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 本技能获取当前的对话上下文和对代码库的理解，产出一份 spec。不要盘问用户——只综合你已经知道的内容。
 
-issue 跟踪器和分类标签词汇应该已经提供给你了——如果没有，运行 `/setup-matt-pocock-skills`。
+issue 跟踪器和分类标签词汇应该已经提供给你了——如果没有，告诉用户运行 `/setup-matt-pocock-skills`。
 
 ## 流程
 

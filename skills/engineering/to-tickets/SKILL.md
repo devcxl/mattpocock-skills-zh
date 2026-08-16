@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 将计划、规范或对话拆分为一组 **ticket**——tracer-bullet 垂直切片，每个都声明阻塞它的其他 ticket。
 
-Issue 跟踪器和分类标签词汇表应已提供给你——如果没有，请运行 `/setup-matt-pocock-skills`。
+Issue 跟踪器和分类标签词汇表应已提供给你——如果没有，请告诉用户运行 `/setup-matt-pocock-skills`。
 
 ## 流程
 

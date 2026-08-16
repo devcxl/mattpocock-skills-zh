@@ -4,4 +4,4 @@ description: 一场用于打磨计划或设计的严格盘问，并在过程中�
 disable-model-invocation: true
 ---
 
-运行一次 `/grilling` 会话，使用 `/domain-modeling` 技能。
+调用 Skill 工具两次，分别传入 "grilling" 和 "domain-modeling"。

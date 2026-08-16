@@ -12,7 +12,7 @@ description: 从固定点（commit、branch、tag 或 merge-base）开始，沿�
 
 两条轴线作为**并行子 agent** 运行，互不污染彼此的上下文，然后由本技能汇总双方的发现。
 
-Issue 跟踪器应该已经提供给你了——如果 `docs/agents/issue-tracker.md` 缺失，请运行 `/setup-matt-pocock-skills`。
+Issue 跟踪器应该已经提供给你了。如果 `docs/agents/issue-tracker.md` 缺失，请告诉用户运行 `/setup-matt-pocock-skills`。
 
 ## 流程
 

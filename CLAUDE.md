@@ -21,3 +21,5 @@
 [`ask-matt`](./skills/engineering/ask-matt/SKILL.md) 是路由器，映射每个用户可调用的技能及其相互关系。触发文档页重新同步的同一个规则也适用于它：每当你添加、重命名、移除或改变某个用户可调用技能在流程中的位置时，重新读 `ask-matt` 的 `SKILL.md` 并更新它，让地图保持准确——一个它从不提及的新技能，或一个它仍在路由的过时技能，都是一个说谎的路由器。
 
 要（重新）把每个技能链接进本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每个条目都是指向本仓库的符号链接，所以 `git pull` 能让已安装的技能保持最新；添加、删除或重命名技能后重新运行脚本。
+
+本仓库的散文（`SKILL.md` 文件、文档、`README.md`、`CHANGELOG.md`、ADR、changesets、代码注释）中**不**使用 em-dash。在需要的地方改用逗号、冒号、句号、括号或连词，视句意所需而定；绝不做盲目的字符替换。

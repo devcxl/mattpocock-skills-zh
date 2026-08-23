@@ -3,17 +3,17 @@
 # Copy this file, edit the steps below, and run it.
 # The agent runs the script; the user follows prompts in their terminal.
 #
-# Usage:
+# 用法：
 #   bash hitl-loop.template.sh
 #
-# Two helpers:
-#   step "<instruction>"          → show instruction, wait for Enter
-#   capture VAR "<question>"      → show question, read response into VAR
+# 两个辅助函数：
+#   step "<instruction>"          → 显示指令，等待用户按 Enter
+#   capture VAR "<question>"      → 显示问题，把回答读入 VAR
 #
-# At the end, captured values are printed as KEY=VALUE for the agent to parse.
+# 末尾会把捕获到的值按 KEY=VALUE 打印出来，供 agent 解析。
 #
-# `capture` prints its value back to the terminal, where the agent reads it — so
-# capture observations, and leave signing in to the user as a `step`.
+# `capture` 会把它的值回显到终端，agent 从那里读取——所以让 capture 抓
+# 观察结果，而把登录这类动作留给用户，用 `step` 来表达。
 
 set -euo pipefail
 

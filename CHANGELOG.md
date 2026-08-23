@@ -168,9 +168,9 @@
 
   **确认门。** 智能体在确认"共识已达成"之前不会执行方案——把既有的"共识"完成标准变成显式的停止门。`description` 还吸纳了预训练过的 **`grill`** 先行词（"Grill the user relentlessly"）以锐化调用，文档页已重新对齐。
 
-  **事实 vs 决策。** Grilling 现在把 _事实_（查一下——探索代码库）与 _决策_（逐条交给人类，等待回答）分开。原本那条笼统的话——"如果某个问题可以通过探索代码库来回答，就改为探索代码库"——是按"人类在场"场景写的；可一旦其他技能在"求解 ticket"的框架内调用 grilling，它就读起来像是连 _决策_ 都可以自主作答。把两者分开，能防止 grilling 智能体一路抢答。
+  **事实 vs 决策。** Grilling 现在把 _事实_（查一下——探索代码库）与 _决策（（逐条交给人类，等待回答）分开。原本那条笼统的话——"如果某个问题可以通过探索代码库来回答，就改为探索代码库"——是按"人类在场"场景写的；可一旦其他技能在"求解 ticket"的框架内调用 grilling，它就读起来像是连 _决策（都可以自主作答。把两者分开，能防止 grilling 智能体一路抢答。
 
-- [#463](https://github.com/mattpocock/skills/pull/463) [`af6d692`](https://github.com/mattpocock/skills/commit/af6d6922c3e2b5288eef155346cbe319e4ed3bd0) 感谢 [@mattpocock](https://github.com/mattpocock)! - 在 **`writing-great-skills`** 中新增两条紧邻的"引导失控"失败模式，都关于"你以为关闭"的语言其实仍在引导智能体。**Negation**——_大象_——即"以禁令形式引导"：点名说"不要做什么"，会把被禁止的行为拖入上下文，使其_更_可被调用，而非更少（_don't think of an elephant_），解药是提示**正向**内容。**Negative Space**——虚空——即对"省略内容所产生的引导"失明：技能拒绝做的每一项决定都被下放给智能体的先验，而非保持中立；解药是逐段阅读草稿的"沉默"，并对每一处省略做有意识的决定（补上，或作为真正的**分支**留空）。保留为两条独立条目，而非合并——它们的诊断与解药不同——每条对应一份完整的 `GLOSSARY.md` 条目加一条 `SKILL.md` 失败模式小节，沿用其他失败模式的承载方式。
+- [#463](https://github.com/mattpocock/skills/pull/463) [`af6d692`](https://github.com/mattpocock/skills/commit/af6d6922c3e2b5288eef155346cbe319e4ed3bd0) 感谢 [@mattpocock](https://github.com/mattpocock)! - 在 **`writing-great-skills`** 中新增两条紧邻的"引导失控"失败模式，都都关于"你以为关闭"的语言其实仍在引导智能体。**Negation**——_大象_——即"以禁令形式引导"：点名说"不要做什么"，会把被禁止的行为拖入上下文，使其_更_可被调用，而非更少（_don't think of an elephant_），解药是提示**正向**内容。**Negative Space**——虚空——即对"省略内容所产生的引导"失明：技能拒绝做的每一项决定都被下放给智能体的先验，而非保持中立；解药是逐段阅读草稿的"沉默"，并对每一处省略做有意识的决定（补上，或作为真正的**分支**留空）。保留为两条独立条目，而非合并——它们的诊断与解药不同——每条对应一份完整的 `GLOSSARY.md` 条目加一条 `SKILL.md` 失败模式小节，沿用其他失败模式的承载方式。
 
 - [`850873c`](https://github.com/mattpocock/skills/commit/850873cd73d5f81826ebf512ad35d2b1e113001f) 感谢 [@mattpocock](https://github.com/mattpocock)! - 将 **`prototype`** 技能改为模型调用型，让智能体可以自主触达（其他技能也能）。其描述围绕先行词 _prototype_——用来回答设计问题的、用完即弃的代码——重写，每个分支配一个触发条件（状态/逻辑合理性校验，或 UI 探索）。
 
@@ -190,14 +190,14 @@
 
 - [#464](https://github.com/mattpocock/skills/pull/464) [`639df6e`](https://github.com/mattpocock/skills/commit/639df6e7386dfddc739b2aecdeff37a876f2483b) 感谢 [@mattpocock](https://github.com/mattpocock)! - 毕业并重塑 **`wayfinder`**——用于规划超出单次智能体会话容量的大块工作的技能。它从 `in-progress/` 毕业至 `engineering/`（插件条目、顶层与 Engineering README 中加入 **User-invoked**，文档页 `docs/engineering/wayfinder.md`，并接入 `ask-matt` 路由），作为成熟技能发布。促成这一变化的改名与重塑如下：
 
-  - **`decision-mapping` 重命名为 `wayfinder`**，调用方式为 `/wayfinder`。"Decision map"既晦涩也不准确——其实只有一种 ticket 类型是真正的决策。重塑为"在朦胧问题中开辟一条路线"，给出一套统一的先行词框架——**fog of war**、**frontier**、**the map**——而非在此之上再造新词。
+  - **`decision-mapping` 重命名为 `wayfinder`**，调用方式为 `/wayfinder`。"Decision map"既晦涩也不准确——其实只有一种 ticket 类型是真正的决策。重塑为"「在朦胧问题中开辟一条路线」，给出一套统一的先行词框架——**fog of war**、**frontier**、**the map**——而非在此之上再造新词。
   - **Destination 作为先行词。** 寻路找的是通往目的地的 _路_**，而非一头冲向目的地。命名目的地是绘图的第一步——它确定范围并塑造每一张 ticket——所以地图新增 `## Destination` 字段，每次会话都以它为定向，分诊在任何 ticket 存在之前先把它钉好。
   - **只规划，不动手。** 地图产出**决策，而非可交付物**；它在"构建之前已无决策可做"时结束。一项工作可以在 Notes 中覆盖此约定。
   - **地图是索引，不是仓库。** 一项决策只存在于一处——其 ticket——所以地图只摘要并链接，绝不复述；把 fog 升格为 ticket 时清除已升格的小块，避免同一内容停留在两处。
   - **默认协作。** 地图从本地 Markdown 文件迁至仓库的 issue 跟踪器：一张 `wayfinder:map` issue，其 ticket 作为子 issue——一个团队可共同关注的 URL。会话以低分辨率加载地图，按需放大到具体 ticket。Wayfinder 保持跟踪器无关（GitHub、GitLab、本地 Markdown），由 `docs/agents/issue-tracker.md` 中的指针指明，`setup-matt-pocock-skills` 会种入"Wayfinding operations"小节。
   - **以指派认领，而非以标签认领。** 会话通过把 ticket 指派给驱动者来认领——指派人即认领者——从而把标签词表腾出来给 `wayfinder:<type>` 一类。
   - **原生阻塞。** 阻塞优先采用跟踪器自身的依赖关系，它在跟踪器自身的 UI 中可视化呈现 frontier，让人不打开地图就能看到可领取项。GitHub 与 GitLab 模板列出原生写法，并附 body 约定的兜底。
-  - **Fog 与 out of scope 拆分。** 两个简单命名的地图小节——`## Not yet specified`（范围内、随 frontier 推进而升格的 fog）与 `## Out of scope`（被排除在目的地之外的工作，已关闭，永远不升格）——让"目的地之外的工作"不再显得像可领 frontier。
+  - **Fog 与 out of scope 拆分。** 两个简单命名的地图小节——`## Not yet specified`（范围内、随 frontier 推进而升格的 fog）与 `## Out of scope`（被排除在目的地之外之外的工作，已关闭，永远不升格）——让"目的地之外的工作"不再显得像可领 frontier。
   - **新增第四种 `task` ticket 类型。** 用于阻塞某项决策的纯手动工作（开通访问、迁移数据、注册服务）——唯一一种"做事"而非"决策"的类型，凭"解锁一项决策"赢得其位置。
   - **HITL / AFK ticket 分类。** 每种 ticket 类型都是 **HITL**（人在回路——grilling、prototype）或 **AFK**（智能体独立——research；task 两者皆可）。HITL ticket 只能通过实时交互解决，因此"等待人类"自然从标签中脱落——一个 grilling 智能体若自行作答，按定义就破坏了 HITL。（这修复了学员反馈的 `/wayfinder` 烤问 _自己_ 而非人类的问题。）
   - **恢复"无 fog 即提前退出"。** 若首轮广度优先的 grilling 没有发现 fog，说明工作量小到足以在一个会话内完成——它就此停下，询问你希望如何推进，而不是造一张谁都不需要的地图。
@@ -254,7 +254,7 @@
 - [`47bde84`](https://github.com/mattpocock/skills/commit/47bde84da032afb2e5058f997f3bbca47d321dbd) 感谢 [@mattpocock](https://github.com/mattpocock)! - 用 **`writing-great-skills`** 替换 **`write-a-skill`**。
 
   - 删除 `write-a-skill`。
-  - 新增 `writing-great-skills`（及其 `GLOSSARY.md`）——一份关于如何写好/改好技能的参考：让技能可预测的词汇与原则，逐句排查 no-op。
+  - 新增 `writing-great-skills`（及其 `GLOSSARY.md`）——一份关于如何写好/改好技能的参考：让技能可预测的词汇与原则，逐句排查修。
   - 暴露 `grilling` 为模型调用型技能——`grill-me` 与 `grill-with-docs` 背后可复用的访谈循环。
 
   **破坏性变更：** `write-a-skill` 已移除；请改用 `writing-great-skills`。

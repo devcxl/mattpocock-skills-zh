@@ -1,14 +1,14 @@
 ---
 name: setup-ts-deep-modules
-description: 将 dependency-cruiser 接入 TypeScript 仓库，使每个 package 都是一个深度模块——实现隐藏在子文件夹中，只能通过入口点文件访问。由用户调用。
+description: 将 dependency-cruiser 接入 TypeScript 仓库，使每个 package 都是一个深度模块：实现隐藏在子文件夹中，只能通过入口点文件访问。由用户调用。
 disable-model-invocation: true
 ---
 
 # 设置 TS 深度模块
 
-让此仓库中的每个 package 都成为一个**深度模块**：小接口背后隐藏大量行为。一个 package 的公开表面是其**入口点**——package 根目录下的文件——而其子文件夹中的所有内容都是隐藏的。本技能安装 [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) 与让入口点成为唯一通路的规则，然后验证规则确实起作用。
+让此仓库中的每个 package 都成为一个**深度模块**：小接口背后隐藏大量行为。一个 package 的公开表面是其**入口点**：package 根目录下的文件：而其子文件夹中的所有内容都是隐藏的。本技能安装 [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) 与让入口点成为唯一通路的规则，然后验证规则确实起作用。
 
-关于相关词汇（深度模块、接口、接缝、depth），请调用 Skill 工具并传入 "codebase-design"——在后续内容中使用它的术语。
+关于相关词汇（深度模块、接口、接缝、depth），请调用 Skill 工具并传入 "codebase-design"：在后续内容中使用它的术语。
 
 ## 它强制形成的结构
 
@@ -42,7 +42,7 @@ src/packages/
 - **packages 根目录**：如果存在 `src/` 则使用 `src/packages`，否则使用 `packages`。如果仓库已经有明显不同的约定，请与用户确认。
 - **已有配置**：检查是否存在 `.dependency-cruiser.*` 文件。若已有，**不要覆盖**：把四条规则与 options 合并进去，并告知用户你新增了什么。
 
-**完成条件：**包管理器、packages 根目录、是否有已有配置——这三项都已确认。
+**完成条件：**包管理器、packages 根目录、是否有已有配置：这三项都已确认。
 
 ### 2. 安装 dependency-cruiser
 
@@ -59,7 +59,7 @@ src/packages/
 ### 4. 接入检查流程
 
 - 新增 `lint:boundaries` 脚本：`depcruise <packages-root>`（或 `depcruise src`）。
-- 将其并入仓库的"总检查"命令——那个已经运行 typecheck 的命令（例如 `check` / `ci` / `validate` 脚本）。**不要改动** `tsconfig`，也不要新增路径别名。
+- 将其并入仓库的"总检查"命令：那个已经运行 typecheck 的命令（例如 `check` / `ci` / `validate` 脚本）。**不要改动** `tsconfig`，也不要新增路径别名。
 - 如果没有总检查脚本，就新增 `lint:boundaries` 并告诉用户在 CI 中加入它。
 
 **完成条件：**`lint:boundaries` 已存在，并作为与 typecheck 同一条命令的一部分运行。

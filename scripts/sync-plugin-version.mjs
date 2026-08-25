@@ -15,7 +15,7 @@ const source = readFileSync(pluginPath, "utf8");
 const plugin = JSON.parse(source);
 
 if (plugin.version === version) {
-  console.log(`plugin.json version is ${version} — already in sync`);
+  console.log(`plugin.json version is ${version} ： already in sync`);
   process.exit(0);
 }
 

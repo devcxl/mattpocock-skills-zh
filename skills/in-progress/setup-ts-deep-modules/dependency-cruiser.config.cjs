@@ -4,7 +4,7 @@
 // packages 根目录下的每个 package 都是一个深度模块（DEEP MODULE）：小接口背后
 // 隐藏大量行为。一个 package 的公开表面（PUBLIC SURFACE）就是它的入口点
 // （ENTRY POINTS）：位于 package 根目录的文件。实现位于子文件夹（SUBFOLDERS）
-// 中且为私有——按惯例 `lib/` 放实现、`tests/` 放测试，不过任何子文件夹都是
+// 中且为私有：按惯例 `lib/` 放实现、`tests/` 放测试，不过任何子文件夹都是
 // 私有的。一个 package 可以暴露多个小型入口点（index.ts、client.ts、
 // server.ts……）；优先采用这种方式，而不是把所有内容都塞进一个巨大的桶文件
 // （barrel index）。

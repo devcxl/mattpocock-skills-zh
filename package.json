@@ -2,7 +2,7 @@
   "name": "mattpocock-skills",
   "version": "1.2.3",
   "private": true,
-  "description": "Matt Pocock's agent skills for real engineering",
+  "description": "Matt Pocock 用于真实工程的智能体技能",
   "repository": {
     "type": "git",
     "url": "https://github.com/mattpocock/skills"

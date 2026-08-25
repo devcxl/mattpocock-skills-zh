@@ -2,13 +2,13 @@
 set -euo pipefail
 
 # NOTE: This is a dev-only script, intended for use by maintainers of this repo.
-# It is not a supported installer. Modifications to it — or requests for
-# modifications — will not be approved.
+# It is not a supported installer. Modifications to it ： or requests for
+# modifications ： will not be approved.
 #
 # Links all skills in the repository into the local skill directories used by
 # each agent harness:
-#   - ~/.claude/skills  — Claude Code
-#   - ~/.agents/skills  — Codex and other Agent Skills-compatible harnesses
+#   - ~/.claude/skills  ： Claude Code
+#   - ~/.agents/skills  ： Codex and other Agent Skills-compatible harnesses
 # Each entry is a symlink into this repo, so a `git pull` is all that's needed
 # to keep installed skills up to date.
 

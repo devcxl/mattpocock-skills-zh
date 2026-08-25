@@ -9,9 +9,9 @@
 
 ## 知识
 
-- [书籍：《力量训练的科学与实践》—— Zatsiorsky & Kraemer](https://example.com)
+- [书籍：《力量训练的科学与实践》： Zatsiorsky & Kraemer](https://example.com)
   编程与适应的基础文本。适用于：任何与周期化、恢复、强度区间相关的内容。
-- [文章："我应该训练多少？"—— Greg Nuckols (Stronger By Science)](https://example.com)
+- [文章："我应该训练多少？"： Greg Nuckols (Stronger By Science)](https://example.com)
   基于证据的容量基准综述。适用于：每周每个肌肉群的组数目标。
 
 ## 智慧（社区）

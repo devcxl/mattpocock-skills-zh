@@ -1,6 +1,6 @@
 # 技能机制
 
-[`writing-for-agents`](SKILL.md) 中专门针对技能（skill）的分支：当文档是一个技能时会发生变化的内容——前置元数据（frontmatter）、调用方式的选择，以及路由技能（router skill）。除此之外的所有写作规则，均适用 `SKILL.md` 中的通用参考。
+[`writing-for-agents`](SKILL.md) 中专门针对技能（skill）的分支：当文档是一个技能时会发生变化的内容：前置元数据（frontmatter）、调用方式的选择，以及路由技能（router skill）。除此之外的所有写作规则，均适用 `SKILL.md` 中的通用参考。
 
 ## 调用方式
 

@@ -4,12 +4,12 @@
     "name": "Matt Pocock",
     "url": "https://www.aihero.dev"
   },
-  "description": "Matt Pocock's skills for real engineering, as an installable Claude Code plugin.",
+  "description": "Matt Pocock 用于真实工程的技能集，以可安装的 Claude Code 插件形式提供。",
   "plugins": [
     {
       "name": "mattpocock-skills",
       "source": "./",
-      "description": "Matt Pocock's agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more.",
+      "description": "Matt Pocock 用于真实工程的智能体技能：盘问、规格/工单流、TDD、代码评审、领域建模等。",
       "category": "engineering",
       "keywords": [
         "engineering",

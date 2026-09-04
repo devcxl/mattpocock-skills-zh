@@ -8,7 +8,7 @@
 
 `engineering/` 或 `productivity/`（**已推广**的 bucket）中的每个技能必须在顶层 `README.md` 中有一处引用，并在 `.claude-plugin/plugin.json` 的 `skills` 数组中有一项（Claude Code 插件只随附已推广的集合）。`misc/`、`in-progress/` 和 `deprecated/` 中的技能不得出现在两者之中。
 
-安装命令从 [.agents/install-block.md](./.agents/install-block.md) 逐字复制。`.claude-plugin/marketplace.json` 让本仓库成为自己的单插件市场：这是安装块解释的回退方案，不是文档化的正式途径。触碰任一清单文件后运行 `claude plugin validate . --strict`。为什么做 Claude 插件而（暂时）不做 Codex 插件，见 [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
+安装命令从 [.agents/install-block.md](./.agents/install-block.md) 逐字复制。`.claude-plugin/marketplace.json` 让本仓库成为自己的单插件市场（这是安装块解释的回退方案，不是文档化的正式途径）。触碰任一清单文件后运行 `claude plugin validate . --strict`。为什么做 Claude 插件而（暂时）不做 Codex 插件，见 [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
 
 顶层 `README.md` 中的每个技能条目必须把技能名链接到它的 `SKILL.md`。
 
@@ -20,4 +20,6 @@
 
 [`ask-matt`](./skills/engineering/ask-matt/SKILL.md) 是路由器，映射每一个用户可达的技能以及它们之间的关系。与重新同步文档页相同的触发条件适用于它：当你新增、重命名、移除一个用户可达技能，或修改它在流程中的位置时，重新读一遍 `ask-matt` 的 `SKILL.md` 并更新它，以保持地图准确：一个它从未提到的新技能，或一个它仍路由到的过时技能，都是在说谎的路由器。
 
-要把所有技能（重新）链到本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每条都是一个指向本仓库的符号链接，所以 `git pull` 会保持已安装技能为最新；新增、移除或重命名技能后再次运行该脚本。
+要把所有 `deprecated/` 和 `misc/` 之外的技能（重新）链到本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每条都是一个指向本仓库的符号链接，所以 `git pull` 会保持已安装技能为最新；新增、移除或重命名技能后再次运行该脚本。
+
+本仓库散文（`SKILL.md` 文件、文档、`README.md`、`CHANGELOG.md`、ADR、changeset、代码注释）中一律不出现 em-dash。某句话用到时，改写成逗号、冒号、句号、括号或连词中实际合适的那一个；切勿做盲目的字符替换。

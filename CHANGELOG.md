@@ -1,5 +1,50 @@
 # mattpocock-skills
 
+## 1.3.0
+
+### Minor Changes
+
+- 删除两个一行委派包装技能 `grill-me` 与 `grill-with-docs`（连同各自的 `agents/openai.yaml`、文档页 `docs/productivity/grill-me.md` 与 `docs/engineering/grill-with-docs.md`），`grilling` 成为全套技能唯一的访谈入口。
+
+- 两个包装技能的正文都只有一行，各自转调 `grilling`（`grill-with-docs` 还转调 `domain-modeling`），去掉这一层不会损失任何行为：`grilling` 现在自己说明，在工作目录里就把敲定的术语写进 `CONTEXT.md`、把难以逆转的决策写成 ADR，出了工作目录则什么都不写。此前"要不要文件"的二分完全由用户选的入口承担，现在它由所在目录决定。
+- `grilling` 同时成为主构建链的起点：`grilling → to-spec → to-tickets → implement → code-review`。
+- 同步更新 `.claude-plugin/plugin.json`（23 项）、顶层 `README.md`、两个 bucket 的 `README.md`、`ask-matt` 路由，以及全部引用旧名的文档页与 `.agents/`、`.out-of-scope/` 文案。
+- 这是**与本地上游 `mattpocock/skills` 的有意分叉**：上游仍保留这两个技能。`.github/workflows/sync-check.yml` 新增 `DROPPED` 白名单把它们排除在"缺失"检查之外，并新增 `revived` 检查，一旦它们随下次同步回到仓库就直接让 CI 失败，提醒再次删除。
+
+### Patch Changes
+
+- Add the `implement-spec` skill (in-progress bucket, user-invoked). It takes a spec and its tickets and drives them to a single PR: the tickets are read as a task graph with blocking edges, so implementer subagents run in background worktrees across the ready frontier for concurrency, a merger subagent folds each one back into the PR branch, and the flow closes with `/code-review` before the PR is marked ready.
+
+- Add the `pr` skill (in-progress bucket, model-invoked). It's a reference for the shape a pull request body should take, not a workflow: the template comes first, then a short section per part of it. The summary comes from the primary source (the issue or spec), never inferred from the diff; the body states size and a one-way/two-way door call up front; "the shape of the change" reproduces `show-me` almost verbatim (credited in the skill's `CREDITS.md`), aimed at a diff instead of a conversation; evidence is a before/after pair (visual first, a failing-then-passing test run where no visual exists); and what was deliberately left out gets its own section. Relates to #521, #938, #509, and #915.
+
+- domain-modeling: trigger on discussing codebase terminology and on writing or editing a CONTEXT.md or an ADR directly, replacing the narrower "pin down domain terminology or a ubiquitous language" / "record an architectural decision" phrasing. Also drops the "another skill needs to maintain the domain model" caveat, since that's the invoking skill's job to state explicitly, not this description's.
+
+- Quote the `description` front matter in `to-spec`, `code-review`, `setup-matt-pocock-skills`, `writing-fragments`, `writing-shape`, and `wait-what`. An unquoted colon-space left over from the em-dash sweep in #905 made each block invalid YAML, so `skills.sh` skipped all six during discovery and they couldn't be listed or installed via `npx skills`.
+
+- grilling: update the round template so consecutive questions are separated by a horizontal rule (`---`) instead of running together.
+
+- grilling: remove em-dashes from `SKILL.md`, replacing them with colons and semicolons so the instructions read as plain text.
+
+- Remove every em-dash from the repo's prose (docs, `SKILL.md` files, ADRs, `README.md`, scripts, JSON/YAML metadata), hand-rewriting each sentence with a comma, colon, period, parentheses, or conjunction rather than mechanically substituting the character. `CLAUDE.md`/`AGENTS.md` now says not to reintroduce them.
+
+- retro: classify coding-standards findings as mechanical or judgement calls before writing them. A mechanical violation (a fixed syntactic pattern, a banned API, an import shape, a file-location rule) now gets a deterministic check instead (a linter rule, a pre-commit hook, or a CI job), reserving `CODING_STANDARDS.md` for genuine judgement calls. Automated checks also now flags a repo with no guardrail at all (no pre-commit hook, no CI lint/typecheck/test job) as a finding in its own right.
+
+- Standardize cross-skill invocation on an explicit "call the Skill tool" instruction instead of bare `/skill`-style prose, across `code-review`, `diagnosing-bugs`, `grill-with-docs`, `grill-me`, `improve-codebase-architecture`, `tdd`, `to-spec`, `to-tickets`, `triage`, and `wayfinder`.
+
+- A skill that names another skill in prose ("run the `/grilling` skill") does not reliably cause it to load. This is the documented rough edge behind `grill-with-docs`'s most-reported problem. Naming the tool directly (`Call the Skill tool with "grilling"`) is intended to raise the hit rate. Dropping the leading `/` also makes the instruction harness-neutral rather than less: it no longer assumes Claude Code's trigger syntax.
+- A step needing more than one skill now says so as multiple calls ("Call the Skill tool twice, for `grilling` and `domain-modeling`"), not one call carrying two names.
+- Documents the convention in `.agents/invocation.md` for future skills to follow.
+
+- Stop skills from trying to reach user-invoked skills through the Skill tool: fix cross-skill references that violated the "no other skill can call it" invariant in `.agents/invocation.md`, in `to-spec`, `wayfinder`, `to-tickets`, `triage`, `code-review`, and `diagnosing-bugs`.
+
+- `to-spec`, `wayfinder`, `to-tickets`, `triage`, and `code-review` each carried a precondition ("...run `/setup-matt-pocock-skills` if not") that PR #878 rewrote into a literal `Call the Skill tool with "setup-matt-pocock-skills"` instruction. `setup-matt-pocock-skills` is user-invoked, so none of these skills (user-invoked or model-invoked) can call it. Reworded all five as instructions for the agent to tell the human to run it instead.
+- `diagnosing-bugs`'s Phase 6 post-mortem hand off to `improve-codebase-architecture` (also user-invoked) the same way, from an autonomous, often-unattended bug-fixing flow with no human in the loop to catch the failed call. Removed the hand-off outright rather than softening it, since it rarely fired in practice. Phase 6 is now "Cleanup" only; the mechanical checklist is untouched.
+- Added a carve-out paragraph to `.agents/invocation.md`'s "Dependencies between them" section: the `Call the Skill tool with "name"` convention only applies when the named skill is model-invoked. This is the section PR #878 introduced without reconciling it against the user-invoked/model-invoked invariant stated eight lines above it; the gap is most of why this bug reached six call sites instead of one.
+
+Fixes #453.
+
+- wait-what: follow `CONTEXT-MAP.md` to the right `CONTEXT.md` when a repo indexes multiple contexts that way instead of keeping a single root `CONTEXT.md`.
+
 ## 1.2.3
 
 ### 补丁变更
@@ -155,9 +200,9 @@
 
   **确认门。** 智能体在你确认已达成共识之前不会执行计划：把该技能既有的"达成共识"完成条件变成一道明确的关停门。`description` 也召募了预训练过的 **`grill`** 引导词（"Grill the user relentlessly"）以锐化触发，文档页重新同步。
 
-  **事实 vs 决策。** grilling 现在把_事实_（查一查：探索代码库）与_决策_（把每一项摆给人类并等待他的回答）拆开。原先那条笼统的话："如果一个问题能通过探索代码库来回答，那就去探索代码库"：是为真人场景写的，但一旦另一个技能在"解决这张 ticket"的框架里跑 grilling，它就同样被读成自主回答_决策_的许可证。把两者分开能避免 grilling 智能体抢着回答自己的问题。
+  **事实 vs 决策。** grilling 现在把*事实*（查一查：探索代码库）与*决策*（把每一项摆给人类并等待他的回答）拆开。原先那条笼统的话："如果一个问题能通过探索代码库来回答，那就去探索代码库"：是为真人场景写的，但一旦另一个技能在"解决这张 ticket"的框架里跑 grilling，它就同样被读成自主回答*决策*的许可证。把两者分开能避免 grilling 智能体抢着回答自己的问题。
 
-- [#463](https://github.com/mattpocock/skills/pull/463) [`af6d692`](https://github.com/mattpocock/skills/commit/af6d6922c3e2b5288eef155346cbe319e4ed3bd0) 感谢 [@mattpocock](https://github.com/mattpocock)! - 为 **`writing-great-skills`** 新增两个相邻的"引导失灵"模式，都关于你以为是"关掉"的语言仍会引导智能体这件事。**Negation**：那只_大象_：是用禁令做引导：点出_不要做什么_，会把被禁的行为拉进 context 并让它_更_可用（"不要想大象"），所以治法是提示**正向**。**Negative Space**：那片空白：是对"留白做了什么引导"的盲视：一份技能放弃的每一项决策都被委托给智能体的先验而不是保持中立，所以治法是按沉默读一遍草稿，并刻意决定每一处省略（补上，或作为真正的**分支**留着）。两者分两条而非合并：它们携带不同的诊断与不同的治法：每一条都是一份完整的 `GLOSSARY.md` 条目加一条 `SKILL.md` 失败模式要点，与其他失败模式的承载方式一致。
+- [#463](https://github.com/mattpocock/skills/pull/463) [`af6d692`](https://github.com/mattpocock/skills/commit/af6d6922c3e2b5288eef155346cbe319e4ed3bd0) 感谢 [@mattpocock](https://github.com/mattpocock)! - 为 **`writing-great-skills`** 新增两个相邻的"引导失灵"模式，都关于你以为是"关掉"的语言仍会引导智能体这件事。**Negation**：那只*大象*：是用禁令做引导：点出*不要做什么*，会把被禁的行为拉进 context 并让它*更*可用（"不要想大象"），所以治法是提示**正向**。**Negative Space**：那片空白：是对"留白做了什么引导"的盲视：一份技能放弃的每一项决策都被委托给智能体的先验而不是保持中立，所以治法是按沉默读一遍草稿，并刻意决定每一处省略（补上，或作为真正的**分支**留着）。两者分两条而非合并：它们携带不同的诊断与不同的治法：每一条都是一份完整的 `GLOSSARY.md` 条目加一条 `SKILL.md` 失败模式要点，与其他失败模式的承载方式一致。
 
 - [`850873c`](https://github.com/mattpocock/skills/commit/850873cd73d5f81826ebf512ad35d2b1e113001f) 感谢 [@mattpocock](https://github.com/mattpocock)! - 把 **`prototype`** 改为模型调用型，让智能体（以及其他技能）可以自主拿起来。描述以引导词 _prototype_：回答设计问题的可丢弃代码：重写，每个分支（状态/逻辑健全性检查，或 UI 探索）配一个触发点。
 
@@ -182,11 +227,11 @@
   - **规划，而非执行。** 地图产出**决策，而非交付物**；当构建该事物的人已经无需再做决策时，它就完成了。一项工程可以在其备注中覆盖这一规则。
   - **地图是索引，不是仓库。** 一项决策恰好存在于一个地方：它的 ticket：所以地图只做摘要与链接，从不复述；把迷雾毕业到 ticket 时，把毕业出去的那一片清空，让它不滞留于两处。
   - **默认协作。** 地图从本地 Markdown 文件迁到仓库的 issue 跟踪器上：一张 `wayfinder:map` issue，其 ticket 是它的子 issue：一个团队可以观察的共享 URL。Session 以低分辨率加载地图，按需放大到 ticket。Wayfinder 在 `docs/agents/issue-tracker.md` 中通过指针保持跟踪器无关（GitHub、GitLab、本地 Markdown），`setup-matt-pocock-skills` 埋下 "Wayfinding operations" 那一节。
-  - **凭分配认领，而非标签。** 一个 session 通过把 ticket 分配给驱动开发的你来认领：被分配的人_就是_认领人：把标签词汇释放到只剩 `wayfinder:<type>`。
+  - **凭分配认领，而非标签。** 一个 session 通过把 ticket 分配给驱动开发的你来认领：被分配的人*就是*认领人：把标签词汇释放到只剩 `wayfinder:<type>`。
   - **原生阻塞。** 阻塞优先使用跟踪器的原生依赖关系，这会在跟踪器自己的 UI 中可视化地渲染 frontier，于是人能看到哪些是可拿起的，而不必打开地图。GitHub 与 GitLab 模板明列原生写法，并提供正文约定作为回退。
   - **迷雾 vs 范围外，拆开。** 两个命名直白的地图小节：`## Not yet specified`（范围内但仍在迷雾中的，随前沿推进毕业）与 `## Out of scope`（已被划在目的地之外的工作，已关闭，永不毕业）：于是超出目的地的工作不再被读作可领取的前沿。
-  - **第四种 `task` ticket 类型。** 用于阻塞决策的字面手工工作（开通访问、迁移数据、注册服务）：_执行_而非_决策_的那一种，凭解锁一项决策而获得一席之地。
-  - **HITL / AFK ticket 分类。** 每种 ticket 类型都是 **HITL**（人在回路：grilling、prototype）或 **AFK**（智能体单独：research；task 两种都是）。HITL ticket 只能通过现场交互解决，所以"等待人类"自然落到标签上：一个自己回答自己问题的 grilling 智能体，按定义，已破坏了 HITL。（这修复了学员反馈的 `/wayfinder` 自己盘问_自己_而非盘问人类。）
+  - **第四种 `task` ticket 类型。** 用于阻塞决策的字面手工工作（开通访问、迁移数据、注册服务）：*执行*而非*决策*的那一种，凭解锁一项决策而获得一席之地。
+  - **HITL / AFK ticket 分类。** 每种 ticket 类型都是 **HITL**（人在回路：grilling、prototype）或 **AFK**（智能体单独：research；task 两种都是）。HITL ticket 只能通过现场交互解决，所以"等待人类"自然落到标签上：一个自己回答自己问题的 grilling 智能体，按定义，已破坏了 HITL。（这修复了学员反馈的 `/wayfinder` 自己盘问*自己*而非盘问人类。）
   - **无迷雾早退出恢复。** 如果开场广度优先的 grilling 没浮出迷雾，说明工作小到可以在一次会话内完成：它就此停下，询问你希望如何推进，而不是造一张谁都不需要的地图。
 
 ### 补丁变更

@@ -28,10 +28,21 @@ jobs:
           # 非翻译文件（不要求对齐）：changeset/CI/脚本/agent 配置/废弃与进行中目录
           EXCL='^(\.changeset/|\.github/|scripts/|\.agents/|\.out-of-scope/|skills/(deprecated|in-progress|personal)/)'
           SUFFIX='\.(yaml|yml|json|cjs|mjs|sh|png|svg)$'
+          # 本地有意删除、不再从上游同步的文件。当前：两个一行委派包装技能，
+          # 它们只是转调 grilling，已由 grilling 本身兼作唯一入口。
+          DROPPED='^(skills/engineering/grill-with-docs/|skills/productivity/grill-me/|docs/engineering/grill-with-docs\.md$|docs/productivity/grill-me\.md$)'
           missing=$(comm -23 <(cd ../upstream && git ls-files | sort) <(git ls-files | sort) \
-            | grep -v -E "$EXCL" | grep -v -E "$SUFFIX" || true)
+            | grep -v -E "$EXCL" | grep -v -E "$SUFFIX" | grep -v -E "$DROPPED" || true)
           extra=$(comm -13 <(cd ../upstream && git ls-files | sort) <(git ls-files | sort) \
             | grep -v -E "$EXCL" | grep -v -E "$SUFFIX" || true)
+          # 上游每次重新出现这些文件（两棵树都有，既不缺也不多）就提醒再删一次，
+          # 否则它们会静默地随下次同步回到仓库里。
+          revived=$(git ls-files | grep -E "$DROPPED" || true)
+          if [ -n "$revived" ]; then
+            echo "::error::本地已删除的技能又从上游回来了，请重新删除"
+            echo "$revived"
+            exit 1
+          fi
           if [ -n "$missing" ] || [ -n "$extra" ]; then
             echo "::error::文件树未对齐上游，请补齐/清理后重新同步"
             if [ -n "$missing" ]; then echo "--- 缺失（上游有，中文版没有）:"; echo "$missing"; fi

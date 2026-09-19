@@ -14,11 +14,11 @@
 | --- | --- |
 | 一个决策正在等的一个外部事实 | `research` |
 | 一个*与你一起*做出的决策，靠访谈 | [grilling](https://aihero.dev/skills-grilling) |
-| 一个耐久的架构决策，写入 `CONTEXT.md` 和 ADR | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| 一个耐久的架构决策，写入 `CONTEXT.md` 和 ADR | [grilling](https://aihero.dev/skills-grilling) |
 | 想弄清楚某个做法在你的代码库里行不行得通 | [prototype](https://aihero.dev/skills-prototype) |
 | 一个一次会话装不下的计划 | [wayfinder](https://aihero.dev/skills-wayfinder) |
 
-`research` 与 `grill-with-docs` 之间的分界线是**回来的东西的保质期**。Research 产出短命的资产：这个库这周的 auth 机制长什么样。ADR 记录你保留的决策。如果你产出的东西是决策、而不是事实，那你是在 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling)，不是在 research。
+`research` 与 `grilling` 之间的分界线是**回来的东西的保质期**。Research 产出短命的资产：这个库这周的 auth 机制长什么样。ADR 记录你保留的决策。如果你产出的东西是决策、而不是事实，那你是在 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling)，不是在 research。
 
 ## 被委派的苦力活
 
@@ -70,4 +70,4 @@
 
 ## 它的定位
 
-一个随时可调用的独立技能，把东西喂给思考型技能，而不是坐在构建链里。它的文件是要被*带进*流程的东西：[盘问（grilling）](https://aihero.dev/skills-grilling) 和 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 在事实已经在桌上时问出更尖锐的问题，[to-spec](https://aihero.dev/skills-to-spec) 能对照它做综合。[wayfinder](https://aihero.dev/skills-wayfinder) 是直接调用它的那个技能，用一个 `/research` subagent 处理地图上的每张 research ticket。整张地图见 [ask-matt](https://aihero.dev/skills-ask-matt)。
+一个随时可调用的独立技能，把东西喂给思考型技能，而不是坐在构建链里。它的文件是要被*带进*流程的东西：[grilling](https://aihero.dev/skills-grilling) 在事实已经在桌上时问出更尖锐的问题，[to-spec](https://aihero.dev/skills-to-spec) 能对照它做综合。[wayfinder](https://aihero.dev/skills-wayfinder) 是直接调用它的那个技能，用一个 `/research` subagent 处理地图上的每张 research ticket。整张地图见 [ask-matt](https://aihero.dev/skills-ask-matt)。

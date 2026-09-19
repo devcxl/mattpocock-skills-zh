@@ -12,7 +12,7 @@
 
 | 你在哪 | 跑什么 |
 | --- | --- |
-| 你什么都还没决定 | 先 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| 你什么都还没决定 | 先 [grilling](https://aihero.dev/skills-grilling) |
 | 已经决定，并且工作装得下一次 [context window](https://www.aihero.dev/ai-coding-dictionary/context-window) | [implement](https://aihero.dev/skills-implement)：跳过 spec |
 | 已经决定，并且工作跨几次会话 | `/to-spec`，然后 [to-tickets](https://aihero.dev/skills-to-tickets) |
 | 一张 [wayfinder](https://aihero.dev/skills-wayfinder) 地图已经清完 | `/to-spec #<map_issue>` |
@@ -61,7 +61,7 @@ spec 之所以存在，是因为 context window 有尽头。你在 [盘问（gri
 
 **我的工作是重构或模块边界、不是功能。这份模板合适吗？**
 
-没那么合适，这是一个已知限制。模板重度偏向用户故事，那是架构性工作的错误形状：你最终会围绕其实是关于接口和不变量的事硬编出没人要的故事。改靠实现决策和测试决策两个小节，让耐久的架构性决策通过 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 以 ADR 落地，而不是硬让 spec 装它们。
+没那么合适，这是一个已知限制。模板重度偏向用户故事，那是架构性工作的错误形状：你最终会围绕其实是关于接口和不变量的事硬编出没人要的故事。改靠实现决策和测试决策两个小节，让耐久的架构性决策通过 [grilling](https://aihero.dev/skills-grilling) 以 ADR 落地，而不是硬让 spec 装它们。
 
 **它会查追踪器看相关工作、或引用它尊重的 ADR 吗？**
 
@@ -84,7 +84,7 @@ spec 之所以存在，是因为 context window 有尽头。你在 [盘问（gri
 `to-spec` 是主构建链上的一步，而且只在多会话的那条分支上：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grilling → to-spec → to-tickets → implement → code-review
 ```
 
-它的上游邻居是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)——做这份技能只负责记录的决定；以及 [wayfinder](https://aihero.dev/skills-wayfinder)——它的完成图就在这里合上这条链。下游，[to-tickets](https://aihero.dev/skills-to-tickets) 把 spec 切成供 [implement](https://aihero.dev/skills-implement) 构建的示踪弹 tickets。拿不准哪个技能或流程合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。
+它的上游邻居是 [grilling](https://aihero.dev/skills-grilling)——主构建链的起点，做这份技能只负责记录的决定；以及 [wayfinder](https://aihero.dev/skills-wayfinder)——它的完成图就在这里合上这条链。下游，[to-tickets](https://aihero.dev/skills-to-tickets) 把 spec 切成供 [implement](https://aihero.dev/skills-implement) 构建的示踪弹 tickets。拿不准哪个技能或流程合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

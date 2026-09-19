@@ -23,3 +23,5 @@
 要把所有 `deprecated/` 和 `misc/` 之外的技能（重新）链到本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每条都是一个指向本仓库的符号链接，所以 `git pull` 会保持已安装技能为最新；新增、移除或重命名技能后再次运行该脚本。
 
 本仓库散文（`SKILL.md` 文件、文档、`README.md`、`CHANGELOG.md`、ADR、changeset、代码注释）中一律不出现 em-dash。某句话用到时，改写成逗号、冒号、句号、括号或连词中实际合适的那一个；切勿做盲目的字符替换。
+
+本仓库与上游 `mattpocock/skills` 有一处**有意分叉**：`grill-me` 与 `grill-with-docs` 已被本地删除，它们只是一行委派包装，职责归入 `grilling`。`.github/workflows/sync-check.yml` 的 `DROPPED` 列表记录了这些文件，缺失检查会跳过它们，`revived` 检查则在它们随同步回潮时报错。要新增分叉，把路径同时加进 `DROPPED` 并在 `.changeset/` 里记一条；不要删掉 `revived` 检查，否则删除的技能会静默地随下次同步返回。

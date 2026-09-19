@@ -12,7 +12,7 @@
 | --- | --- |
 | 有个想法，但完全不知道从哪开始 | 主流程的起点，以及这次构建是否小到可以跳过 spec |
 | 来自他人的 bug 和需求 | [triage](https://aihero.dev/skills-triage) 入口，以及为什么你自己生成的 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 不该出现在上面 |
-| 两个看起来可以互换的技能 | 两者之间的分界线，而且通常是一个具体的测试，而不是口味问题。[grill-me](https://aihero.dev/skills-grill-me) 还是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，取决于你是否在工作目录里；[grill-with-docs](https://aihero.dev/skills-grill-with-docs) 还是 [wayfinder](https://aihero.dev/skills-wayfinder)，取决于工作量是否适合一次会话完成 |
+| 两个看起来可以互换的技能 | 两者之间的分界线，而且通常是一个具体的测试，而不是口味问题。[grilling](https://aihero.dev/skills-grilling) 还是 [wayfinder](https://aihero.dev/skills-wayfinder)，取决于工作量是否适合一次会话完成；[grilling](https://aihero.dev/skills-grilling) 还是 [to-questionnaire](https://aihero.dev/skills-to-questionnaire)，取决于答案在你自己脑子里还是在别人脑子里 |
 | 一次很长的会话，以及关于 [context](https://www.aihero.dev/ai-coding-dictionary/context) 的决策 | 在阶段边界上对五个选项的有序决策树 |
 | 一个你已经选好的技能 | 没有有用的答案。直接调用那个技能。 |
 
@@ -53,7 +53,7 @@
 
 **它告诉我一半的技能没安装。**
 
-一个已知、未修复的 bug。路由器会路由到的多数技能都设置了 `disable-model-invocation: true`，这意味着 harness 会把它们从注入到 agent 上下文中的技能列表里剔除。agent 把那份列表当作完整清单，于是报告它们缺失。有一份报告的会话中，它宣称整个 spec-and-tickets 流程不存在，转而路由到光秃秃的 `/grilling` 和 `/tdd`。插件二十二个技能中有十三个带这个标志，所以这是常见情况而不是边缘情况。它们已经安装了。照常输入斜杠命令，或者查看 `.claude-plugin/plugin.json`——那才是判断安装内容的权威。
+一个已知、未修复的 bug。路由器会路由到的多数技能都设置了 `disable-model-invocation: true`，这意味着 harness 会把它们从注入到 agent 上下文中的技能列表里剔除。agent 把那份列表当作完整清单，于是报告它们缺失。有一份报告的会话中，它宣称整个 spec-and-tickets 流程不存在，转而路由到光秃秃的 `/grilling` 和 `/tdd`。插件二十三个技能中有十二个带这个标志，所以这是常见情况而不是边缘情况。它们已经安装了。照常输入斜杠命令，或者查看 `.claude-plugin/plugin.json`——那才是判断安装内容的权威。
 
 **它描述了某个技能的行为，但该技能并不那样做。**
 
@@ -85,6 +85,6 @@
 
 ## 它的定位
 
-`ask-matt` 是一个**独立路由器**，凌驾于整个技能集之上。它从来不是链条中的一步；它指向每一条链条，也是其他文档页面回链的节点，这样它们谁都不用重画这张图。从这里你最常见的落点是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)——主流程的起点——或者 [triage](https://aihero.dev/skills-triage)——为"送来的工作"而非"你启动的工作"准备的入口。
+`ask-matt` 是一个**独立路由器**，凌驾于整个技能集之上。它从来不是链条中的一步；它指向每一条链条，也是其他文档页面回链的节点，这样它们谁都不用重画这张图。从这里你最常见的落点是 [grilling](https://aihero.dev/skills-grilling)——主流程的起点——或者 [triage](https://aihero.dev/skills-triage)——为"送来的工作"而非"你启动的工作"准备的入口。
 
 对于它所描述的技能，它是 [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source)。当路由器与某个 `SKILL.md` 不一致时，以 `SKILL.md` 为准。

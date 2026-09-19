@@ -16,7 +16,7 @@
 | 一个 spec，还没拆分，构建跨会话 | 先 [to-tickets](https://aihero.dev/skills-to-tickets)，然后每个 ticket 跑一次 `/implement` |
 | 一个 spec，构建很小 | 直接对着 spec 跑 `/implement` |
 | 只存在于你刚进行的对话里，而且仍然很小 | 就地 `/implement`，同一个窗口里 |
-| 还没写在任何地方 | [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，如果没有代码库就用 [grill-me](https://aihero.dev/skills-grill-me) |
+| 还没写在任何地方 | [grilling](https://aihero.dev/skills-grilling) |
 | 一个具体的行为了，要测试先行，没有 spec | 直接 [tdd](https://aihero.dev/skills-tdd) |
 | 已经构建好了，你想检查它 | 直接 [code-review](https://aihero.dev/skills-code-review) |
 
@@ -87,7 +87,7 @@
 `implement` 是主链上的构建一环，位列倒数第二：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grilling → to-spec → to-tickets → implement → code-review
 ```
 
 它的邻居是 [to-tickets](https://aihero.dev/skills-to-tickets)——产出它消费的 tickets，并声明决定它们顺序的阻塞边；[tdd](https://aihero.dev/skills-tdd)——它内部在每个接缝上驱动它；以及 [code-review](https://aihero.dev/skills-code-review)——它在提交前跑。它坐在规划技能的下游，并信任它们。它不复验交给它的形状，所以一张结构糟糕的 map 或一条水平切层的 ticket 会按原样被构建。

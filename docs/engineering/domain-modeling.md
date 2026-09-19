@@ -6,7 +6,7 @@
 
 ## 何时使用
 
-键入 `/domain-modeling`，或者当任务合适时 agent 会自动使用它。实践中，自动调用是这个技能最弱的一环：当 `grill-with-docs` 或 `wayfinder` 说要加载它时，[model](https://www.aihero.dev/ai-coding-dictionary/model) 经常加载 `grilling` 而跳过这一个。如果一次 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling) 跑完而 `CONTEXT.md` 末尾没被动过，那就是这种情况；按名字把它和其他技能一起调用。
+键入 `/domain-modeling`，或者当任务合适时 agent 会自动使用它。实践中，自动调用是这个技能最弱的一环：当 [grilling](https://aihero.dev/skills-grilling) 或 [wayfinder](https://aihero.dev/skills-wayfinder) 说要加载它时，[model](https://www.aihero.dev/ai-coding-dictionary/model) 经常照跑访谈而跳过这一个。如果一次 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling) 跑完而 `CONTEXT.md` 末尾没被动过，那就是这种情况；按名字把它和其他技能一起调用。
 
 当*话术*本身是问题时使用它：
 
@@ -16,7 +16,7 @@
 | "Account" 在三个文件里干着三件事 | `domain-modeling`：把它拆成 Customer 和 User |
 | 你刚做了一个难以逆转的架构选择 | `domain-modeling`：如果选择过关，它会出一份 ADR |
 | 模块的*形状*是问题——接缝放哪里、接口有多深 | [codebase-design](https://aihero.dev/skills-codebase-design) |
-| 你想在动手前把整个计划审一遍 | [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，它在下面驱动这个技能 |
+| 你想在动手前把整个计划审一遍 | [grilling](https://aihero.dev/skills-grilling)，它在下面驱动这个技能 |
 | 你想查一个术语，而不是改它 | 没有。读 `CONTEXT.md`。它是个文件。 |
 
 ## 先决条件
@@ -69,7 +69,7 @@ ADR 的三条测试缺任何一条，就不写 ADR。一个容易逆转的决策
 
 **我怎样为一个没有词汇表的代码库弄出一份？**
 
-显式要它，而不是等它自己累积。`/grill-with-docs help me scaffold my existing repo with a CONTEXT.md` 是文档化的路径；预期是一场长盘问——一位用户报告在文件成形前被问了 50+ 个问题。在棕地（brownfield）仓库上，靠偶发使用来建立词汇表远远不够快。
+显式要它，而不是等它自己累积。`/grilling help me scaffold my existing repo with a CONTEXT.md` 是文档化的路径；预期是一场长盘问——一位用户报告在文件成形前被问了 50+ 个问题。在棕地（brownfield）仓库上，靠偶发使用来建立词汇表远远不够快。
 
 **我能保留 domain model，但用我自己的 ADR 格式吗？**
 
@@ -94,4 +94,4 @@ ADR 的三条测试缺任何一条，就不写 ADR。一个容易逆转的决策
 
 ## 它的定位
 
-`domain-modeling` 是一个**模型调用的参考**，*在*其他技能*之下*跑的次数比单独跑的次数多。[grill-with-docs](https://aihero.dev/skills-grill-with-docs) 在一次盘问中驱动它，[wayfinder](https://aihero.dev/skills-wayfinder) 在绘制地图时加载它，[triage](https://aihero.dev/skills-triage) 用它让 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 保持项目自己的话术，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在决策结晶时调用它。它最近的同胞是 [codebase-design](https://aihero.dev/skills-codebase-design)：两者是其他一切之下的词汇层，一个是给*领域*的，一个是给模块*形状*的。它也能直接被调到——当你想要这种纪律、又不想被通常会拉它的那个技能的步骤绑住的时候。拿不准哪个技能合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。
+`domain-modeling` 是一个**模型调用的参考**，*在*其他技能*之下*跑的次数比单独跑的次数多。[grilling](https://aihero.dev/skills-grilling) 在一次盘问中驱动它，[wayfinder](https://aihero.dev/skills-wayfinder) 在绘制地图时加载它，[triage](https://aihero.dev/skills-triage) 用它让 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 保持项目自己的话术，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在决策结晶时调用它。它最近的同胞是 [codebase-design](https://aihero.dev/skills-codebase-design)：两者是其他一切之下的词汇层，一个是给*领域*的，一个是给模块*形状*的。它也能直接被调到——当你想要这种纪律、又不想被通常会拉它的那个技能的步骤绑住的时候。拿不准哪个技能合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

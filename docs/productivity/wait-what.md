@@ -8,7 +8,7 @@
 
 通过键入 `/wait-what` 来调用它。agent 不会主动触发它，也不应该。只有你知道你何时停止了跟随。
 
-一发现自己开始略读就立刻用。agent 已经飘进了它自己造的术语、堆了五个缩写、或者解释了一个你从未见过的前提的决定。它修的是你正在进行的这段对话。要让那些术语根本不出现，使用 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，它会从一开始就建立共享语言。
+一发现自己开始略读就立刻用。agent 已经飘进了它自己造的术语、堆了五个缩写、或者解释了一个你从未见过的前提的决定。它修的是你正在进行的这段对话。要让那些术语根本不出现，使用 [grilling](https://aihero.dev/skills-grilling)，它会从一开始就建立共享语言。
 
 ## 名字就是机制
 
@@ -33,4 +33,4 @@
 
 ## 它的定位
 
-你可以在任何时点、任何对话、任何其他技能内部使用 `wait-what`。它在事后修补一条消息。真正的治本是事先约定一套共享语言，那就是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)：一场 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) session 一边跑 [domain-modeling](https://aihero.dev/skills-domain-modeling)，于是你们双方用的词都落到 `CONTEXT.md` 里。当你不确定哪个技能适合当下时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。
+你可以在任何时点、任何对话、任何其他技能内部使用 `wait-what`。它在事后修补一条消息。真正的治本是事先约定一套共享语言，那就是 [grilling](https://aihero.dev/skills-grilling)：一场 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) session 一边跑 [domain-modeling](https://aihero.dev/skills-domain-modeling)，于是你们双方用的词都落到 `CONTEXT.md` 里。当你不确定哪个技能适合当下时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

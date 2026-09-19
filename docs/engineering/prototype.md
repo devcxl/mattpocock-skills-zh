@@ -70,4 +70,4 @@
 
 它最大的消费者是 [wayfinder](https://aihero.dev/skills-wayfinder)。一张 wayfinder 地图由**决策 tickets** 组成，而 `prototype` 是 ticket 可以是的那四种之一：当阻塞的问题是"这应该长什么样"或"这应该怎么行为"时用到的那种——再多讨论也敲不定的那种。Wayfinder 用做出某样具体东西让人反应来抬高一场模糊讨论的保真度，而这个技能就是那种具体东西如何被搭起来的途径。一张原型 ticket 由答案解决，原型作为一份资产被链接到地图上。
 
-其他邻居是它的上游和下游。[grill-me](https://aihero.dev/skills-grill-me) 和 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 回答可被盘问的问题；不可被盘问的那些走到这里来，一行答案再回到访谈里。下游，一个被验证的状态模型或 UI 方向变成 [to-spec](https://aihero.dev/skills-to-spec) 的敲定输入，它能内联原型产出的信息密集片段，而不是用散文描述它。任何别的情况，[ask-matt](https://aihero.dev/skills-ask-matt) 在整套技能之上给你路由。
+其他邻居是它的上游和下游。[grilling](https://aihero.dev/skills-grilling) 回答可被盘问的问题；不可被盘问的那些走到这里来，一行答案再回到访谈里。下游，一个被验证的状态模型或 UI 方向变成 [to-spec](https://aihero.dev/skills-to-spec) 的敲定输入，它能内联原型产出的信息密集片段，而不是用散文描述它。任何别的情况，[ask-matt](https://aihero.dev/skills-ask-matt) 在整套技能之上给你路由。

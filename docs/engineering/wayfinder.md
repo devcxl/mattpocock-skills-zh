@@ -8,11 +8,11 @@
 
 你通过键入 `/wayfinder` 来调用它；[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会主动使用它。
 
-它是整套里最重、最密的流程，所以触发条件很窄：工作量必须真的比一次 agent 会话能容纳的更大，并且通往目的地的路线必须是模糊的。分界很清楚：单会话规划用 `/grill-with-docs`，多会话规划用 `/wayfinder`。
+它是整套里最重、最密的流程，所以触发条件很窄：工作量必须真的比一次 agent 会话能容纳的更大，并且通往目的地的路线必须是模糊的。分界很清楚：单会话规划用 `/grilling`，多会话规划用 `/wayfinder`。
 
 | 你面前是什么 | 跑什么 |
 | --- | --- |
-| 一个范围良好的功能，你能在一次坐下里敲定 | [grill-me](https://aihero.dev/skills-grill-me)，有代码库时用 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| 一个范围良好的功能，你能在一次坐下里敲定 | [grilling](https://aihero.dev/skills-grilling) |
 | 一个绿地项目，或跨多会话的构建，并且路线仍不清楚 | `/wayfinder` |
 | 一段决定已经做完的对话线程 | [to-spec](https://aihero.dev/skills-to-spec)：跳过地图 |
 | 一张已经清空的 wayfinder 地图 | [to-spec](https://aihero.dev/skills-to-spec)，然后 [to-tickets](https://aihero.dev/skills-to-tickets) 和 [implement](https://aihero.dev/skills-implement) |
@@ -56,9 +56,9 @@ Research 是*一张 ticket 一次会话*规则之外唯一的例外。
 
 ## 常见问题
 
-**这和 `/grill-with-docs` 有什么不同？我该从哪个开始？**
+**这和 `/grilling` 有什么不同？我该从哪个开始？**
 
-会话数，而不是项目大小。`/grill-with-docs` 是单会话规划；wayfinder 是多会话规划。如果你能在一次对话里容纳整件事，盘问是更便宜、更好的工具，并且对于那种情况 wayfinder 真的更慢、更密。社区沉淀下来的简短说法是：wayfinder 只有在工作装不进一次会话时才有意义。以明显优势这是 wayfinder 被问得最多的问题，它一直被问是因为描述并不告诉你自己的任务落在这条线的哪里。会话数要你自己判断。
+会话数，而不是项目大小。`/grilling` 是单会话规划；wayfinder 是多会话规划。如果你能在一次对话里容纳整件事，盘问是更便宜、更好的工具，并且对于那种情况 wayfinder 真的更慢、更密。社区沉淀下来的简短说法是：wayfinder 只有在工作装不进一次会话时才有意义。以明显优势这是 wayfinder 被问得最多的问题，它一直被问是因为描述并不告诉你自己的任务落在这条线的哪里。会话数要你自己判断。
 
 **当它要"目的地"时，它指的是本次会话的尽头，还是一切的尽头？**
 

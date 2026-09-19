@@ -17,7 +17,7 @@
 | 一个项目需要一次性从状态 A 搬到状态 B | 走完整个转换并报告它没能完成的部分 |
 | 你正要把这些步骤写进 README | 改为写一个可执行版本，它不会那么安静地腐烂 |
 
-不要用它来*决定*要构建什么；那是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 和 [to-spec](https://aihero.dev/skills-to-spec) 的工具。
+不要用它来*决定*要构建什么；那是 [grilling](https://aihero.dev/skills-grilling) 和 [to-spec](https://aihero.dev/skills-to-spec) 的工具。
 
 ## 先决条件
 
@@ -70,7 +70,7 @@
 
 **它在工作流里处于什么位置——盘问和 spec 之后？**
 
-没有特定位置。它是独立技能，不是链上的一环。常见的猜测是 `/grill-with-docs → /to-spec → /wizard`，这个顺序没问题，但触发条件是出现一个手动流程，它可以发生在任何时刻：开始之前、构建中途、上线很久之后。它也能充当发现工具——范围界定会浮出任务的隐藏前置条件，比如你没想到的三个 API key。
+没有特定位置。它是独立技能，不是链上的一环。常见的猜测是 `/grilling → /to-spec → /wizard`，这个顺序没问题，但触发条件是出现一个手动流程，它可以发生在任何时刻：开始之前、构建中途、上线很久之后。它也能充当发现工具——范围界定会浮出任务的隐藏前置条件，比如你没想到的三个 API key。
 
 **它在 Claude Code 之外能用吗？**
 

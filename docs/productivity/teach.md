@@ -15,7 +15,7 @@
 | 用几周时间学习一个主题，让会话累积起来 | `teach` |
 | 在你已有的 session 里解释一个想法 | 直接在那个 session 里问 |
 | 因为智能体上一条消息没讲清楚而重新讲一遍 | [wait-what](https://aihero.dev/skills-wait-what) |
-| 打磨你已经有的想法，而不是获取新材料 | [grill-me](https://aihero.dev/skills-grill-me) |
+| 打磨你已经有的想法，而不是获取新材料 | [grilling](https://aihero.dev/skills-grilling) |
 | 让后台 agent 读 [primary sources](https://www.aihero.dev/ai-coding-dictionary/primary-source) 并留下一份带引用的文档 | [research](https://aihero.dev/skills-research) |
 | 想学 grilling 中途冒出来的东西，又不想打断 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) | [handoff](https://aihero.dev/skills-handoff) 出去到一个教学工作区，再在那里用 `teach` |
 

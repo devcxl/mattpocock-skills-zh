@@ -6,16 +6,17 @@
 
 ## 何时使用
 
-键入 `/grilling`，或者当任务契合时 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 会自己触发它。它是 grilling 系列中唯一被模型调用的 [skill](https://www.aihero.dev/ai-coding-dictionary/skill)，这也是你很少直接键入它的原因：通常是某个你*确实*键入了的技能在替你运行它。
+键入 `/grilling`，或者当任务契合时 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 会自己触发它。它是主构建链的起点，在 [to-spec](https://aihero.dev/skills-to-spec) 之前。
 
-直接键入 `/grilling` 让你得到一个干净的访谈，仅此而已。当你想做点别的：
+行为取决于你在哪：在**工作目录**里，它一边访谈一边把敲定的术语写进 `CONTEXT.md`、把难以逆转的决策写成 ADR；出了工作目录，没有文件可写，它就是一场干净的访谈，只留下一段更锐利的思考。你的想法是否和代码有关、是否装在一个仓库里，都不改变访谈本身。
+
+当你想做点别的：
 
 | 你有什么 | 用什么 |
 | --- | --- |
-| 你不在某个工作目录里 | [grill-me](https://aihero.dev/skills-grill-me)：同一个 [session](https://www.aihero.dev/ai-coding-dictionary/session)，名字不同：agent 不会主动触发 |
-| 你在某个工作目录里 | [grill-with-docs](https://aihero.dev/skills-grill-with-docs)：同一个 session，它会一边访谈一边写 `CONTEXT.md` 和 ADR |
-| 一项工作大到一次 session 装不下 | [wayfinder](https://aihero.dev/skills-wayfinder)：它画一张地图，然后在决策 ticket 里跑 grilling |
+| 一项工作大到一次 [session](https://www.aihero.dev/ai-coding-dictionary/session) 装不下 | [wayfinder](https://aihero.dev/skills-wayfinder)：它画一张地图，然后在决策 ticket 里跑 grilling |
 | 一个无法靠谈话解决的问题：某样东西应该长什么样、感觉如何 | [prototype](https://aihero.dev/skills-prototype)：先做出可丢弃的版本，再回来 |
+| 你只想要领域纪律，不想跑一场完整访谈 | [domain-modeling](https://aihero.dev/skills-domain-modeling)：直接在它下面跑 |
 | 你自己的某个技能需要访谈 | 在它里面触发 `/grilling`，而不是另写一份访谈 |
 
 ## 轮、前沿，以及谁来决策
@@ -30,16 +31,6 @@
 
 诚实的局限：前沿是 agent 的判断，不是算出来的图。它可能把两个问题放进同一轮，事后才发现其中一个的答案本应改变另一个。除了你指出来，没有别的防御：这会在下一轮重新打开受影响的分支。
 
-## 这里覆盖什么，包装层覆盖什么
-
-本页覆盖机制本身。人们最常想知道的事在上一层记录。
-
-| 问题 | 在哪里答 |
-| --- | --- |
-| 设计树、前沿、轮、问题格式、事实与决策 | 这里 |
-| 一次 session 应该跑多久、遇到不能靠谈话回答的问题怎么办、如何避免全程点头 | [grill-me](https://aihero.dev/skills-grill-me) |
-| 什么会写入 `CONTEXT.md`，什么会成为 ADR | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
-
 ## 常见问题
 
 **我能退回到一次一个问题吗？**
@@ -50,9 +41,6 @@ When grilling, ask one question at a time.
 ```
 
 按轮问的默认设置确实存在争议。读得慢的、用第二语言的、或把顺序格式当作专注脚手架的从业者都报告说"一次一个"对他们更好，这种选择是被支持的，而不是被容忍的。
-
-**`/batch-grill-me` 去哪了？**
-并入了这个技能。基于轮的问题曾经以一个独立技能短暂上线，然后被搬进了 `grilling` 本身，这样所有构建在原语之上的东西：`grill-me`、`grill-with-docs`、`triage`、`wayfinder`：一次性都拿到了它。没有 `batch-grill-me` 可装，也没有独立的顺序技能；上面那行 `CLAUDE.md` 就是回到"一次一个"的方式。
 
 **一次问一整轮，那之前回答会引发的问题不就丢了吗？**
 这是对轮设计最常见的反对，前沿就是答案：一轮永远只包含彼此不依赖的问题，所以一轮里的任何回答都不会让另一道题作废。回答仍然重塑所有下游：下一轮是重算出来的，不是预先写好的。你失去的，比"一次性全问"暗示的要少；比"什么都没失去"要多：见上面"前沿"的局限。
@@ -66,11 +54,8 @@ When grilling, ask one question at a time.
 **我能给问题数设个上限吗？**
 不能，而且上限被刻意排除在范围之外。有的计划需要三个问题，有的需要五十个；硬上限要么砍掉难题，要么在简单题上显得武断。用自然语言引导才是设计内的控制：告诉它收尾，或者停在那里接受计划。如果一次 session 跑得特别长，原因通常是范围太大；把工作拆开，分别盘问各个部分。
 
-**我单独装了 `grill-me`，结果什么也没发生。**
-`grill-me` 是个一句话技能，整个正文就是"运行一次 `/grilling` session"，所以这个技能也得一起装。`grill-with-docs` 也一样，只是它还需要 [domain-modeling](https://aihero.dev/skills-domain-modeling)。装整个集合可以避免这个问题；选择性装则要把原语一起装上。
-
-**`grill-with-docs` 跑了，但它从未加载 `grilling`。**
-一个真实存在、尚未修复的粗糙边角，在各 [harnesses](https://www.aihero.dev/ai-coding-dictionary/harness) 和模型上都有报告：一个技能在文案里提到另一个技能，并不能可靠地让那个技能被加载，而 `grill-with-docs` 提到了两个。迹象是一场 session 一次性把所有问题倒出来，且没有附推荐答案：那是模型在即兴访谈，而不是在跑这个技能。直接问 agent 是否加载了 `grilling` 和 `domain-modeling`，通常能恢复。
+**它跑了，但 `CONTEXT.md` 和 ADR 什么都没出现。**
+在工作目录里，`grilling` 会在决策落定的那一刻调用 [domain-modeling](https://aihero.dev/skills-domain-modeling) 往磁盘上写。这里有一个真实存在、尚未修复的粗糙边角，在各 [harnesses](https://www.aihero.dev/ai-coding-dictionary/harness) 和模型上都有报告：一个技能在文案里提到另一个技能，并不能可靠地让那个技能被加载，所以访谈照跑而写入那一半静默不发生。另一个原因更平凡：没有够格的决策。ADR 需要同时满足难以逆转、脱离上下文令人意外、且是真实权衡三个条件。如果你怀疑是前者，直接问 agent 它是否加载了 `domain-modeling`。
 
 ## 怎样算成功
 
@@ -84,4 +69,4 @@ When grilling, ask one question at a time.
 
 ## 它的定位
 
-`grilling` 是一个**原语**，不是一个排上日程的步骤：访谈技巧的唯一事实来源，留在一个地方，让所有需要访谈的技能都来用它，而不是各自发明一份。[grill-me](https://aihero.dev/skills-grill-me) 和 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 是它的两个用户调用入口，`grill-with-docs` 是主要构建链的起点，在 [to-spec](https://aihero.dev/skills-to-spec) 之前。[wayfinder](https://aihero.dev/skills-wayfinder) 跑它来解析决策 ticket，[triage](https://aihero.dev/skills-triage) 跑它把一份模糊的报告盘成可执行的，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 跑它在挑中一个候选之后遍历那棵树。不确定哪个入口合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。
+`grilling` 是主构建链的起点，也是一个**原语**，不是一个排上日程的步骤：访谈技巧的唯一事实来源，留在一个地方，让所有需要访谈的技能都来用它，而不是各自发明一份。[wayfinder](https://aihero.dev/skills-wayfinder) 跑它来解析决策 ticket，[triage](https://aihero.dev/skills-triage) 跑它把一份模糊的报告盘成可执行的，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 跑它在挑中一个候选之后遍历那棵树。它产出的共识理解与敲定的词汇，直接交给 [to-spec](https://aihero.dev/skills-to-spec) 综合。不确定什么合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

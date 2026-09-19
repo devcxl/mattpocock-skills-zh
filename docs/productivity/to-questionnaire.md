@@ -12,8 +12,8 @@
 
 | 答案在…… | 用 |
 | --- | --- |
-| 你自己的脑子里，还未被磨利 | [grill-me](https://aihero.dev/skills-grill-me) |
-| 代码库里 | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| 你自己的脑子里，还未被磨利 | [grilling](https://aihero.dev/skills-grilling) |
+| 代码库里 | [grilling](https://aihero.dev/skills-grilling) |
 | 别人的脑子里 | `to-questionnaire` |
 | 谁的脑子里都没有：这个问题需要点东西让你反应 | [prototype](https://aihero.dev/skills-prototype) |
 
@@ -57,8 +57,8 @@
 **它会把东西发出去吗：Slack、issue 跟踪器、邮件？**
 不会。它把一份 Markdown 文件写在当前目录里，并把路径告诉你。投递是你的事：粘到一张 [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket) 里、丢进 Slack 线程、附在邮件上，或者在共享屏幕上打开，一起在会议里过完。大家都手工把四种都试过。
 
-**这不就是 `/grill-me` 的批处理模式吗？**
-不是，区别值得守住。`grill-me` 已经是**分轮**：一次问完整个前沿，再根据你的回答重算：所以"一次性把所有问题给我"的需求在那里已经被满足了。`to-questionnaire` 走的是另一条维度：不是问题怎么交付，而是答案在谁的脑子里。自己更快地答完是 `grill-me`；从别人那里把答案拿出来是这个。
+**这不就是 `/grilling` 的批处理模式吗？**
+不是，区别值得守住。`grilling` 已经是**分轮**：一次问完整个前沿，再根据你的回答重算：所以"一次性把所有问题给我"的需求在那里已经被满足了。`to-questionnaire` 走的是另一条维度：不是问题怎么交付，而是答案在谁的脑子里。自己更快地答完是 `grilling`；从别人那里把答案拿出来是这个。
 
 **我就不能跳过技能直接问 agent 吗？**
 可以，而且在这个技能出现之前很多人都这么干过：`OPEN_QUESTIONS.md` 文件、发给客户的电子表格、一张"needs more info"的 ticket 对应每个未答的问题。技能给你两样东西：访谈不会滑到主题上，文档以非技术收件人能真正填写的形式出炉。如果你已经有一份现成的、有效的内部格式，诚实的答案是你不需要这个。
@@ -75,4 +75,4 @@
 
 `to-questionnaire` 是一个可随时取用的独立工具。它站在你自己知识的边界上，下一步是另一个人而不是另一个技能：最常发生在流程中途，计划卡在一个不属于你决策的东西上。
 
-它的邻居是 [grill-me](https://aihero.dev/skills-grill-me)，两者按答案住在哪里来划分：grilling 挖的是你自己，问卷挖的是别人。回来的是生料：喂给另一轮 grilling，或者喂给 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 或 [to-spec](https://aihero.dev/skills-to-spec)，如果工作是奔着构建去的话。不确定哪个技能适合当下时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。
+它的邻居是 [grilling](https://aihero.dev/skills-grilling)，两者按答案住在哪里来划分：grilling 挖的是你自己，问卷挖的是别人。回来的是生料：喂给 [grilling](https://aihero.dev/skills-grilling) 的另一轮，或者如果工作是奔着构建去的，直接喂给 [to-spec](https://aihero.dev/skills-to-spec)。不确定哪个技能适合当下时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

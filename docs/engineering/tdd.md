@@ -88,7 +88,7 @@ v1.0 进了 [codebase-design](https://aihero.dev/skills-codebase-design)，泛�
 `tdd` 是主链构建步骤里的引擎，而不是自己独立的一步：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grilling → to-spec → to-tickets → implement → code-review
 ```
 
 [to-spec](https://aihero.dev/skills-to-spec) 预先约定测试接缝，[implement](https://aihero.dev/skills-implement) 按 ticket 驱动 `tdd`，[code-review](https://aihero.dev/skills-code-review) 在事后检查只用了约定好的接缝，并且拥有 `tdd` 不再做的重构。另一个邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——`tdd` 所说的接缝与深模块词汇的共享来源。你也能在它自身被调用，无论何时有一个具体的行为要构建、并且没有完整 spec 在台面上。拿不准哪个技能适合你的情况时，[ask-matt](https://aihero.dev/skills-ask-matt) 为你路由。

@@ -69,7 +69,7 @@
 
 **它在一个大型遗留代码库上能行吗？**
 
-部分能。它在缺少一致结构的大型既有代码库上很强，并且是一次性结构搭建之后推荐的维护机制。诚实的反作用力：项目真的失控的用户报告"帮了一点忙，但还是不够"，一个在八年遗留代码库上工作的开发者报告 model 原地打转，而同一个技能在一个干净的仓库上产出一张清晰的图。这个场景还没有专门的 `/refactor` 技能。如果代码库根本没有共享词汇表，先 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 建立一套，往往会让这个技能的输出好得多。
+部分能。它在缺少一致结构的大型既有代码库上很强，并且是一次性结构搭建之后推荐的维护机制。诚实的反作用力：项目真的失控的用户报告"帮了一点忙，但还是不够"，一个在八年遗留代码库上工作的开发者报告 model 原地打转，而同一个技能在一个干净的仓库上产出一张清晰的图。这个场景还没有专门的 `/refactor` 技能。如果代码库根本没有共享词汇表，先 [grilling](https://aihero.dev/skills-grilling) 建立一套，往往会让这个技能的输出好得多。
 
 **这和 `/codebase-design` 有什么不同？**
 
@@ -98,4 +98,4 @@
 
 ## 它的定位
 
-`improve-codebase-architecture` 是**周期性维护**：每隔几天跑一次，在任何链之外，把工作排进队列而不是动手做。它的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——占着每条候选都用以撰写的 depth-and-seam 词汇；[盘问（grilling）](https://aihero.dev/skills-grilling)——在你挑了一条候选之后走决策树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)——在决策敲定时保持 `CONTEXT.md` 和 ADR 是最新的。它产出的是一份想法，经由 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 或 [to-spec](https://aihero.dev/skills-to-spec) 重新进入主构建流程。哪个技能适合某场景时，[ask-matt](https://aihero.dev/skills-ask-matt) 是整套技能的路由器。
+`improve-codebase-architecture` 是**周期性维护**：每隔几天跑一次，在任何链之外，把工作排进队列而不是动手做。它的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——占着每条候选都用以撰写的 depth-and-seam 词汇；[盘问（grilling）](https://aihero.dev/skills-grilling)——在你挑了一条候选之后走决策树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)——在决策敲定时保持 `CONTEXT.md` 和 ADR 是最新的。它产出的是一份想法，先在 [grilling](https://aihero.dev/skills-grilling) 里过一遍决策树，再交给 [to-spec](https://aihero.dev/skills-to-spec) 重新进入主构建流程。哪个技能适合某场景时，[ask-matt](https://aihero.dev/skills-ask-matt) 是整套技能的路由器。

@@ -95,12 +95,9 @@ npx skills@latest add mattpocock/skills
 
 在 AI 时代也是一样的。你和智能体之间存在沟通鸿沟。修复办法是**盘问会话（grilling session）**：让智能体就你要构建的东西向你提出详细的问题。
 
-**修复**就是使用：
+**修复**就是使用 [`/grilling`](./skills/productivity/grilling/SKILL.md)。
 
-- [`/grill-me`](./skills/productivity/grill-me/SKILL.md)：用于非代码场景
-- [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md)：和 [`/grill-me`](./skills/productivity/grill-me/SKILL.md) 一样，但增加了更多内容（见下文）
-
-这些是我最受欢迎的技能。它们帮你和智能体在你开始之前先对齐，并就你正在做的修改深入思考。**每次**你想做修改时都用它们。
+它是我最受欢迎的技能。它帮你和智能体在你开始之前先对齐，并就你正在做的修改深入思考。**每次**你想做修改时都用它。
 
 ### #2：智能体太冗长
 
@@ -128,7 +125,7 @@ npx skills@latest add mattpocock/skills
 
 </details>
 
-这套东西已经内置到 [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) 里。它是一场盘问会话，但帮你和 AI 建立共享语言，并把难以解释的决定记录到 ADR 里。
+这套东西已经内置到 [`/grilling`](./skills/productivity/grilling/SKILL.md) 里。它是一场盘问会话，但帮你和 AI 建立共享语言，并把难以解释的决定记录到 ADR 里：只要你在工作目录里，它就会把敲定的术语和决策写进 `CONTEXT.md` 和 ADR。
 
 要解释这东西有多强大很难。它可能是这个仓库里最酷的一项技术。试一下就知道了。
 
@@ -183,7 +180,7 @@ npx skills@latest add mattpocock/skills
 
 ## 索引
 
-这些按一个维度划分：谁能触发它们。**用户调用**的技能只有在你键入它们时才可达（例如 `/grill-me`）；它们的职责是编排。**模型调用**的技能可以由你触发，或者在任务契合时由智能体自动拿起来用；它们承载着可复用的纪律。一个用户调用的技能可以触发模型调用的技能，但永远不能触发另一个用户调用的技能。
+这些按一个维度划分：谁能触发它们。**用户调用**的技能只有在你键入它们时才可达（例如 `/triage`）；它们的职责是编排。**模型调用**的技能可以由你触发，或者在任务契合时由智能体自动拿起来用；它们承载着可复用的纪律。一个用户调用的技能可以触发模型调用的技能，但永远不能触发另一个用户调用的技能。
 
 ### Engineering
 
@@ -192,7 +189,6 @@ npx skills@latest add mattpocock/skills
 **用户调用**
 
 - **[ask-matt](./skills/engineering/ask-matt/SKILL.md)**：询问哪种技能或流程适合你的处境。是本仓库用户调用技能之上的路由器。
-- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**：盘问会话，同时构建你项目的领域模型，打磨术语并就地更新 `CONTEXT.md` 和 ADR。
 - **[triage](./skills/engineering/triage/SKILL.md)**：让 Issue 在 triage 角色状态机中流转。
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**：扫描代码库中的深化机会，将它们以可视化的 HTML 报告呈现，然后盘问你选中的那一个。
 - **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)**：为工程类技能配置本仓库（Issue 跟踪器、triage 标签、领域文档布局）。在使用其他工程技能之前，每个仓库运行一次。
@@ -219,7 +215,6 @@ npx skills@latest add mattpocock/skills
 
 **用户调用**
 
-- **[grill-me](./skills/productivity/grill-me/SKILL.md)**：被无休止地盘问你的计划或设计，直到设计树的每个分支都被解决。
 - **[handoff](./skills/productivity/handoff/SKILL.md)**：把当前对话压缩成一份交接文档，让另一个智能体能继续这项工作。
 - **[teach](./skills/productivity/teach/SKILL.md)**：用当前目录作为有状态的教学工作区，跨多次会话教用户一项新技能或概念。
 - **[to-questionnaire](./skills/productivity/to-questionnaire/SKILL.md)**：把你一个人答不出的决定变成一份 Markdown 问卷，交给唯一能答的人：异步填写，或开会时一起过完。它盘问的是发送对象（发给谁、要拿回什么），而不是主题本身。
@@ -227,5 +222,5 @@ npx skills@latest add mattpocock/skills
 
 **模型调用**
 
-- **[grilling](./skills/productivity/grilling/SKILL.md)**：无休止地盘问用户的计划、决策或想法，直到设计树的每个分支都被解决。`grill-me`、`grill-with-docs`、`triage`、`wayfinder` 和 `improve-codebase-architecture` 背后的可复用访谈原语。
+- **[grilling](./skills/productivity/grilling/SKILL.md)**：无休止地盘问用户的计划、决策或想法，直到设计树的每个分支都被解决。全套技能共用的访谈入口：`triage`、`wayfinder` 和 `improve-codebase-architecture` 背后的可复用原语，也是主构建链的起点。
 - **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**：为智能体编写文档：技能、AGENTS.md/CLAUDE.md，以及任何智能体通过指针触达的文档。

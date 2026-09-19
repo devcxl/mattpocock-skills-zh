@@ -85,7 +85,7 @@ Spec 轴需要一个存在且可找到的 spec。它按这个顺序查找：
 
 ## 它的定位
 
-`code-review` 是构建链尾端的审查步骤——`grill-with-docs → to-spec → to-tickets → implement → code-review`——也可以独立地用在任何你指向的分支或 PR 上。
+`code-review` 是构建链尾端的审查步骤——`grilling → to-spec → to-tickets → implement → code-review`——也可以独立地用在任何你指向的分支或 PR 上。
 
 - [implement](https://aihero.dev/skills-implement) 是最近的邻居：它驱动构建，并在提交前调用这个技能作为自己的收尾审查。
 - [to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets) 产出 Spec 轴对照的文档；一份含糊的 spec 会让那条轴也变得含糊。

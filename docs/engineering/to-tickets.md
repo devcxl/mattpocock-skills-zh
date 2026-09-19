@@ -13,7 +13,7 @@
 | 你有一份 spec issue，构建跨几次会话 | `/to-tickets`，或 `/to-tickets #<spec_issue>` |
 | 计划只在对话里，从未被写成 spec | `/to-tickets` 直接读线程，不需要 spec |
 | 整个变更装得下一次 context window | [implement](https://aihero.dev/skills-implement)，跳过 tickets |
-| 什么都还没决定 | [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，然后 [to-spec](https://aihero.dev/skills-to-spec) |
+| 什么都还没决定 | [grilling](https://aihero.dev/skills-grilling)，然后 [to-spec](https://aihero.dev/skills-to-spec) |
 | 一张 [wayfinder](https://aihero.dev/skills-wayfinder) 地图已经清完 | 先 [to-spec](https://aihero.dev/skills-to-spec) 把地图折成一份 spec，然后 `/to-tickets` |
 
 `to-tickets` 产出的 tickets 按构造是 agent-ready 的。别对它们跑 [triage](https://aihero.dev/skills-triage)。Triage 是为从别人那里到达的工作准备的。
@@ -105,7 +105,7 @@
 `to-tickets` 是主构建链上的一步：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grilling → to-spec → to-tickets → implement → code-review
 ```
 
 上游是 [to-spec](https://aihero.dev/skills-to-spec)——交给它一份被敲定的 spec 来切；让两者留在同一个未被打断的 context window 里。下游是 [implement](https://aihero.dev/skills-implement)——每次全新会话构建一张 ticket，为测试驱动 [tdd](https://aihero.dev/skills-tdd)、以 [code-review](https://aihero.dev/skills-code-review) 收尾。拿不准哪个技能或流程合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

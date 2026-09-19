@@ -13,7 +13,7 @@
 | 你拥有什么 | 去哪里 |
 | --- | --- |
 | 一个满是他人原始报告的追踪器 | `/triage` |
-| 一个你自己的粗略想法，什么都没写下来 | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| 一个你自己的粗略想法，什么都没写下来 | [grilling](https://aihero.dev/skills-grilling) |
 | 一段已敲定的对话，要变成一份 [spec](https://www.aihero.dev/ai-coding-dictionary/spec) | [to-spec](https://aihero.dev/skills-to-spec) |
 | 一份 spec，要拆成代理就绪的 tickets | [to-tickets](https://aihero.dev/skills-to-tickets) |
 | 一个已确认的 bug，需要根因而不是标签 | [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) |

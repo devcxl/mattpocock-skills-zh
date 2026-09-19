@@ -10,7 +10,7 @@
 
 键入 `/writing-for-agents`，或者当你在创建或编辑技能、或修改 `AGENTS.md` 或 `CLAUDE.md` 时，agent 会自动触发它。
 
-对其余任何 agent 会读的文档：你的 docs、specs 和 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)、system 与 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) prompts：手动触发它。判断就一个问题：agent 会读这份吗？：文档怎么到它手上不重要，是指针点名、人粘贴、还是就放在仓库里。要弄清一份代码库到底包含什么，使用 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)：这份参考管的是文档读起来怎样，不管它知道什么。
+对其余任何 agent 会读的文档：你的 docs、specs 和 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)、system 与 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) prompts：手动触发它。判断就一个问题：agent 会读这份吗？：文档怎么到它手上不重要，是指针点名、人粘贴、还是就放在仓库里。要弄清一份代码库到底包含什么，使用 [grilling](https://aihero.dev/skills-grilling)：这份参考管的是文档读起来怎样，不管它知道什么。
 
 ## 两种负载
 

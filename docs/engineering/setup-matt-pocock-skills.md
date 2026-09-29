@@ -4,7 +4,7 @@
 
 那些文件是各仓库之间唯一不同的地方。技能本身在任何地方都相同；它们运行时读 `docs/agents/issue-tracker.md`，按它说的做。这正是这套技能不绑死 GitHub 的原因，也正是没有任何一份技能文件需要被编辑以把它指向别处的原因。带着"把技能链到一个自定义 issue 追踪器"调用它，能与任何你能以编程方式连接的东西配合，技能侧零修改。
 
-它是一个提示驱动的技能，不是确定性脚本。它读你的 `git remote`、现有的 `CLAUDE.md`、现有的 `CONTEXT.md`，提出它发现了什么，并在写任何东西之前等你确认。
+它是一个提示驱动的技能，不是确定性脚本。它读你的 `git remote`、现有的 `CLAUDE.md`、现有的 `GLOSSARY.md`，提出它发现了什么，并在写任何东西之前等你确认。
 
 ## 何时使用
 
@@ -33,7 +33,7 @@
 | --- | --- | --- |
 | **Issue 追踪器** | 与你 `git remote` 匹配的那个 | 总是：这是那个真正的选择 |
 | **Triage 标签** | 保留五个规范名（`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`） | 仅当 `triage` 技能已安装 |
-| **领域文档** | 单上下文：根目录一份 `CONTEXT.md` 加 `docs/adr/` | 仅当它嗅到 monorepo 信号，并且那时它提议一份多上下文的 `CONTEXT-MAP.md` |
+| **领域文档** | 单上下文：根目录一份 `GLOSSARY.md` 加 `docs/adr/` | 仅当它嗅到 monorepo 信号，并且那时它提议一份多上下文的 `GLOSSARY-MAP.md` |
 
 追踪器选项：
 
@@ -91,4 +91,4 @@ v1.1 之后直接问，Matt 说要。技能自己的收尾消息更软：它告�
 
 ## 它的定位
 
-`setup-matt-pocock-skills` 是工程流程的**一次性 setup**，是其他一切假设的先决条件，而不是链上的一步。它的邻居是它的读者们：[triage](https://aihero.dev/skills-triage) 应用这里写下的标签词汇；[to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets) 发布到此处命名的追踪器；以及 [wayfinder](https://aihero.dev/skills-wayfinder)，它读同一份追踪器文件的"Wayfinding operations"小节来知道地图和子 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 如何存储。它记录的领域文档布局是 [domain-modeling](https://aihero.dev/skills-domain-modeling) 之后会填的那个：当一个术语或决策真正被敲定时，它惰性创建 `CONTEXT.md` 和 ADR，所以 setup 之后的空仓库是预期状态。下一步该用哪个技能时，[ask-matt](https://aihero.dev/skills-ask-matt) 路由整套集合。
+`setup-matt-pocock-skills` 是工程流程的**一次性 setup**，是其他一切假设的先决条件，而不是链上的一步。它的邻居是它的读者们：[triage](https://aihero.dev/skills-triage) 应用这里写下的标签词汇；[to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets) 发布到此处命名的追踪器；以及 [wayfinder](https://aihero.dev/skills-wayfinder)，它读同一份追踪器文件的"Wayfinding operations"小节来知道地图和子 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 如何存储。它记录的领域文档布局是 [domain-modeling](https://aihero.dev/skills-domain-modeling) 之后会填的那个：当一个术语或决策真正被敲定时，它惰性创建 `GLOSSARY.md` 和 ADR，所以 setup 之后的空仓库是预期状态。下一步该用哪个技能时，[ask-matt](https://aihero.dev/skills-ask-matt) 路由整套集合。

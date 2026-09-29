@@ -119,7 +119,7 @@ npx skills@latest add mattpocock/skills
 示例
 </summary>
 
-这是一个 [`CONTEXT.md`](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) 的例子，来自我的 `course-video-manager` 仓库。哪一份更容易读？
+这是一个[术语表](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md)的例子（在那个 pinned commit 里还叫 `CONTEXT.md`，早于技能重命名这个约定），来自我的 `course-video-manager` 仓库。哪一份更容易读？
 
 - **之前**："There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
 - **之后**："There's a problem with the materialization cascade"
@@ -192,14 +192,16 @@ npx skills@latest add mattpocock/skills
 **用户调用**
 
 - **[ask-matt](./skills/engineering/ask-matt/SKILL.md)**：询问哪种技能或流程适合你的处境。是本仓库用户调用技能之上的路由器。
-- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**：盘问会话，同时构建你项目的领域模型，打磨术语并就地更新 `CONTEXT.md` 和 ADR。
+- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**：盘问会话，同时构建你项目的领域模型，打磨术语并就地更新 `GLOSSARY.md` 和 ADR。
 - **[triage](./skills/engineering/triage/SKILL.md)**：让 Issue 在 triage 角色状态机中流转。
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**：扫描代码库中的深化机会，将它们以可视化的 HTML 报告呈现，然后盘问你选中的那一个。
 - **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)**：为工程类技能配置本仓库（Issue 跟踪器、triage 标签、领域文档布局）。在使用其他工程技能之前，每个仓库运行一次。
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)**：把当前对话变成规格，并发布到 Issue 跟踪器。不访谈：只是综合你已经讨论过的内容。
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)**：把任何计划、规格或对话拆成一组 tracer-bullet 工单，每条声明其阻塞边：以本地文件中的文本，或真实跟踪器上的原生阻塞链接形式编写。
 - **[implement](./skills/engineering/implement/SKILL.md)**：按规格或工单集合构建工作，在预先约定的 seam 上驱动 `/tdd`，并在提交前以 `/code-review` 收尾。
+- **[implement-spec](./skills/engineering/implement-spec/SKILL.md)**：在一条集成分支上实现整份规格。把工单当任务图推进，在可领取的前沿并行运行实施者子代理以获得最大并发，最后以 `/code-review` 收尾。
 - **[wayfinder](./skills/engineering/wayfinder/SKILL.md)**：把一项远大于一次 agent 会话能装下的工作，作为一份共享的决策 ticket 地图规划到 Issue 跟踪器上：一次解析一个，直到通往目的地的路清晰。
+- **[retro](./skills/engineering/retro/SKILL.md)**：在一次会话之后，为编码 agent 的**环境**（导航、自动化检查、编码规范、引导文件、工具）提出改进建议，按严重程度排序。
 
 **模型调用**
 
@@ -207,10 +209,10 @@ npx skills@latest add mattpocock/skills
 - **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)**：对硬核 bug 和性能回归的有纪律诊断循环：构建一个对这个 bug 变红的反馈循环→最小化→假设→插桩→修复→回归测试。
 - **[research](./skills/engineering/research/SKILL.md)**：针对高可信度的原始来源调查一个问题，并把发现以带引用的 Markdown 文件形式保存到仓库，作为后台 agent 运行。
 - **[tdd](./skills/engineering/tdd/SKILL.md)**：红绿重构循环下的测试驱动开发。一次一条垂直切片地构建特性或修复 bug。
-- **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)**：主动构建并打磨一份项目的领域模型：用边缘场景挑战术语，并就地更新 `CONTEXT.md` 与 ADR。
+- **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)**：主动构建并打磨项目的领域模型：对照术语表挑战术语、用边缘场景压力测试，并就地更新 `GLOSSARY.md` 与 ADR。
 - **[codebase-design](./skills/engineering/codebase-design/SKILL.md)**：用于设计深度模块的共享纪律与词汇：小接口背后的大量行为，安放在干净的 seam 上，通过这个 seam 可测。
 - **[code-review](./skills/engineering/code-review/SKILL.md)**：对一个固定点以来的 diff 进行双轴评审：**规范（Standards）**（它是否遵循仓库的编码规范，外加 Fowler 异味基线？）与**规格（Spec）**（它是否忠实地实现了原始 Issue/规格？），作为并行子 agent 运行以免互相污染。
-- **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)**：逐 hunk 处理进行中的 git 合并或 rebase 冲突，按追溯到各方原始来源的意图解决，再完成操作：绝不 `--abort`。
+- **[pr](./skills/engineering/pr/SKILL.md)**：PR body 应有的形状：以能说清变更的最小可视化做摘要，加上证明其可行的 before/after 证据，再加上合并风险判断（单向门或双向门，外加爆炸半径）。
 - **[wizard](./skills/engineering/wizard/SKILL.md)**：生成一个交互式 bash 向导，引导人类完成只有他们能执行的步骤：基础设施预置、配置凭据或 CI secrets、走过陌生的第三方控制台，或运行一次性迁移或切换。
 
 ### Productivity
@@ -223,7 +225,7 @@ npx skills@latest add mattpocock/skills
 - **[handoff](./skills/productivity/handoff/SKILL.md)**：把当前对话压缩成一份交接文档，让另一个智能体能继续这项工作。
 - **[teach](./skills/productivity/teach/SKILL.md)**：用当前目录作为有状态的教学工作区，跨多次会话教用户一项新技能或概念。
 - **[to-questionnaire](./skills/productivity/to-questionnaire/SKILL.md)**：把你一个人答不出的决定变成一份 Markdown 问卷，交给唯一能答的人：异步填写，或开会时一起过完。它盘问的是发送对象（发给谁、要拿回什么），而不是主题本身。
-- **[wait-what](./skills/productivity/wait-what/SKILL.md)**：一条消息没被接住的瞬间就触发它。智能体会用你缺失的上下文、用大白话、用你 `CONTEXT.md` 的词汇重新讲一遍。
+- **[wait-what](./skills/productivity/wait-what/SKILL.md)**：一条消息没被接住的瞬间就触发它。智能体会用你缺失的上下文、用大白话、用你 `GLOSSARY.md` 的词汇重新讲一遍。
 
 **模型调用**
 

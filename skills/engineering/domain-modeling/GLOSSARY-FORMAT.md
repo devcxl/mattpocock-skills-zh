@@ -1,4 +1,4 @@
-# CONTEXT.md 格式
+# GLOSSARY.md 格式
 
 ## 结构
 
@@ -31,18 +31,18 @@ _Avoid_：Client, buyer, account
 
 ## 单 context vs 多 context repo
 
-**单 context（大多数 repo）：** 一个 `CONTEXT.md` 位于 repo 根目录。
+**单 context（大多数 repo）：** 一个 `GLOSSARY.md` 位于 repo 根目录。
 
-**多 context：** repo 根目录下的 `CONTEXT-MAP.md` 列出各 context、它们的位置以及相互关系：
+**多 context：** repo 根目录下的 `GLOSSARY-MAP.md` 列出各 context、它们的位置以及相互关系：
 
 ```md
-# Context Map
+# Glossary Map
 
 ## Contexts
 
-- [Ordering](./src/ordering/CONTEXT.md) — 接收并跟踪客户订单
-- [Billing](./src/billing/CONTEXT.md) — 生成发票并处理付款
-- [Fulfillment](./src/fulfillment/CONTEXT.md) — 管理仓库拣货和发货
+- [Ordering](./src/ordering/GLOSSARY.md) — 接收并跟踪客户订单
+- [Billing](./src/billing/GLOSSARY.md) — 生成发票并处理付款
+- [Fulfillment](./src/fulfillment/GLOSSARY.md) — 管理仓库拣货和发货
 
 ## Relationships（关系）
 
@@ -53,8 +53,8 @@ _Avoid_：Client, buyer, account
 
 此 skill 会推断适用哪种结构：
 
-- 如果存在 `CONTEXT-MAP.md`，读取它以找到 contexts
-- 如果只有根目录的 `CONTEXT.md`，则为单 context
-- 如果两者都不存在，当第一个术语确定时懒加载创建根目录的 `CONTEXT.md`
+- 如果存在 `GLOSSARY-MAP.md`，读取它以找到 contexts
+- 如果只有根目录的 `GLOSSARY.md`，则为单 context
+- 如果两者都不存在，当第一个术语确定时懒加载创建根目录的 `GLOSSARY.md`
 
 当存在多个 context 时，推断当前主题与哪个 context 相关。如果不明确，则询问。

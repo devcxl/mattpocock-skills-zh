@@ -14,4 +14,3 @@ npx skills@latest add mattpocock/skills --skill=<name>
 - **[writing-shape](./writing-shape/SKILL.md)** ： 把一份原始素材的 markdown 文件按段落塑造成一篇文章，每一步讨论格式选择。
 - **[claude-handoff](./claude-handoff/SKILL.md)** ： 把当前对话交接给一个全新的后台 agent，让它立刻接手工作，注入交接摘要的方式是通过 `claude --bg`。用户调用。
 - **[setup-ts-deep-modules](./setup-ts-deep-modules/SKILL.md)** ： 把 dependency-cruiser 接入 TypeScript 仓库，使每个 package 成为一个深度模块：实现隐藏在子文件夹中，只能通过入口点文件访问，测试通过这些入口点对实现进行验证。用户调用。
-- **[implement-spec](./implement-spec/SKILL.md)** ： 在单个分支上把整份 spec 落地为实现。把 ticket 当作任务图而非列表处理，让实施者子 agent 在准备好的前沿上并行运行以最大化并发，最终合并为单个 PR。用户调用。

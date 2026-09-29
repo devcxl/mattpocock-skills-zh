@@ -54,11 +54,11 @@
 
 **我能把它一次性指向所有 tickets，或者并行跑几个吗？**
 
-不能。一次调用，一个 ticket。批量派发一个 ticket 队列，以及 [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) 扇出，都被反复请求过，两个都不存在。在同一个 checkout 里并行跑几个 `/implement` 会话比"不支持"更糟：一份现场报告描述了一次 `git commit --amend` 落到另一次会话的 commit 上、一个 stash 从 `refs/stash` 消失、commit 落到错误的分支——一个下午之内三件事连续发生。多个会话共享一个工作目录、一个 index、一个 HEAD。Git worktrees 是社区的变通方案，而且 `refs/stash` 在 worktree 之间也是共享的，所以单靠 worktree 修不好 stash 这种情况。如果今天你想要并行，那是自己组装。
+对 `/implement` 而言不能：一次调用，一个 ticket。要在一次运行里处理整份 spec，用 [implement-spec](https://aihero.dev/skills-implement-spec)——它把 ticket 扇出给 [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent)，每个都有自己的 worktree，横跨可领取的前沿，最后合并到一条集成分支上。在同一个 checkout 里并行跑几个 `/implement` 会话比"不支持"更糟：一份现场报告描述了一次 `git commit --amend` 落到另一次会话的 commit 上、一个 stash 从 `refs/stash` 消失、commit 落到错误的分支——一个下午之内三件事连续发生。多个会话共享一个工作目录、一个 index、一个 HEAD。Git worktrees 是社区的变通方案，而且 `refs/stash` 在 worktree 之间也是共享的，所以单靠 worktree 修不好 stash 这种情况。
 
 **它能开一个 pull request 而不是提交吗？**
 
-没有内置。它直接提交到当前分支，这被好几个人觉得太急：代码在他们有机会验证能跑之前就落地了。没有配置开关，也没有 PR 模式。人们在调用时覆盖（"commit 到一个分支并开一个 PR"），或者编辑他们那份本地副本。
+没有内置。它直接提交到当前分支，这被好几个人觉得太急：代码在他们有机会验证能跑之前就落地了。没有配置开关，也没有 PR 模式。人们在调用时覆盖（"commit 到一个分支并开一个 PR"），或者编辑他们那份本地副本。当 agent 确实要写 PR 时，[pr](https://aihero.dev/skills-pr) 负责塑造它的 body。
 
 **`code-review` 说看不到我的变更。**
 
@@ -84,10 +84,10 @@
 
 ## 它的定位
 
-`implement` 是主链上的构建一环，位列倒数第二：
+`implement` 是主链上的构建一环：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
 它的邻居是 [to-tickets](https://aihero.dev/skills-to-tickets)——产出它消费的 tickets，并声明决定它们顺序的阻塞边；[tdd](https://aihero.dev/skills-tdd)——它内部在每个接缝上驱动它；以及 [code-review](https://aihero.dev/skills-code-review)——它在提交前跑。它坐在规划技能的下游，并信任它们。它不复验交给它的形状，所以一张结构糟糕的 map 或一条水平切层的 ticket 会按原样被构建。

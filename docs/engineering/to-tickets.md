@@ -105,7 +105,7 @@
 `to-tickets` 是主构建链上的一步：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
-上游是 [to-spec](https://aihero.dev/skills-to-spec)——交给它一份被敲定的 spec 来切；让两者留在同一个未被打断的 context window 里。下游是 [implement](https://aihero.dev/skills-implement)——每次全新会话构建一张 ticket，为测试驱动 [tdd](https://aihero.dev/skills-tdd)、以 [code-review](https://aihero.dev/skills-code-review) 收尾。拿不准哪个技能或流程合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。
+上游是 [to-spec](https://aihero.dev/skills-to-spec)——交给它一份被敲定的 spec 来切；让两者留在同一个未被打断的 context window 里。下游是 [implement](https://aihero.dev/skills-implement)——每次全新会话构建一张 ticket，为测试驱动 [tdd](https://aihero.dev/skills-tdd)、以 [code-review](https://aihero.dev/skills-code-review) 收尾。[implement-spec](https://aihero.dev/skills-implement-spec) 是另一条向下的路：它把同样的阻塞边读成任务图，在一条集成分支上并行构建每一张就绪的 ticket。拿不准哪个技能或流程合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

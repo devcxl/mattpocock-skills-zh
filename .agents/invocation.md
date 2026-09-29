@@ -19,4 +19,4 @@
 
 ## 被动 vs 主动的领域工作
 
-仅仅_读取_ `CONTEXT.md` 获取词汇表是一行散文式指引，而不是 `domain-modeling` 技能。只有主动构建/打磨的实践（挑战术语、边缘场景、撰写 ADR、内联更新 `CONTEXT.md`）才是 `domain-modeling`。
+仅仅_读取_ `GLOSSARY.md` 获取词汇表是一行散文式指引，而不是 `domain-modeling` 技能。只有主动构建/打磨的实践（挑战术语、边缘场景、撰写 ADR、内联更新 `GLOSSARY.md`）才是 `domain-modeling`。

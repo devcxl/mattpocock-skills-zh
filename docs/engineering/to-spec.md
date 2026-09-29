@@ -2,7 +2,7 @@
 
 `to-spec` 把刚发生的对话转成一份 **[spec](https://www.aihero.dev/ai-coding-dictionary/spec)**，并作为单个 issue 发布到你的 issue 追踪器。
 
-它不访谈你。等你伸手来用它的时候，决定已经做完，所以它综合已知的东西（来自这条线程、来自代码库、来自你的 `CONTEXT.md` 和 ADR），而不是打开新的一轮提问。spec 是一份已经做出的决策的记录，而不是新决策被做出的地方。
+它不访谈你。等你伸手来用它的时候，决定已经做完，所以它综合已知的东西（来自这条线程、来自代码库、来自你的 `GLOSSARY.md` 和 ADR），而不是打开新的一轮提问。spec 是一份已经做出的决策的记录，而不是新决策被做出的地方。
 
 ## 何时使用
 
@@ -57,7 +57,7 @@ spec 之所以存在，是因为 context window 有尽头。你在 [盘问（gri
 
 **tickets 开始之后，我把 spec 冻结，还是让 agent 重写？**
 
-没有什么让它保持同步，所以实际上它是你在那时知道的东西的一张快照，并在实现第一次教你点东西的时候就过时。一旦工作上线，把它当用完即弃。意图比它更长寿的工件是你的 `CONTEXT.md` 和 ADR；如果实现中学到的什么值得留下来，它属于那里，而不是被编辑过的 spec。
+没有什么让它保持同步，所以实际上它是你在那时知道的东西的一张快照，并在实现第一次教你点东西的时候就过时。一旦工作上线，把它当用完即弃。意图比它更长寿的工件是你的 `GLOSSARY.md` 和 ADR；如果实现中学到的什么值得留下来，它属于那里，而不是被编辑过的 spec。
 
 **我的工作是重构或模块边界、不是功能。这份模板合适吗？**
 
@@ -84,7 +84,7 @@ spec 之所以存在，是因为 context window 有尽头。你在 [盘问（gri
 `to-spec` 是主构建链上的一步，而且只在多会话的那条分支上：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
 它的上游邻居是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)——做这份技能只负责记录的决定；以及 [wayfinder](https://aihero.dev/skills-wayfinder)——它的完成图就在这里合上这条链。下游，[to-tickets](https://aihero.dev/skills-to-tickets) 把 spec 切成供 [implement](https://aihero.dev/skills-implement) 构建的示踪弹 tickets。拿不准哪个技能或流程合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

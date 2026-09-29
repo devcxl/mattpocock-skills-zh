@@ -14,7 +14,7 @@
 | --- | --- |
 | 一个决策正在等的一个外部事实 | `research` |
 | 一个*与你一起*做出的决策，靠访谈 | [grilling](https://aihero.dev/skills-grilling) |
-| 一个耐久的架构决策，写入 `CONTEXT.md` 和 ADR | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| 一个耐久的架构决策，写入 `GLOSSARY.md` 和 ADR | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
 | 想弄清楚某个做法在你的代码库里行不行得通 | [prototype](https://aihero.dev/skills-prototype) |
 | 一个一次会话装不下的计划 | [wayfinder](https://aihero.dev/skills-wayfinder) |
 

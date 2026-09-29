@@ -27,9 +27,9 @@
 
 ## 先决条件
 
-运行它没有先决条件。它读 `CONTEXT.md` 和 `docs/adr/` 下的任何 ADR（如果存在的话），用你领域自己的名词说话：有的话，候选会读作"加深 Order intake 模块"，而不是"重构 FooBarHandler"。
+运行它没有先决条件。它读 `GLOSSARY.md` 和 `docs/adr/` 下的任何 ADR（如果存在的话），用你领域自己的名词说话：有的话，候选会读作"加深 Order intake 模块"，而不是"重构 FooBarHandler"。
 
-它写两个地方。报告写到 `<tmpdir>/architecture-review-<timestamp>.html`，在仓库之外。在盘问循环中，它会增补或打磨 `CONTEXT.md` 里的术语（如果文件不存在则创建），并提议把一条被拒绝的候选记录为 ADR，这样未来的运行不会再次建议它。
+它写两个地方。报告写到 `<tmpdir>/architecture-review-<timestamp>.html`，在仓库之外。在盘问循环中，它会增补或打磨 `GLOSSARY.md` 里的术语（如果文件不存在则创建），并提议把一条被拒绝的候选记录为 ADR，这样未来的运行不会再次建议它。
 
 ## 深度，以及那份猎取它的报告
 
@@ -57,7 +57,7 @@
 
 **它会留下任何持久化的东西吗？**
 
-只有 `CONTEXT.md` 和（如果你接受了那条提议）`docs/adr/` 下的一个 ADR。报告在临时目录里，OS 重启就没了——这正是它为什么不承担任何 git 状态的原因。
+只有 `GLOSSARY.md` 和（如果你接受了那条提议）`docs/adr/` 下的一个 ADR。报告在临时目录里，OS 重启就没了——这正是它为什么不承担任何 git 状态的原因。
 
 **我能一次性跑多个，或者在同一个会话里挑多个吗？**
 
@@ -98,4 +98,4 @@
 
 ## 它的定位
 
-`improve-codebase-architecture` 是**周期性维护**：每隔几天跑一次，在任何链之外，把工作排进队列而不是动手做。它的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——占着每条候选都用以撰写的 depth-and-seam 词汇；[盘问（grilling）](https://aihero.dev/skills-grilling)——在你挑了一条候选之后走决策树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)——在决策敲定时保持 `CONTEXT.md` 和 ADR 是最新的。它产出的是一份想法，经由 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 或 [to-spec](https://aihero.dev/skills-to-spec) 重新进入主构建流程。哪个技能适合某场景时，[ask-matt](https://aihero.dev/skills-ask-matt) 是整套技能的路由器。
+`improve-codebase-architecture` 是**周期性维护**：每隔几天跑一次，在任何链之外，把工作排进队列而不是动手做。它的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——占着每条候选都用以撰写的 depth-and-seam 词汇；[盘问（grilling）](https://aihero.dev/skills-grilling)——在你挑了一条候选之后走决策树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)——在决策敲定时保持 `GLOSSARY.md` 和 ADR 是最新的。它产出的是一份想法，经由 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 或 [to-spec](https://aihero.dev/skills-to-spec) 重新进入主构建流程。哪个技能适合某场景时，[ask-matt](https://aihero.dev/skills-ask-matt) 是整套技能的路由器。

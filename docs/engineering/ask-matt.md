@@ -24,11 +24,12 @@
 
 ## 是流程，不是技能
 
-这个技能给你用来思考的词是**流程（flow）**：一条*穿过*技能的路径，而不是单个技能。为你的情况命名，就把你放到某条流程的某一步上，这与"匹配你关键词的技能"是不同的答案。一共存在四种路由，技能本身完整地承载它们：
+这个技能给你用来思考的词是**流程（flow）**：一条*穿过*技能的路径，而不是单个技能。为你的情况命名，就把你放到某条流程的某一步上，这与"匹配你关键词的技能"是不同的答案。一共存在五种路由，技能本身完整地承载它们：
 
-- **主流程**，从想法到上线。grill、spec、tickets、implement、review，里面有两条分支：当某个问题需要可运行代码才能敲定时走 prototype 绕行，以及 spec-and-tickets 拆分——只有当构建跨多于一会话时才值得它的成本。
+- **主流程**，从想法到上线。grill、spec、tickets、implement（一次一张 ticket，或用 [implement-spec](https://aihero.dev/skills-implement-spec) 并行推进整张任务图）、review，然后是 [retro](https://aihero.dev/skills-retro)，它把构建学到的东西喂回 agent 的环境。里面有两条分支：当某个问题需要可运行代码才能敲定时走 prototype 绕行，以及 spec-and-tickets 拆分——只有当构建跨多于一会话时才值得它的成本。
 - **入口（on-ramps）**，为那种产生工作再合入主流程的情况：涌入的 bug 报告、某样东西坏了、或一个太模糊、太庞大、无法在一次会话里容纳的工作量。
-- **独立技能**，不在任何流程上，按各自的节奏被调用：prototype、questionnaire、你已经坐进的那个合并冲突。
+- **代码库健康**，是维护而非功能工作：[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 巡视代码寻找深化机会，每找到一个，就作为想法重新进入主流程。
+- **独立技能**，不在任何流程上，按各自的节奏被调用：prototype、问卷、research 运行。
 - **底下的词汇层**，当问题是话术而不是流程时，其他技能会拉进来引用的两份参考。
 
 ## 阶段边界
@@ -49,11 +50,11 @@
 
 **难道就没有一个按正确顺序排列的技能清单吗？**
 
-人们一直要求在 README 里放一个。这份技能就是那份清单——它就是为此而存在的。一张静态表格会写成 `wayfinder → to-spec → to-tickets → implement → code-review`，而对大多数情况来说是错的，因为有趣的在于分支：有没有现成的代码库、构建是否跨会话、这个问题能否靠对话解决。诚实的代价是路由器人工维护，会落后于仓库。`/grilling` 和 `/resolving-merge-conflicts` 都在路由器能点名它们之前很久就已发布。
+人们一直要求在 README 里放一个。这份技能就是那份清单——它就是为此而存在的。一张静态表格会写成 `wayfinder → to-spec → to-tickets → implement → code-review → retro`，而对大多数情况来说是错的，因为有趣的在于分支：有没有现成的代码库、构建是否跨会话、这个问题能否靠对话解决。诚实的代价是路由器人工维护，会落后于仓库。`/grilling` 在路由器能点名它之前很久就已发布。
 
 **它告诉我一半的技能没安装。**
 
-一个已知、未修复的 bug。路由器会路由到的多数技能都设置了 `disable-model-invocation: true`，这意味着 harness 会把它们从注入到 agent 上下文中的技能列表里剔除。agent 把那份列表当作完整清单，于是报告它们缺失。有一份报告的会话中，它宣称整个 spec-and-tickets 流程不存在，转而路由到光秃秃的 `/grilling` 和 `/tdd`。插件二十二个技能中有十三个带这个标志，所以这是常见情况而不是边缘情况。它们已经安装了。照常输入斜杠命令，或者查看 `.claude-plugin/plugin.json`——那才是判断安装内容的权威。
+一个已知、未修复的 bug。路由器会路由到的多数技能都设置了 `disable-model-invocation: true`，这意味着 harness 会把它们从注入到 agent 上下文中的技能列表里剔除。agent 把那份列表当作完整清单，于是报告它们缺失。有一份报告的会话中，它宣称整个 spec-and-tickets 流程不存在，转而路由到光秃秃的 `/grilling` 和 `/tdd`。插件二十七个技能中有十六个带这个标志，所以这是常见情况而不是边缘情况。它们已经安装了。照常输入斜杠命令，或者查看 `.claude-plugin/plugin.json`——那才是判断安装内容的权威。
 
 **它描述了某个技能的行为，但该技能并不那样做。**
 

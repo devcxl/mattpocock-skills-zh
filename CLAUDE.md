@@ -14,7 +14,7 @@
 
 每个 bucket 文件夹有一份 `README.md`，用一句话描述列出该 bucket 中的每个技能，技能名链接到它的 `SKILL.md`。已推广 bucket 的 `README.md` 与顶层 `README.md` 把条目分成 **User-invoked**（用户调用）与 **Model-invoked**（模型调用）；非推广 bucket 的 `README.md`（`misc/`、`in-progress/`）使用扁平的列表。
 
-`engineering/` 与 `productivity/` 中的技能还在 `docs/<bucket>/<skill-name>.md` 有一份面向人类的文档页（文档树镜像 `skills/` 下的这两个 bucket 文件夹）。发布的 URL 是 `https://aihero.dev/skills-<skill-name>`，无论 bucket 如何：文档路径只是仓库组织形式。当你在 `engineering/` 或 `productivity/` 中新增、重命名或修改某个技能的行为时，按 [.agents/writing-docs.md](./.agents/writing-docs.md) 创建或重新同步其文档页。一份完成的页面包含四个部分：**它的作用**、**何时使用**、**常见问题**、**怎样算成功**：`writing-docs.md` 给出模板、小节顺序以及去哪里找问题。非推广 bucket（`misc/`、`in-progress/`、`deprecated/`）中的技能**没有**文档页。
+`engineering/` 与 `productivity/` 中的技能还在 `docs/<bucket>/<skill-name>.md` 有一份面向人类的文档页（文档树镜像 `skills/` 下的这两个 bucket 文件夹）。发布的 URL 是 `https://aihero.dev/skills-<skill-name>`，无论 bucket 如何：文档路径只是仓库组织形式。当你在 `engineering/` 或 `productivity/` 中新增、重命名或修改某个技能的行为时，按 [.agents/writing-docs.md](./.agents/writing-docs.md) 创建或重新同步其文档页。一份完成的页面包含四个部分：**它的作用**、**何时使用**、**常见问题**、**怎样算成功**：`writing-docs.md` 给出模板、小节顺序以及去哪里找问题。非推广 bucket（`misc/`、`in-progress/`、`deprecated/`）中的技能**没有**文档页。唯一的例外是被整体移除的已推广技能：它的文档页保留，并以归档页方式标记（见 `writing-docs.md`）。
 
 每份 `SKILL.md` 要么是用户调用型（`disable-model-invocation: true` 加上 `agents/openai.yaml` 中的 `policy.allow_implicit_invocation: false`，仅人类可达），要么是模型调用型（模型或用户均可达）。见 [.agents/invocation.md](./.agents/invocation.md)。
 

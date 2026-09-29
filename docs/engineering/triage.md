@@ -103,4 +103,4 @@
 
 ## 它的定位
 
-`triage` 是一个**入口（on-ramp）**，不是主链里的一步。主流程从你有的一个想法出发——盘问、spec、tickets、implement、review——而 `triage` 是为"到达的"工作准备的平行车道。它在同一个地方汇合：一个标着 `ready-for-agent`、带着简报的 issue，[implement](https://aihero.dev/skills-implement) 捡起它，正如它会捡起 [to-tickets](https://aihero.dev/skills-to-tickets) 的 ticket 一样。当一个请求在被简报之前需要打磨时，`triage` 把 [盘问（grilling）](https://aihero.dev/skills-grilling) 和 [domain-modeling](https://aihero.dev/skills-domain-modeling) 一起运行，一次一轮问题，所以决策在做出时就落进 `CONTEXT.md` 和 ADR。拿不准自己在哪条车道上时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你路由。
+`triage` 是一个**入口（on-ramp）**，不是主链里的一步。主流程从你有的一个想法出发——盘问、spec、tickets、implement、review——而 `triage` 是为"到达的"工作准备的平行车道。它在同一个地方汇合：一个标着 `ready-for-agent`、带着简报的 issue，[implement](https://aihero.dev/skills-implement) 捡起它，正如它会捡起 [to-tickets](https://aihero.dev/skills-to-tickets) 的 ticket 一样。当一个请求在被简报之前需要打磨时，`triage` 把 [盘问（grilling）](https://aihero.dev/skills-grilling) 和 [domain-modeling](https://aihero.dev/skills-domain-modeling) 一起运行，一次一轮问题，所以决策在做出时就落进 `GLOSSARY.md` 和 ADR。拿不准自己在哪条车道上时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你路由。

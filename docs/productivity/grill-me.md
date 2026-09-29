@@ -13,7 +13,7 @@
 想用哪一种 grilling 技能，取决于你面前是什么：
 
 - **任何事、任何地方**：`grill-me`。它不需要仓库，不写文件，主题也不必是代码。
-- **要对照一份代码库**：[grill-with-docs](https://aihero.dev/skills-grill-with-docs)。同样的访谈，但是[有状态](https://www.aihero.dev/ai-coding-dictionary/stateful)：它读取你的代码，把学到的东西保存在 `CONTEXT.md` 和 ADR 里。
+- **要对照一份代码库**：[grill-with-docs](https://aihero.dev/skills-grill-with-docs)。同样的访谈，但是[有状态](https://www.aihero.dev/ai-coding-dictionary/stateful)：它读取你的代码，把学到的东西保存在 `GLOSSARY.md` 和 ADR 里。
 - **一次会话装不下**：[wayfinder](https://aihero.dev/skills-wayfinder)。它把整项工作画成一张地图，并在其中运行 grilling session。
 
 把 [plan mode](https://www.aihero.dev/ai-coding-dictionary/agent-mode) 关掉。Plan mode 让 agent 急着去产出计划，这恰好与"保持在追问中"相反。
@@ -71,6 +71,6 @@ When grilling, ask one question at a time.
 
 `grill-me` 是一个**可随时取用的独立工具，可在任何地方、对任何事使用**。无状态是它便携的原因：不需要仓库、工作区、配置，也不假设这个想法甚至和软件相关。人们把它对准商业决策、写作、"下一步该干什么"：任何在他们脑中坐不住的东西。
 
-这种便携性正是它和 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 的全部区别：后者跑同样的访谈，但会读一份代码库来对照，并把学到的东西记录为 `CONTEXT.md` 和 ADR。两者都基于 [grilling](https://aihero.dev/skills-grilling) 原语；`grill-me` 是用户调用的入口，什么都不带。
+这种便携性正是它和 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 的全部区别：后者跑同样的访谈，但会读一份代码库来对照，并把学到的东西记录为 `GLOSSARY.md` 和 ADR。两者都基于 [grilling](https://aihero.dev/skills-grilling) 原语；`grill-me` 是用户调用的入口，什么都不带。
 
 如果你盘问的东西结果确实是软件，你可以把同一段对话交给 [to-spec](https://aihero.dev/skills-to-spec)，继续走构建流程：这是一个可选，而不是这个技能的目的。不确定哪条流程合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

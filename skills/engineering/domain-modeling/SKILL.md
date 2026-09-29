@@ -1,11 +1,11 @@
 ---
 name: domain-modeling
-description: 构建和完善项目的领域模型。当讨论代码库术语、编写或编辑 CONTEXT.md，或记录或编辑 ADR 时使用。
+description: 构建和完善项目的领域模型。当讨论代码库术语、编写或编辑 GLOSSARY.md，或记录或编辑 ADR 时使用。
 ---
 
 # Domain Modeling（领域建模）
 
-在设计过程中主动构建和完善项目的领域模型。这是一门**主动**的学科——质疑术语、创造边界场景、在术语和决策形成的瞬间将其记录在案。（仅仅*阅读* `CONTEXT.md` 来获取词汇不是此 skill 的用途——那是任何 skill 都能做的单行习惯。此 skill 用于你在*修改*模型，而非仅仅消费它。）
+在设计过程中主动构建和完善项目的领域模型。这是一门**主动**的学科——质疑术语、创造边界场景、在术语和决策形成的瞬间将其记录在案。（仅仅*阅读* `GLOSSARY.md` 来获取词汇不是此 skill 的用途——那是任何 skill 都能做的单行习惯。此 skill 用于你在*修改*模型，而非仅仅消费它。）
 
 ## 文件结构
 
@@ -13,7 +13,7 @@ description: 构建和完善项目的领域模型。当讨论代码库术语、�
 
 ```
 /
-├── CONTEXT.md
+├── GLOSSARY.md
 ├── docs/
 │   └── adr/
 │       ├── 0001-event-sourced-orders.md
@@ -21,29 +21,29 @@ description: 构建和完善项目的领域模型。当讨论代码库术语、�
 └── src/
 ```
 
-如果根目录存在 `CONTEXT-MAP.md`，则该 repo 有多个 context。该 map 指向每个 context 的位置：
+如果根目录存在 `GLOSSARY-MAP.md`，则该 repo 有多个 context。该 map 指向每个 context 的位置：
 
 ```
 /
-├── CONTEXT-MAP.md
+├── GLOSSARY-MAP.md
 ├── docs/
 │   └── adr/                          ← 系统级决策
 ├── src/
 │   ├── ordering/
-│   │   ├── CONTEXT.md
+│   │   ├── GLOSSARY.md
 │   │   └── docs/adr/                 ← context 特定决策
 │   └── billing/
-│       ├── CONTEXT.md
+│       ├── GLOSSARY.md
 │       └── docs/adr/
 ```
 
-懒加载创建文件——仅当有内容需要写入时才创建。如果 `CONTEXT.md` 不存在，在第一个术语确定时创建。如果 `docs/adr/` 不存在，在第一个 ADR 需要时创建。
+懒加载创建文件——仅当有内容需要写入时才创建。如果 `GLOSSARY.md` 不存在，在第一个术语确定时创建。如果 `docs/adr/` 不存在，在第一个 ADR 需要时创建。
 
 ## 在会话期间
 
 ### 对照 glossary 提出质疑
 
-当用户使用与 `CONTEXT.md` 中已有语言冲突的术语时，立即指出。"你的 glossary 将 'cancellation' 定义为 X，但你似乎指的是 Y——到底是哪个？"
+当用户使用与 `GLOSSARY.md` 中已有语言冲突的术语时，立即指出。"你的 glossary 将 'cancellation' 定义为 X，但你似乎指的是 Y——到底是哪个？"
 
 ### 优化模糊语言
 
@@ -57,11 +57,11 @@ description: 构建和完善项目的领域模型。当讨论代码库术语、�
 
 当用户陈述某事物的工作方式时，检查代码是否一致。如果发现矛盾，指出："你的代码取消了整个 Orders，但你刚才说部分取消是可能的——哪个是对的？"
 
-### 内联更新 CONTEXT.md
+### 内联更新 GLOSSARY.md
 
-当术语确定时，立即更新 `CONTEXT.md`。不要批量处理——在发生时即时捕获。使用 [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md) 中的格式。
+当术语确定时，立即更新 `GLOSSARY.md`。不要批量处理——在发生时即时捕获。使用 [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md) 中的格式。
 
-`CONTEXT.md` 应完全不含实现细节。不要将 `CONTEXT.md` 视为 spec、草稿本或实现决策的仓库。它是 glossary，仅此而已。
+`GLOSSARY.md` 应完全不含实现细节。不要将 `GLOSSARY.md` 视为 spec、草稿本或实现决策的仓库。它是 glossary，仅此而已。
 
 ### 谨慎提供 ADR
 

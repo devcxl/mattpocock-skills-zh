@@ -1,3 +1,5 @@
+> **已归档。** 该技能已在 v1.3.0 中从插件移除，不再维护。没有替代品：agent 会在没有专用技能的情况下处理 merge 或 rebase 冲突。本页保留供参考。
+
 ## 它的作用
 
 `resolving-merge-conflicts` 逐 hunk 推进一次进行中的 git merge 或 rebase，然后跑项目自己的检查，并以一个 commit 结束这次操作。

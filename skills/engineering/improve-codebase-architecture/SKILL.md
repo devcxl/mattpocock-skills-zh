@@ -11,7 +11,7 @@ disable-model-invocation: true
 本命令**参考**项目的领域模型，并基于共享的设计词汇：
 
 - 调用 Skill 工具并传入 "codebase-design" 获取架构词汇（**module**、**interface**、**depth**、**seam**、**adapter**、**leverage**、**locality**）及其原则（deletion test、"interface 就是 test surface"、"一个 adapter = 假设性 seam，两个 = 真实的"）。在每个建议中严格使用这些术语——不要偏离到 "component"、"service"、"API" 或 "boundary"。
-- `CONTEXT.md` 中的领域语言为好的 seam 提供了命名；`docs/adr/` 中的 ADR 记录了本命令不应重新讨论的决策。
+- `GLOSSARY.md` 中的领域语言为好的 seam 提供了命名；`docs/adr/` 中的 ADR 记录了本命令不应重新讨论的决策。
 
 ## 流程
 
@@ -22,7 +22,7 @@ disable-model-invocation: true
 - 如果用户指定了方向——一个模块、一个子系统、一个痛点——就采用它，并跳过下面的推断步骤。
 - 否则，回顾一段较长的提交历史（`git log --oneline`）来找到代码库的热点——那些反复出现的文件和区域——让这些路径首先吸引你的注意力。如果变更分散，没有明确的热点，就扩大范围。
 
-首先阅读项目的领域术语表（`CONTEXT.md`）以及你将要接触的区域内任何 ADR。
+首先阅读项目的领域术语表（`GLOSSARY.md`）以及你将要接触的区域内任何 ADR。
 
 然后生成一个子代理来遍历代码库。不要遵循僵化的启发式规则——有机地探索，并记录你在哪里遇到了摩擦：
 
@@ -51,7 +51,7 @@ disable-model-invocation: true
 
 报告以**最佳推荐**部分结尾：你会先处理哪个候选方案以及原因。
 
-**对 CONTEXT.md 使用领域词汇，对架构使用 `/codebase-design` 词汇。** 如果 `CONTEXT.md` 定义了 "Order"，就说 "Order intake module"——而不是 "FooBarHandler"，也不是 "Order service"。
+**对 GLOSSARY.md 使用领域词汇，对架构使用 `/codebase-design` 词汇。** 如果 `GLOSSARY.md` 定义了 "Order"，就说 "Order intake module"——而不是 "FooBarHandler"，也不是 "Order service"。
 
 **ADR 冲突**：如果某个候选方案与现有 ADR 矛盾，仅当摩擦确实严重到值得重新审视 ADR 时才提出来。在卡片中明确标注（例如警告提示：_"与 ADR-0007 矛盾——但值得重新讨论，因为……"_）。不要列出 ADR 禁止的每个理论上的重构。
 
@@ -65,7 +65,7 @@ disable-model-invocation: true
 
 副作用在决策明确时即时产生——调用 Skill 工具并传入 "domain-modeling" 以保持领域模型的最新状态：
 
-- **将一个 deepened module 命名为 `CONTEXT.md` 中不存在的概念？** 将该术语添加到 `CONTEXT.md`。如果文件不存在，延迟创建。
-- **在对话过程中澄清了一个模糊的术语？** 立即更新 `CONTEXT.md`。
+- **将一个 deepened module 命名为 `GLOSSARY.md` 中不存在的概念？** 将该术语添加到 `GLOSSARY.md`。如果文件不存在，延迟创建。
+- **在对话过程中澄清了一个模糊的术语？** 立即更新 `GLOSSARY.md`。
 - **用户因一个重要原因拒绝了候选方案？** 提议创建一个 ADR，措辞为：_"需要我将此记录为 ADR，以便未来的架构审查不再重新提出此建议吗？"_ 只有当原因确实对未来探索者避免重复提出相同建议有实际帮助时才提出——跳过临时性原因（"现在不值得做"）和自明的原因。
 - **想探索 deepened module 的替代 interface？** 调用 Skill 工具并传入 "codebase-design" 并使用其 design-it-twice 并行子代理模式。

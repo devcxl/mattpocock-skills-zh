@@ -10,7 +10,7 @@
 - **[handoff](./handoff/SKILL.md)** ： 把当前对话压缩成一份交接文档，让另一个 agent 能继续这项工作。
 - **[teach](./teach/SKILL.md)** ： 跨多个会话教用户一项新技能或概念，把当前目录当作有状态的教学工作空间。
 - **[to-questionnaire](./to-questionnaire/SKILL.md)** ： 把你一个人答不出的决定变成一份 Markdown 问卷，交给唯一能答的人：异步填写，或开会时一起填。
-- **[wait-what](./wait-what/SKILL.md)** ： 一条消息没被接住的瞬间就触发它。agent 会带着你缺失的上下文、用你 `CONTEXT.md` 的词汇，以大白话重新讲一遍。
+- **[wait-what](./wait-what/SKILL.md)** ： 一条消息没被接住的瞬间就触发它。agent 会带着你缺失的上下文、用你 `GLOSSARY.md` 的词汇，以大白话重新讲一遍。
 
 ## 模型调用（Model-invoked）
 

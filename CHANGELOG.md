@@ -120,7 +120,28 @@ Fixes #453.
 
   此外：[grill-me](https://aihero.dev/skills-grill-me) 在遇到 UI/感觉类问题时，被链接到 prototype 作为推荐的下一步：它原本就该指向那里。
 
-- [#742](https://github.com/mattpocock/skills/pull/742) [`17d3d92`](https://github.com/mattpocock/skills/commit/17d3d9275c4a6518d40d2065f55e4a52d8f508d4) 感谢 [@mattpocock](https://github.com/mattpocock)! - **破坏性变更：**将 **`wayfinder`** 中的术语从"决策图"（decision map）改为 **`decision ticket`**（决策 ticket）。
+
+- [#536](https://github.com/mattpocock/skills/pull/536) [`42a5b70`](https://github.com/mattpocock/skills/commit/42a5b70fcacc7baff1977b13f3919fb2f63af14e) 感谢 [@mattpocock](https://github.com/mattpocock)! - 把这套技能作为原生 **Claude Code 插件**发布，并列入 Claude Code 官方市场。你现在可以把已推广的技能作为一个受管的只读包来订阅，而不必复制可编辑的文件：
+
+  ```bash
+  claude plugins install mattpocock-skills
+  ```
+
+  或者在会话内：
+
+  ```
+  /plugin install mattpocock-skills
+  ```
+
+  无需先添加市场：官方市场默认已配置。
+
+  `.claude-plugin/plugin.json` 携带完整的插件元数据（版本、描述、作者、许可证、关键词）以及已推广技能的显式清单。`skills.sh` 仍是通用安装器（也是当下 Codex 与其他 harness 的路径）；原生 Codex 插件延后，原因见 `.agents/adr/0002-ship-as-a-claude-code-plugin.md`。
+
+- [#751](https://github.com/mattpocock/skills/pull/751) [`355fa74`](https://github.com/mattpocock/skills/commit/355fa7420b418af838998f7ec4365ceda1c8dfcc) 感谢 [@mattpocock](https://github.com/mattpocock)! - 新增 **`wait-what`**：用一个词纠正模型啰嗦。当一条消息没被接住的瞬间输入它，agent 会重新讲一遍：一点上下文、ASD-STE100 简化技术英语，以及你 `GLOSSARY.md` 里的通用语言。用户调用，仅三行。
+
+  机制就在名字里。简洁类技能失败于膨胀：一个 400 行的技能仍然让模型啰嗦，所以这个技能只是一个精确的引导词，别无其他。描述*输出*的名字（`/tldr`、`/no-fluff`）会让模型剪掉词语、反而让你更迷糊；命名*听者*的状态则一次要到两半：既更少的词，**也**有你缺失的上下文。它还复用了你全局 `CLAUDE.md` 里已有的引导词，于是这个技能、`CLAUDE.md` 与每一份 `GLOSSARY.md` 都抓同一批 token。
+
+- [#763](https://github.com/mattpocock/skills/pull/763) [`77d207e`](https://github.com/mattpocock/skills/commit/77d207ef03219cc603e2832e1159cbdd1c91818e) 感谢 [@mattpocock](https://github.com/mattpocock)! - 把 `/wayfinder` 的单位命名为**决策 ticket**（decision ticket），并用子智能体并行烧掉 research ticket。
 
   人们倾向于把一张 wayfinder ticket 读作普通的*实现* ticket：一块要执行的构建切片：而 wayfinder 把它们当作**决策 ticket**：其解答即决策的问题。技能的描述和它的开头现在引入该术语（并说明是什么让它成为决策 ticket），`ask-matt`/Engineering README 的简介和文档页与之同步：一旦该术语确立，"ticket"就作为日常用语保留下来。`CONTEXT.md` 将 **Decision ticket** 记为领域术语，因此"避免：ticket"的指引不再与 wayfinder 故意使用这个词相矛盾。
 

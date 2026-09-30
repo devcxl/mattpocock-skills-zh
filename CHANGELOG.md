@@ -2,57 +2,57 @@
 
 ## 1.3.0
 
-### Minor Changes
+### 次要变更
 
-- Graduate **`implement-spec`** into the **Engineering** bucket, so it ships in the Claude Code plugin, gets a docs page, and is routed by `ask-matt` as the parallel alternative to per-ticket `implement`.
+- 把 **`implement-spec`** 毕业进 **Engineering** bucket：随 Claude Code 插件发布、拥有文档页，并由 `ask-matt` 路由，作为逐 ticket `implement` 的并行替代方案。
 
-`implement-spec` (user-invoked) implements a whole spec in one run. It reads the tickets as a **task graph**, runs implementer subagents in their own worktrees across the ready **frontier**, and lands everything on one **integration branch**, closing out with `code-review`. Ahead of graduating:
+`implement-spec`（用户调用）一次运行实现整份 spec。它把 ticket 读成一张**任务图**，在可领取的**前沿**上并行运行各自 worktree 里的实施者子智能体，把一切落到一条**集成分支**，最后以 `code-review` 收尾。毕业前的调整：
 
-- The goal is now the integration branch, not a PR. A draft PR opens only when the issue tracker closes work through PRs or you ask for one, and only after the first merge (a branch with no commits ahead of main can't open one). Without a PR, the tickets are resolved the way the tracker closes work.
-- It points at the issue tracker like its siblings, telling you to run `/setup-matt-pocock-skills` when none has been provided, rather than silently defaulting to `gh`.
-- Each implementer confirms its worktree is based on the integration branch, builds its ticket with `tdd`, and merges the integration tip into its own branch before reporting done, so each merge is a fast-forward.
+- 目标现在是集成分支，而不是 PR。只有当 issue 跟踪器通过 PR 关闭工作、或你主动要求时，draft PR 才会打开，而且在第一次合并之后才开（一个在 main 之上没有 commit 的分支开不了 PR）。没有 PR 时，ticket 按跟踪器关闭工作的方式解决。
+- 它像同族技能一样指向 issue 跟踪器：没有提供跟踪器时告诉你运行 `/setup-matt-pocock-skills`，而不是悄悄默认用 `gh`。
+- 每个实施者先确认自己的 worktree 基于集成分支，用 `tdd` 构建 ticket，并在报告完成之前把集成分支的顶部合并进自己的分支，这样每次合并都是 fast-forward。
 
-- Graduate **`pr`** into the **Engineering** bucket, so it ships in the Claude Code plugin, gets a docs page, and is routed by `ask-matt` as the PR-body close-out.
+- 把 **`pr`** 毕业进 **Engineering** bucket：随 Claude Code 插件发布、拥有文档页，并由 `ask-matt` 路由为 PR body 的收尾环节。
 
-`pr` (model-invoked) is the shape a pull request body should take: a summary as the smallest visual that makes the change clear (pseudocode, a call tree, a file tree, Mermaid, a diff), before/after evidence that it works, and a merge-danger call (one-way or two-way door, plus blast radius). The Summary visuals are adapted from Dex Horthy's `show-me`, credited in the skill's `CREDITS.md`.
+`pr`（模型调用）是 PR body 应有的形状：以能说清变更的最小可视化做摘要（伪代码、调用树、文件树、Mermaid、diff），加上证明其可行的 before/after 证据，再加上合并风险判断（单向门或双向门，外加爆炸半径）。Summary 的视图菜单改编自 Dex Horthy 的 `show-me`，署名见技能的 `CREDITS.md`。
 
-- Graduate **`retro`** into the **Engineering** bucket, so it ships in the Claude Code plugin, gets a docs page, and is routed by `ask-matt` as the last step of the main flow, after `code-review`.
+- 把 **`retro`** 毕业进 **Engineering** bucket：随 Claude Code 插件发布、拥有文档页，并由 `ask-matt` 路由为主流程的最后一步（`code-review` 之后）。
 
-`retro` (user-invoked) looks back at a coding session and suggests changes to the agent's environment rather than the code: navigation pointers, automated checks, coding standards, steering files, tool economy, information access. It classifies each coding-standards finding first: a mechanical violation gets a deterministic check (a linter rule, a pre-commit hook, or a CI job), and `CODING_STANDARDS.md` is kept for genuine judgement calls. A repo with no guardrail at all is a finding in its own right.
+`retro`（用户调用）回顾一次编码会话，为 agent 的**环境**而非代码提出改动建议：导航指针、自动化检查、编码规范、引导文件、工具经济性、信息获取。它先给每条编码规范类发现分类：机械性违规配一个确定性检查（linter 规则、pre-commit 钩子或 CI job），`CODING_STANDARDS.md` 则留给真正的判断题。一个完全没有任何护栏的仓库，本身就是一条发现。
 
-- Remove the **`resolving-merge-conflicts`** skill. It's no longer needed, and nothing replaces it: the agent works through an in-progress merge or rebase conflict without a dedicated skill. It leaves the Claude Code plugin, the README and the `ask-matt` router. Its docs page at `https://aihero.dev/skills-resolving-merge-conflicts` stays up, marked archived.
+- 移除 **`resolving-merge-conflicts`** 技能。它不再需要，也没有替代品：agent 会在没有专用技能的情况下处理进行中的 merge 或 rebase 冲突。它退出 Claude Code 插件、README 与 `ask-matt` 路由器。其文档页 https://aihero.dev/skills-resolving-merge-conflicts 保留，并标记为归档。
 
-- Rename the `CONTEXT.md`/`CONTEXT-MAP.md` domain-doc convention to `GLOSSARY.md`/`GLOSSARY-MAP.md` everywhere the skills read and write it (`domain-modeling`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, `triage`, `tdd`, `diagnosing-bugs`, `ask-matt`, `codebase-design`, `wait-what`, `pr`), plus the docs pages and this repo's own root glossary.
+- 将 `CONTEXT.md`/`CONTEXT-MAP.md` 领域文档约定重命名为 `GLOSSARY.md`/`GLOSSARY-MAP.md`，覆盖所有读写它的技能（`domain-modeling`、`grill-with-docs`、`improve-codebase-architecture`、`setup-matt-pocock-skills`、`triage`、`tdd`、`diagnosing-bugs`、`ask-matt`、`codebase-design`、`wait-what`、`pr`），以及文档页和本仓库自己的根术语表。
 
-If you have an existing `CONTEXT.md` (or `CONTEXT-MAP.md`) from before this change, `git mv` it to the new name: the skills only look for `GLOSSARY.md`/`GLOSSARY-MAP.md` going forward.
+如果你在此变更之前已有 `CONTEXT.md`（或 `CONTEXT-MAP.md`），用 `git mv` 改成新名字：技能从此只认 `GLOSSARY.md`/`GLOSSARY-MAP.md`。
 
-### Patch Changes
+### 补丁变更
 
-- domain-modeling: trigger on discussing codebase terminology and on writing or editing a GLOSSARY.md or an ADR directly, replacing the narrower "pin down domain terminology or a ubiquitous language" / "record an architectural decision" phrasing. Also drops the "another skill needs to maintain the domain model" caveat, since that's the invoking skill's job to state explicitly, not this description's.
+- domain-modeling：触发条件改为讨论代码库术语、以及直接编写或编辑 GLOSSARY.md 或 ADR，取代此前更窄的"钉住领域术语或统一语言"/"记录架构决策"措辞。同时去掉"另一个技能需要维护领域模型"的注意事项，因为那是调用方技能的职责明说，而不该由本描述承担。
 
-- Quote the `description` front matter in `to-spec`, `code-review`, `setup-matt-pocock-skills`, `writing-fragments`, `writing-shape`, and `wait-what`. An unquoted colon-space left over from the em-dash sweep in #905 made each block invalid YAML, so `skills.sh` skipped all six during discovery and they couldn't be listed or installed via `npx skills`.
+- 为 `to-spec`、`code-review`、`setup-matt-pocock-skills`、`writing-fragments`、`writing-shape` 与 `wait-what` 的 `description` front matter 加引号。#905 的破折号清扫遗留了未加引号的冒号-空格，使这六段成为无效 YAML，导致 `skills.sh` 在发现阶段跳过它们，无法被 `npx skills` 列出或安装。
 
-- grilling: update the round template so consecutive questions are separated by a horizontal rule (`---`) instead of running together.
+- grilling：更新轮次模板，让连续问题之间用水平分隔线（`---`）隔开，而不是连成一片。
 
-- grilling: remove em-dashes from `SKILL.md`, replacing them with colons and semicolons so the instructions read as plain text.
+- grilling：从 `SKILL.md` 中移除破折号，改用冒号与分号替代，让说明读起来像纯文本。
 
-- Remove every em-dash from the repo's prose (docs, `SKILL.md` files, ADRs, `README.md`, scripts, JSON/YAML metadata), hand-rewriting each sentence with a comma, colon, period, parentheses, or conjunction rather than mechanically substituting the character. `CLAUDE.md`/`AGENTS.md` now says not to reintroduce them.
+- 移除仓库散文中的所有破折号（docs、`SKILL.md` 文件、ADR、`README.md`、脚本、JSON/YAML 元数据），逐句用手写方式改用逗号、冒号、句号、括号或连词，而不是机械替换字符。`CLAUDE.md`/`AGENTS.md` 现在写明不得重新引入。
 
-- Standardize cross-skill invocation on an explicit "call the Skill tool" instruction instead of bare `/skill`-style prose, across `code-review`, `diagnosing-bugs`, `grill-with-docs`, `grill-me`, `improve-codebase-architecture`, `tdd`, `to-spec`, `to-tickets`, `triage`, and `wayfinder`.
+- 把跨技能调用统一为显式的"调用 Skill 工具"指令，替代裸 `/技能` 式散文，覆盖 `code-review`、`diagnosing-bugs`、`grill-with-docs`、`grill-me`、`improve-codebase-architecture`、`tdd`、`to-spec`、`to-tickets`、`triage` 与 `wayfinder`。
 
-- A skill that names another skill in prose ("run the `/grilling` skill") does not reliably cause it to load. This is the documented rough edge behind `grill-with-docs`'s most-reported problem. Naming the tool directly (`Call the Skill tool with "grilling"`) is intended to raise the hit rate. Dropping the leading `/` also makes the instruction harness-neutral rather than less: it no longer assumes Claude Code's trigger syntax.
-- A step needing more than one skill now says so as multiple calls ("Call the Skill tool twice, for `grilling` and `domain-modeling`"), not one call carrying two names.
-- Documents the convention in `.agents/invocation.md` for future skills to follow.
+- 一个技能在散文里点名另一个技能（"run the `/grilling` skill"）并不能可靠地让它加载。这是 `grill-with-docs` 报告最多的问题背后的已知粗糙边缘。直接点名工具（`Call the Skill tool with "grilling"`）意在提高命中率。去掉前导 `/` 也让指令对 harness 中立而非更弱：它不再假设 Claude Code 的触发语法。
+- 需要多个技能的步骤现在写成多次调用（"Call the Skill tool twice, for `grilling` and `domain-modeling`"），而不是一次调用携带两个名字。
+- 在 `.agents/invocation.md` 中记录该约定，供未来技能遵循。
 
-- Stop skills from trying to reach user-invoked skills through the Skill tool: fix cross-skill references that violated the "no other skill can call it" invariant in `.agents/invocation.md`, in `to-spec`, `wayfinder`, `to-tickets`, `triage`, `code-review`, and `diagnosing-bugs`.
+- 阻止技能试图通过 Skill 工具触达用户调用型技能：修复 `to-spec`、`wayfinder`、`to-tickets`、`triage`、`code-review` 与 `diagnosing-bugs` 中违反 `.agents/invocation.md` 里"没有其他技能能调用它"不变式的跨技能引用。
 
-- `to-spec`, `wayfinder`, `to-tickets`, `triage`, and `code-review` each carried a precondition ("...run `/setup-matt-pocock-skills` if not") that PR #878 rewrote into a literal `Call the Skill tool with "setup-matt-pocock-skills"` instruction. `setup-matt-pocock-skills` is user-invoked, so none of these skills (user-invoked or model-invoked) can call it. Reworded all five as instructions for the agent to tell the human to run it instead.
-- `diagnosing-bugs`'s Phase 6 post-mortem hand off to `improve-codebase-architecture` (also user-invoked) the same way, from an autonomous, often-unattended bug-fixing flow with no human in the loop to catch the failed call. Removed the hand-off outright rather than softening it, since it rarely fired in practice. Phase 6 is now "Cleanup" only; the mechanical checklist is untouched.
-- Added a carve-out paragraph to `.agents/invocation.md`'s "Dependencies between them" section: the `Call the Skill tool with "name"` convention only applies when the named skill is model-invoked. This is the section PR #878 introduced without reconciling it against the user-invoked/model-invoked invariant stated eight lines above it; the gap is most of why this bug reached six call sites instead of one.
+- `to-spec`、`wayfinder`、`to-tickets`、`triage` 与 `code-review` 各自带有一个前置条件（"...run `/setup-matt-pocock-skills` if not"），PR #878 把它改写成了字面的 `Call the Skill tool with "setup-matt-pocock-skills"` 指令。`setup-matt-pocock-skills` 是用户调用型，所以这些技能（无论用户调用还是模型调用）都不能调用它。五处全部改写为让 agent 告诉人类去运行它。
+- `diagnosing-bugs` 的 Phase 6 post-mortem 以同样方式移交给 `improve-codebase-architecture`（也是用户调用型），而且发生在一个自治、通常无人值守的 bug 修复流程中，没有人有机会接住失败调用。直接移除该移交而非软化它，因为它在实践中很少触发。Phase 6 现在只剩"Cleanup"；机械性检查清单未动。
+- 在 `.agents/invocation.md` 的 "Dependencies between them" 一节新增一段例外说明：`Call the Skill tool with "name"` 约定只在被点名技能是模型调用型时适用。这正是 PR #878 引入该节时未与上方八行处陈述的用户调用/模型调用不变式对齐的缺口；这个缺口也是该 bug 蔓延到六个调用点的主因。
 
 Fixes #453.
 
-- wait-what: follow `GLOSSARY-MAP.md` to the right `GLOSSARY.md` when a repo indexes multiple contexts that way instead of keeping a single root `GLOSSARY.md`.
+- wait-what：当仓库以多上下文方式索引时，跟随 `GLOSSARY-MAP.md` 找到正确的 `GLOSSARY.md`，而不是保留单一的根 `GLOSSARY.md`。
 
 ## 1.2.3
 

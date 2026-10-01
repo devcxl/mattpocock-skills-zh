@@ -34,8 +34,8 @@
 
 边是这份工件的重点。它根据追踪器的不同有两种读法：
 
-| 追踪器 | 边住哪里 | | 你怎么处理它们 |
-| --- | --- | --- | --- |
+| 追踪器 | 边住哪里 | 你怎么处理它们 |
+| --- | --- | --- |
 | 本地 markdown | `.scratch/<feature>/issues/<NN>-<slug>.md` 下一文件一份，编号按 blocker-first | 自上而下手工处理 |
 | 真实追踪器（GitHub、Linear） | 原生阻塞链接，或追踪器有 sub-issues 时用 sub-issues | 任意一张 blocker 都完成的 ticket 处于**前沿**，可被领取 |
 
@@ -51,17 +51,13 @@
 - **Migrate**：按爆炸半径分批（按 package、按目录）挪动调用点，一批一张 ticket，每张被 expand 阻塞。CI 保持绿色，因为老形式还在。
 - **Contract**：一旦没有调用方剩下、在一张被每张 migrate 批次都阻塞的 ticket 里删掉老形式。
 
-当一张 ticket 的范围是机械的、跨代码库、对每个调用点的改动都相同时，这套流程合适。示踪弹规则为大多数功能切片服务、为大多数重构服务；expand-contract 只为这一种形态服务。
+当这些批次连单独保持绿色都做不到时，它们共享一条集成分支，并全部阻塞一张最终的集成并验证（integrate-and-verify）ticket。绿色只在那里被承诺。
 
 ## 常见问题
 
-**Tickets 出来了，但每张里都有 schema 改动。**
+**它为一个三行变更产出了十二个 tickets。**
 
-这经常发生，因为数据库改动看起来像一个独立的层。处理办法和别的形状一样：先 prefactor 那张 schema 迁移，把它作为第一张 ticket，所有功能 ticket 都阻塞在它之上。这正是 `to-tickets` 已经寻找的 prefactoring；把它显式说出来往往能阻止它被埋进功能 ticket。
-
-**我希望按层切片——schema 一张、API 一张、UI 一张。**
-
-可以，但不要。层切是水平切，会得到一个 26 张 ticket、每张二十次 agent 跑动的复盘，里面四分之三是返工。如果你坚持这样做，第一张之后没有任何东西能独立演示，所以验收标准会去碰其他 ticket 拥有的工作。垂直切片一次穿过所有层，每张 ticket 自己拥有它评分的全部内容。
+过度分解是这个技能被报告最多的摩擦点，而且跨从业者一致：[model](https://www.aihero.dev/ai-coding-dictionary/model) 默认原子单元，丢掉会让它们有意义的归组。提问那一步恰恰为此存在：叫它合并，它就会合并。更深的答案是 tickets 有一个下限：如果整个变更装得进一个 context window，你根本不需要这个技能。直接去 [implement](https://aihero.dev/skills-implement)。
 
 **Tickets 出来时是一层一张：所有 schema 在一张，所有 API 在另一张。**
 

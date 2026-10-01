@@ -41,7 +41,7 @@
 
 ## 四种决策 ticket 类型
 
-每张 ticket 带一个 `wayfinder:<type>` 标签，并且要么是 **[HITL](https://www.aihero.dev/ai-coding-dictionary/human-in-the-loop)**（与一个替自己说话的人类一起处理），要么是 **[AFK](https://www.aihero.dev/ai-coding-dictionary/afk)**，由 agent 单独驱动。一张 HITL ticket 只能通过实时交流解决；一个替自己回答 [grilling](https://aihero.dev/skills-grilling) 问题的 agent 已经把它打破了。
+每张 ticket 带一个 `wayfinder:<type>` 标签，并且要么是 **[HITL](https://www.aihero.dev/ai-coding-dictionary/human-in-the-loop)**（与一个替自己说话的人类一起处理），要么是 **[AFK](https://www.aihero.dev/ai-coding-dictionary/afk)**，由 agent 单独驱动。一张 HITL ticket 只能通过实时交流解决；一个替自己回答 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 问题的 agent 已经把它打破了。
 
 | 类型 | 模式 | 在什么时候用 | 由什么解决 |
 | --- | --- | --- | --- |
@@ -74,7 +74,7 @@ Research 是*一张 ticket 一次会话*规则之外唯一的例外。
 
 **我绘制了 27 张 ticket，等到第十三张时，其余的已经讲不通了。**
 
-一份真实且反复被报告的结果，原话照搬自一份现场报告。Wayfinder 的默认本能是综合地规划，一张地图的后面那些 ticket 立足于前面那些 ticket 否定了的假设，这正是这份技能被指责的瀑布陷阱。两件事推回去。把地图的范围限定在一个有界的目的地，而不是整个产品。从业者一致报告：范围被限定在一个定义好的 epic 上的地图，比一张蔓延的"实现 V1"表现得更好，并且规划一个非常大的东西本来就不是目标本身——目标是小步交付。还有一件事：激进地用 [prototype](https://aihero.dev/skills-prototype)。路线保持新鲜的全部原因在于不确定性在实现依赖它之前被廉价的具象工件冲刷掉。Wayfinder 是"prototype-maxxing"，不是"planmaxxing"。
+一份真实且反复被报告的结果，原话照搬自一份现场报告。Wayfinder 的默认本能是综合地规划，一张地图的后面那些 ticket 立足于前面那些 ticket 否定了的假设，这正是这份技能被指责的瀑布陷阱。两件事推回去。把地图的范围限定在一个有界的目的地，而不是整个产品。从业者一致报告：范围被限定在一个定义好的 epic 上的地图，比一张蔓延的"实现 V1"表现得更好，并且规划一个非常大的东西本来就不是目标本身——目标是小步交付。还有一件事：激进地用 [prototype](https://www.aihero.dev/ai-coding-dictionary/prototyping)。路线保持新鲜的全部原因在于不确定性在实现依赖它之前被廉价的具象工件冲刷掉。Wayfinder 是"prototype-maxxing"，不是"planmaxxing"。
 
 **我能并行处理几张 ticket 吗？**
 

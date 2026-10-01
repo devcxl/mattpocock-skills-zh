@@ -47,19 +47,19 @@
 
 ## 你挑了之后会发生什么
 
-挑一条候选会就它开启一次 [盘问（grilling）](https://www.aihero.dev/skills-grilling) 会话：约束条件、接缝背后是什么、哪些测试能挺过来、加深后的接口应该长什么样。那次会话的输出是一个决策，而不是一份 diff。从那里起，正常流程接管：[to-spec](https://aihero.dev/skills-to-spec) 产出文档，[implement](https://aihero.dev/skills-implement) 做那次重构。这一道顺序——勘察、决策、规格、实现——是这个技能自身存在的原因。
+挑一条候选会就它开启一次 [盘问（grilling）](https://aihero.dev/skills-grilling) 会话：约束条件、接缝背后是什么、哪些测试能挺过来、加深后的接口应该长什么样。那次会话的输出是一个决策，而不是一份 diff。从那里起，正常流程接管：把决策带进 [to-spec](https://aihero.dev/skills-to-spec)，然后 [to-tickets](https://aihero.dev/skills-to-tickets)，再然后 [implement](https://aihero.dev/skills-implement)。
 
 ## 常见问题
 
-**每条候选都打开一个浏览器页面吗？**
+**它围绕一个想法盘问了我一个小时，而不是给我看选项。能关掉吗？**
 
-不。报告是一份静态 HTML。它由一次 `git ls-files` 和几条 `Read` 写出来，没有 Playwright、没有 dev server、也没有无头浏览器。它在你的浏览器里打开只是因为你双击了它；技能本身从来没启动过浏览器。
+能：调用时说出来（"别盘问我，只给我看报告"）。这是这个技能最响亮的抱怨。一位用户说得直白：他喜欢它作为"获得改进的彻底分析的一种便捷方式"，而在盘问循环被加入后觉得它"近乎不可用"，报告了它会提出单一方案、然后问"几十甚至几百个问题"的会话。设计意图是报告在前，盘问只在你选中的候选上开始，但较弱的 [model](https://www.aihero.dev/ai-coding-dictionary/model) 会直接跳去采访你关于自己想到的第一个想法。那个帖子里按模型划分的报告差异很大，而且这是一个未决 issue：技能还没有记录在案的无盘问模式。
 
-**它会留下任何持久化的东西吗？**
+**报告以无样式的原始 HTML 打开，没有图表。发生了什么？**
 
-只有 `GLOSSARY.md` 和（如果你接受了那条提议）`docs/adr/` 下的一个 ADR。报告在临时目录里，OS 重启就没了——这正是它为什么不承担任何 git 状态的原因。
+报告从 CDN 加载 Tailwind 和 Mermaid，所以打开时需要网络访问，而当有东西阻止这些脚本时它会无声地坏掉。提交的案例是一个要求 SRI 哈希的安全钩子：agent 加上了哈希，CDN 提供给浏览器的字节与用来计算哈希的 `curl` 得到的不同，浏览器就阻止了脚本。离线和锁定环境撞上同一堵墙。agent 看不到这一点，因为它从不渲染页面。变通办法是要求内联 CSS 和手绘 SVG 图，而不是 CDN 脚手架。这是一个未决 issue，也是一条真实的粗糙边缘。
 
-**我能一次性跑多个，或者在同一个会话里挑多个吗？**
+**它给了我十二个候选。我该在同一个会话里逐个做，还是另开一个新会话？**
 
 一次会话一条候选。在一次对话里走几条会把 [context window](https://www.aihero.dev/ai-coding-dictionary/context-window) 装满：报告、盘问、domain-model 编辑和代码改动全堆在一起。报告只活在临时文件里，所以带上候选本身、而不是那份文件：挑一条、盘它、把决策带进 `/to-spec`，并把剩下的转成你可以独立捡起的 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)。把挑好的改善写进 spec，而不是直接进实现。这是一个反复出现的问题，技能自身没有文档化的流程。
 
@@ -98,4 +98,4 @@
 
 ## 它的定位
 
-`improve-codebase-architecture` 是**周期性维护**：每隔几天跑一次，在任何链之外，把工作排进队列而不是动手做。它的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——占着每条候选都用以撰写的 depth-and-seam 词汇；[盘问（grilling）](https://aihero.dev/skills-grilling)——在你挑了一条候选之后走决策树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)——在决策敲定时保持 `GLOSSARY.md` 和 ADR 是最新的。它产出的是一份想法，经由 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 或 [to-spec](https://aihero.dev/skills-to-spec) 重新进入主构建流程。哪个技能适合某场景时，[ask-matt](https://aihero.dev/skills-ask-matt) 是整套技能的路由器。
+`improve-codebase-architecture` 是**周期性维护**：每隔几天跑一次，在任何链之外，把工作排进队列而不是动手做。它的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——占着每条候选都用以撰写的 depth-and-seam 词汇；[盘问（grilling）](https://aihero.dev/skills-grilling)——在你挑了一条候选之后走决策树；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)——在决策敲定时保持 `GLOSSARY.md` 和 ADR 是最新的。它产出的是一份想法，经由 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 或 [to-spec](https://aihero.dev/skills-to-spec) 重新进入主构建流程。它在主流程末端的对位技能是 [retro](https://aihero.dev/skills-retro)：这个技能改善 agent 工作的代码，`retro` 则在一次构建之后改善它周边的环境（检查、标准、引导文件）。哪个技能适合某场景时，[ask-matt](https://aihero.dev/skills-ask-matt) 是整套技能的路由器。

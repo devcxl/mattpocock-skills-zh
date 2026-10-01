@@ -87,7 +87,9 @@ Spec 轴需要一个存在且可找到的 spec。它按这个顺序查找：
 
 `code-review` 是构建链**接近**尾端的审查步骤——`grill-with-docs → to-spec → to-tickets → implement → code-review → retro`——也可以独立地用在任何你指向的分支或 PR 上。
 
-- [implement](https://aihero.dev/skills-implement) 是最近的邻居：它驱动构建，并在提交前调用这个技能作为自己的收尾审查。
+- [implement](https://aihero.dev/skills-implement) 是最近的邻居：它驱动构建，并在提交前调用这个技能作为自己的收尾审查。[implement-spec](https://aihero.dev/skills-implement-spec) 对整条集成分支做一次同样的事。
+- [retro](https://aihero.dev/skills-retro) 在它之后运行并调校它：当一次会话暴露出评审漏掉了某类错误时，`retro` 会提出检查或 `CODING_STANDARDS.md` 规则，供 Standards 轴此后读取。
+- [pr](https://aihero.dev/skills-pr) 在评审过的工作要提交时撰写 PR body。
 - [to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets) 产出 Spec 轴对照的文档；一份含糊的 spec 会让那条轴也变得含糊。
 - [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 是全代码库层面的对应物——这个技能永远只盯着一个 diff。
 

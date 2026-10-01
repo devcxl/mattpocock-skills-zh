@@ -43,17 +43,17 @@
 - **接口就是测试面。** 调用者和测试跨越同一条接缝。如果你想测试*越过*接口，那模块的形状就是错的。
 - **一个适配器意味着一个假想的接缝。两个适配器意味着一个真实的接缝。** 不要在什么真的在那里变化之前切开一个接缝。单适配器的接缝只是间接。
 
-还有两份支撑文件走得更远，技能按需读取而不是一次性读完。[DEEPENING.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DEEPENING.md) 把候选的依赖分成四类（进程内、可本地替换的、远程但归属自己的、真正外部的），因为类别决定了加深后的模块如何跨接缝被测试。[DESIGN-IT-TWICE.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DESIGN-IT-TWICE.md) 来自 Ousterhout——并行生成截然不同的设计，挑一个——这是这个技能被创造之前它所在的、已退役的 `design-an-interface` 的回收物。
+还有两份支撑文件走得更远，技能按需读取而不是一次性读完。[DEEPENING.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DEEPENING.md) 把候选的依赖分成四类（进程内、可本地替换的、远程但归属自己的、真正外部的），因为类别决定了加深后的模块如何跨接缝被测试。[DESIGN-IT-TWICE.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DESIGN-IT-TWICE.md) 启动并行[子代理](https://www.aihero.dev/ai-coding-dictionary/subagent)，为同一个模块产出三个或更多截然不同的接口，再按深度、局部性和接缝位置比较它们。
 
 ## 常见问题
 
-**它会自己开一个会话吗？**
+**如何真正在 TypeScript 里构建一个深模块？**
 
-不应该，但有些 agent 这么干，于是有人提了 issue（[#417](https://github.com/mattpocock/skills/issues/417)）。没有循环、没有停止规则，agent 就会即兴编出一个循环——读文件、提议抽取、把它们作为抽取的"理由"展示——这就是为什么 SKILL.md 把"这是一个参考，不是一个流程"摆在显著位置。如果你看到 `/codebase-design` 之后 agent 自行开干了，那就是误解了这份参考资料。如果你计划要一次这样的会话，先自己把要设计的东西写下来，再调用它，让它对照你的草稿点评。
+这是关于这个技能被问得最多的问题，而技能本身没有回答它。它定义深模块*是什么*；它没说如何阻止一个野生的 import 越过接口。[Issue #458](https://github.com/mattpocock/skills/issues/458) 说得很直白："let's say we're happy with the interface, it hides the details, etc. But how do we enforce it? I think without linting or clear guardrails, humans and LLMs alike will start making it messy over time." Matt 在那个帖里的回答是三个选项：用 class 或 IIFE 包起来，接受这个 class 变得巨大；在 monorepo 里做成一个 package，接受 monorepo 的工具链；或者用 [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) 这类 linter 禁止绕过接口的 import。他另在别处称 Effect 是最好的机制、dependency-cruiser 是第二好。仓库的 `in-progress/` bucket 里有一个 `setup-ts-deep-modules` 技能，它铺设 `src/packages/<name>/index.ts` 约定，但那是 beta 通道技能、没有文档页，而且没有随附 lint 规则。
 
-**它和 `/grilling`、`/tdd`、`/improve-codebase-architecture` 有什么不同？**
+**我让一个会话指向它，它烧掉 10 万 [tokens](https://www.aihero.dev/ai-coding-dictionary/token) 重新设计了一堆我没要求的东西。**
 
-它们在这份词汇表上协作：grilling 把它当成被盘问的对象，tdd 把它当成接缝处的措辞，improve-codebase-architecture 用它来报告它找到的加深候选。把任意一个角色错配给这个技能都会破事。[Issue #442](https://github.com/mattpocock/skills/issues/442) 描述了一连串的混淆——有人把 `/improve-codebase-architecture` 或 `/tdd` 配合 `codebase-design` 作为词汇表来跑。issue 是开放的。
+已知，并已立案为 [issue #449](https://github.com/mattpocock/skills/issues/449)。这个技能是模型调用的，自称是词汇表，但它里面没有任何东西能硬拦住 agent 把它当成可运行流程。被要求"resume in /codebase-design and drive the open decisions"时，agent 会去抓它能找到的最具行动感的内容：`DESIGN-IT-TWICE.md` 里的并行子代理。它重新探索了上一个会话已经测绘过的代码，跑了很长一段才问第一个问题。驱动型技能有的那些护栏（检查点、一次一个问题、不自动推进）在这里一个都没有，因为参考型技能本来就没有。变通做法是点名一个驱动技能，让这一个待在下面当底座：`/grill-with-docs`、`/improve-codebase-architecture` 或 `/tdd`，配上 `codebase-design` 作为词汇表。issue 仍然开放。
 
 **`design-an-interface` 去哪了？还有一个 `/interface-design` 技能吗？**
 
@@ -61,7 +61,7 @@
 
 **这不就是文件结构约定吗，比如文件夹、barrel 文件、feature 切片？**
 
-不是，而且这个技能在反复施压下守住了这条线。[Issue #95](https://github.com/mattpocock/skills/issues/95) 提出把一种形式化的 fractal-tree 文件结构当作深模块的具体实现；回复是两者正交："deep modules are about the design of the interface and accessing through a strict interface, no matter what the file system looks like. It seems perfectly possible that you could have shallow modules with this approach."[#458](https://github.com/mattpocock/skills/issues/458) 也提出了同样的问题："I think you might be tying the concept of modules too closely to the file system. The file system can certainly be a useful hint to the shape of modules, but there's no need to use the file system in the construction of deep modules." 词汇表把 **module** 定义为与规模无关的，正是出于这个原因。
+不是，而且这个技能在反复施压下守住了这条线。[Issue #95](https://github.com/mattpocock/skills/issues/95) 提出把一种形式化的 fractal-tree 文件结构当作深模块的具体实现；回复是两者正交："deep modules are about the design of the interface and accessing through a strict interface, no matter what the file system looks like. It seems perfectly possible that you could have shallow modules with this approach."#458 也提出了同样的问题："I think you might be tying the concept of modules too closely to the file system. The file system can certainly be a useful hint to the shape of modules, but there's no need to use the file system in the construction of deep modules." 词汇表把 **module** 定义为与规模无关的，正是出于这个原因。
 
 **`tdd` 真的用这套词汇表吗？**
 

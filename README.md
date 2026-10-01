@@ -10,21 +10,23 @@
 
 # 给真正工程师用的技能集
 
-[![skills.sh](https://skills.sh/b/mattpocock/skills)](https://skills.sh/mattpocock/skills)
+[![skills.sh](https://skills.sh/b/devcxl/mattpocock-skills-zh)](https://skills.sh/devcxl/mattpocock-skills-zh)
 
-我每天都在用的智能体技能：做真正的工程，不是 vibe coding。
+本仓库由 `devcxl` 维护，是 [Matt Pocock 的 `mattpocock/skills`](https://github.com/mattpocock/skills) 项目的第三方简体中文汉化版，非官方仓库。以下中文版安装方式均指向本仓库；英文原版见[上游仓库](https://github.com/mattpocock/skills)。
+
+Matt Pocock 的智能体技能集面向真正的工程实践，而非 vibe coding。
 
 开发真正的应用很难。GSD、BMAD、Spec-Kit 等方法试图通过接管流程来帮忙。但在这么做的同时，它们剥夺了你的控制权，并且让流程中的 bug 极难排查。
 
 这些技能的设计原则是：小巧、易定制、可组合。它们兼容任何模型。它们基于数十年的工程经验打磨而成。尽管折腾、改造成你自己的。Enjoy。
 
-如果你想跟进这些技能的更新以及我新发布的技能，可以加入我的 Newsletter，已有约 60,000 名开发者订阅：
+想关注 Matt Pocock 发布的新技能与上游动态，可订阅他的 Newsletter（上游 README 标注约 60,000 名开发者订阅）：
 
 [订阅 Newsletter](https://www.aihero.dev/s/skills-newsletter)
 
 ## 安装（30 秒配置）
 
-两种方式，两种理念。**[Claude Code 插件](https://code.claude.com/docs/en/plugins)** 将整套技能集作为受管理的只读 bundle 安装，在我发布新版本时自动更新：你订阅而非 fork。**[skills.sh](https://skills.sh/mattpocock/skills)** 将可编辑的技能文件复制到你的项目中，这样你可以随意修改，变成自己的东西。**二选一：两者都装会导致每个技能出现两次。**
+两种方式，两种理念。**[Claude Code 插件](https://code.claude.com/docs/en/plugins)** 将整套技能集作为受管理的只读 bundle 安装，来源是本仓库自带的 marketplace。**[skills.sh](https://skills.sh/devcxl/mattpocock-skills-zh)** 将可编辑的中文版技能文件复制到你的项目中，便于自行修改。**二选一：两者都装会导致每个技能出现两次。**
 
 ### 1. 获取技能
 
@@ -32,16 +34,18 @@
 <summary><strong>Claude Code</strong></summary>
 
 ```bash
-claude plugins install mattpocock-skills
+claude plugin marketplace add devcxl/mattpocock-skills-zh
+claude plugin install mattpocock-skills@mattpocock
 ```
 
-或者在会话中：
+或者在 Claude Code 会话中：
 
 ```
-/plugin install mattpocock-skills
+/plugin marketplace add devcxl/mattpocock-skills-zh
+/plugin install mattpocock-skills@mattpocock
 ```
 
-它在 Claude Code 的官方市场中，无需额外添加，更新自动送达。
+以上命令从本仓库的 marketplace 安装中文版插件，不是从 Claude Code 官方市场安装英文版。
 
 </details>
 
@@ -49,7 +53,7 @@ claude plugins install mattpocock-skills
 <summary><strong>Codex 及其他智能体</strong></summary>
 
 ```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add devcxl/mattpocock-skills-zh
 ```
 
 选择你想要的技能，以及要安装到哪些编程智能体上。**安装器会让你选择要装的技能：务必把 `setup-matt-pocock-skills` 选上。**
@@ -64,16 +68,16 @@ npx skills@latest add mattpocock/skills
 使用同样的安装器，在任何智能体上安装：包括 Claude Code：
 
 ```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add devcxl/mattpocock-skills-zh
 ```
 
 这会将技能作为普通文件写入你的仓库，归你所有，你可以自由编辑。不会有任何东西在后台偷偷更新；想获取最新变更时，运行 `npx skills update` 即可。
 
 </details>
 
-### 2. 运行 `/setup-matt-pocock-skills`
+### 2. 运行安装向导
 
-在你的智能体中运行它，每个仓库执行一次。它会：
+在你的智能体中运行它，每个仓库执行一次。Claude Code 插件用户可运行 `/mattpocock-skills:setup-matt-pocock-skills`，通过 skills.sh 安装的用户可运行 `/setup-matt-pocock-skills`。它会：
 
 - 询问你要使用哪个 Issue 跟踪器（GitHub、Linear 或本地文件）
 - 询问你对工单进行分类时使用哪些标签（`/triage` 会用到）
@@ -83,9 +87,9 @@ npx skills@latest add mattpocock/skills
 
 ## 这些技能存在的原因
 
-我建立这些技能是为了修复我在 Claude Code、Codex 以及其他编程智能体上看到的常见失败模式。
+上游项目将这套技能定位为解决 Matt Pocock 在 Claude Code、Codex 及其他编程智能体中观察到的常见失败模式。
 
-### #1：智能体没做我想要的事
+### #1：智能体没按需求做事
 
 > "No-one knows exactly what they want"
 >
@@ -100,7 +104,7 @@ npx skills@latest add mattpocock/skills
 - [`/grill-me`](./skills/productivity/grill-me/SKILL.md)：用于非代码场景
 - [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md)：和 [`/grill-me`](./skills/productivity/grill-me/SKILL.md) 一样，但增加了更多内容（见下文）
 
-这些是我最受欢迎的技能。它们帮你和智能体在你开始之前先对齐，并就你正在做的修改深入思考。**每次**你想做修改时都用它们。
+上游项目将这两项列为最受欢迎的技能。它们帮助你和智能体在开始前先对齐，并深入思考正在进行的修改。**每次**你想做修改时都可以使用它们。
 
 ### #2：智能体太冗长
 
@@ -110,7 +114,7 @@ npx skills@latest add mattpocock/skills
 
 **问题所在**：在一个项目的开始，开发者和他们正在为之构建软件的人（领域专家）通常说的是不同的语言。
 
-我在和我的智能体之间感受到了同样的张力。智能体通常被丢进一个项目，要去现场弄懂那些行话。所以它们用 20 个词的地方，一个就够。
+使用智能体时也会遇到同样的张力。智能体通常被丢进一个项目，需要现场弄懂其中的行话。所以它们用 20 个词的地方，一个就够。
 
 **修复**是建立一套共享语言。它是一份帮助智能体解码项目中使用的行话的文档。
 
@@ -119,7 +123,7 @@ npx skills@latest add mattpocock/skills
 示例
 </summary>
 
-这是一个[术语表](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md)的例子（在那个 pinned commit 里还叫 `CONTEXT.md`，早于技能重命名这个约定），来自我的 `course-video-manager` 仓库。哪一份更容易读？
+这是一个[术语表](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md)的例子（在那个 pinned commit 里还叫 `CONTEXT.md`，早于技能重命名这个约定），来自 Matt Pocock 的 `course-video-manager` 仓库。哪一份更容易读？
 
 - **之前**："There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
 - **之后**："There's a problem with the materialization cascade"
@@ -153,11 +157,11 @@ npx skills@latest add mattpocock/skills
 
 对自动化测试来说，红绿重构循环至关重要。这是先让智能体写一个失败测试，再修复测试的环节。它能给智能体持续一致的反馈，从而产出好得多的代码。
 
-我建了一个 **[`/tdd`](./skills/engineering/tdd/SKILL.md)** 技能，你可以放进任何项目。它鼓励红绿重构，并给智能体充分指引，什么是好测试、什么是坏测试。
+仓库提供了 **[`/tdd`](./skills/engineering/tdd/SKILL.md)** 技能，可以放进任何项目。它鼓励红绿重构，并给智能体充分指引，说明什么是好测试、什么是坏测试。
 
-对调试，我也建了一个 **[`/diagnosing-bugs`](./skills/engineering/diagnosing-bugs/SKILL.md)** 技能，它把最佳调试实践包成一个按阶段把关、有纪律的循环。
+此外还有 **[`/diagnosing-bugs`](./skills/engineering/diagnosing-bugs/SKILL.md)** 技能，它把最佳调试实践组织成一个按阶段把关、有纪律的循环。
 
-### #4：我们建了一团泥球
+### #4：代码库变成一团泥球
 
 > "Invest in the design of the system _every day_."
 >
@@ -175,11 +179,11 @@ npx skills@latest add mattpocock/skills
 
 - [`/to-spec`](./skills/engineering/to-spec/SKILL.md) 在创建规格之前先测验你要触及哪些模块
 
-而关键的是，[`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) 会扫描一份代码库里的深化机会，然后把候选摆给你。我建议你在你的代码库上每隔几天跑一次。它是一次扫描而不是一次救援：在一份真正老的代码库上它会找到真实的候选，但它不会替你把泥团解开。
+而关键的是，[`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) 会扫描代码库里的深化机会，再把候选项呈现出来。建议每隔几天在自己的代码库上运行一次。它是一次扫描而不是一次救援：在一份真正老的代码库上它会找到真实的候选，但它不会替你把泥团解开。
 
 ### 小结
 
-软件工程的基本功比以往更重要。这些技能是我把这些基本功压缩成可重复实践的最大努力，帮你做出你职业生涯中最好的应用。Enjoy。
+软件工程的基本功比以往更重要。这套技能尝试把这些基本功压缩成可重复实践，帮助开发者打造更好的应用。Enjoy。
 
 ## 索引
 
@@ -187,7 +191,7 @@ npx skills@latest add mattpocock/skills
 
 ### Engineering
 
-我每天用的编码工作技能。
+日常编码工作技能。
 
 **用户调用**
 

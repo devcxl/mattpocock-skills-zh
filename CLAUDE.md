@@ -8,7 +8,7 @@
 
 `engineering/` 或 `productivity/`（**已推广**的 bucket）中的每个技能必须在顶层 `README.md` 中有一处引用，并在 `.claude-plugin/plugin.json` 的 `skills` 数组中有一项（Claude Code 插件只随附已推广的集合）。`misc/`、`in-progress/` 和 `deprecated/` 中的技能不得出现在两者之中。
 
-安装命令从 [.agents/install-block.md](./.agents/install-block.md) 逐字复制。`.claude-plugin/marketplace.json` 让本仓库成为自己的单插件市场（这是安装块解释的回退方案，不是文档化的正式途径）。触碰任一清单文件后运行 `claude plugin validate . --strict`。为什么做 Claude 插件而（暂时）不做 Codex 插件，见 [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
+README 的中文版安装命令必须逐字复制自 [.agents/install-block.md](./.agents/install-block.md)。本仓库由 `devcxl` 维护，是 Matt Pocock 的 `mattpocock/skills` 项目的第三方简体中文汉化版；中文版命令必须指向 `devcxl/mattpocock-skills-zh`，提及上游英文原版时须明确标注，不得把上游命令用作中文版的默认安装命令。`.claude-plugin/marketplace.json` 定义本仓库自己的单插件 marketplace，不是 Claude Code 官方市场的一部分。触碰任一清单文件后运行 `claude plugin validate . --strict`。为什么做 Claude 插件而（暂时）不做 Codex 插件，见 [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
 
 顶层 `README.md` 中的每个技能条目必须把技能名链接到它的 `SKILL.md`。
 

@@ -5,7 +5,7 @@ Beta 版。这些技能公开是有意为之：试用并告诉我哪里坏了。
 插件不会给你这些。直接单独安装：
 
 ```bash
-npx skills@latest add mattpocock/skills --skill=<name>
+INSTALL_INTERNAL_SKILLS=1 npx skills@latest add devcxl/mattpocock-skills-zh --skill=<name>
 ```
 
 - **[loop-me](./loop-me/SKILL.md)** ： 通过多个会话将你自己盘问出可实施的工作流规格，使用当前目录作为有状态工作区。用户调用。

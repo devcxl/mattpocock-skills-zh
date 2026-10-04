@@ -18,7 +18,8 @@
 | 一份来自他人的、还没确认或整理的原始 bug 报告 | 先 [triage](https://aihero.dev/skills-triage) |
 | 为回答一个设计问题而写的、用完就扔的代码，不是为了追缺陷 | [prototype](https://aihero.dev/skills-prototype) |
 | 为构建一个计划中的行为而测试先行 | [tdd](https://aihero.dev/skills-tdd) |
-| 没有合适的接缝能把这个 bug 钉死 | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture)：这个技能自己会交接到那里 |
+| 修复后，想知道哪些做法本可以避免这个 bug | [retro](https://aihero.dev/skills-retro)，在同一会话中运行 |
+| 没有合适的接缝能把这个 bug 钉死 | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture)，由你自行启动 |
 
 ## 紧回路就是这个技能
 
@@ -51,7 +52,7 @@
 | 进入第 5 阶段 | 探针对应具体的预测，一次一个变量，每条 debug 日志都打成 `[DEBUG-a4f2]` 这种样式，让清理变成一次 grep |
 | 完成 | 原始复现已经不再复现，插桩已清理，且猜对的那条假设被写进了 commit message |
 
-第 5 阶段有一条值得了解的逃生口。回归测试在修复之前写，但只有在存在一个**正确的接缝**时才能写：测试能在这个 bug 模式真实发生的调用点上锻炼它。当唯一可用的接缝太浅时，技能被告知要明说，而不是写一个给出虚假信心的测试。这种缺失本身就是发现，也正是把事后分析路由到 `improve-codebase-architecture` 的东西。
+第 5 阶段有一条值得了解的逃生口。回归测试会在修复之前编写，但前提是存在一个**正确的接缝**：测试能在调用点覆盖真实发生的 bug 模式。如果唯一可用的接缝太浅，技能会明确说明，而不是写出让人产生虚假信心的测试。这种缺失本身就是一项发现，技能会如实记录，而不是掩盖过去。
 
 ## 常见问题
 
@@ -97,4 +98,4 @@ Snyk 确实标了，但标的是误报。它是整个技能集合里唯一一个
 
 `diagnosing-bugs` 是一个随时可调用的独立工具。当某样东西坏了你就钻进它，修好回归测试后就退出；它不持有任何状态，也不需要任何先行的设置。[ask-matt](https://aihero.dev/skills-ask-matt) 会把"某样东西坏了"路由到这里。
 
-有两个邻居要紧。[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在真正的发现是代码没有接缝能钉住 bug 时接手[交接（handoff）](https://www.aihero.dev/ai-coding-dictionary/handoff)；这条建议是在修复落定之后、掌握更多信息时做出的。[triage](https://aihero.dev/skills-triage) 在那些作为他人原始报告到来的 bug 面前坐在它的上游，做同一份前两个阶段的浅版本。
+有两个相邻技能值得注意。[retro](https://aihero.dev/skills-retro) 接在它之后：修复完成后，在同一会话中运行它，趁着掌握的信息比一开始更多，追问哪些做法本可以避免这个 bug。该技能不会自行调用 `retro`，因为 `retro` 由用户主动调用。[triage](https://aihero.dev/skills-triage) 位于它的上游，处理他人提交的原始 bug 报告，并以较浅的方式执行同样的前两个阶段。

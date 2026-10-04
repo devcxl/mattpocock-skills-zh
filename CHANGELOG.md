@@ -1,5 +1,11 @@
 # mattpocock-skills
 
+## 1.3.1
+
+### 补丁变更
+
+- [#1121](https://github.com/mattpocock/skills/pull/1121) [`c5b9869`](https://github.com/mattpocock/skills/commit/c5b98691982c4f0d3a5e40ab09566b3b84721e00) 感谢 [@mattpocock](https://github.com/mattpocock)！ - `ask-matt` 不再表示 `diagnosing-bugs` 会在事后复盘中将工作交接给 `improve-codebase-architecture`，该步骤已移除。修复完成后，它现在会引导你使用 `/retro`，询问怎样做才能避免这个 bug；如果发现的问题是缺少一个衔接点，则会引导你使用 `/improve-codebase-architecture`。`diagnosing-bugs` 文档页面也删除了同样过时的交接说明。感谢 @Ygilany 发现了这个问题（[#1117](https://github.com/mattpocock/skills/issues/1117)）。
+
 ## 1.3.0
 
 ### 次要变更

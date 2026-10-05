@@ -50,11 +50,15 @@
 
 ## 简报之前先验证
 
-在任何 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling) 之前，`triage` 检查论断是否真的成立。对 bug，它按报告者的步骤复现。对 PR，它 checkout 分支并跑相关测试。然后它报告三件事中哪件发生了：已确认，带代码路径；无法复现；或细节不足无法尝试——后者本身就是最强的 `needs-info` 信号。
+在任何 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling) 之前，`triage` 检查论断是否成立。对 bug，它按报告者的步骤复现；对 PR，它 checkout 分支并运行相关测试。然后它报告三种结果之一：
 
-它在同一遍里对代码库再跑两项检查——**冗余**（这已经实现了吗？按领域概念搜索，而不是按报告者的措辞？）和**先前拒绝**（`.out-of-scope/` 已经说过不吗？）。两者都便宜，命中时都产生一个 `wontfix`。
+- 已确认，并说明代码路径。
+- 无法复现。
+- 细节不足，无法尝试。这是最强的 `needs-info` 信号。
 
-这一切存在是为了让一件工件变好：**代理简报（agent brief）**，即 issue 移到 `ready-for-agent` 时发布的结构化评论。一旦发布，简报就是契约，原始报告只是上下文。简报被写成**耐久**的而不是精确的，因为一份 issue 可能在 `ready-for-agent` 里坐上几周，而底下的代码在移动。所以它们点名类型、签名和行为契约，绝不放文件路径或行号。一个确认的复现比一个猜测做出强得多的简报。
+同一遍里，它还会对代码库跑两项检查。**冗余**检查：功能是否已经实现？按领域概念搜索，而不是按报告者的措辞。**先前拒绝**检查：`.out-of-scope/` 是否已经说过不？两项检查都很便宜，任一命中都会产生一个 `wontfix`。
+
+所有这些工作都是为了做好一件工件：**代理简报（agent brief）**，即 `triage` 把 issue 移至 `ready-for-agent` 时发布的结构化评论。发布后，简报就是契约，原始报告只是上下文。简报追求**耐久**而不是精确，因为 issue 可能在 `ready-for-agent` 中停留数周，期间代码会变化。因此，简报会写明类型、签名和行为契约，不写文件路径或行号。确认过的复现能让简报比猜测有力得多。
 
 ## PR 是带代码的 issue
 
@@ -78,7 +82,13 @@
 
 **五个状态不够——blocked、deferred 或 implemented 呢？**
 
-这是这份技能被提交最多的缺口，有三种形态。一个完全指定、但等待另一张 issue 关闭的 issue（[#139](https://github.com/mattpocock/skills/issues/139)）——报告者的抱怨是 `ready-for-agent` 在那里"技术上为真"但有误导性，所以代理捡起它、撞上墙。被触发器门控、打算做但还不可执行的未来工作（[#297](https://github.com/mattpocock/skills/issues/297)）。以及一个"已实现、等待验证"的终态，没有它 AFK 运行器可能重新排队已完成的 tickets。Matt 同意 blocked 的情况是真的，对名字（`blocked` 对 `paused`）还没决定。全都没发布。人们使用的变通办法是在类别旁边加一个仓库本地的额外标签，让规范状态槽被诚实的东西占据，代价是技能不知道它。一个社区衍生品走得更远，加了 `needs-slicing`、`tracking` 和投入度标签——那有效，但那是他们的，不是技能的。
+这是这份技能被提交最多的缺口，有三种形式：
+
+- 一张已完全指定、但要等另一张 issue 关闭的 issue（[#139](https://github.com/mattpocock/skills/issues/139)）。报告者说，在这种情况下 `ready-for-agent` "技术上为真"，但容易误导，所以 agent 会接手后卡住。
+- 预期要做、但要等某个触发条件才会变得可执行的未来工作（[#297](https://github.com/mattpocock/skills/issues/297)）。
+- 一个"已实现、待验证"的终态。没有它，AFK 运行器可能会重新排队已完成的 tickets。
+
+blocked 的情况已被接受为真实问题，但名称（`blocked` 还是 `paused`）尚未决定。还没有任何方案发布。作为变通，人们会在类别旁边加一个仓库本地的额外标签，让状态槽保留一个准确值，但技能并不知道这个额外标签。一个社区 fork 走得更远，增加了 `needs-slicing`、`tracking` 和 effort 标签。这种做法有效，但属于该 fork，不属于这个技能。
 
 **这和 `/diagnosing-bugs` 有什么不同？**
 

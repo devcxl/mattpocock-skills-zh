@@ -2,7 +2,7 @@
 
 `wizard` 生成一个交互式 bash 脚本，逐步引导人类完成一个手动流程——配置第三方服务、运行一次性迁移、将项目从状态 A 搬到状态 B。它打开每个 URL，告诉你要点击和复制什么，捕获返回的内容，并写入 `.env` 文件和 GitHub Actions secrets。
 
-[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 负责写脚本，**从不运行它**。由你在自己的机器上运行。所以 wizard 不是一份你照着做的说明清单——它是一个驱动流程并持有状态的程序，你的部分只是点击、粘贴和按回车。
+[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 负责写脚本，**从不运行它**。由你在自己的机器上运行。Wizard 是程序，不是说明清单：脚本按顺序执行每个步骤，并保存你输入的值。你要做的只是点击、粘贴和按回车。
 
 ## 何时使用
 
@@ -15,7 +15,7 @@
 | 一个新开发需要在应用启动前配置六个服务 | 按顺序打开每个 dashboard，捕获 key，写入 `.env` 和 CI |
 | 一次性迁移需要按特定顺序拨动开关 | 把不可逆步骤排在确认门之后 |
 | 一个项目需要一次性从状态 A 搬到状态 B | 走完整个转换并报告它没能完成的部分 |
-| 你正要把这些步骤写进 README | 改为写一个可执行版本，它不会那么安静地腐烂 |
+| 你正要把这些步骤写进 README | 改为写一个可执行版本，步骤过时后会明确失败 |
 
 不要用它来*决定*要构建什么；那是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 和 [to-spec](https://aihero.dev/skills-to-spec) 的工具。
 
@@ -27,7 +27,7 @@
 
 **stage** 是同一屏上的一个聚焦任务。脚本在阶段之间清屏，所以一个溢出屏幕的阶段会丢失滚走的部分。你按依赖顺序编写阶段并设置 `TOTAL_STAGES`，它驱动进度显示。
 
-范围界定发生在写下任何一行代码之前。[技能（skill）](https://www.aihero.dev/ai-coding-dictionary/skill) 会读取仓库而不是凭空提问：`.env*`、`docker-compose*`、框架配置，以及 `.github/workflows/` 中的每个 `secrets.*` / `vars.*` 引用——每一个都是 wizard 必须产出的值。然后它向你展示有序的阶段列表以供确认，之后才把每个阶段映射到人类走的确切路径（"Dashboard → Developers → API keys → Reveal test key → copy"）。在它不知道当前 UI 的地方，它会问你或查文档，而不是编造点击路径。
+[技能（skill）](https://www.aihero.dev/ai-coding-dictionary/skill) 会先界定流程范围，再写任何脚本。它会读取仓库，而不是让你从头回答：`.env*`、`docker-compose*`、框架配置，以及 `.github/workflows/` 中每个 `secrets.*` / `vars.*` 引用。每个引用都是 wizard 必须生成的值。随后它会展示有序的阶段列表供你确认；只有你确认后，它才将每个阶段映射到人类要走的准确路径（"Dashboard → Developers → API keys → Reveal test key → copy"）。如果它不知道当前 UI，就会询问你或查阅文档，而不是编造点击路径。
 
 对每个捕获的值，范围界定会确定它落在哪里：
 
@@ -41,9 +41,9 @@
 
 ## 模板已经解决了 UX
 
-[模板](https://github.com/mattpocock/skills/blob/main/skills/engineering/wizard/template.sh) 自带完整体验：剩余时间进度显示、确认门、跨平台 URL 打开（含 WSL）、秘密的隐藏输入、幂等的 `.env` upsert、`gh secret` / `gh variable` 写入，以及一份它不得不跳过的所有事项的收尾摘要。`STAGES` 标记之上的一切都是固定库，在每个 wizard 中完全相同，绝不手工编辑。这种一致性正是重点。你的工作只是界定流程范围并编写阶段。
+[模板](https://github.com/mattpocock/skills/blob/main/skills/engineering/wizard/template.sh) 自带完整体验：剩余时间进度显示、确认门、跨平台 URL 打开（含 WSL）、秘密的隐藏输入、幂等的 `.env` upsert、`gh secret` / `gh variable` 写入，以及一份它不得不跳过的所有事项的收尾摘要。`STAGES` 标记之上的一切都是固定库，在每个 wizard 中完全相同，而且绝不手工编辑。这个库不变，因此每个 wizard 的行为一致。每个 wizard 唯一需要做的，是界定流程并编写阶段。
 
-写 wizard 的 agent 永远不会端到端跑它，因为它会打开浏览器并等待人类输入。它改为静态验证：`bash -n`、可用时的 `shellcheck`，以及追踪每个值是否落在范围界定所说的位置、每个 `set_secret` 名称是否匹配 CI 中真实的 `secrets.*` 引用。相应地调整预期——第一次运行是你的，而那次运行就是测试。
+写 wizard 的 agent 永远不会端到端运行它，因为脚本会打开浏览器并等待人类输入。agent 会改为静态检查：运行 `bash -n`，有条件时运行 `shellcheck`，并追踪每个值是否落在界定范围时指定的位置，以及每个 `set_secret` 名称是否匹配 CI 中真实的 `secrets.*` 引用。因此第一次运行由你完成，而那次运行就是测试。
 
 ## 默认临时性
 
@@ -56,7 +56,7 @@
 
 **我的 API key 会进入模型的上下文吗？**
 
-不会。agent 写脚本，但不跑它。你自己跑脚本，它用隐藏的终端输入捕获 key，并直接写入 `.env` 或 `gh secret`。wizard 是一个 CLI，模型与它没有连接。一个警告：这只适用于 wizard 在运行时捕获的值。如果你在界定流程时把 key 粘贴进聊天，它就和任何粘贴的文本一样进入了[上下文（context）](https://www.aihero.dev/ai-coding-dictionary/context)。
+不会。agent 写脚本，但不跑它。你自己运行脚本，它用隐藏的终端输入捕获 key，并直接写入 `.env` 或 `gh secret`。Wizard 是 CLI，模型无法连接到它。这只适用于 wizard 运行时捕获的值；如果你在界定流程时把 key 粘贴进聊天，它就和任何粘贴的文本一样进入[上下文（context）](https://www.aihero.dev/ai-coding-dictionary/context)。
 
 **我能回去修正输错的值吗？**
 
@@ -74,11 +74,11 @@
 
 **它在 Claude Code 之外能用吗？**
 
-产物可以，无条件：它是一个普通 bash 脚本，不在乎是哪个 [harness](https://www.aihero.dev/ai-coding-dictionary/harness) 生成的。技能本身是模型调用的，所以它出现在所有地方——在 Claude Code 中键入 `/wizard`，或在 Codex 中 `$wizard`，或者干脆描述你卡住的设置。模型调用也让它避开了 [#693](https://github.com/mattpocock/skills/issues/693)，即 Claude 的桌面和网页端会把*用户调用*的技能从 [model](https://www.aihero.dev/ai-coding-dictionary/model) 的清单中剔除并报告为未安装。
+脚本可以。它是普通 bash 脚本，无论由哪个 [harness](https://www.aihero.dev/ai-coding-dictionary/harness) 生成都能运行。技能本身是模型调用的，所以它会出现在各处：在 Claude Code 中键入 `/wizard`，或在 Codex 中 `$wizard`，也可以直接描述你卡住的设置。模型调用也让它避开了 [#693](https://github.com/mattpocock/skills/issues/693)：Claude 的桌面和网页应用会把*用户调用*的技能从 [model](https://www.aihero.dev/ai-coding-dictionary/model) 清单中剔除，并报告为未安装。
 
 **它以前不是用户调用的吗？**
 
-是的。现在是模型调用，所以当 agent 撞上一个必须由你完成的步骤时，它会主动使用它。你以前能做的任何事都仍然有效——模型调用*增加*了 agent 的触达，从不移除你的，所以 `/wizard` 的行为和以前完全一样。改变的是它退役的失败模式：agent 在构建中途撞上凭据墙，往聊天里倾倒六条编号步骤让你手动照做。
+是的。现在是模型调用，所以当 agent 撞上一个必须由你完成的步骤时，它会主动使用它。你以前能做的事仍然有效。模型调用让 agent 也能调用技能，不会削弱你的调用方式，所以 `/wizard` 仍像以前一样工作。它改变的是一种失败模式：过去 agent 在构建中途遇到凭据障碍，会在聊天里倒出六条编号步骤让你手动照做；现在它会写一个 wizard。
 
 **它以前在 `in-progress/`——现在在哪？**
 
@@ -95,4 +95,4 @@
 
 ## 它的定位
 
-`wizard` 是一个随时可调用的独立技能，站在自动化停止、人类必须点击的边界线上。它最近的邻居是 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills)，因为两者都是为了把仓库带入可用状态——那个技能配置这套技能集，而 `wizard` 为其他一切生成设置路径。它也和 [implement](https://aihero.dev/skills-implement) 配对：当一次构建落地一个需要凭据或手动切换的功能时，wizard 就是人类那一半的完成方式。当你不确定哪个技能适合当下时，[ask-matt](https://aihero.dev/skills-ask-matt) 为你路由。
+`wizard` 是一个随时可调用的独立技能，站在自动化停止、人类必须点击的边界线上。它最近的邻居是 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills)，因为两者都是为了把仓库带入可用状态：那个技能配置这套技能集，`wizard` 则为其他一切生成设置路径。它也和 [implement](https://aihero.dev/skills-implement) 配对：当构建出的功能需要凭据或手动切换时，wizard 会覆盖只有人类能完成的步骤。当你不确定哪个技能适合当下时，[ask-matt](https://aihero.dev/skills-ask-matt) 为你路由。

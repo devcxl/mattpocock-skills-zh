@@ -20,13 +20,13 @@
 
 路由器只点名技能，不负责安装。它指向的一切都必须已安装，推荐才可执行；而且它只认识本仓库中晋升出来的技能。
 
-依赖追踪器的路由（triage、`to-spec`、`to-tickets`、`implement`）假设 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 已经在仓库中配置好了一个 issue 追踪器。在那之前，路由器也会照常推荐它们。
+依赖追踪器的路由（triage、`to-spec`、`to-tickets`、`implement`）假设 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 已经在仓库中配置好了一个 issue 追踪器；即使尚未配置，路由器仍会推荐它们。
 
 ## 是流程，不是技能
 
-这个技能给你用来思考的词是**流程（flow）**：一条*穿过*技能的路径，而不是单个技能。为你的情况命名，就把你放到某条流程的某一步上，这与"匹配你关键词的技能"是不同的答案。一共存在五种路由，技能本身完整地承载它们：
+这个技能的核心词是**流程（flow）**：一条*穿过*多个技能的路径，而不是单个技能。你说出自己的情况后，路由器会把你放到某条流程的某一步上。这不同于"给你一个匹配关键词的技能"。路由分五类，技能本身完整描述了它们：
 
-- **主流程**，从想法到上线。grill、spec、tickets、implement（一次一张 ticket，或用 [implement-spec](https://aihero.dev/skills-implement-spec) 并行推进整张任务图）、review，然后是 [retro](https://aihero.dev/skills-retro)，它把构建学到的东西喂回 agent 的环境。里面有两条分支：当某个问题需要可运行代码才能敲定时走 prototype 绕行，以及 spec-and-tickets 拆分——只有当构建跨多于一会话时才值得它的成本。
+- **主流程**，从想法到上线。grill、spec、tickets、implement（一次一张 ticket，或用 [implement-spec](https://aihero.dev/skills-implement-spec) 并行推进整张任务图）、review，然后是 [retro](https://aihero.dev/skills-retro)，它把构建学到的东西喂回 agent 的环境。它有两条分支：一条是 prototype 绕行，适用于需要可运行代码才能敲定的问题；另一条是 spec-and-tickets 拆分，只有当构建跨越多个会话时才值得付出成本。
 - **入口（on-ramps）**，为那种产生工作再合入主流程的情况：涌入的 bug 报告、某样东西坏了、或一个太模糊、太庞大、无法在一次会话里容纳的工作量。
 - **代码库健康**，是维护而非功能工作：[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 巡视代码寻找深化机会，每找到一个，就作为想法重新进入主流程。
 - **独立技能**，不在任何流程上，按各自的节奏被调用：prototype、问卷、research 运行。
@@ -39,10 +39,10 @@
 | 选项 | 何时选择 |
 | --- | --- |
 | **继续（Continue）** | 下一阶段需要这一阶段的原文，或者你还有 [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone) 剩余。这是唯一让会话保持为 [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source) 的动作，所以先把它排除 |
-| **`/clear`** | 身后的一切都可丢弃。棋盘上最便宜的一步，但如果判断错了就是单向的 |
+| **`/clear`** | 身后的一切都可丢弃。成本最低的选项，但判断错了就无法撤销 |
 | **[handoff](https://aihero.dev/skills-handoff)** | 有东西需要转移：新的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness)、新的目录、一位同事、一个阶段中途分叉出来的副任务 |
 | **子代理（Subagent）** | 任务范围足够紧凑，可以在你 [away from the keyboard](https://www.aihero.dev/ai-coding-dictionary/afk) 时跑 |
-| **`/compact`** | 以上都不行。默认选项，而且经常落到这里 |
+| **`/compact`** | 以上都不行。它是默认选项，决策树也常以它收尾 |
 
 其中两个经常被搞错，这正是路由器携带顺序而非清单的原因。`/handoff` 读起来像窗口之间的通用桥梁，其实不是——可移植性是它买来的全部。`/compact` 是树的底部而不是第一选择，因为它上面的四个问题每一个都更便宜或更精确。
 

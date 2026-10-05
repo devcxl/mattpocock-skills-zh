@@ -39,7 +39,7 @@
 | 本地 markdown | `.scratch/<feature>/issues/<NN>-<slug>.md` 下一文件一份，编号按 blocker-first | 自上而下手工处理 |
 | 真实追踪器（GitHub、Linear） | 原生阻塞链接，或追踪器有 sub-issues 时用 sub-issues | 任意一张 blocker 都完成的 ticket 处于**前沿**，可被领取 |
 
-无论如何，边都活在 ticket 里。媒介只决定有没有东西能并行处理它们。`to-tickets` 产出这份工件；运行它（一次会话一张，或一支舰队）是你自己的事，不是技能的事。
+无论如何，边都活在 ticket 里。追踪器只决定有没有东西能并行处理它们。`to-tickets` 产出这份工件；运行它（一次会话一张，或一支舰队）是你自己的事，不是技能的事。
 
 ## 宽重构例外
 

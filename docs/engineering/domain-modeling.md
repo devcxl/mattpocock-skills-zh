@@ -1,6 +1,6 @@
 ## 它的作用
 
-`domain-modeling` 在你做设计的过程中构建并打磨一个项目的**统一语言（ubiquitous language）**：质疑与词汇表冲突的术语，逼你在使用含糊词的地方给出一个精确的词，并用具体场景压力测试一个关系，直到边界变得确切。
+`domain-modeling` 在你做设计的过程中构建并打磨一个项目的**统一语言（ubiquitous language）**。它会质疑与词汇表冲突的术语，在你用词含糊时要求给出精确说法，并用具体场景检验关系，直到边界明确。
 
 它是**主动**的纪律，而不是被动的。读 `GLOSSARY.md` 来借用它的词汇是任何技能都能做的一行习惯；这个技能是为你正在*改变*这个模型的时候准备的。这就是它会打断你的原因。它在对话进行中、术语敲定的那一刻就把一条已敲定的术语写进 `GLOSSARY.md`，而不是在末尾产出一份整齐的词汇表，因为批量版本是某次 [session](https://www.aihero.dev/ai-coding-dictionary/session) 的摘要，而内联版本才是那次 session 的真实产出。
 
@@ -53,7 +53,7 @@ ADR 的三条测试缺任何一条，就不写 ADR。一个容易逆转的决策
 
 **我的 `GLOSSARY.md` 有 500 行。1000 行。3000 行。我该怎么办？**
 
-大小是一个症状，不是病根：这个文件吸收了从来不是词汇表材料的实现细节和决策。修法是一条直接的指令：`/grill-with-docs make my GLOSSARY.md more concise and remove any implementation details from it`。对着一个臃肿的文件跑它，大部分内容都会消掉。只有当文件真正精瘦、且仍覆盖两个读者不愿同时记住的领域时，才考虑拆出 `GLOSSARY-MAP.md`；拆一个臃肿的文件只会给你几份臃肿的文件。技能在这方面的指引还不够强，无法在一开始就阻止这种膨胀，追踪这件事的 issue 仍然开放。
+大小只是症状。问题在于文件收进了不属于词汇表的实现细节和决策。修法是一条直接的指令：`/grill-with-docs make my GLOSSARY.md more concise and remove any implementation details from it`。对着一个臃肿的文件跑它，大部分内容都会消掉。只有当文件已经精简、却仍覆盖读者不愿同时掌握的两个领域时，才用 `GLOSSARY-MAP.md` 拆分；拆分臃肿文件只会得到几份臃肿文件。技能在这方面的指引还不够强，无法在一开始就阻止这种膨胀，追踪这件事的 issue 仍然开放。
 
 **为什么叫 `GLOSSARY.md` 而不是 `GLOSSARY.md`？**
 
@@ -61,7 +61,7 @@ ADR 的三条测试缺任何一条，就不写 ADR。一个容易逆转的决策
 
 **`/ubiquitous-language` 去哪了？**
 
-它被移除了，并且不是被废弃。它的活儿搬进了 `domain-modeling`，后者持续维护整个模型，而不是从一次对话里倒一份词汇表。词汇表强制执行变得更承重了，不是更轻：它现在跑在盘问、triage 和 mapping 的下面，而不是作为一个你记得要做一遍的独立环节。
+它被移除了，并不是被废弃。它的工作转入 `domain-modeling`，后者持续维护整个模型，而不是从一次对话里倒出一份词汇表。词汇规范如今更重要了：它在盘问、triage 和 mapping 的底层持续发挥作用，而不是一个你得记得单独执行的步骤。
 
 **我怎样为一个没有词汇表的代码库弄出一份？**
 
@@ -90,4 +90,4 @@ ADR 的三条测试缺任何一条，就不写 ADR。一个容易逆转的决策
 
 ## 它的定位
 
-`domain-modeling` 是一个**模型调用的参考**，*在*其他技能*之下*跑的次数比单独跑的次数多。[grill-with-docs](https://aihero.dev/skills-grill-with-docs) 在一次盘问中驱动它，[wayfinder](https://aihero.dev/skills-wayfinder) 在绘制地图时加载它，[triage](https://aihero.dev/skills-triage) 用它让 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 保持项目自己的话术，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在决策结晶时调用它。它最近的同胞是 [codebase-design](https://aihero.dev/skills-codebase-design)：两者是其他一切之下的词汇层，一个是给*领域*的，一个是给模块*形状*的。它也能直接被调到——当你想要这种纪律、又不想被通常会拉它的那个技能的步骤绑住的时候。拿不准哪个技能合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。
+`domain-modeling` 是一个**模型调用的参考**，*在*其他技能*之下*运行的次数比单独运行更多。[grill-with-docs](https://aihero.dev/skills-grill-with-docs) 在盘问中驱动它，[wayfinder](https://aihero.dev/skills-wayfinder) 在绘制地图时加载它，[triage](https://aihero.dev/skills-triage) 用它让 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 保持项目自己的话术，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在决策敲定时调用它。它最近的同伴是 [codebase-design](https://aihero.dev/skills-codebase-design)。两者一起构成其他技能之下的词汇层：一个面向*领域*，一个面向模块*形状*。你也可以直接调用它，获得这套规范，而不必执行通常会加载它的其他技能的流程。拿不准哪个技能合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 给你路由。

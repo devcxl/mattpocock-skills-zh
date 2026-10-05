@@ -49,7 +49,12 @@ Spec 轴需要一个存在且可找到的 spec。它按这个顺序查找：
 
 **它和 Claude Code 自带的 `/code-review` 撞名了。我该怎么办？**
 
-这是这个技能被报告最多的问题，而且尚未修复。Claude Code 自带自己的 `/code-review`，它做的事不一样——它在 diff 里猎 bug，而这个技能检查 spec 合规和仓库标准。安装这个库意味着其中一方胜出，而谁胜出取决于你的安装方式。通过插件市场安装，所有东西都带 `mattpocock-skills:` 前缀别名，内置的那个在无前缀名下就很难够到；通过普通 skills 安装，本地文件胜出，这个技能遮蔽了内置的。一个干净的回答是彻底移除 Claude Code 的内置技能：省下大量[上下文（context）](https://www.aihero.dev/ai-coding-dictionary/context)，而且冲突不再重要。遮蔽本身可以说是一个 Claude Code [harness](https://www.aihero.dev/ai-coding-dictionary/harness) 的 bug——技能作者理应可以随意命名自己的技能——所以另一个回答是重命名本地副本。编辑 frontmatter 或重命名目录会被 `npx skills update` 撤销；用户报告的持久变通方案是：把技能 fork 成一个新名字，把 `code-review` 从受管集合中移除，并记下你 fork 时的提交，以便手动重新同步。
+这是这个技能被报告最多的问题，而且尚未修复。Claude Code 自带自己的 `/code-review`，它做的事不一样：它在 diff 里找 bug，而这个技能检查 spec 合规和仓库标准。安装这个库时，其中一个会胜出，具体取决于安装方式：
+
+- **插件市场。** 每个技能都会带上 `mattpocock-skills:` 前缀，内置技能就很难通过无前缀名称调用。
+- **普通 skills 安装。** 本地文件胜出，这个技能会遮蔽内置技能。
+
+一种办法是彻底移除 Claude Code 的内置技能，这样能省下大量[上下文（context）](https://www.aihero.dev/ai-coding-dictionary/context)，冲突也就不再重要。遮蔽本身可以说是 Claude Code 的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness) bug（技能作者理应可以随意命名技能），所以另一个办法是重命名本地副本。`npx skills update` 会撤销对 frontmatter 的修改或目录重命名。用户报告的持久变通方案是把技能 fork 成新名字，并从受管集合中移除 `code-review`。记下 fork 时的 commit，以便手动重新同步。
 
 **它的子代理老是再次调用 `/code-review`，生出更多代理。**
 

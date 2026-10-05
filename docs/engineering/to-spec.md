@@ -2,13 +2,13 @@
 
 `to-spec` 把刚发生的对话转成一份 **[spec](https://www.aihero.dev/ai-coding-dictionary/spec)**，并作为单个 issue 发布到你的 issue 追踪器。
 
-它不访谈你。等你伸手来用它的时候，决定已经做完，所以它综合已知的东西（来自这条线程、来自代码库、来自你的 `GLOSSARY.md` 和 ADR），而不是打开新的一轮提问。spec 是一份已经做出的决策的记录，而不是新决策被做出的地方。
+它不访谈你。你来调用时，决定已经做完，所以它综合已知信息（来自当前对话、代码库、你的 `GLOSSARY.md` 和 ADR），而不会开启新一轮提问。spec 记录已经做出的决策，而不是用来做出新决策的地方。
 
 ## 何时使用
 
 你通过键入 `/to-spec` 来调用它；[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会主动使用它。
 
-当构建对一次 agent [session](https://www.aihero.dev/ai-coding-dictionary/session) 来说太大、并且必须能在被拆成几次后还能活下去时，使用它。这就是全部触发条件：
+当构建对一次 agent [session](https://www.aihero.dev/ai-coding-dictionary/session) 来说太大、必须拆到多个会话里完成时，使用它。这就是全部触发条件：
 
 | 你在哪 | 跑什么 |
 | --- | --- |
@@ -19,19 +19,19 @@
 
 ## 先决条件
 
-`to-spec` 把 spec 作为 issue 发布，所以 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 必须先为这个仓库配置好追踪器和 triage 标签词汇。两种都可以：像 GitHub 这样的真实追踪器，或者 `.scratch/` 下的本地 markdown 文件——它开箱支持。
+`to-spec` 把 spec 作为 issue 发布，所以 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 必须先为这个仓库配置追踪器和 triage 标签词汇。两类追踪器都可以：像 GitHub 这样的真实追踪器，或无需额外设置即可使用的 `.scratch/` 本地 markdown 文件。
 
 ## spec 是一份决策记录
 
-spec 之所以存在，是因为 context window 有尽头。你在 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling) 时敲定的一切——解的形状、你争辩过来的选择、你刻意拒绝的东西——都留在一次即将被清空的对话里。spec 是活过那次清空的东西。
+spec 之所以存在，是因为 context window 有尽头。你在 [盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling) 时敲定了很多东西：解的形状、经过争论后作出的选择，以及你刻意拒绝的方案。所有内容都留在一段即将清空的对话里，spec 则把它们保留下来。
 
-所以它不验证任何东西，也不再决定任何东西。它用项目自己的词汇捕获已经决定的东西，让一次全新的会话不需要你重新解释就能把工作接过去。spec 断言的任何你其实从来没说过的东西，是一个缺陷。
+因此，spec 不会验证或决定任何东西。它用项目自己的词汇记录已经敲定的内容，让一个全新会话无需你重新解释就能接手工作。spec 中任何你从未说过的断言都是缺陷。
 
 ## 接缝优先于散文
 
-在它动笔之前，`to-spec` 会勾勒这份功能将被测试的**接缝**，并与你核对。它优先用已经存在的接缝，而不是新造出来的，并且取它能取的最高那条：一次变更跨过的理想数量是一道。
+在写下任何内容之前，`to-spec` 会勾勒功能将在哪些**接缝**上测试，并与你确认。它优先选择现有接缝而不是新建接缝，并选择能达到的最高接缝。一次变更的理想接缝数是一个。
 
-那些被约定好的接缝随之流转。[tdd](https://aihero.dev/skills-tdd) 只在预先约定的接缝上工作，[code-review](https://aihero.dev/skills-code-review) 对照 spec 审查 diff，所以一道没人约定过的接缝会以一条 review 发现的形式冒出来。这种绑定是间接的：它通过这份文档流转，这恰恰就是为什么接缝对话值得在这里认真对待，而不是被推到实现阶段。
+之后的技能会沿用这些已确认的接缝。[tdd](https://aihero.dev/skills-tdd) 只在预先约定的接缝上工作；[code-review](https://aihero.dev/skills-code-review) 会对照 spec 审查 diff，因此未经约定的接缝会成为一条 review 发现。这种关联通过本文件间接传递，所以接缝讨论应在这里认真完成，而不要留到实现阶段。
 
 ## 常见问题
 
@@ -41,7 +41,7 @@ spec 之所以存在，是因为 context window 有尽头。你在 [盘问（gri
 
 **为什么 spec 拿到 `ready-for-agent` 标签？我不想让 agent 照着它实现。**
 
-那个标签的意思是"不再需要 triage"：这份文档已经够完整、agent 能照着工作。它是一个输入标志，不是工作令。但如果你跑轮询 `ready-for-agent` 的 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) agent，那种区别对它们并不可见，它们会乐于一次跑动里试图构建整份 spec，而不是捡起 ticket 的切片。这是这个技能被报告最多的粗糙边缘。在它改变之前，在你的 AFK agent 提示里显式排除那份父 spec，或在 `/to-tickets` 跑过之后剥掉那个标签。
+那个标签的意思是"不再需要 triage"：这份文档完整到 agent 可以据此工作。它标记的是输入，不是工作命令。但轮询 `ready-for-agent` 的 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) agent 看不出这个区别，会试图一次构建整份 spec，而不是领取 ticket 切片。这是这个技能被报告最多的问题。在问题解决前，要在 AFK agent 的提示中明确排除父 spec，或在 `/to-tickets` 运行后移除标签。
 
 **为什么不直接从盘问到 `/to-tickets`、跳过 spec？**
 

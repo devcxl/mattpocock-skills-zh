@@ -1,6 +1,6 @@
 ## 它的作用
 
-`tdd` 以测试先行的方式构建一个功能或修复一个 bug：一条失败的测试，然后是恰好让它通过的代码，然后是下一个行为。它背负着让那个循环产出值得保留的测试的那些标准：什么是好测试、测试放哪里、mock 是拿来干什么的，以及悄悄毁掉一套测试套件的三个反模式。
+`tdd` 以测试先行的方式构建一个功能或修复一个 bug：一条失败的测试，然后是恰好让它通过的代码，然后是下一个行为。它带有让循环产出值得保留的测试所需的标准：什么是好测试、测试放哪里、mock 是做什么用的，以及会让测试套件失去价值的三个反模式。
 
 它不在一个你还没事先同意的接缝上写任何测试。在任何测试存在之前，它点名将打算在其上测试的公共边界，并停下来等你确认，因为测试的精力是有限的，而这里就是把它花在关键路径而不是每一条边角情况上的地方。另外要知道的是 `tdd` 是一份**参考**，而不是驱动器。它持有循环的规则，由别人（你，或 [implement](https://aihero.dev/skills-implement)）来跑套用规则的 [session](https://www.aihero.dev/ai-coding-dictionary/session)。
 
@@ -18,7 +18,7 @@
 | 你有一份 [spec](https://www.aihero.dev/ai-coding-dictionary/spec) 或 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)、并且希望整个构建替你跑 | [implement](https://aihero.dev/skills-implement)，它按 ticket 驱动 `tdd` |
 | 配置、接线、粘合、类型标注、直白的 CRUD 委托 | 这里没有合适的；见下面那条开放的缺口 |
 
-最后那一行是一个真实的缺口，不是风格偏好。技能决定接缝*放哪里*；它里面没有东西决定一次变更是否值得走这个循环。在一项没有独立真值来源可断言的变更上跑它，你会得到一条重述实现的测试：技能自己警告的那条重言式反模式，从另一头到达。它是 [issue #746](https://github.com/mattpocock/skills/issues/746)，并且是开放的。在它关闭之前，那个判断属于你或你的 `CLAUDE.md`。
+最后那一行是一个真实的缺口，不是风格偏好。技能决定接缝*放哪里*，却没有判断一次变更是否值得走这个循环。如果变更没有独立的真值来源可供断言，跑它就会得到一条重述实现的测试。这正是技能所警告的重言式反模式，只是从另一个方向出现。它是 [issue #746](https://github.com/mattpocock/skills/issues/746)，目前仍开放。在问题解决之前，这个判断由你自己做，或把规则写进 `CLAUDE.md`。
 
 ## 先决条件
 
@@ -32,7 +32,7 @@
 
 **垂直切片（Vertical slice）。** 一道接缝、一条测试、一份最小实现、然后重复，第一个循环是一发**示踪弹**（tracer bullet），证明一条端到端路径走通。相对的是水平切片：先所有测试，再所有代码。批量测试验证的是*想象中的*行为，它们检查的是事物的形状而不是用户做什么，并且它们在你理解实现之前就让你锁定了一份测试结构。
 
-**预先约定的接缝（Pre-agreed seam）。** 接缝是你不深入其内部就能观察行为的公共边界。规则是绝对的：没有未确认接缝上的测试。在完整链里，接缝在更早——[to-spec](https://aihero.dev/skills-to-spec)——阶段就被约定好："`/tdd` 被告知只在预先约定的测试接缝上工作，`/code-review` 检查只用了约定好的测试接缝。" 在自身被调用时，`tdd` 会直接问你。
+**预先约定的接缝（Pre-agreed seam）。** 接缝是你不深入其内部就能观察行为的公共边界。规则没有例外：测试不能放在未经确认的接缝上。在完整链里，接缝在更早的 [to-spec](https://aihero.dev/skills-to-spec) 阶段就被约定好："`/tdd` 被告知只在预先约定的测试接缝上工作，`/code-review` 检查只用了约定好的测试接缝。" 单独调用 `tdd` 时，它会直接问你。
 
 它被写出来要预防的三种反模式：
 
@@ -42,7 +42,7 @@
 | 重言式 | 期望值按代码计算方式那样计算，所以测试按构造就过。期望值必须来自别处：一个已知的字面量、一个算过的例子、spec。 |
 | 水平切片 | 一批测试在任何实现之前落地。 |
 
-Mocks 只用于系统边界：外部 API、定时器、文件系统——而*不是*你自己的模块。被 mock 的内部类是测试在反射实现的最强信号。
+Mocks 只用于系统边界：外部 API、时间、随机性，有时也包括文件系统或数据库。绝不要 mock 自己的模块。被 mock 的内部类是测试在反射实现的最强信号。
 
 ## 常见问题
 
@@ -56,11 +56,11 @@ Mocks 只用于系统边界：外部 API、定时器、文件系统——而*不
 
 **它在测试之前写了实现，尽管技能说先红。**
 
-会发生。一位用户就此追问 [model](https://www.aihero.dev/ai-coding-dictionary/model)，得到了一份异常诚实的回答："I knew the skill said 'one test at a time, watch it fail for the right reason'. I read it. I just defaulted to my normal habit." 技能被写成能与此共存。没有指令能让 agent 100% 服从，强行收紧会限制 agent 的创造性而收益很小；即便没有被严格遵守，循环也值得跑，因为整体结果仍然更好。如果某一片切片必须严格遵守，那就盯着那次跑动，而不是相信技能会强制它。
+会发生。一位用户就此追问 [model](https://www.aihero.dev/ai-coding-dictionary/model)，得到了一份异常诚实的回答："I knew the skill said 'one test at a time, watch it fail for the right reason'. I read it. I just defaulted to my normal habit." 技能接受这种情况。没有指令能让 agent 100% 服从，而更强硬的措辞只会限制它的创造性，收益很小。即便 agent 没有严格遵守，循环仍值得跑，因为整体结果更好。如果某个切片必须严格遵守，就盯着那次运行，而不要指望技能强制执行。
 
 **它应该先写浏览器或端到端测试吗？**
 
-通常不应该，技能不会阻止它。一位用户报告 agent 先写了一条 Playwright 测试，然后烧了一个长循环反复跑它，并得出*测试*坏了——为一个还不存在的功能。在你的 `CLAUDE.md` 里配置这点。浏览器测试慢到让红绿反馈循环开始不值；在你仓库的 `CLAUDE.md` 里声明它们在行为能跑通之后才写。
+通常不应该，技能不会阻止它。一位用户报告 agent 先写了一条 Playwright 测试，然后花很长时间反复运行，最后认定*测试*坏了，实际上只是功能还不存在。在你的 `CLAUDE.md` 里配置这点。浏览器测试慢到让红绿反馈循环不再划算；在仓库的 `CLAUDE.md` 里声明它们应在行为实现后再写。
 
 **`/tdd` 会替代 `/implement` 或课程里的 `/do-work` 吗？**
 
@@ -72,7 +72,7 @@ v1.0 进了 [codebase-design](https://aihero.dev/skills-codebase-design)，泛�
 
 **它知道我的其他 tickets 吗？**
 
-不知道。跑一个 ticket 时，它会很高兴地提出属于某张兄弟 ticket 的工作，因为它看不到其余 issue 图（[issue #129](https://github.com/mattpocock/skills/issues/129)）。Matt 的立场是这不是 `tdd` 的事。把 spec 一起传过去有帮助；一开始就调对 ticket 大小帮助更大。
+不知道。针对一张 ticket 运行时，它可能提出属于兄弟 ticket 的工作，因为它看不到其余 issue 图（[issue #129](https://github.com/mattpocock/skills/issues/129)）。这不是 `tdd` 的职责。把 spec 一起传过去有帮助；一开始就调对 ticket 大小更有帮助。
 
 ## 怎样算成功
 
@@ -85,10 +85,10 @@ v1.0 进了 [codebase-design](https://aihero.dev/skills-codebase-design)，泛�
 
 ## 它的定位
 
-`tdd` 是主链构建步骤里的引擎，而不是自己独立的一步：
+`tdd` 在主链的构建步骤中运行，不是独立的一步：
 
 ```txt
 grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
-[to-spec](https://aihero.dev/skills-to-spec) 预先约定测试接缝，[implement](https://aihero.dev/skills-implement) 按 ticket 驱动 `tdd`，[code-review](https://aihero.dev/skills-code-review) 在事后检查只用了约定好的接缝，并且拥有 `tdd` 不再做的重构。另一个邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)——`tdd` 所说的接缝与深模块词汇的共享来源。你也能在它自身被调用，无论何时有一个具体的行为要构建、并且没有完整 spec 在台面上。拿不准哪个技能适合你的情况时，[ask-matt](https://aihero.dev/skills-ask-matt) 为你路由。
+[to-spec](https://aihero.dev/skills-to-spec) 预先约定测试接缝，[implement](https://aihero.dev/skills-implement) 按 ticket 驱动 `tdd`，[code-review](https://aihero.dev/skills-code-review) 事后检查是否只用了约定好的接缝，并负责 `tdd` 不再做的重构。另一个邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)，它是 `tdd` 使用的接缝与深模块词汇的共享来源。只要有具体行为要构建、又没有完整 spec，也可以单独调用 `tdd`。拿不准哪个技能适合你的情况时，[ask-matt](https://aihero.dev/skills-ask-matt) 为你路由。

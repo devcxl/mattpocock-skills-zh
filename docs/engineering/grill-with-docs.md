@@ -2,7 +2,7 @@
 
 `grill-with-docs` 就一份计划或设计盘问你，直到你和 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 对它拥有一份共识理解，并在过程中把词汇和艰难的决策写进你的仓库。它和 [grill-me](https://aihero.dev/skills-grill-me) 运行的是同一种访谈（一轮问题，然后等待，然后下一轮），只是指向一个代码库。
 
-它是 **[stateful](https://www.aihero.dev/ai-coding-dictionary/stateful)** 的。其他盘问技能都把 [session](https://www.aihero.dev/ai-coding-dictionary/session) 留在你的脑子里；这个会把文件留在磁盘上。一个术语被敲定，就在那一刻落进 `GLOSSARY.md`，而不是结尾批量写入。一个决策通过三道闸门，就作为 ADR 落地。这就是全部区别，也是人们对这个技能的大多数麻烦的来源：工件是真实仓库里的真实文件，所以它们可能在你期待时缺席，也可能在不止一个人写它们时漂移。
+它是 **[stateful](https://www.aihero.dev/ai-coding-dictionary/stateful)** 的。其他盘问技能都把 [session](https://www.aihero.dev/ai-coding-dictionary/session) 留在你的脑子里；这个会把文件留在磁盘上。术语一经敲定，技能就立刻写入 `GLOSSARY.md`，而不是等到最后批量写入；决策通过三道门槛后，技能就把它写成 ADR。这就是全部区别，也是人们遇到的大多数问题的来源：工件是仓库里的真实文件，所以可能在你期待时缺失，也可能因多人同时编辑而漂移。
 
 ## 何时使用
 
@@ -22,7 +22,7 @@
 
 ## 先决条件
 
-技能会写入你的仓库，所以你需要待在一个写入安全的地方。敲定的术语进入根目录的 `GLOSSARY.md` 词汇表——或者如果根目录的 `GLOSSARY-MAP.md` 把仓库标记为多上下文，则进入相关上下文的 `GLOSSARY.md`。决策进入 `docs/adr/`。两者都惰性创建；在第一个术语或决策结晶之前什么都不存在，所以没有需要预先搭建的东西。
+技能会写入你的仓库，所以你需要待在一个写入安全的地方。敲定的术语进入根目录的 `GLOSSARY.md` 词汇表，或者在根目录的 `GLOSSARY-MAP.md` 将仓库标记为多上下文时，进入对应上下文的 `GLOSSARY.md`。决策进入 `docs/adr/`。技能只会在需要时创建这些文件：第一个术语或决策敲定之前什么都不会出现，因此无需预先搭建。
 
 它还需要另外两个技能在场，因为它自己的 `SKILL.md` 只有一行，把工作委派给它们：[grilling](https://aihero.dev/skills-grilling) 提供访谈，[domain-modeling](https://aihero.dev/skills-domain-modeling) 提供写入。单独安装 `grill-with-docs` 会得到一个不工作的技能。
 
@@ -38,17 +38,17 @@
 
 第三行才是让人栽跟头的那个。`GLOSSARY.md` 是词汇表，刻意保持为词汇表——没有实现细节、没有 [spec](https://www.aihero.dev/ai-coding-dictionary/spec)、没有草稿笔记。ADR 被同时用三个条件把关，所以大多数决策不够格，大多数会话产不出 ADR。一个产出更锐利的词汇表和零个 ADR 的会话是在按设计工作，但这意味着你达成一致的大部分内容只存在于你达成一致的 [context window](https://www.aihero.dev/ai-coding-dictionary/context-window) 里。把同一段对话交给 [to-spec](https://aihero.dev/skills-to-spec)，而不是 [clearing](https://www.aihero.dev/ai-coding-dictionary/clearing) 它。
 
-词汇表才是重点。领域语言是这个技能真正在构建的东西——项目自己的词，一次敲定，这样你、agent 和你的同事就不再花钱重新推导它们。值得说的是，并非所有人都同意这能买到 agent 性能：最尖锐的公开反驳是，一个术语和它的平实英语展开从 [model](https://www.aihero.dev/ai-coding-dictionary/model) 那里得到同样的结果，而且词汇真正压缩的是共享它的人类之间的沟通。按那种读法，词汇表仍然有价值；只是价值被挪了位置。
+词汇表是主要产出。这个技能构建的是领域语言：项目自己的词汇，一次敲定，让你、agent 和同事不必反复推导。并非所有人都认同这能提升 agent 的表现。最有力的反对意见是，术语和它的平实英语释义从 [model](https://www.aihero.dev/ai-coding-dictionary/model) 那里得到的结果相同，而词汇主要缩短了共享这些术语的人类之间的沟通。按这种看法，词汇表仍有价值，只是受益者是人。
 
 ## 常见问题
 
 **我应该用这个还是 `/wayfinder`？**
 
-范围决定。任何你能在一次会话里敲定的东西用这个；当工作量太大、一次会话装不下时用 [wayfinder](https://aihero.dev/skills-wayfinder)，它先把工作绘制成一张决策 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 的地图。Wayfinder 更慢、更密，在一个范围良好的功能上用它是最常见的错误。它不替代这个技能——它可以在盘问会话中切入地图中适合单会话的那些部分。
+范围决定。任何你能在一次会话里敲定的东西用这个；当工作量太大、一次会话装不下时用 [wayfinder](https://aihero.dev/skills-wayfinder)，它先把工作绘制成一张决策 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 的地图。Wayfinder 更慢、更密，在一个范围良好的功能上用它是最常见的错误。它不替代本技能；对于地图中适合单会话处理的部分，它可以启动一次盘问。
 
 **它跑了，但 `GLOSSARY.md` 和 ADR 都没出现。**
 
-两个已知原因。平凡的那个：没有够格的。ADR 需要三道闸门全过，而一个没有新词汇的变更会话确实没什么可写的。真正的 bug：当技能跑在另一个编排层内部（一个 spec 驱动开发包装、一个多 agent 框架、一条把它当作别人流水线里一步的规则）时，文件写入那一半被报告会无声地不发生，而访谈照常跑。这已提交、未修复。如果你在那个环境里，在相信会话输出之前先检查工作目录。
+有两个已知原因。第一，可能没有任何内容符合条件：ADR 必须通过三道门槛，而没有新词汇的变更会话确实无物可写。第二，这是一个真实的 bug：用户报告称，当技能在其他编排层内运行（例如 spec 驱动开发包装、多 agent 框架，或把它作为别人流水线一步的规则）时，文件写入会悄无声息地失败，而访谈仍会照常进行。这个 bug 已提交但未修复。如果你处于这种环境，先检查工作目录，再相信会话产出。
 
 **它一次把所有问题都甩出来，没有推荐，也从来没提 `GLOSSARY.md`。**
 
@@ -68,7 +68,7 @@
 
 **它为什么叫这个名字？**
 
-没人对这个名字满意。有一个未决的建议把它改名为 `grill-domain-model`，那更诚实地描述了行为。没有任何进展。如果改名最终落地，文档页会跟着移动，URL 也会变。
+没人对这个名字满意。有一个未决的建议把它改名为 `grill-domain-model`，那能更准确地描述它的行为。这个建议还没有进展。如果改名最终落地，文档页会跟着移动，URL 也会变。
 
 ## 怎样算成功
 

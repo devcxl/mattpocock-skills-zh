@@ -53,7 +53,7 @@
 
 **两个并行跑的实施者在同一个文件上撞了，或者给同一件事取了不同的名字。**
 
-worktree 不会消除碰撞，只是把它们推迟到合并时。写在 ticket 文本里的阻塞边，是对每张 ticket 将触碰哪些文件的猜测，而两张位于"代码库不同部分"的 ticket 仍会共享一个消息目录、一个配置注册表或某个类型。每个实施者只看见自己的 ticket 和共享笔记，从不看见对方的进行中工作，所以一位用户的 web 和 mobile ticket 把同一个字符串分别加成了 `blockedSince` 和 `blockedOn`。当两张前沿 ticket 触碰同一个共享表面时，要么在它们之间加一条阻塞边让它们前后运行，要么在探查笔记里把每张 ticket 新增的确切名字固定下来。
+worktree 不会消除碰撞，只是把它们推迟到合并时。写在 ticket 文本里的阻塞边，是对每张 ticket 将触碰哪些文件的猜测，而两张位于"代码库不同部分"的 ticket 仍会共享一个消息目录、一个配置注册表或某个类型。每个实施者只看见自己的 ticket 和共享笔记，从不看见对方的进行中工作，所以一位用户的 web 和 mobile ticket 把同一个字符串分别加成了 `blockedSince` 和 `blockedOn`。当两张前沿 ticket 触碰同一个共享文件时，要么在它们之间加一条阻塞边让它们前后运行，要么在探查笔记里把每张 ticket 新增的确切名字固定下来。
 
 **被阻塞的 ticket 从不开始，即使它的阻塞项已经合并了。**
 
@@ -61,7 +61,7 @@ GitHub 上的一个已知粗糙边缘。跟踪器的 blocked-by 计数只在阻�
 
 **这会取代 Sandcastle 或 AFK 脚本吗？**
 
-不会。人们会问是因为这些技能现在伸手到了实现里："Sandcastle 还相关吗？你的技能现在似乎也能处理实现了。"`implement-spec` 把编排交给一个 harness 会话里的 agent 负责，不需要任何基础设施，还让你能在旁观察和转向。对真正 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) 的工作，确定性循环（[Sandcastle](https://github.com/mattpocock/sandcastle)、shell 脚本、CI job）更快、更便宜、更可靠，因为编排的任何部分都不会跑偏。
+不会。人们会问是因为这些技能现在伸手到了实现里："Sandcastle 还相关吗？你的技能现在似乎也能处理实现了。"`implement-spec` 把编排交给一个 harness 会话里的 agent 负责，不需要任何基础设施，还让你能在旁观察和转向。对真正 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) 的工作，确定性循环（[Sandcastle](https://github.com/mattpocock/sandcastle)、shell 脚本、CI job）更快、更便宜、更可靠，因为编排决策不会交给 agent。
 
 **某张 ticket 的关键测试在它的 worktree 里被跳过了，却报告绿色。**
 

@@ -58,7 +58,7 @@
 
 **在我只想要一个直接答案的快速问题上，它也会触发。**
 
-这是这个技能被报告最多的问题，而且是真的。尤其在 GPT-5.6-Sol 上，用户报告它在一个平铺直叙的问题描述上就会触发："模型反而触发了相当正式的 diagnosing-bugs 技能。它随后会在给我回复或建议之前先构建一个复现场景，往往是一个价值有限的模拟场景。这导致可观的回复延迟。"有四个人在 [issue #578](https://github.com/mattpocock/skills/issues/578) 上报告了同样的形态。大家接受的修法是先以较轻的方式上手，只在问题真的需要时再升级到较重的方式，但这个改动还没落进来。技能是按 Claude Code 的调用行为校准的；一个激活阈值较低的[模型（model）](https://www.aihero.dev/ai-coding-dictionary/model)会过度触发它。在它升级之前，实际的修法是把你要的明说出来（"就答这个，别诊断"），或者在你的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness) 里关掉它的模型调用。
+这是这个技能被报告最多的问题，而且是真的。尤其在 GPT-5.6-Sol 上，用户报告它在一个平铺直叙的问题描述上就会触发："模型反而触发了相当正式的 diagnosing-bugs 技能。它随后会在给我回复或建议之前先构建一个复现场景，往往是一个价值有限的模拟场景。这导致可观的回复延迟。"有四个人在 [issue #578](https://github.com/mattpocock/skills/issues/578) 上报告了同样的形态。大家接受的修法是先以较轻的方式上手，只在问题需要时再升级到完整诊断，但这个改动还没发布。技能是按 Claude Code 的调用行为校准的；一个激活阈值较低的[模型（model）](https://www.aihero.dev/ai-coding-dictionary/model)会过度触发它。在它升级之前，实际的修法是把你要的明说出来（"就答这个，别诊断"），或者在你的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness) 里关掉它的模型调用。
 
 **我能把它指向整个代码库问性能问题在哪吗？**
 

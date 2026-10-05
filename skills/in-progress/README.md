@@ -14,3 +14,4 @@ INSTALL_INTERNAL_SKILLS=1 npx skills@latest add devcxl/mattpocock-skills-zh --sk
 - **[writing-shape](./writing-shape/SKILL.md)** ： 把一份原始素材的 markdown 文件按段落塑造成一篇文章，每一步讨论格式选择。
 - **[claude-handoff](./claude-handoff/SKILL.md)** ： 把当前对话交接给一个全新的后台 agent，让它立刻接手工作，注入交接摘要的方式是通过 `claude --bg`。用户调用。
 - **[setup-ts-deep-modules](./setup-ts-deep-modules/SKILL.md)** ： 把 dependency-cruiser 接入 TypeScript 仓库，使每个 package 成为一个深度模块：实现隐藏在子文件夹中，只能通过入口点文件访问，测试通过这些入口点对实现进行验证。用户调用。
+- **[chief-of-staff](./chief-of-staff/SKILL.md)** ：在单次长会话中协调子智能体与周期性安排，持续推进长期目标。用户调用。

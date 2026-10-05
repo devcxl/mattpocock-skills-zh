@@ -1,32 +1,32 @@
 ## 它的作用
 
-`writing-for-agents` 是你写给 agent 的文档所参照的参考：一份技能、一份 `AGENTS.md` / `CLAUDE.md`、一份 [spec](https://www.aihero.dev/ai-coding-dictionary/spec)、一份运行时 prompt、一份 README，任何 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 会读的文档。包装不同；写作不变：同样的杠杆让每份都可预测，于是 agent 每次跑都走相同的*过程*，而不是产出相同的输出。
+`writing-for-agents` 是撰写 agent 文档的参考，适用于技能、`AGENTS.md` 或 `CLAUDE.md`、[spec](https://www.aihero.dev/ai-coding-dictionary/spec)、运行时 prompt、README，以及任何 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 会读的文档。格式各异，写作原则不变。同样的杠杆让每份文档都可预测，于是 agent 每次运行都遵循相同的*过程*，但不一定产出相同的结果。
 
 它的默认动作是删除，而不是解释。让 agent 给另一个 agent 写指令，它会把大部分词花在解释 [model](https://www.aihero.dev/ai-coding-dictionary/model) 已经知道的东西上：那些行里的每一行都是**空操作**，付了 [context](https://www.aihero.dev/ai-coding-dictionary/context) 却没改变任何行为。这份参考是找到它们的透镜，这就是为什么它在一份你手上已经有的文档上跟在一份空文件上一样能挣到自己的位置。
 
-它在 v1.1 之前叫 `writing-great-skills`。重命名跟踪的，是它本质上一直是的样子：几乎没有任何部分是技能专属的。技能专属的机制：frontmatter、模型调用 vs 用户调用的选择、路由器技能：披露到一份链接到的 `SKILL-MECHANICS.md`，只在面对的文档是技能时你才读它。
+它在 v1.1 之前叫 `writing-great-skills`。新名字更准确地反映了它一直以来的用途：几乎没有任何内容是技能专属的。只有技能相关的机制（frontmatter、模型调用还是用户调用的选择、路由器技能）放在链接的 `SKILL-MECHANICS.md` 中；只有当前文档是技能时才需要阅读它。
 
 ## 何时使用
 
 键入 `/writing-for-agents`，或者当你在创建或编辑技能、或修改 `AGENTS.md` 或 `CLAUDE.md` 时，agent 会自动触发它。
 
-对其余任何 agent 会读的文档：你的 docs、specs 和 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)、system 与 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) prompts：手动触发它。判断就一个问题：agent 会读这份吗？：文档怎么到它手上不重要，是指针点名、人粘贴、还是就放在仓库里。要弄清一份代码库到底包含什么，使用 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)：这份参考管的是文档读起来怎样，不管它知道什么。
+其他所有 agent 会读的文档（你的 docs、specs、[tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)、system 和 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) prompts）都可以手动调用它。判断标准只有一个：agent 会读这份文档吗？文档如何交到 agent 手里并不重要：可能是指针提到它、人直接粘贴，或它就放在仓库里。要弄清代码库包含什么，使用 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)。这份参考规范文档的写法，而不是文档包含的信息。
 
 ## 两种负载
 
 整份参考围绕的观念，是每份文档和每个指针都要花费的一对预算：
 
 - **上下文负载（Context load）**：常驻素材对 agent 窗口的代价：一条 `AGENTS.md` 行、一条 skill description、任何不管是否触发都每 [turn](https://www.aihero.dev/ai-coding-dictionary/turn) 都坐在 context 里的东西。
-- **认知负载（Cognitive load）**：对你的代价：哪些文档存在，何时去拿哪份。你就是索引。这不是要被最小化的代价：它是人类主动性的价格。
+- **认知负载（Cognitive load）**：记住有哪些文档、何时该使用哪份的代价。你就是索引。不要试图最小化这项代价，因为它是人类自主性的成本。
 
 一旦你按这两个负载来想，绝大多数写作决策：拆不拆、内联还是披露、点还是推：就成了在不同地方做出的同一笔取舍。
 
 ## 那些杠杆
 
-- **[Context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer)**：常驻 context 里指向 context 之外那份材料的引用，并编码了触达它的条件。一条 skill description 和一行 `AGENTS.md` 命名某文档，是同一个对象；指针的*措辞*，不是它指向哪里，决定了 agent 多可靠地穿过去。
-- **Information hierarchy**：从文件内步骤，到文件内参考，再到指针之后的披露参考之间的梯子。**[Progressive disclosure](https://www.aihero.dev/ai-coding-dictionary/progressive-disclosure)** 是沿梯子往下走的那一步：把顶部留在易读的位置。
-- **Completion criteria**：每一步完成条件的清晰度与要求度，以及要求度驱动的**外勤**；对抗**过早完成**的防线。
-- **Leading words**：一个 [model](https://www.aihero.dev/ai-coding-dictionary/model) 预训练里已有的紧凑观念（*tight*、*red*、*tracer bullet*），agent 在跑这份文档时用它来思考。它下两次锚：执行锚在正文里，调用锚在指针里。
+- **[Context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer)**：常驻 context 中指向上下文外材料的引用，并说明何时应读取它。一条 skill description 和一行 `AGENTS.md` 文档指针是同一种东西。指针的*措辞*而非目标，决定 agent 会多可靠地跟进。
+- **Information hierarchy**：从文件内步骤，到文件内参考，再到通过指针披露的参考，构成一条层级。**[Progressive disclosure](https://www.aihero.dev/ai-coding-dictionary/progressive-disclosure)** 是把材料沿层级下移，让顶层保持易读。
+- **Completion criteria**：每一步完成条件的清晰度与要求度，以及这些要求所促成的**实际工作**。它们是防止**过早完成**的保障。
+- **Leading words**：一个 [model](https://www.aihero.dev/ai-coding-dictionary/model) 预训练中已有的紧凑概念（*tight*、*red*、*tracer bullet*），agent 在执行文档时会用它思考。它在两个地方发挥作用：正文中指导执行，指针中触发调用。
 - **Pruning**：单一事实来源、相关性，以及按句套用的空操作测试，对抗**重复**、**沉淀**和**蔓延**。
 
 ## 常见问题
@@ -67,4 +67,4 @@
 
 ## 它的定位
 
-这是一份可随时取用的独立参考。它在集合中没有任何邻居，因为它位于整套之下而不是与任何单个技能并列：这里每一个技能都是对着它写的，而其他技能留下的文档：一份 `GLOSSARY.md` 与它的 ADR、一份 spec、一张 ticket：正是它管辖的文本，一旦有 agent 必须去读它们。当你不确定哪个技能或流程适合某个任务时，[ask-matt](https://aihero.dev/skills-ask-matt) 在整个集合上为你路由。
+这是一份可随时取用的独立参考，适用于整套技能，而不只是其中某一个。这里的每个技能都是依照它写的；其他技能产出的文档（`GLOSSARY.md` 及其 ADR、spec、ticket）也在 agent 需要阅读时受它规范。你不确定某个任务适合哪个技能或流程时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你路由。

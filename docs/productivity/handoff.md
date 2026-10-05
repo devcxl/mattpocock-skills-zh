@@ -2,13 +2,13 @@
 
 `handoff` 把当前进行的对话压缩成一份**交接文档**：一份 markdown 文件，写入操作系统临时目录而不是工作区，让一个全新的 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 读取并接手工作。
 
-它换来的是**便携性**，而不是压缩。这让这个技能比听上去更窄：你只在工作需要*搬运*的时候才需要一份文件：搬到一个新的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness)、新的目录、一个同事，或一个你想分叉出来的支线任务。如果没什么要搬的，你不需要交接：留在 [session](https://www.aihero.dev/ai-coding-dictionary/session) 里、`/clear`、派个 [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent)、或 `/compact` 覆盖了普通的"阶段结束"情况，而 `/compact` 比这个技能出现得更频繁。
+它带来的是**便携性**，不是压缩，所以这个技能比听起来更窄。只有工作需要*搬运*时你才需要一份文件：搬到新的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness)、新的目录、交给同事，或分叉出一个支线任务。如果没什么要搬，就不需要交接。留在 [session](https://www.aihero.dev/ai-coding-dictionary/session) 里、`/clear`、派个 [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) 或 `/compact`，都能覆盖普通的"阶段结束"情况；而 `/compact` 比这个技能更常用。
 
 ## 何时使用
 
-你通过键入 `/handoff` 来调用它：agent 不会主动使用它。传一段关于下一次会话用途的说明，文档就为它而写。
+你通过键入 `/handoff` 来调用它：agent 不会主动使用它。附上一段说明，讲清下一次会话要做什么，技能会据此写好文档。
 
-四种情况是全部触发：
+触发情况只有四种：
 
 | 情况 | 为什么要一份文件 |
 | --- | --- |
@@ -17,21 +17,21 @@
 | 把工作交给一个同事 | 他们需要能读的东西 |
 | 在某个阶段里分叉出一个支线任务 | 你继续干；第二个 agent 接住分叉 |
 
-其他情况：同一 harness、同目录，你盘问完进入实现：用 `/compact`。在阶段边界不确定时，[ask-matt](https://aihero.dev/skills-ask-matt) 给出覆盖五种选项的有序决策树。
+其他情况（同一 harness、同一目录，盘问结束后转入实现）都用 `/compact`。在阶段边界不确定时，[ask-matt](https://aihero.dev/skills-ask-matt) 提供五种选项的有序决策树。
 
 ## 分叉是被跳过的那种用法
 
 这个技能的描述读起来像是会话续接：写一份摘要、在这里结束、在那里继续。按这种读法它就像一个更差的 `/compact`，于是被略过。值得知道的是分叉的情况：你**留在当前 session 里**，把累积下来的 [context](https://www.aihero.dev/ai-coding-dictionary/context) 副本交给一个并行工作的第二个 agent。
 
-这正是通过 [prototype](https://aihero.dev/skills-prototype) 的那段弯路所做的：你正深入一场设计对话，撞上一个只能靠跑代码才能确定的问题，你又不想把已经攒起来的对话花在这件事上。交接给一个 prototype session，拿到答案，把答案接回来，在原来的对话里引用它。两次穿越，一场进行中的对话，没有重述的东西。
+这正是通过 [prototype](https://aihero.dev/skills-prototype) 绕行时的做法：你深入一场设计对话，遇到一个只能靠运行代码才能确定的问题，又不想为此耗掉已经积累的对话。交接给一个 prototype session，拿到答案，再把答案带回并引用在原对话里。工作来回两次，原对话保持进行中，也不必重述。
 
 五种选项里的三种各自保留不同的东西：`/compact` 保留你的意图，`/clear` 什么都不保留，`/handoff` 保留工作可被搬运的能力。
 
 ## 搬运什么，不搬运什么
 
-文档携带的是进行中的对话：什么正在进行、为什么、接下来是什么：加一个**建议技能**部分，指明下一个 agent 应该拿什么。敏感信息会在写入前打码。
+文档携带进行中的线索（正在做什么、原因和下一步），还会有一个**建议技能**部分，指出下一个 agent 应使用什么技能。技能会在写入文件前打码敏感信息。
 
-它刻意不携带任何已经写下来的东西。规格、计划、ADR、issue、commit 和 diff 都按路径或 URL 引用，从不复制。这让文件保持小，也让已经确定下来的细节只存一处，不会出现两处漂移。
+它刻意不携带任何已经写下来的东西。文档只按路径或 URL 引用规格、计划、ADR、issue、commit 和 diff，不会复制它们。这样文件更小，已经确定的细节也只保存在一处，不会有两份内容逐渐偏离。
 
 ## 常见问题
 
@@ -39,7 +39,7 @@
 除非有东西要搬，否则用 `/compact`。留在同一个任务上是 compact，不是 handoff：同一 harness、同一目录、还得保持在循环里，是阶段边界树最常落的地方。`/handoff` 的优势不是摘要得更好；而是结果是一份你能搬运到 `/compact` 到不了的地方的文件。
 
 **那么 compact、clear 和 handoff 到底差在哪？**
-三种不同的东西在被保留。`/compact` 压缩当前 context，让你在新窗口里继续：意图存活。`/clear` 清空窗口，从零开始：当背后一切都可以丢弃时是对的，如果不丢弃就是单向不可逆。`/handoff` 写一份可携带的文件：工作能搬到别的地方。注意，这三者都把 [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)（对话本身）变成了 [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source)（对话的摘要）。唯一不这么做的，是继续：所以那是第一个要排除的选项。
+三种方式保留的东西各不相同。`/compact` 压缩当前 context，让你在新窗口继续，因此意图得以保留。`/clear` 清空窗口、从零开始；当之前的一切都可丢弃时才合适，否则就无法撤销。`/handoff` 写出一份可携带的文件，让工作能转移到别处。注意，这三者都会把 [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)（对话本身）变成 [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source)（对话摘要）。只有继续当前会话不会这样做，所以应最先排除它。
 
 **我的 handoff 文件去哪了？**
 临时目录：这是这个技能被报告最多的摩擦点：路径很长、按 OS 而异，在 Windows 上 agent 有时要试几次才能找到对的那个。问回路径，搬家前先记住它。临时目录是有意为之的：handoff 是一份过境文档，不是你要维护的工件。它也不是持久化的：见下条。

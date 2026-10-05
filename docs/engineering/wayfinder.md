@@ -1,14 +1,14 @@
 ## 它的作用
 
-`wayfinder` 接住一项对一次 agent [session](https://www.aihero.dev/ai-coding-dictionary/session) 来说太大的工作：一个你能说出其**目的地**但还看不清路线的主意，并把它绘制成你 issue 追踪器上由**决策 tickets** 构成的一张共享**地图**，然后一张一张地解决它们，直到道路变得清晰。
+`wayfinder` 处理一项对一次 agent [session](https://www.aihero.dev/ai-coding-dictionary/session) 来说太大的工作。这类工作是你能说出其**目的地**、却还看不清路线的想法。它会在 issue 追踪器上把工作绘制成一张由**决策 tickets** 构成的共享**地图**，然后逐一解决这些 ticket，直到路线清晰。
 
-它规划，不动手。每张 ticket 持有的问题、其解决是一个决策，而不是一段要去执行的构建切片，地图在"在某人去构建那个东西之前已经没什么要决定的了"时就完成了。这一条规则就是 wayfinder ticket 与普通实现 [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket) 的分野，也是 agent 最常违反的规则。地图清空时，wayfinder 交班；它不会一直走到代码里去。
+它做规划，不做构建。每张 ticket 都提出一个问题，答案是一个决策，而不是一段要执行的构建切片。等到构建之前已没有待决定的事，地图就完成了。这条规则区分了 wayfinder ticket 和普通实现 [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket)，也是 agent 最常违反的规则。地图清空时，wayfinder 就交班，不会继续写代码。
 
 ## 何时使用
 
 你通过键入 `/wayfinder` 来调用它；[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会主动使用它。
 
-它是整套里最重、最密的流程，所以触发条件很窄：工作量必须真的比一次 agent 会话能容纳的更大，并且通往目的地的路线必须是模糊的。分界很清楚：单会话规划用 `/grill-with-docs`，多会话规划用 `/wayfinder`。
+它是整套里最重的流程，所以触发条件很窄：工作量必须超过一次 agent 会话所能容纳的范围，而且通往目的地的路线必须不清楚。分界按会话数划分：单会话规划用 `/grill-with-docs`，多会话规划用 `/wayfinder`。
 
 | 你面前是什么 | 跑什么 |
 | --- | --- |
@@ -18,39 +18,39 @@
 | 一张已经清空的 wayfinder 地图 | [to-spec](https://aihero.dev/skills-to-spec)，然后 [to-tickets](https://aihero.dev/skills-to-tickets) 和 [implement](https://aihero.dev/skills-implement) |
 | 一次已经长出边界的现存会话 | 说"hand off to `/wayfinder`"（[handoff](https://aihero.dev/skills-handoff) 既能进入一张地图、也能从一张地图出来） |
 
-绿地不是必需条件。Wayfinder 在遗留和半构建代码库上被常态化使用，而且在那里更锐利——因为大量"迷雾"是"这里已经什么是真的"、而不是"我们应该做什么"。
+不要求是绿地项目。人们经常在遗留和半成品代码库上使用 wayfinder，而且在那里可能更有用，因为许多迷雾在于"这里已经有什么是真的"，而不是"我们应该做什么"。
 
 ## 先决条件
 
-地图和它的 tickets 活在仓库的 issue 追踪器上，所以 wayfinder 需要 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 铺设的追踪器接线。那一步写下一段"Wayfinding operations"小节，描述 GitHub、GitLab 或本地 markdown 下地图、其子 tickets、阻塞边和前沿查询如何被表达。Wayfinder 通过你 `CLAUDE.md` / `AGENTS.md` 里的指针解析那份文档、而不是固定路径；完全没有配置追踪器时它回退到本地 markdown 文件。
+地图和它的 tickets 存在仓库的 issue 追踪器上，所以 wayfinder 需要 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 配置追踪器。那一步会写入"Wayfinding operations"小节，说明如何在 GitHub、GitLab 或本地 markdown 中表示地图、子 ticket、阻塞关系和前沿查询。Wayfinder 通过 `CLAUDE.md` / `AGENTS.md` 中的指针找到这份说明，而不是寻找固定路径。若未配置追踪器，它会回退到本地 markdown 文件。
 
 追踪器不是装饰。阻塞是让前沿在追踪器自己的 UI 里被可视地渲染的东西；一个没有原生依赖链接的追踪器（比如自托管的 Gitea）会让 wayfinder 退化为从地图文本推断 blocker，能用但需要更密切的监督。
 
 ## 地图、迷雾与前沿
 
-**地图**是一张打了 `wayfinder:map` 标签的 issue；它的 tickets 是其子 issues。它是一份**索引，而不是仓库**：一项决策只活在一个地方——它的 ticket——地图只是简述它并链接。一次会话以低分辨率加载地图、按需放大单张 ticket，这正是让一张地图可以持续长大、而不让每次会话都为它的整段历史付费的原因。
+**地图**是一张打了 `wayfinder:map` 标签的 issue，它的 tickets 是子 issue。它是一份**索引，而不是仓库**：一项决策只保存在一处，也就是对应的 ticket；地图只给出一句摘要并附上链接。一次会话以低分辨率加载地图，需要时再打开单张 ticket，因此地图可以持续扩展，而每次会话不必加载全部历史。
 
-四样东西活在它上面：
+地图有四个部分：
 
-- **目的地**：走到这张地图的尽头长什么样。命名它是绘制的第一个动作，在任何 ticket 存在之前，因为目的地固定了每张 ticket 被衡量的范围。
-- **到目前已做的决策**：每张已关闭 ticket 一行，每行链接到详细实际居住的地方。
-- **尚未明确**：**战争迷雾（fog of war）**。你能判断出即将到来、但此刻还不能尖锐措辞的决策。迷雾与 ticket 的分界测试是：你*现在*能不能精确陈述问题，而不是你能不能回答它。解决一张 ticket 揭开它前方的迷雾，并把任何现在可被规格化的部分升格成新 ticket。
-- **超出范围**：被裁定在目的地之外的工作。迷雾永远只朝着目的地聚集，所以超出范围的工作被关掉、永远不升格。
+- **目的地。** 走到这张地图的尽头是什么样。你要先命名目的地，早于任何 ticket，因为它确定了衡量每张 ticket 的范围。
+- **已做出的决策。** 每张已关闭 ticket 一行，并链接到详细内容所在处。
+- **尚未明确。** 这就是**战争迷雾（fog of war）**：你知道将会有决策要做，却还无法清楚表述的问题。区分迷雾和 ticket，要看你*现在*能否精确说出问题，而不是能否回答它。解决一张 ticket 会驱散前方迷雾，并把如今可以明确的问题转成新 ticket。
+- **超出范围。** 目的地之外的工作。迷雾只会朝目的地聚集，所以超出范围的工作会保持关闭，也不会被转成 ticket。
 
-**前沿**是那些打开、未阻塞、未被认领的 tickets（已知之物的边缘）。一次会话在开任何工作之前先把自己指派为它的 assignee，所以 assignee *就是*认领，并发的会话会跳过它。Tickets 始终按名字引用，从不按赤裸的 `#42`；一墙的 issue 编号在叙述里没法读。
+**前沿**是尚未关闭、未被阻塞、也未被认领的 tickets 集合（已知之物的边缘）。会话会在开工前把自己指派为 ticket 的 assignee；assignee *就是*认领，因此并发会话会跳过该 ticket。会话始终按名称引用 tickets，而不只说 `#42`，因为一串 issue 编号在描述中很难读。
 
 ## 四种决策 ticket 类型
 
-每张 ticket 带一个 `wayfinder:<type>` 标签，并且要么是 **[HITL](https://www.aihero.dev/ai-coding-dictionary/human-in-the-loop)**（与一个替自己说话的人类一起处理），要么是 **[AFK](https://www.aihero.dev/ai-coding-dictionary/afk)**，由 agent 单独驱动。一张 HITL ticket 只能通过实时交流解决；一个替自己回答 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 问题的 agent 已经把它打破了。
+每张 ticket 带一个 `wayfinder:<type>` 标签，并且属于 **[HITL](https://www.aihero.dev/ai-coding-dictionary/human-in-the-loop)**（由能为自己发言的人类参与处理）或 **[AFK](https://www.aihero.dev/ai-coding-dictionary/afk)**（由 agent 单独驱动）。HITL ticket 只能通过实时交流解决；agent 若自己回答 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 问题，就破坏了这张 ticket 的设计。
 
 | 类型 | 模式 | 在什么时候用 | 由什么解决 |
 | --- | --- | --- | --- |
 | `grilling` | HITL | 默认。问题能靠谈开解决。 | [grilling](https://aihero.dev/skills-grilling) 加 [domain-modeling](https://aihero.dev/skills-domain-modeling)，在一次新会话里 |
-| `prototype` | HITL | "这应该长什么样"或"这应该怎么行为"：一个谈话敲不定的问题。 | [prototype](https://aihero.dev/skills-prototype)，成品作为资产从 ticket 链接 |
-| `research` | AFK | 工作目录之外的一个事实正卡着一个决策。 | 一个 [research](https://aihero.dev/skills-research) [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent)，绘制时被触发、在一条 `research/<name>` 分支上并行烧掉 |
-| `task` | 任意 | 没有要决定的事，但手工工作卡着决策，例如开通访问、注册服务、搬动数据以看到它的形状。 | agent 单独能做的就它做，否则交给人类的一份精确清单 |
+| `prototype` | HITL | "这应该长什么样"或"这应该怎么行为"：一个谈话敲不定的问题。 | [prototype](https://aihero.dev/skills-prototype)，并从 ticket 链接到做出的原型 |
+| `research` | AFK | 工作目录之外的一个事实正卡着一个决策。 | 一个 [research](https://aihero.dev/skills-research) [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent)，绘制地图时启动，并在 `research/<name>` 分支上并行运行 |
+| `task` | 任意 | 没有要决定的事，但手工工作卡着决策，例如开通访问、注册服务、搬动数据以查看其形状。 | agent 能独自完成的就由它做，否则给人类一份精确清单 |
 
-`task` 是唯一一种*做*而不是*决定*的类型，它的存在资格是解除一个决策的阻塞、永远不是交付目的地的一小片。这是实践中出错最多的那种类型：agent 会把它解读为一步实现，并开始在地图里写产品代码。
+`task` 是唯一一种*做*而不是*决定*的类型。它留在地图上的理由只能是解除某个决策的阻塞，不能是交付目的地的一部分。这是实践中最常出错的类型：agent 会把它当成实现步骤，并开始在地图里写产品代码。
 
 Research 是*一张 ticket 一次会话*规则之外唯一的例外。
 

@@ -2,13 +2,13 @@
 
 `setup-matt-pocock-skills` 回答关于一个仓库的三个问题：issue 住在哪里、triage 标签叫什么、领域文档放在哪里。它把答案记录为 `docs/agents/` 下的 markdown 文件。
 
-那些文件是各仓库之间唯一不同的地方。技能本身在任何地方都相同；它们运行时读 `docs/agents/issue-tracker.md`，按它说的做。这正是这套技能不绑死 GitHub 的原因，也正是没有任何一份技能文件需要被编辑以把它指向别处的原因。带着"把技能链到一个自定义 issue 追踪器"调用它，能与任何你能以编程方式连接的东西配合，技能侧零修改。
+那些文件是各仓库之间唯一不同的地方。技能本身在任何地方都相同，它们运行时读取 `docs/agents/issue-tracker.md` 并照其说明行事。这正是这套技能不绑死 GitHub 的原因，也正是你不必修改技能文件来改用其他追踪器的原因。带着"把技能链到一个自定义 issue 追踪器"调用它，能与任何可通过程序连接的追踪器配合，技能侧无需修改。
 
-它是一个提示驱动的技能，不是确定性脚本。它读你的 `git remote`、现有的 `CLAUDE.md`、现有的 `GLOSSARY.md`，提出它发现了什么，并在写任何东西之前等你确认。
+它是一个提示驱动的技能，不是确定性脚本。它读取你的 `git remote`、`CLAUDE.md` 和 `GLOSSARY.md`，提出它发现了什么，并在写入任何内容之前等你确认。
 
 ## 何时使用
 
-你通过键入 `/setup-matt-pocock-skills` 来调用它；[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会主动使用它。它被刻意标记为不可调用，所以也没有其他技能能为你触发它。
+你通过键入 `/setup-matt-pocock-skills` 来调用它；[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会主动使用它。它的 metadata 刻意将其标记为不可调用，所以也没有其他技能能替你触发它。
 
 每个仓库调一次，在第一次使用任何其他工程技能之前。如果 [triage](https://aihero.dev/skills-triage)、[to-spec](https://aihero.dev/skills-to-spec)、[to-tickets](https://aihero.dev/skills-to-tickets) 或 [wayfinder](https://aihero.dev/skills-wayfinder) 开始猜你的 issue 该去哪、或应用你追踪器里没有的标签，那说明它们还没在这里被 setup。一个已经进行到一半的仓库是跑它的合适位置；技能读已存在的内容，没有先前的活儿被浪费。
 
@@ -23,11 +23,11 @@
 | `triage-labels.md` | `docs/agents/`，仅当 `triage` 技能已安装 |
 | 一个 `## Agent skills` 块 | 已存在的 `CLAUDE.md` / `AGENTS.md` 其一 |
 
-全部都是被提交的 markdown。没有用户级或全局模式：配置活在仓库里，所以每个仓库各拿一份。
+这些内容都以 markdown 提交。没有用户级或全局模式：配置活在仓库里，所以每个仓库各有一份。
 
 ## 三个决策
 
-它把推荐答案放在每个段落的前面，并跳过已经敲定的探索。大多数跑动就是两次确认就完事。
+它从每一节的推荐答案开始，并跳过探索时已经回答的问题。大多数运行只需两次确认。
 
 | 决策 | 它提议什么 | 何时真的问 |
 | --- | --- | --- |
@@ -41,12 +41,12 @@
 | --- | --- | --- |
 | **GitHub** | 这个仓库的 GitHub Issues | `gh` CLI |
 | **GitLab** | 这个仓库的 GitLab Issues | `glab` CLI |
-| **本地 markdown** | 这个仓库下 `.scratch/<feature>/` 里的文件 | 无：完全不需 remote |
+| **本地 markdown** | 这个仓库下 `.scratch/<feature>/` 里的文件 | 什么都不需要，连 remote 都不需要 |
 | **其他** | 你说的任意地方 | 你的一段话描述工作流 |
 
-前三个随技能作为模板发布，开箱即用。本地 markdown 是头等选项，不是兜底：没有 remote 的单人项目被完整支持。一条注意事项值得重复：如果你在用 GitHub，就别用本地 markdown。它们是替代品，不是层。
+前三个随技能作为模板发布，开箱即用。本地 markdown 是完整选项，不是兜底；没有 remote 的单人项目也受支持。一条注意事项：如果你使用 GitHub，就别用本地 markdown。它们互为替代，选其一即可。
 
-"其他"也不是占位。这就是 Jira、Linear、Azure DevOps 和 Beads 都能工作的原因：你描述工作流，技能把你的散文记录到 `docs/agents/issue-tracker.md`，下游技能照着散文做。社区已经做过这些了：一个走 [MCP](https://www.aihero.dev/ai-coding-dictionary/mcp) 的 Jira 变体、一个照着 `gh` 形状造的 Gitea CLI、一个手搓的本地 dashboard。
+"其他"也是完整选项。这正是 Jira、Linear、Azure DevOps 和 Beads 都能工作的方式：你描述工作流，技能把你的说明记录到 `docs/agents/issue-tracker.md`，下游技能照着做。用户已经实现过这些方案：一个走 [MCP](https://www.aihero.dev/ai-coding-dictionary/mcp) 的 Jira 变体、一个照着 `gh` 形状造的 Gitea CLI、一个手搓的本地 dashboard。
 
 ## 常见问题
 
@@ -71,7 +71,7 @@ v1.1 之后直接问，Matt 说要。技能自己的收尾消息更软：它告�
 
 **我能不能在这里配置其他技能的行为（[盘问（grilling）](https://www.aihero.dev/ai-coding-dictionary/grilling) 节拍、问题格式、语气）？**
 
-不能。它只配置三件事：追踪器、标签、文档布局。有直接的请求要把它变成每用户偏好的归处，常设答案是技能保持有主张："Config is death." 偏好属于你 `CLAUDE.md` 里的普通指令，每份技能已经会读。
+不能。它只配置三件事：追踪器、标签、文档布局。用户曾直接要求把它作为每用户偏好的配置入口；答案是技能保持有主张，不支持每用户配置。偏好应写在你 `CLAUDE.md` 的普通指令里，每份技能都会读取。
 
 **我能把配置留在 `~/.claude` 而不是提交到每个仓库吗？**
 
@@ -91,4 +91,4 @@ v1.1 之后直接问，Matt 说要。技能自己的收尾消息更软：它告�
 
 ## 它的定位
 
-`setup-matt-pocock-skills` 是工程流程的**一次性 setup**，是其他一切假设的先决条件，而不是链上的一步。它的邻居是它的读者们：[triage](https://aihero.dev/skills-triage) 应用这里写下的标签词汇；[to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets) 发布到此处命名的追踪器；以及 [wayfinder](https://aihero.dev/skills-wayfinder)，它读同一份追踪器文件的"Wayfinding operations"小节来知道地图和子 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 如何存储。它记录的领域文档布局是 [domain-modeling](https://aihero.dev/skills-domain-modeling) 之后会填的那个：当一个术语或决策真正被敲定时，它惰性创建 `GLOSSARY.md` 和 ADR，所以 setup 之后的空仓库是预期状态。下一步该用哪个技能时，[ask-matt](https://aihero.dev/skills-ask-matt) 路由整套集合。
+`setup-matt-pocock-skills` 是工程流程的**一次性 setup**，是其他一切假设的先决条件，而不是链上的一步。它的邻居是它的读者们：[triage](https://aihero.dev/skills-triage) 应用这里写下的标签词汇；[to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets) 发布到此处命名的追踪器；[wayfinder](https://aihero.dev/skills-wayfinder) 则读取同一份追踪器文件的"Wayfinding operations"小节，了解地图和子 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 的存放方式。[domain-modeling](https://aihero.dev/skills-domain-modeling) 之后会填充这里记录的领域文档布局。它只在术语或决策敲定时创建 `GLOSSARY.md` 和 ADR，所以 setup 后仓库里没有领域文档是正常的。下一步该用哪个技能时，[ask-matt](https://aihero.dev/skills-ask-matt) 路由整套集合。

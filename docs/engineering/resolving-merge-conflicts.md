@@ -4,7 +4,7 @@
 
 `resolving-merge-conflicts` 逐 hunk 推进一次进行中的 git merge 或 rebase，然后跑项目自己的检查，并以一个 commit 结束这次操作。
 
-它拒绝把冲突当作文本问题。在动一个 hunk 之前，它把每一侧追回到它的 **[primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)**（commit message、PR、原始 issue），所以它在两者意图之间做选择，而不是在两段文本之间做选择，并在它们仍然兼容的地方保留两者。在确实不兼容的地方，它挑与 merge 陈述目标一致的那一侧，并指出权衡。它不发明新行为来糊弄冲突，`--abort` 也不是它的选项之一：merge 总会一路走到一个完成的 commit。
+它拒绝把冲突当作文本问题。在动一个 hunk 之前，它把每一侧追回到它的 **[primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)**（commit message、PR、原始 issue），所以它在两者意图之间做选择，而不是在两段文本之间做选择，并在它们仍然兼容的地方保留两者。在两边无法兼容时，它挑与 merge 声明目标一致的一侧，并指出权衡。它不会为了掩盖冲突而发明新行为，也不会使用 `--abort`；它总会把 merge 推进到一个完成的 commit。
 
 ## 何时使用
 
@@ -20,7 +20,7 @@
 
 ## 一手来源优于 `ours` 和 `theirs`
 
-这个技能存在要消灭的失败模式是按标志位解决：`--ours`、`--theirs`，或者手删看起来不那么重要的那一块，让标记消失、build 编译通过。这种解决在语法上可以完美，却仍可能悄悄丢掉某人有目的做的一个改动。
+这个技能要防止的就是按标志位解决冲突：`--ours`、`--theirs`，或者手删看起来不那么重要的那一块，让标记消失、build 编译通过。这种解决在语法上可以完美，却仍可能悄悄丢掉某人有意做出的改动。
 
 你没读过就保不住意图。所以工作从历史（commits、PRs、[tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)）开始，然后才走到 diff。循环里还有一步出于同样原因：技能找到仓库自己的 [automated checks](https://www.aihero.dev/ai-coding-dictionary/automated-check) 并在 commit 前跑它们，因为 merge 是 git 里最容易写出同时满足两边分支、却两边测试都不过的代码的地方。
 

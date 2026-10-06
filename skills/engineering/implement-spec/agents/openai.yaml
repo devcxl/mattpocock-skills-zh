@@ -1,5 +1,5 @@
 interface:
   display_name: "Implement Spec"
-  short_description: "Implement the result of /to-spec and /to-tickets in code."
+  short_description: "实现 /to-spec 和 /to-tickets 产出的需求与工单"
 policy:
   allow_implicit_invocation: false

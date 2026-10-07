@@ -1,5 +1,39 @@
 # mattpocock-skills
 
+## 1.3.2
+
+### Patch Changes
+
+- `ask-matt` 现在会先读取技能的 `SKILL.md`，再说明该技能的作用或建议跳过某个步骤，而不是依赖自己的一行摘要（#614）。
+
+- `code-review` 现在会在仓库中搜索规范文件，并始终将 `CODING_STANDARDS.md` / `CONTRIBUTING.md` 交给 Standards 子代理（#1065）；两个子代理都在前台运行，并使用其返回的报告（#1073）；同时通过提供的 tracker 文档解析 issue 跟踪器，而不再使用硬编码路径（#937）。
+
+- `diagnosing-bugs` 的 Phase 5 现在会让 agent 将强制制造的变更 `diff` 与干净副本比较，确认变更确实生效后才相信红灯测试，避免实际上什么都没改的编辑被误当成失败测试（#955）。
+
+- 修复 GitHub tracker 模板中的外部 PR 列表：原实现会在 `authorAssociation` 处失败（#468，感谢 @lofi-coding）。重新运行 `/setup-matt-pocock-skills` 以刷新 `docs/agents/issue-tracker.md`。
+
+- `grilling` 现在会调整每个问题的措辞，使回答“是”就代表接受推荐答案；同意推荐时不再需要回答“否”（#706）。
+
+- `handoff` 现在会说明操作系统临时目录的位置（`$TMPDIR`，否则为 `/tmp`；Windows 上为 `%TEMP%`），避免 agent 自行猜测（#272）。
+
+- `implement` 现在会调用 Skill 工具来运行 `tdd` 和 `code-review`，不再只写裸 `/skill` 形式的文字，与 #878 保持一致。
+
+- `implement` 收到 ticket 引用时会先从 issue 跟踪器获取 ticket，并在开始前说明其标题；引用含糊时会先询问（#700）。
+
+- `setup-matt-pocock-skills` 现在会在 GitHub/GitLab 创建缺失的 triage 标签（#616），修复 GitLab 模板中的 `glab` 命令（#635），使用 `--json` 读取 GitHub issue，以便获取标签和正文（#733），并明确指出 `triage-labels.md` 中的 “Label in our tracker” 列（#801）。重新运行 `/setup-matt-pocock-skills` 以刷新 `docs/agents/`。
+
+- `tdd` 现在会为每个建议的 seam 附上一行说明，指出它能捕获什么、会漏掉什么，选择 seam 时不必再靠猜（#607）。
+
+- `teach` 测验现在会改变正确答案所在的位置（#611）。
+
+- `teach` 现在会把工作区写入你运行它时所在的目录，而不是技能文件夹（#377）。
+
+- `to-tickets` 现在会将每张 ticket 设为其来源 issue 的子 issue（GitHub tracker 模板现已给出相应命令）；若阻塞关系使用原生链接，则省略 `## Blocked by`。重新运行 `/setup-matt-pocock-skills` 以刷新 `docs/agents/issue-tracker.md`。感谢 @richardwhatever（#554）和 @adamslowe（#262）。
+
+- `wayfinder` 不再给地图或 ticket 添加 `ready-for-agent` 标签（#518）；只有存在真实 issue ID 时才写入交叉引用（#507）；research 分支不再创建 PR（#576）；并按 ticket 标签所标示的类型解决 ticket（#625）。感谢 @jcwayne、@baob、@rynz 和 @sponge-b0b。
+
+- `wizard` 模板修复：`ask` 使用 Readline，让方向键可以移动光标（#741）；`write_env` 为值加单引号，让空格、`#`、`$` 和引号经 `source` 与 dotenv 读取后仍能保留（#770）；没有浏览器启动器时，`open_url` 会打印手动打开警告（#774）；`write_env` 会通过符号链接写入 `.env`，并保留已有文件的权限模式（#811）；`ask` 和 `ask_secret` 在遇到 EOF 时会报错退出，不再无限循环（#852）。
+
 ## 1.3.1
 
 ### 补丁变更
@@ -125,7 +159,6 @@ Fixes [#453](https://github.com/mattpocock/skills/issues/453).
   - **重新打回原型的场景**已被吸收进原型的判定："有 UI 时是否走到代码"，"是否保留原型的可运行证据"：原来属于收尾问卷的门槛，原型现在自己问。
 
   此外：[grill-me](https://aihero.dev/skills-grill-me) 在遇到 UI/感觉类问题时，被链接到 prototype 作为推荐的下一步：它原本就该指向那里。
-
 
 - [#536](https://github.com/mattpocock/skills/pull/536) [`42a5b70`](https://github.com/mattpocock/skills/commit/42a5b70fcacc7baff1977b13f3919fb2f63af14e) 感谢 [@mattpocock](https://github.com/mattpocock)! - 把这套技能作为原生 **Claude Code 插件**发布，并列入 Claude Code 官方市场。你现在可以把已推广的技能作为一个受管的只读包来订阅，而不必复制可编辑的文件：
 

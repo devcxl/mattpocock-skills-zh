@@ -1,0 +1,23 @@
+name: Triage label
+
+# Every new issue gets `needs-triage`, so nothing skips the queue.
+# The issue forms already add it; this catches issues opened any other way.
+
+on:
+  issues:
+    types: [opened]
+
+permissions: {}
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add needs-triage
+        run: gh issue edit "$NUMBER" --add-label needs-triage
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}

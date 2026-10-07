@@ -1,0 +1,40 @@
+name: Idea or feedback
+description: A change to an existing skill, grounded in a failure you saw.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repo is curated. An idea stays open only if it clears **both** parts of the bar in [`SCOPE.md`](https://github.com/mattpocock/skills/blob/main/SCOPE.md):
+
+        1. **Observed failure**: it describes something that went wrong in a real session, not a hypothetical improvement.
+        2. **Fits the philosophy**: it doesn't match anything in [`.out-of-scope/`](https://github.com/mattpocock/skills/tree/main/.out-of-scope), and it isn't a config option, a harness-specific branch, or a personal-workflow tweak.
+
+        New skills are not accepted. `misc/` skills are frozen.
+  - type: checkboxes
+    id: read-scope
+    attributes:
+      label: Before filing
+      options:
+        - label: I've read `SCOPE.md` and checked `.out-of-scope/`, and this isn't covered by either.
+          required: true
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Which existing skill this changes.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What went wrong
+      description: The real session where the skill fell short. What you ran, what it did, and why that was a problem. Include harness and model.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change
+      description: What you'd change in the skill, as concretely as you can.
+    validations:
+      required: true

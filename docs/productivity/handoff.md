@@ -42,7 +42,7 @@
 三种方式保留的东西各不相同。`/compact` 压缩当前 context，让你在新窗口继续，因此意图得以保留。`/clear` 清空窗口、从零开始；当之前的一切都可丢弃时才合适，否则就无法撤销。`/handoff` 写出一份可携带的文件，让工作能转移到别处。注意，这三者都会把 [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)（对话本身）变成 [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source)（对话摘要）。只有继续当前会话不会这样做，所以应最先排除它。
 
 **我的 handoff 文件去哪了？**
-临时目录：这是这个技能被报告最多的摩擦点：路径很长、按 OS 而异，在 Windows 上 agent 有时要试几次才能找到对的那个。问回路径，搬家前先记住它。临时目录是有意为之的：handoff 是一份过境文档，不是你要维护的工件。它也不是持久化的：见下条。
+文件写在临时目录里：这是这个技能被报告最多的问题。技能会使用 `$TMPDIR`，未设置时使用 `/tmp`；Windows 上使用 `%TEMP%`。路径可能很长，所以要问清路径并在移动前记下来。临时目录是有意为之的：handoff 是一份过境文档，不是你要维护的工件。它也不是持久化的：见下条。
 
 **我的 handoff 在两次会话之间消失了。**
 有些环境会在会话之间清空临时目录：被报告的是 Codex：而 `/private/tmp` 会在重启时清掉。如果下一个 session 不在一小时内启动，或者在另一个 harness 下启动，就在它写出来之后立刻把它拷到一个持久的位置。同样的道理适用于文档*指向*的东西：一份派发单引用了临时目录里的其他文件，那就是下一位 agent 接不住的派发单。

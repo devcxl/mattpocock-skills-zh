@@ -23,3 +23,9 @@ README 的中文版安装命令必须逐字复制自 [.agents/install-block.md](
 要把所有 `deprecated/` 和 `misc/` 之外的技能（重新）链到本地 harness 技能目录（`~/.claude/skills`、`~/.agents/skills`），运行 `scripts/link-skills.sh`。每条都是一个指向本仓库的符号链接，所以 `git pull` 会保持已安装技能为最新；新增、移除或重命名技能后再次运行该脚本。
 
 本仓库散文（`SKILL.md` 文件、文档、`README.md`、`CHANGELOG.md`、ADR、changeset、代码注释）中一律不出现 em-dash。某句话用到时，改写成逗号、冒号、句号、括号或连词中实际合适的那一个；切勿做盲目的字符替换。
+
+## Agent skills
+
+### Triage 标签
+
+规范名称保持不变。参见 `docs/agents/triage-labels.md`。根据 [`SCOPE.md`](./SCOPE.md) 判断 issues。

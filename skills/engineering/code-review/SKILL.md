@@ -12,7 +12,7 @@ description: 从固定点（commit、branch、tag 或 merge-base）开始，沿�
 
 两条轴线作为**并行子 agent** 运行，互不污染彼此的上下文，然后由本技能汇总双方的发现。
 
-Issue 跟踪器应该已经提供给你了。如果 `docs/agents/issue-tracker.md` 缺失，请告诉用户运行 `/setup-matt-pocock-skills`。
+Issue 跟踪器应该已经提供给你了。如果没有，请告诉用户运行 `/setup-matt-pocock-skills`。
 
 ## 流程
 
@@ -28,14 +28,14 @@ Issue 跟踪器应该已经提供给你了。如果 `docs/agents/issue-tracker.m
 
 按以下顺序查找原始规格：
 
-1. commit 消息中的 issue 引用（`#123`、`Closes #45`、GitLab `!67` 等）——按照 `docs/agents/issue-tracker.md` 中的工作流来获取。
+1. commit 消息中的 issue 引用（`#123`、`Closes #45`、GitLab `!67` 等）——按照 tracker 文档中的工作流来获取。
 2. 用户作为参数传入的路径。
 3. `docs/`、`specs/` 或 `.scratch/` 下与分支名或功能名匹配的 PRD/规格文件。
 4. 如果什么都没找到，询问用户规格在哪里。如果用户说没有，**规格**子 agent 将跳过并报告"无可用的规格"。
 
 ### 3. 确定规范来源
 
-仓库中任何记载了代码应如何编写的文档，例如 `CODING_STANDARDS.md` 或 `CONTRIBUTING.md`。
+搜索仓库，找出所有记载代码编写规范的文件。若存在 `CODING_STANDARDS.md` 或 `CONTRIBUTING.md`，必须将它们列入来源。
 
 除了仓库记录的内容外，规范轴线始终携带下面的**气味基线（smell baseline）**——一组来自 Fowler《重构》第 3 章的固定代码气味，即使仓库没有任何文档也适用。两条约束规则：
 
@@ -58,6 +58,8 @@ Issue 跟踪器应该已经提供给你了。如果 `docs/agents/issue-tracker.m
 - **拒绝遗产（Refused Bequest）**——子类或实现者忽略或覆盖了大部分继承的内容。→ 放弃继承，改用组合。
 
 ### 4. 并行启动两个子 agent
+
+同时发出两个子 agent 调用，并在前台运行；汇总它们返回的报告。
 
 **规范子 agent prompt**——包含：
 

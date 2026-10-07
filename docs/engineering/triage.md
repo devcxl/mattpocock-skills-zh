@@ -64,7 +64,7 @@
 
 在追踪器把外部 pull request 当作请求面的地方，它们跑过同一台机器——同样的类别、同样的状态、同样的转换。状态只是对着 diff 读：`ready-for-agent` 意味着附了简报、agent 应该对代码采取下一步；`ready-for-human` 意味着准备好让一个人合并。PR 上的简报描述对现有 diff 还剩下什么要做，而不是如何从零构建那个东西。
 
-发现面只浮出*外部* PR，因为协作者进行中的分支不是 triage 工作。那个过滤器只作用于发现——显式点名一个 PR，无论谁写的它都会被 triage。一条粗糙边缘：GitHub 模板的外部 PR 列出命令向 `gh pr list` 要一个 `gh` 并不暴露的 `authorAssociation` 字段，所以写好的命令会直接失败（[#468](https://github.com/mattpocock/skills/issues/468)）。
+发现面只浮出*外部* PR，因为协作者进行中的分支不是 triage 工作。那个过滤器只作用于发现——显式点名一个 PR，无论谁写的它都会被 triage。
 
 ## 常见问题
 

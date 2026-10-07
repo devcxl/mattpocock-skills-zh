@@ -22,7 +22,7 @@ claude plugin install mattpocock-skills@mattpocock
 /plugin install mattpocock-skills@mattpocock
 ```
 
-以上命令从本仓库的 marketplace 安装中文版插件，不是从 Claude Code 官方市场安装英文版。
+以上命令从本仓库的 marketplace 安装中文版插件，不是从 Claude Code 官方市场安装英文版。若提示找不到插件，运行 `claude plugins marketplace update` 后重试。本仓库 marketplace 不属于 Anthropic 官方市场，默认不会自动更新；可在 `/plugin` → Marketplaces 中为 `mattpocock` 开启自动更新。运行 `claude plugin list` 查看已安装版本，并参阅 [CHANGELOG.md](../CHANGELOG.md) 了解最新发布版本。
 
 </canonical-block>
 

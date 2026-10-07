@@ -1,0 +1,43 @@
+name: Bug
+description: A skill did the wrong thing in a real session.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bugs in `skills/misc/` are not fixed (see [`.out-of-scope/frozen-misc-skills.md`](https://github.com/mattpocock/skills/blob/main/.out-of-scope/frozen-misc-skills.md)). Installer problems with `npx skills` belong at skills.sh.
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Which skill, e.g. `to-tickets`, `grilling`.
+    validations:
+      required: true
+  - type: input
+    id: harness
+    attributes:
+      label: Harness and version
+      description: e.g. Claude Code 2.3.1, Codex CLI 0.40, Cursor. Say how you installed (plugin or skills.sh) and which skills version.
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model and effort
+      description: e.g. Opus, high effort. Roughly how full was the context when it happened?
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you ran, and what the skill did. Paste the relevant part of the session.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: What the skill should have done instead, and which line of the SKILL.md (if any) says so.
+    validations:
+      required: true

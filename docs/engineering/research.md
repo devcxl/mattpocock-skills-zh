@@ -58,7 +58,7 @@
 
 **`/wayfinder` 创建了 research tickets。我要自己处理那些吗？**
 
-不用，它现在会替你启动这些任务。在 v1.1 之后尚未发布的改动中，绘图会话会为每张 research ticket 启动一个 `/research` subagent 并行执行。每个任务都会把发现记在一条用完即扔的 `research/<name>` 分支上，ticket 通过 [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer) 指向它。Research tickets 是 wayfinder 一 ticket 一会话规则的唯一例外，因为它们是 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) 的：没有东西在等你。这些分支有两个已知问题：有人看到 subagent 从一条本不打算合并的分支开出草稿 PR（[issue #576](https://github.com/mattpocock/skills/issues/576)）；之后删除分支也会破坏 ticket 中的 context pointer。
+不用，它现在会替你启动这些任务。在 v1.1 之后尚未发布的改动中，绘图会话会为每张 research ticket 启动一个 `/research` subagent 并行执行。每个任务都会把发现记在一条用完即扔的 `research/<name>` 分支上，ticket 通过 [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer) 指向它。Research tickets 是 wayfinder 一 ticket 一会话规则的唯一例外，因为它们是 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) 的：没有东西在等你。一个已知问题是，之后删除分支会破坏 ticket 中的 context pointer。
 
 ## 怎样算成功
 

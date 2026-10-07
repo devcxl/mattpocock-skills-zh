@@ -65,11 +65,11 @@
 
 **在 GitHub 上这些 tickets 不是作为 spec issue 的 sub-issues 被创建的。**
 
-已知未修复。已在十余次跑动和多个 model 上被报告，[最完整的是 issue #554](https://github.com/mattpocock/skills/issues/554)，且在 Codex 上比在 Claude 上更糟。`gh` 从 v2.94 起原生支持：`gh issue create --parent <n>`，事后 `gh issue edit <parent> --add-sub-issue <n>`。在追踪器模板偏向那些之前，跑完之后自己手工接上父链接是可靠的招。
+这个问题曾在十余次跑动和多个 model 上被报告，[最完整的报告见 issue #554](https://github.com/mattpocock/skills/issues/554)。现已修复：`to-tickets` 会把每张 ticket 建为来源 issue 的子 issue，GitHub tracker 模板也给出了相应命令（`gh` 2.94+ 的 `gh issue create --parent <n>`）。重新运行 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills)，以刷新旧版 `docs/agents/issue-tracker.md`。
 
 **"Blocked by" 被写进了 issue 正文里、而不是真实的阻塞链接。**
 
-同类问题，[在 issue #513 中被报告](https://github.com/mattpocock/skills/issues/513)，agent 甚至断言 GitHub 根本没有原生阻塞关系。其实有：`gh issue create --blocked-by 12,15`。因为 blocker 是先发布的，它们的编号在创建时总是可用的。正文文本是为没有原生边的追踪器准备的兜底，不是默认。
+同类问题，[在 issue #513 中被报告](https://github.com/mattpocock/skills/issues/513)，agent 甚至断言 GitHub 根本没有原生阻塞关系。其实有：`gh issue create --blocked-by 12,15`。因为 blocker 是先发布的，它们的编号在创建时总是可用的。正文文本是为没有原生边的追踪器准备的兜底，不是默认；当边使用原生链接时，ticket 模板现在会省略 `## Blocked by`。
 
 **本地 tickets 放在哪？v1.1 的注释说一份根级 `tickets.md`。**
 

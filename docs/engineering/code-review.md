@@ -25,12 +25,12 @@
 
 Spec 轴需要一个存在且可找到的 spec。它按这个顺序查找：
 
-1. 提交消息中的 issue 引用（`#123`、`Closes #45`、GitLab 的 `!67`），通过 `docs/agents/issue-tracker.md` 获取。
+1. 提交消息中的 issue 引用（`#123`、`Closes #45`、GitLab 的 `!67`），通过 tracker 文档获取。
 2. 你作为参数传入的路径。
 3. `docs/`、`specs/` 或 `.scratch/` 下与分支名或功能名匹配的 spec 文件。
 4. 问你。
 
-第 1 步依赖 `docs/agents/issue-tracker.md`，它由 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 写入。没有它，只要你给一条路径，这条轴仍然能用。完全没有 spec 时，Spec 子代理会被跳过，报告会写"无可用 spec"（no spec available），而不是凭空编造需求。
+第 1 步依赖 tracker 文档；该文档由 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 写入。没有它，只要你给一条路径，这条轴仍然能用。完全没有 spec 时，Spec 子代理会被跳过，报告会写"无可用 spec"（no spec available），而不是凭空编造需求。
 
 ## 两条轴
 

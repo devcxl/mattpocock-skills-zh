@@ -62,8 +62,6 @@
 
 运行中不能。没有返回按钮——阶段向前推进，第 3 阶段的一个错误答案意味着 Ctrl-C 重跑。重跑按设计很廉价：任何已写入 `.env` 的值都会作为默认值回显，所以你在正确的阶段按回车，只需重打错误的那一个。这件事发布当周被提出，此后再没被关闭过："loved it! One thing though, is there a way to go back and correct what you've entered?"
 
-还有一个相关的未关闭 bug：`ask` 提示中的方向键会插入 `^[[D` / `^[[C` 而不是移动光标，因为提示用的是 `read -r` 而非 Readline（[issue #741](https://github.com/mattpocock/skills/issues/741)）。退格键能用；方向键不能用。删除回到错误处，而不是把光标移进去。
-
 **它知道我已完成什么设置吗？**
 
 部分知道，而且比发布时的反应所假设的要少。它在提问前读取仓库——你的 `.env` 文件、`docker-compose`、框架配置、CI 中的 `secrets.*` 引用——所以它只针对真正缺失的值做范围界定，而不是像 README 那样从零开始。它不做的是检查第三方服务。如果 key 已存在于 `.env`，wizard 会把它作为默认值回显，回车即保留；如果你已经创建了 Stripe 账户但从未保存 key，wizard 仍会把你送去 dashboard 取。

@@ -1,0 +1,38 @@
+name: Close needs-info
+
+# Closes issues labelled `needs-info` after 14 days with no reply.
+# Touches only issues with that label. Never marks anything stale on its own.
+# A comment after the label goes on removes `needs-info` and puts the issue
+# back in `needs-triage`, so add the label after you ask your question.
+
+on:
+  schedule:
+    - cron: "30 1 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      actions: write # the action keeps its state in the Actions cache
+    steps:
+      - uses: actions/stale@v10
+        with:
+          only-issue-labels: needs-info
+          stale-issue-label: needs-info
+          days-before-issue-stale: -1
+          days-before-issue-close: 14
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          remove-issue-stale-when-updated: true
+          labels-to-add-when-unstale: needs-triage
+          close-issue-reason: not_planned
+          close-issue-message: >
+            Closing this because we asked for more information 14 days ago
+            and have not heard back. Thank you for the report. If you can add
+            the details, comment here and we will reopen it.
+            See [CONTRIBUTING.md](https://github.com/mattpocock/skills/blob/main/CONTRIBUTING.md)
+            for what a good report includes.

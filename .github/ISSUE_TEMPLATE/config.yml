@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and discussion
+    url: https://github.com/mattpocock/skills/discussions
+    about: How-do-I questions, ideas you want to talk through, and anything that isn't a concrete failure in a skill.

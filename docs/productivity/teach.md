@@ -35,7 +35,7 @@
 | `assets/*` | 可复用的组件：首先是一份共享的样式表：让课程看起来像一门课 |
 | `NOTES.md` | 你陈述的教学偏好 |
 
-对这个列表的两个诚实说明。词汇表适合大多数主题，但这个技能带了一份 `GLOSSARY-FORMAT.md`，而 `SKILL.md` 已经不再链到它，所以你得主动要才会有一份（[issue #559](https://github.com/mattpocock/skills/issues/559)）。并且 workspace 不总是创建在你以为的地方：在你要在上面构建一门长课之前，先看看下面第一个问题。
+对这个列表有两点说明。词汇表适合大多数主题，但这个技能带了一份 `GLOSSARY-FORMAT.md`，而 `SKILL.md` 已经不再链到它，所以你得主动要才会有一份（[issue #559](https://github.com/mattpocock/skills/issues/559)）。所有文件都会写入你运行 `/teach` 时所在的目录。
 
 ## 存储强度，而非流利度
 
@@ -56,7 +56,7 @@
 ## 常见问题
 
 **它把文件放哪？我的最后落在了 `~/.claude/skills`。**
-一个真实的、尚未解决的 bug（[#377](https://github.com/mattpocock/skills/issues/377)）。`SKILL.md` 对 `./` 同时用了两种根：`./MISSION-FORMAT.md` 之类确实和 `SKILL.md` 并列放在已安装的技能里，而 `./lessons/`、`./reference/`、`./learning-records/` 和 `./assets/` 本意是在你的目录里。一个把第一种解析到技能安装目录的 agent，会继续把第二种也解析到那里，于是把你的课程写进了技能文件夹。在你往上堆东西之前先检查第一节课落到了哪里，并且显式给出目录名，而不是依赖"当前目录"被理解。
+文件会写入你运行 `/teach` 时所在的目录（[#377](https://github.com/mattpocock/skills/issues/377)）。
 
 **我应该留在一个 session 里，还是每节课开一个新的？**
 三种做法都行：留在同一个 session、在新 session 里重新调用 `/teach`、或在同一文件夹里开一个新的 session。每节课都是各自的一次调用。承接的是文件夹，不是对话。常见的做法是在 workspace 里开一个新的 session 然后说 `/teach next lesson for <topic>`。

@@ -101,6 +101,8 @@ disable-model-invocation: true
 
 只有当 `triage` 已安装且 B 节执行过时，才包含 `### Triage labels` 子块并写 `docs/agents/triage-labels.md`。否则两者都省略。
 
+如果 B 节在 GitHub 或 GitLab 上执行过，请创建跟踪器中尚不存在的每个已配置标签（`gh label create` / `glab label create`）。
+
 然后用本技能文件夹中的种子模板作为起点写文档文件：
 
 - [issue-tracker-github.md](./issue-tracker-github.md) — GitHub issue 跟踪器

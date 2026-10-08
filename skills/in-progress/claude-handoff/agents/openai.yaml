@@ -1,5 +1,5 @@
 interface:
   display_name: "Claude Handoff"
-  short_description: "Hand off to a background agent"
+  short_description: "将任务交给后台智能体"
 policy:
   allow_implicit_invocation: false

@@ -1,5 +1,5 @@
 interface:
   display_name: "Loop Me"
-  short_description: "Spec the workflows you want to build"
+  short_description: "为准备构建的工作流程编写需求说明"
 policy:
   allow_implicit_invocation: false

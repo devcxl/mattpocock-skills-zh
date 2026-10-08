@@ -1,5 +1,5 @@
 interface:
   display_name: "Chief Of Staff"
-  short_description: "Pursue a long-running goal in a single session by co-ordinating subagents"
+  short_description: "协调子智能体，在单次会话中推进长期目标"
 policy:
   allow_implicit_invocation: false

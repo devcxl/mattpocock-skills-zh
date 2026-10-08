@@ -1,5 +1,5 @@
 interface:
   display_name: "Handoff"
-  short_description: "Compact a conversation into a handoff"
+  short_description: "将对话压缩成便于接手的交接文档"
 policy:
   allow_implicit_invocation: false

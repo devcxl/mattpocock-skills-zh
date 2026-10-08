@@ -1,5 +1,5 @@
 interface:
   display_name: "Wait What"
-  short_description: "Re-pitch that: simpler, with the context I'm missing"
+  short_description: "补充缺失的背景，用更简单的话重新解释"
 policy:
   allow_implicit_invocation: false

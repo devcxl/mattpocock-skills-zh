@@ -1,5 +1,5 @@
 interface:
   display_name: "To Questionnaire"
-  short_description: "Front-load questions into a doc for someone to answer"
+  short_description: "预先将问题整理成供他人回答的文档"
 policy:
   allow_implicit_invocation: false

@@ -1,5 +1,5 @@
 interface:
   display_name: "To Tickets"
-  short_description: "Split a plan into tracer-bullet tickets"
+  short_description: "将计划拆成可逐步验证的工单"
 policy:
   allow_implicit_invocation: false

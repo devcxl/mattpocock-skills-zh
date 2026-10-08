@@ -1,5 +1,5 @@
 interface:
   display_name: "To Spec"
-  short_description: "Turn a conversation into a spec"
+  short_description: "将讨论整理成需求说明"
 policy:
   allow_implicit_invocation: false

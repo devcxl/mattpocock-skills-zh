@@ -26,7 +26,7 @@ Matt Pocock 的智能体技能集面向真正的工程实践，而非 vibe codin
 
 ## 安装（30 秒配置）
 
-两种方式，两种理念。**[Claude Code 插件](https://code.claude.com/docs/en/plugins)** 将整套技能集作为受管理的只读 bundle 安装，来源是本仓库自带的 marketplace。**[skills.sh](https://skills.sh/devcxl/mattpocock-skills-zh)** 将可编辑的中文版技能文件复制到你的项目中，便于自行修改。**二选一：两者都装会导致每个技能出现两次。**
+插件安装由各 agent 按其更新机制管理；[skills.sh](https://skills.sh/devcxl/mattpocock-skills-zh) 将可编辑的中文版技能文件复制到项目中，需要手动更新。**按 agent 选择一种安装方式，避免同一技能重复安装。**本页中文版命令均指向 `devcxl/mattpocock-skills-zh`。英文上游仓库 `mattpocock/skills` 的 Claude Code 官方市场命令不适用于中文版。下列 Claude Code、Codex、Copilot、VS Code、Gemini CLI 和 skills.sh 路线参考英文上游截至 2026-10-08 的支持情况并改用中文版仓库源，中文版路线尚未逐项实测。所有托管插件路线都要等 `.claude-plugin/plugin.json` 的 `version` 更新后才能获取新版本。本仓库发布工作流通过 `npm run version` 创建 `chore: version skills` 版本 PR；合并后，安装端再按各自的更新机制获取新版本。
 
 ### 1. 获取技能
 
@@ -45,33 +45,66 @@ claude plugin install mattpocock-skills@mattpocock
 /plugin install mattpocock-skills@mattpocock
 ```
 
-以上命令从本仓库的 marketplace 安装中文版插件，不是从 Claude Code 官方市场安装英文版。若提示找不到插件，运行 `claude plugins marketplace update` 后重试。本仓库 marketplace 不属于 Anthropic 官方市场，默认不会自动更新；可在 `/plugin` → Marketplaces 中为 `mattpocock` 开启自动更新。运行 `claude plugin list` 查看已安装版本，并参阅 [CHANGELOG.md](./CHANGELOG.md) 了解最新发布版本。
+中文版从本仓库自带的 `mattpocock` marketplace 安装，不是从 Anthropic 官方市场安装英文版。默认不会自动更新。安装后，在 `/plugin` → Marketplaces 中为 `mattpocock` 一次性开启自动更新。若提示找不到插件，运行 `claude plugins marketplace update` 后重试。运行 `claude plugin list` 查看已安装版本，并参阅 [CHANGELOG.md](./CHANGELOG.md) 了解最新发布版本。
 
 </details>
 
 <details>
-<summary><strong>Codex 及其他智能体</strong></summary>
+<summary><strong>Codex</strong></summary>
 
 ```bash
-npx skills@latest add devcxl/mattpocock-skills-zh
+codex plugin marketplace add devcxl/mattpocock-skills-zh
+codex plugin add mattpocock-skills@mattpocock
 ```
 
-选择你想要的技能，以及要安装到哪些编程智能体上。**安装器会让你选择要装的技能：务必把 `setup-matt-pocock-skills` 选上。**
-
-原生 Codex 插件已在规划中：详见 [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)。
+按上游行为，Codex 默认在启动时自动更新。新版本仍需先合并本仓库的 `chore: version skills` 版本 PR。
 
 </details>
 
 <details>
-<summary><strong>喜欢折腾的</strong></summary>
+<summary><strong>GitHub Copilot</strong>（CLI 和 VS Code）</summary>
 
-使用同样的安装器，在任何智能体上安装：包括 Claude Code：
+请使用 marketplace，不要使用 `copilot plugin install devcxl/mattpocock-skills-zh` 直接安装仓库。Copilot 已弃用直接仓库安装，且这种方式无法自动更新。以下配置遵循文档 schema，但上游尚未实际运行验证；中文版路线也尚未验证。
 
 ```bash
-npx skills@latest add devcxl/mattpocock-skills-zh
+copilot plugin marketplace add devcxl/mattpocock-skills-zh
+copilot plugin install mattpocock-skills@mattpocock
 ```
 
-这会将技能作为普通文件写入你的仓库，归你所有，你可以自由编辑。不会有任何东西在后台偷偷更新；想获取最新变更时，运行 `npx skills update` 即可。
+然后一次性在 `~/.copilot/settings.json` 中添加：
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "mattpocock": { "source": { "source": "github", "repo": "devcxl/mattpocock-skills-zh" }, "autoUpdate": true }
+  }
+}
+```
+
+在 VS Code 中运行 **Chat: Install Plugin From Source**，输入 `https://github.com/devcxl/mattpocock-skills-zh`。按上游行为默认每日更新；中文版路线尚未验证。
+
+</details>
+
+<details>
+<summary><strong>Gemini CLI</strong>（手动更新）</summary>
+
+```bash
+gemini skills install https://github.com/devcxl/mattpocock-skills-zh.git --path skills/engineering
+gemini skills install https://github.com/devcxl/mattpocock-skills-zh.git --path skills/productivity
+```
+
+Gemini 不读取 `.claude-plugin`，且 `--path` 一次指定一个 bucket。此命令会复制技能文件，不会自动更新；更新时重新运行两条命令。中文版路线尚未实测。
+
+</details>
+
+<details>
+<summary><strong>其他智能体，或需要可编辑文件</strong>（手动更新）</summary>
+
+```bash
+npx skills@latest add devcxl/mattpocock-skills-zh -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose
+```
+
+安装器询问要安装哪些技能时，请选择 `setup-matt-pocock-skills`。更新时运行 `npx skills@latest update`；要获取新技能，请重新运行 `add`。上面的 agent 列表来自英文上游 2026-10-07 的测试，中文版路线尚未逐项实测。
 
 </details>
 

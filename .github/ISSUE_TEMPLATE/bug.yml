@@ -1,10 +1,12 @@
 name: Bug
-description: A skill did the wrong thing in a real session.
-labels: ["bug"]
+description: A skill did the wrong thing in a real session. One bug per issue.
+labels: [bug, needs-triage]
 body:
   - type: markdown
     attributes:
       value: |
+        Keep it short and put the repro first. If an agent wrote this for you, cut it down to the repro before you post. See [CONTRIBUTING.md](https://github.com/mattpocock/skills/blob/main/CONTRIBUTING.md).
+
         Bugs in `skills/misc/` are not fixed (see [`.out-of-scope/frozen-misc-skills.md`](https://github.com/mattpocock/skills/blob/main/.out-of-scope/frozen-misc-skills.md)). Installer problems with `npx skills` belong at skills.sh.
   - type: input
     id: skill
@@ -14,10 +16,18 @@ body:
     validations:
       required: true
   - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: The plugin version, or the commit SHA you installed from. Many bugs are already fixed on `main`.
+      placeholder: 1.3.1, or 4588b32
+    validations:
+      required: true
+  - type: input
     id: harness
     attributes:
       label: Harness and version
-      description: e.g. Claude Code 2.3.1, Codex CLI 0.40, Cursor. Say how you installed (plugin or skills.sh) and which skills version.
+      description: e.g. Claude Code 2.3.1, Codex CLI 0.40, Cursor. Say how you installed (plugin or skills.sh).
     validations:
       required: true
   - type: input
@@ -31,7 +41,7 @@ body:
     id: what-happened
     attributes:
       label: What happened
-      description: What you ran, and what the skill did. Paste the relevant part of the session.
+      description: The smallest steps that show the bug, and what the skill did. Paste the relevant part of the session.
     validations:
       required: true
   - type: textarea
@@ -41,3 +51,12 @@ body:
       description: What the skill should have done instead, and which line of the SKILL.md (if any) says so.
     validations:
       required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: This issue is about one problem.
+          required: true
+        - label: I searched open and closed issues for a duplicate.
+          required: true

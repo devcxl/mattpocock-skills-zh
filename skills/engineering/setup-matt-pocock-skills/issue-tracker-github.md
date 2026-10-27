@@ -8,11 +8,15 @@
 - **读取 issue**：`gh issue view <number> --json number,title,body,labels,comments`。
 - **列出 issue**：`gh issue list --state open --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'` 并配合适当的 `--label` 和 `--state` 过滤。
 - **将 issue 设为父 issue 的子 issue**：`gh issue create --parent <parent> ...`，或之后运行 `gh issue edit <parent> --add-sub-issue <child>`（`gh` 2.94+）。旧版 `gh`：`gh api --method POST repos/<owner>/<repo>/issues/<parent>/sub_issues -F sub_issue_id=<child-db-id>`（数据库 ID，如下文 **阻塞** 所述）。若不支持 sub-issues，则在子 issue 正文顶部写 `Part of #<parent>`。
+- **阻塞**：GitHub 的**原生 issue 依赖关系**是规范且在 UI 中可见的表示方式。通过 `gh issue create --blocked-by <n>,<n> ...` 或 `gh issue edit <child> --add-blocked-by <blocker>`（`gh` 2.94+）添加依赖。旧版 `gh`：`gh api --method POST repos/<owner>/<repo>/issues/<child>/dependencies/blocked_by -F issue_id=<blocker-db-id>`，其中 `<blocker-db-id>` 是阻塞项的数字**数据库 id**（`gh api repos/<owner>/<repo>/issues/<n> --jq .id`，*不是* `#number` 或 `node_id`）。依赖功能不可用时，在子 issue 正文顶部使用 `Blocked by: #<n>, #<n>` 作为回退。只有所有阻塞项都已关闭，ticket 才解除阻塞。
+- **统计未关闭的阻塞项**：`gh api repos/<owner>/<repo>/issues/<n> --jq .issue_dependencies_summary.blocked_by`（只统计未关闭的阻塞项；0 表示可以开始）。`gh issue view <n> --json blockedBy` 也会列出已关闭的阻塞项，因此要过滤：`--jq '[.blockedBy.nodes[] | select(.state == "OPEN")] | length'`。
 - **评论 issue**：`gh issue comment <number> --body "..."`
 - **应用 / 移除标签**：`gh issue edit <number> --add-label "..."` / `--remove-label "..."`
-- **关闭**：`gh issue close <number> --comment "..."`
+- **关闭**：先用 `gh issue comment <number> --body "..."` 发布说明，再运行 `gh issue close <number>`。对于已关闭的 issue，`gh issue close --comment` 会丢弃评论，但仍以 0 退出。
 
 从 `git remote -v` 推断仓库——在克隆内运行时 `gh` 会自动这么做。
+
+只在用户自己的 repo 中创建 issue。除非用户拥有 `mattpocock/skills`，否则绝不要向该仓库创建 issue。在 fork 中，`gh` 可能默认指向上游父仓库，因此每次会话首次运行 `gh issue create` 前，先用 `gh repo view --json nameWithOwner` 检查目标；如果目标不是用户自己的 repo，就先向用户确认。
 
 ## 把拉取请求作为分类入口
 
@@ -20,7 +24,7 @@
 
 设为 `yes` 时，PR 与 issue 走同样的标签和状态，使用对应的 `gh pr` 命令：
 
-- **读取 PR**：`gh pr view <number> --comments`，diff 用 `gh pr diff <number>`。
+- **读取 PR**：先运行 `gh pr view <number>`，再运行 `gh pr view <number> --comments`（在非 TTY 环境下，`--comments` 只输出评论，不包含正文），并用 `gh pr diff <number>` 查看 diff。
 - **列出供分类的外部 PR**：`gh api --paginate 'repos/{owner}/{repo}/pulls?state=open' --jq '.[] | select(.author_association | IN("OWNER","MEMBER","COLLABORATOR") | not) | {number, title, author: .user.login, author_association, labels: [.labels[].name]}'`。
 - **评论 / 打标签 / 关闭**：`gh pr comment`、`gh pr edit --add-label`/`--remove-label`、`gh pr close`。
 
@@ -40,7 +44,7 @@ GitHub 的 issue 和 PR 共用一个编号空间，所以裸的 `#42` 可能是�
 
 - **地图**：一个标记为 `wayfinder:map` 的 issue，承载 Notes / Decisions-so-far / Fog 正文。`gh issue create --label wayfinder:map`。
 - **子 ticket**：作为 GitHub 子 issue 链接到地图的 issue（参见 **将 issue 设为父 issue 的子 issue**）。在未启用 sub-issues 时，把子项加进地图正文的任务列表，并在子项正文顶部放 `Part of #<map>`。标签：`wayfinder:<type>`（`research`/`prototype`/`grilling`/`task`）。一旦被认领，ticket 就分配给驱动的开发者。
-- **阻塞**：GitHub 的**原生 issue 依赖**——规范、UI 可见的表示。用 `gh api --method POST repos/<owner>/<repo>/issues/<child>/dependencies/blocked_by -F issue_id=<blocker-db-id>` 添加边，其中 `<blocker-db-id>` 是阻塞者的数字**数据库 id**（`gh api repos/<owner>/<repo>/issues/<n> --jq .id`，*不是* `#number` 或 `node_id`）。GitHub 报告 `issue_dependencies_summary.blocked_by`（只含未关闭的阻塞者——即实时闸门）。在依赖不可用之处，回退到子项正文顶部的 `Blocked by: #<n>, #<n>` 行。当每个阻塞者都被关闭时，ticket 即解除阻塞。
-- **前沿查询**：列出地图未关闭的子项（`gh issue list --state open`，限定在地图的子 issue / 任务列表），丢弃任何有未关闭阻塞者（`issue_dependencies_summary.blocked_by > 0`，或 `Blocked by` 行中有未关闭 issue）或有指派人的；按地图顺序取第一个。
+- **阻塞**：参见约定中的 **阻塞**。
+- **前沿查询**：列出地图未关闭的子项（`gh issue list --state open`，限定在地图的子 issue / 任务列表），丢弃任何有未关闭阻塞项（参见约定中的 **统计未关闭的阻塞项**，或检查 `Blocked by` 行中是否有未关闭 issue）或有指派人的；按地图顺序取第一个。
 - **认领**：`gh issue edit <n> --add-assignee @me` — 会话的第一次写入。
 - **解决**：`gh issue comment <n> --body "<answer>"`，然后 `gh issue close <n>`，然后把上下文指针（gist + 链接）追加到地图的 Decisions-so-far。

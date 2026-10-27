@@ -55,9 +55,9 @@ ADR 的三条测试缺任何一条，就不写 ADR。一个容易逆转的决策
 
 大小只是症状。问题在于文件收进了不属于词汇表的实现细节和决策。修法是一条直接的指令：`/grill-with-docs make my GLOSSARY.md more concise and remove any implementation details from it`。对着一个臃肿的文件跑它，大部分内容都会消掉。只有当文件已经精简、却仍覆盖读者不愿同时掌握的两个领域时，才用 `GLOSSARY-MAP.md` 拆分；拆分臃肿文件只会得到几份臃肿文件。技能在这方面的指引还不够强，无法在一开始就阻止这种膨胀，追踪这件事的 issue 仍然开放。
 
-**为什么叫 `GLOSSARY.md` 而不是 `GLOSSARY.md`？**
+**为什么叫 `GLOSSARY.md`，而不是 `CONTEXT.md`？**
 
-这件事被反复讨论过，没有敲定的答案。反对当前命名的理由很有力：如果它是"一份词汇表，仅此而已"，那 `GLOSSARY.md` 直接这么说，正如一位读者所说："with ai agents everything is [context](https://www.aihero.dev/ai-coding-dictionary/context)"。支持它的理由是那张图：`GLOSSARY-MAP.md` 指向多份 `GLOSSARY.md`，读起来比 `GLOSSARY-MAP.md` 自然，并且 `context` 是 DDD 里表示有界模型区的现成词。至少有一人专门维护一份本地 fork 来给文件改名。你也可以这么做，但技能集合里其他技能都去找 `GLOSSARY.md`，所以改名意味着把它们全打补丁。
+在 1.3.0 之前，它叫 `CONTEXT.md`（以及 `CONTEXT-MAP.md`）。该文件只是一份词汇表，因此 `GLOSSARY.md` 清楚说明了它的用途。正如一位读者所说："with ai agents everything is [context](https://www.aihero.dev/ai-coding-dictionary/context)"。如果你的 repo 中仍有 `CONTEXT.md`，请重新运行 `/setup-matt-pocock-skills`：它会提议通过 `git mv` 重命名文件，并更新 `docs/agents/domain.md` 中的相应名称。这套技能中的所有技能都会查找 `GLOSSARY.md`，因此保留旧名称意味着要给它们全部打补丁。
 
 **`/ubiquitous-language` 去哪了？**
 

@@ -1,5 +1,6 @@
 name: Idea or feedback
-description: A change to an existing skill, grounded in a failure you saw.
+description: A change to an existing skill, grounded in a failure you saw. One change per issue.
+labels: [enhancement, needs-triage]
 body:
   - type: markdown
     attributes:
@@ -16,6 +17,10 @@ body:
       label: Before filing
       options:
         - label: I've read `SCOPE.md` and checked `.out-of-scope/`, and this isn't covered by either.
+          required: true
+        - label: This issue is about one problem.
+          required: true
+        - label: I searched open and closed issues for a duplicate.
           required: true
   - type: input
     id: skill
@@ -35,6 +40,6 @@ body:
     id: change
     attributes:
       label: Proposed change
-      description: What you'd change in the skill, as concretely as you can.
+      description: The smallest change that fixes it. Describe it; don't paste a rewritten SKILL.md.
     validations:
       required: true

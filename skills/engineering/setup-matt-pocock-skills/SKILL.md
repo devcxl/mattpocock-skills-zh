@@ -22,7 +22,7 @@ disable-model-invocation: true
 
 - `git remote -v` 和 `.git/config` — 这是 GitHub 仓库吗？是哪一个？
 - 仓库根目录的 `AGENTS.md` 和 `CLAUDE.md` — 存在吗？里面是否已有 `## Agent skills` 章节？
-- 仓库根目录的 `GLOSSARY.md` 和 `GLOSSARY-MAP.md`
+- 仓库根目录的 `GLOSSARY.md` 和 `GLOSSARY-MAP.md`，以及旧版 `CONTEXT.md` / `CONTEXT-MAP.md`。如果发现旧版文件，询问是否要用 `git mv` 将其重命名为对应的 `GLOSSARY` 名称，并在 `docs/agents/domain.md` 中更新这些名称。
 - `docs/adr/` 和任何 `src/*/docs/adr/` 目录
 - `docs/agents/` — 这个技能之前的产出是否已存在？
 - `.scratch/` — 表明本地 markdown issue 跟踪器约定已在使用的迹象
@@ -47,6 +47,8 @@ disable-model-invocation: true
 - **其他**（Jira、Linear 等）— 让用户用一段话描述工作流；技能会把它记录为自由文本
 
 把选择记录在 `docs/agents/issue-tracker.md`。GitHub 和 GitLab 模板带有"PRs as a request surface"（把 PR 当作请求入口）标志，默认**关闭**——保持关闭，不要提起它；想把外部 PR 放进分类队列的用户可以稍后在文件里打开这个标志。
+
+GitHub 或 GitLab 跟踪器必须对应一个可访问的仓库。如果用户选择其中之一，而当前没有指向该 host 的 `git remote`，先向用户获取仓库 URL，再配置 remote（必要时先运行 `git init`，然后运行 `git remote add origin <url>`），之后才能继续。必须能在当前目录中通过 `gh repo view` / `glab repo view` 查看项目；如果无法查看，就停止并告诉用户缺少什么。
 
 **B 节 — 分类标签词汇。** 如果 `triage` 技能未安装（探索已告诉你），整节跳过——未安装的技能不需要标签。
 

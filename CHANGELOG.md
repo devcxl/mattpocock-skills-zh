@@ -22,7 +22,7 @@
 
 ## 1.3.2
 
-### Patch Changes
+### 补丁变更
 
 - `ask-matt` 现在会先读取技能的 `SKILL.md`，再说明该技能的作用或建议跳过某个步骤，而不是依赖自己的一行摘要（#614）。
 
@@ -41,6 +41,8 @@
 - `implement` 收到 ticket 引用时会先从 issue 跟踪器获取 ticket，并在开始前说明其标题；引用含糊时会先询问（#700）。
 
 - `setup-matt-pocock-skills` 现在会在 GitHub/GitLab 创建缺失的 triage 标签（#616），修复 GitLab 模板中的 `glab` 命令（#635），使用 `--json` 读取 GitHub issue，以便获取标签和正文（#733），并明确指出 `triage-labels.md` 中的 “Label in our tracker” 列（#801）。重新运行 `/setup-matt-pocock-skills` 以刷新 `docs/agents/`。
+
+- [#1341](https://github.com/mattpocock/skills/pull/1341) [`7739eae`](https://github.com/mattpocock/skills/commit/7739eaed7f8f3915437a8def198a6d0d7206dbc7) 感谢 [@mattpocock](https://github.com/mattpocock)! - 会派发 sub-agents 的 skills（`implement-spec`、`code-review`、`codebase-design`、`improve-codebase-architecture`、`wayfinder`、`research`、`grilling`、`chief-of-staff`）现在会要求每个 sub-agent 从全新的 context window 开始，而不是 fork 当前对话；某些 harnesses（如 Codex）默认会 fork 当前对话，这会丢弃 sub-agent 原本应有的干净 context。
 
 - `tdd` 现在会为每个建议的 seam 附上一行说明，指出它能捕获什么、会漏掉什么，选择 seam 时不必再靠猜（#607）。
 

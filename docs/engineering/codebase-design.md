@@ -43,7 +43,7 @@
 - **接口就是测试面。** 调用者和测试跨越同一条接缝。如果你想测试*越过*接口，那模块的形状就是错的。
 - **一个适配器意味着一个假想的接缝。两个适配器意味着一个真实的接缝。** 不要在什么真的在那里变化之前切开一个接缝。单适配器的接缝只是间接。
 
-还有两份支撑文件走得更远，技能按需读取而不是一次性读完。[DEEPENING.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DEEPENING.md) 把候选的依赖分成四类（进程内、可本地替换的、远程但归属自己的、真正外部的），因为类别决定了加深后的模块如何跨接缝被测试。[DESIGN-IT-TWICE.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DESIGN-IT-TWICE.md) 启动并行[子代理](https://www.aihero.dev/ai-coding-dictionary/subagent)，为同一个模块产出三个或更多截然不同的接口，再按深度、局部性和接缝位置比较它们。
+还有两份支撑文件走得更远，技能按需读取而不是一次性读完。[DEEPENING.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DEEPENING.md) 把候选的依赖分成四类（进程内、可本地替换的、远程但归属自己的、真正外部的），因为类别决定了加深后的模块如何跨接缝被测试。[DESIGN-IT-TWICE.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DESIGN-IT-TWICE.md) 启动并行[子代理](https://www.aihero.dev/ai-coding-dictionary/subagent)，为同一个模块产出三个或更多截然不同的接口，再按深度、局部性和接缝位置比较它们。每个子代理都从一个全新的[上下文窗口](https://www.aihero.dev/ai-coding-dictionary/context-window)启动。
 
 ## 常见问题
 

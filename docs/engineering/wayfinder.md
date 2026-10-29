@@ -47,7 +47,7 @@
 | --- | --- | --- | --- |
 | `grilling` | HITL | 默认。问题能靠谈开解决。 | [grilling](https://aihero.dev/skills-grilling) 加 [domain-modeling](https://aihero.dev/skills-domain-modeling)，在一次新会话里 |
 | `prototype` | HITL | "这应该长什么样"或"这应该怎么行为"：一个谈话敲不定的问题。 | [prototype](https://aihero.dev/skills-prototype)，并从 ticket 链接到做出的原型 |
-| `research` | AFK | 工作目录之外的一个事实正卡着一个决策。 | 一个 [research](https://aihero.dev/skills-research) [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent)，绘制地图时启动，并在 `research/<name>` 分支上并行运行 |
+| `research` | AFK | 工作目录之外的一个事实正卡着一个决策。 | 一个 [research](https://aihero.dev/skills-research) [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent)，绘制地图时启动，并在 `research/<name>` 分支上并行运行；每个研究子代理都从全新的[上下文窗口](https://www.aihero.dev/ai-coding-dictionary/context-window)启动 |
 | `task` | 任意 | 没有要决定的事，但手工工作卡着决策，例如开通访问、注册服务、搬动数据以查看其形状。 | agent 能独自完成的就由它做，否则给人类一份精确清单 |
 
 `task` 是唯一一种*做*而不是*决定*的类型。它留在地图上的理由只能是解除某个决策的阻塞，不能是交付目的地的一部分。这是实践中最常出错的类型：agent 会把它当成实现步骤，并开始在地图里写产品代码。

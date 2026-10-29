@@ -24,6 +24,8 @@ README 的中文版安装命令必须逐字复制自 [.agents/install-block.md](
 
 本仓库散文（`SKILL.md` 文件、文档、`README.md`、`CHANGELOG.md`、ADR、changeset、代码注释）中一律不出现 em-dash。某句话用到时，改写成逗号、冒号、句号、括号或连词中实际合适的那一个；切勿做盲目的字符替换。
 
+每个会调度 subagent 的 skill 都会要求以全新的上下文窗口启动它。有些 harness（比如 Codex）默认会分叉父会话，而分叉会继承父会话的上下文，这恰恰是 subagent 本应摆脱的东西。
+
 ## Agent skills
 
 ### Triage 标签

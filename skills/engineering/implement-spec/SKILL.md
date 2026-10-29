@@ -12,6 +12,8 @@ disable-model-invocation: true
 
 这些 ticket 不是一份步骤清单。它们是一张**任务图**，彼此之间存在阻塞关系。这意味着始终存在一个**前沿（frontier）**：可立即被领走的 ticket。
 
+每个子智能体都应从一个全新的上下文窗口开始。
+
 与子智能体之间的通信应保持精简。通信主要通过**上下文指针**：指向 spec、ticket、研究笔记与历史 commit。无需重复指针已经能触达的信息。
 
 **实施者子智能体**应尽可能在后台运行，以获得最大并发。
@@ -24,7 +26,7 @@ disable-model-invocation: true
 
 3. 创建集成分支。如果 issue 跟踪器通过 PR 关闭工作，或者用户要求一个 PR，则在步骤 5 的第一次合并之后开一个 draft PR（一个在 main 之上没有 commit 的分支开不了 PR），并标记为关闭对应的 spec 与 ticket。
 
-4. 使用**实施者子智能体**逐一实现每张 ticket，每个都在自己的 worktree、自有的分支上工作。每个实施者子智能体：
+4. 每张 ticket 都使用一个全新的**实施者子智能体**来实现，每个都在自己的 worktree、自有的分支上工作。每个实施者子智能体：
    - 开始前先确认其 worktree 基于集成分支，如果不是则重置到该分支；
    - 调用 Skill 工具并传入 `tdd` 来构建 ticket；
    - 在报告完成之前，把集成分支的顶部合并进自己的分支。
@@ -33,7 +35,7 @@ disable-model-invocation: true
 
 6. 如果这改变了可领取 ticket 的**前沿**，立刻启动更多**实施者子智能体**去处理新出现的 ticket。这保证了最大并发。
 
-7. 所有 ticket 完成后，对集成分支调用 Skill 工具并传入 `code-review`。用一个**实施者子智能体**一次性修复 code review 提出的全部问题。
+7. 所有 ticket 完成后，对集成分支调用 Skill 工具并传入 `code-review`。用一个全新的**实施者子智能体**一次性修复 code review 提出的全部问题。
 
 8. 如果存在 draft PR，将它标记为 ready for review。否则，按 issue 跟踪器关闭工作的方式逐张解决 ticket，并报告集成分支。
 

@@ -6,7 +6,7 @@
 
 **Explore task**
 - Trigger：创建 ticket 时，或由人类为其添加标签时。
-- Does：对照 codebase 检查 ticket，并将其归入某个类别（可轻松处理、需要人类介入、不是 bug）。
+- Does：对照 codebase 核查 ticket 中所述内容，并在可行时复现；将其归入某个类别（可轻松处理、需要人类介入、不是 bug），并把发现记录在 ticket 上供 implementer 参考，绝不推送代码。
 - Triggers：对于可轻松处理的情况，触发一次 implementer run。其他情况则以 ticket 被标记为等待人类处理而结束。
 
 ## 已标记为 ready 的 tickets 等待有人实现

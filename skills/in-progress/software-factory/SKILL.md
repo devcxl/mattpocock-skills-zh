@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 **Task**：
 一种由 factory 执行的工作，只需定义一次，就可以反复运行：review、explore、implement、ratchet。Task 可以处理一个 ticket、一个 PR，或整个 codebase。
-_Avoid_：job、workflow、action
+_Avoid_：不要将 job、workflow、action 用作 Task 的名称。CI 服务商的 workflow 文件及其 jobs 是配置 task 的地方，而不是 task 本身。
 
 **Trigger**：
 启动一个 run 的事件：ticket tracker 或 git host 中的变更、orchestrator 上的时钟，或另一个 run。

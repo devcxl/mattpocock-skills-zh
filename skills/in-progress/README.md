@@ -15,4 +15,4 @@ INSTALL_INTERNAL_SKILLS=1 npx skills@latest add devcxl/mattpocock-skills-zh --sk
 - **[claude-handoff](./claude-handoff/SKILL.md)** ： 把当前对话交接给一个全新的后台 agent，让它立刻接手工作，注入交接摘要的方式是通过 `claude --bg`。用户调用。
 - **[setup-ts-deep-modules](./setup-ts-deep-modules/SKILL.md)** ： 把 dependency-cruiser 接入 TypeScript 仓库，使每个 package 成为一个深度模块：实现隐藏在子文件夹中，只能通过入口点文件访问，测试通过这些入口点对实现进行验证。用户调用。
 - **[software-factory](./software-factory/SKILL.md)** ：为设计软件工厂提供一套共同语言：它运行的任务以及它接入的服务。与盘问会话搭配使用。用户调用。
-- **[chief-of-staff](./chief-of-staff/SKILL.md)** ：在单次长会话中协调子智能体与周期性安排，持续推进长期目标。用户调用。
+- **[chief-of-staff](./chief-of-staff/SKILL.md)** ： 将工作委派给新的子代理，并把从中学到的内容记录在按日期整理的 wiki 中，以便下一次会话接续处理。由用户主动调用。

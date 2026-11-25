@@ -14,11 +14,11 @@
 _Avoid_：Purchase, transaction
 
 **Invoice**：
-发送给客户的付款请求（交付后）。
+针对 **Order** 的付款请求，会在交付后发送给其 **Customer**。
 _Avoid_：Bill, payment request
 
 **Customer**：
-下单的个人或组织。
+提交 **Order** 的个人或组织。
 _Avoid_：Client, buyer, account
 ```
 
@@ -26,6 +26,7 @@ _Avoid_：Client, buyer, account
 
 - **要有主见。** 当同一概念存在多个词汇时，选择最佳的一个，并将其他词列在 `_Avoid_` 下。
 - **保持定义简洁。** 最多一两句话。定义它*是*什么，而不是它*做*什么。
+- **在定义中加粗其他术语。** 当定义提及另一个术语时，将其写作 `**Order**`，并让周围的句子说明两者之间的关系。
 - **仅包含该项目 context 特有的术语。** 通用编程概念（timeouts、error types、utility patterns）即使项目广泛使用也不应包含。在添加术语之前，问：这是此 context 独有的概念，还是通用编程概念？只有前者才属于这里。
 - **当自然聚类出现时，将术语分组到子标题下。** 如果所有术语都属于一个单一的 cohesive 领域，扁平列表也可以。
 

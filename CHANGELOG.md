@@ -1,5 +1,13 @@
 # mattpocock-skills
 
+## 1.3.4
+
+### Patch Changes
+
+- `chief-of-staff` 现在聚焦于两项工作：将每项任务委派给一个全新的 subagent，并用 context pointers 为其提供背景，再用 2 到 4 行转述每项结果；将它学到的内容记入带日期、引用 commit 的 wiki。改善环境会在每项任务之后成为一种习惯，而不再是每条消息的第一步；schedules 部分和 tactical/strategic framing 也已移除。
+
+- `chief-of-staff` 汇报时会先说明结果，以及用户必须作出的决定；只有在补充细节会影响用户接下来采取的行动时才添加细节，而不是遵循固定的行数。环境习惯现在会在任务遇到阻碍后运行，并作为一个选项提供给用户。它委派的是具体工作，而不是把每项任务（包括任务描述和开场白）都交出去：subagents 负责执行工作，而问题、访谈和与用户的跟进沟通则留在 main session 中。
+
 ## 1.3.3
 
 ### Patch Changes

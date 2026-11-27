@@ -85,7 +85,7 @@ Issue 跟踪器和分类标签词汇表应已提供给你——如果没有，�
 
 ## Parent
 
-跟踪器上父 issue 的引用（若源为已有 issue，否则省略本节）。
+父 issue 的标题，后接其在跟踪器上的引用。
 
 ## What to build
 
